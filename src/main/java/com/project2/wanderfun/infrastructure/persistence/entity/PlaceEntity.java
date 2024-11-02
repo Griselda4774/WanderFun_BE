@@ -12,8 +12,9 @@ public class PlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(precision = 9, scale = 6)
     private BigDecimal longitude;
+    @Column(precision = 8, scale = 6)
     private BigDecimal latitude;
     private String address;
     private String name;
