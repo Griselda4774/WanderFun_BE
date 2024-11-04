@@ -7,4 +7,37 @@ public class Trip {
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
+
+    public Trip() {
+    }
+
+    public Trip(Date startTime, Date endTime, List<TripPlace> tripPlaces) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.tripPlaces = tripPlaces;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public List<TripPlace> getTripPlaces() {
+        return tripPlaces;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setTripPlaces(List<TripPlace> tripPlaces) {
+        this.tripPlaces = tripPlaces;
+    }
 }

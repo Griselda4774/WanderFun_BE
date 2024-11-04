@@ -14,4 +14,31 @@ public class FeedbackImageEntity {
     private FeedbackEntity feedback;
 
     private String imageUrl;
+
+    public FeedbackImageEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public FeedbackEntity getFeedback() {
+        return feedback;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFeedback(FeedbackEntity feedback) {
+        this.feedback = feedback;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

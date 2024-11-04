@@ -43,4 +43,167 @@ public class PlaceEntity {
 
     @OneToMany(mappedBy = "place")
     private List<FeedbackEntity> feedbacks;
+
+    public PlaceEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
+    public Integer getCheckInPoint() {
+        return checkInPoint;
+    }
+
+    public Float getCheckInRange() {
+        return checkInRange;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public LocalDateTime getTimeOpen() {
+        return timeOpen;
+    }
+
+    public LocalDateTime getTimeClose() {
+        return timeClose;
+    }
+
+    public String getAlternativeName() {
+        return alternativeName;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public List<TripPlaceEntity> getTripPlaces() {
+        return tripPlaces;
+    }
+
+    public List<UserEntity> getUsersWhoFavorited() {
+        return usersWhoFavorited;
+    }
+
+    public List<SectionEntity> getSections() {
+        return sections;
+    }
+
+    public List<PlaceImageEntity> getPlaceImages() {
+        return placeImages;
+    }
+
+    public List<FeedbackEntity> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
+    }
+
+    public void setCheckInPoint(Integer checkInPoint) {
+        this.checkInPoint = checkInPoint;
+    }
+
+    public void setCheckInRange(Float checkInRange) {
+        this.checkInRange = checkInRange;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setTimeOpen(LocalDateTime timeOpen) {
+        this.timeOpen = timeOpen;
+    }
+
+    public void setTimeClose(LocalDateTime timeClose) {
+        this.timeClose = timeClose;
+    }
+
+    public void setAlternativeName(String alternativeName) {
+        this.alternativeName = alternativeName;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
+        this.tripPlaces = tripPlaces;
+    }
+
+    public void setUsersWhoFavorited(List<UserEntity> usersWhoFavorited) {
+        this.usersWhoFavorited = usersWhoFavorited;
+    }
+
+    public void setSections(List<SectionEntity> sections) {
+        this.sections = sections;
+    }
+
+    public void setPlaceImages(List<PlaceImageEntity> placeImages) {
+        this.placeImages = placeImages;
+    }
+
+    public void setFeedbacks(List<FeedbackEntity> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
 }

@@ -23,4 +23,55 @@ public class TripEntity {
     // Relationships
     @OneToMany(mappedBy = "trip")
     private List<TripPlaceEntity> tripPlaces;
+
+    public TripEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public List<TripPlaceEntity> getTripPlaces() {
+        return tripPlaces;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
+        this.tripPlaces = tripPlaces;
+    }
 }

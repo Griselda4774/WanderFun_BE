@@ -14,4 +14,31 @@ public class PlaceImageEntity {
     private PlaceEntity place;
 
     private String imageUrl;
+
+    public PlaceImageEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public PlaceEntity getPlace() {
+        return place;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPlace(PlaceEntity place) {
+        this.place = place;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
