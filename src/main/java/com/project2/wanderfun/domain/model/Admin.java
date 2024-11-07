@@ -4,13 +4,24 @@ public class Admin extends BaseUser{
     public Admin() {
     }
 
-    public Admin(String role, String password, String email, String lastName, String firstName) {
-        super(role, password, email, lastName, firstName);
+    @Override
+    public Long getId() {
+        return super.getId();
     }
 
     @Override
-    public String getRole() {
+    public void setId(Long id) {
+        super.setId(id);
+    }
+
+    @Override
+    public UserRole getRole() {
         return super.getRole();
+    }
+
+    @Override
+    public void setRole(UserRole role) {
+        super.setRole(role);
     }
 
     @Override
@@ -19,28 +30,13 @@ public class Admin extends BaseUser{
     }
 
     @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getFirstName() {
-        return super.getFirstName();
-    }
-
-    @Override
-    public String getLastName() {
-        return super.getLastName();
-    }
-
-    @Override
-    public void setRole(String role) {
-        super.setRole(role);
-    }
-
-    @Override
     public void setEmail(String email) {
         super.setEmail(email);
+    }
+
+    @Override
+    public String getPassword() {
+        return super.getPassword();
     }
 
     @Override
@@ -49,8 +45,18 @@ public class Admin extends BaseUser{
     }
 
     @Override
+    public String getFirstName() {
+        return super.getFirstName();
+    }
+
+    @Override
     public void setFirstName(String firstName) {
         super.setFirstName(firstName);
+    }
+
+    @Override
+    public String getLastName() {
+        return super.getLastName();
     }
 
     @Override

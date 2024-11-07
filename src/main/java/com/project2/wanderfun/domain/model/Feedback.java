@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Feedback {
+    private Long id;
     private String userName;
     private float rating;
     private String comment;
@@ -13,12 +14,8 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(String userName, float rating, String comment, List<String> imageUrls, Date timeArrived) {
-        this.userName = userName;
-        this.rating = rating;
-        this.comment = comment;
-        this.imageUrls = imageUrls;
-        this.timeArrived = timeArrived;
+    public Long getId() {
+        return id;
     }
 
     public Date getTimeArrived() {
@@ -39,6 +36,10 @@ public class Feedback {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setTimeArrived(Date timeArrived) {

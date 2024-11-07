@@ -3,6 +3,7 @@ package com.project2.wanderfun.domain.model;
 import java.util.List;
 
 public class Album {
+    private Long id;
     private String name;
     private String description;
     private String placeId;
@@ -11,39 +12,40 @@ public class Album {
     public Album() {
     }
 
-    public Album(String name, String description, String placeId, List<String> imageUrls) {
-        this.name = name;
-        this.description = description;
-        this.placeId = placeId;
-        this.imageUrls = imageUrls;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getPlaceId() {
-        return placeId;
-    }
-
-    public List<String> getImageUrls() {
-        return imageUrls;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public String getPlaceId() {
+        return placeId;
+    }
+
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
+    }
+
+    public List<String> getImageUrls() {
+        return imageUrls;
     }
 
     public void setImageUrls(List<String> imageUrls) {
