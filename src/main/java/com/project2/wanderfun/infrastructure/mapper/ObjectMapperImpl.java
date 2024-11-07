@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ObjectMapperImpl implements ObjectMapper<ModelMapper> {
+public class ObjectMapperImpl implements ObjectMapper {
     private final ModelMapper modelMapper;
 
     @Autowired

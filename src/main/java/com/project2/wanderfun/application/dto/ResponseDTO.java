@@ -1,4 +1,4 @@
-package com.project2.wanderfun.adapter.dto;
+package com.project2.wanderfun.application.dto;
 
 public class ResponseDTO<T> {
     private String message;

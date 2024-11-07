@@ -1,4 +1,4 @@
-package com.project2.wanderfun.adapter.dto;
+package com.project2.wanderfun.application.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
