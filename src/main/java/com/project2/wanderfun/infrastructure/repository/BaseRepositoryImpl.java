@@ -1,26 +1,21 @@
 package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.application.repository.BaseRepository;
-import com.project2.wanderfun.infrastructure.persistence.jpaRepository.BaseJpaRepository;
-import jakarta.validation.constraints.Email;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.project2.wanderfun.domain.repository.BaseRepository;
+import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaBaseRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
 public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Model, ID> {
-    private final BaseJpaRepository<Entity, ID> baseJpaRepository;
+    private final JpaBaseRepository<Entity, ID> jpaBaseRepository;
     protected final ObjectMapper objectMapper;
     private final Class<Model> modelClass;
-    private final Class<Entity> entityClass;
+    private final  Class<Entity> entityClass;
 
-    @Autowired
-    public BaseRepositoryImpl(BaseJpaRepository<Entity, ID> baseJpaRepository, ObjectMapper objectMapper, Class<Model> modelClass, Class<Entity> entityClass) {
-        this.baseJpaRepository = baseJpaRepository;
+    public BaseRepositoryImpl(JpaBaseRepository<Entity, ID> jpaBaseRepository, ObjectMapper objectMapper, Class<Model> modelClass, Class<Entity> entityClass) {
+        this.jpaBaseRepository = jpaBaseRepository;
         this.objectMapper = objectMapper;
         this.modelClass = modelClass;
         this.entityClass = entityClass;
@@ -28,26 +23,26 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
 
     @Override
     public Model save(Model model) {
-        Entity entity = (Entity) objectMapper.map(model, entityClass);
-        Entity savedEntity = baseJpaRepository.save(entity);
-        return (Model) objectMapper.map(savedEntity, modelClass);
+        Entity entity = objectMapper.map(model, entityClass);
+        Entity savedEntity = jpaBaseRepository.save(entity);
+        return objectMapper.map(savedEntity, modelClass);
     }
 
     @Override
     public List<Model> findAll() {
-        return baseJpaRepository.findAll().stream()
-                .map(entity -> (Model) objectMapper.map(entity, modelClass))
+        return jpaBaseRepository.findAll().stream()
+                .map(entity -> objectMapper.map(entity, modelClass))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Model> findById(ID id) {
-        return baseJpaRepository.findById(id)
-                .map((entity -> (Model) objectMapper.map(entity, modelClass)));
+        return jpaBaseRepository.findById(id)
+                .map((entity -> objectMapper.map(entity, modelClass)));
     }
 
     @Override
     public void deleteById(ID id) {
-        baseJpaRepository.deleteById(id);
+        jpaBaseRepository.deleteById(id);
     }
 }

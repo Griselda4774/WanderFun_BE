@@ -1,9 +1,9 @@
-package com.project2.wanderfun.adapter.dto;
+package com.project2.wanderfun.application.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 
-public class AccountDTO {
+public class AccountDto {
     @Email(message = "Email is invalid")
     private String email;
 
@@ -11,7 +11,7 @@ public class AccountDTO {
             message = "Password must be at least 8 characters and include at least one lowercase letter, one uppercase letter, and one number")
     private String password;
 
-    public AccountDTO() {
+    public AccountDto() {
     }
 
     public String getEmail() {

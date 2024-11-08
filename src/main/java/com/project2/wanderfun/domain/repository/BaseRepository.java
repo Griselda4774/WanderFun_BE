@@ -1,4 +1,4 @@
-package com.project2.wanderfun.application.repository;
+package com.project2.wanderfun.domain.repository;
 
 import java.util.List;
 import java.util.Optional;
