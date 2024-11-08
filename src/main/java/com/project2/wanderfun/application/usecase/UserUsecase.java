@@ -2,7 +2,7 @@ package com.project2.wanderfun.application.usecase;
 
 import com.project2.wanderfun.application.dto.UserDto;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.application.service.UserService;
+import com.project2.wanderfun.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

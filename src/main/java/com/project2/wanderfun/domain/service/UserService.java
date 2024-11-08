@@ -1,4 +1,4 @@
-package com.project2.wanderfun.application.service;
+package com.project2.wanderfun.domain.service;
 
 import com.project2.wanderfun.domain.model.User;
 

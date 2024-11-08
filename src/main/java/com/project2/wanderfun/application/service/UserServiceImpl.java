@@ -1,30 +1,26 @@
-package com.project2.wanderfun.application.service.impl;
+package com.project2.wanderfun.application.service;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.application.repository.UserRepository;
+import com.project2.wanderfun.domain.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
-import com.project2.wanderfun.application.service.UserService;
-import com.project2.wanderfun.infrastructure.persistence.entity.UserEntity;
-import com.project2.wanderfun.infrastructure.persistence.jpaRepository.UserJpaRepository;
+import com.project2.wanderfun.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final ObjectMapper objectMapper;
-    private final UserJpaRepository userJpaRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(ObjectMapper objectMapper, UserJpaRepository userJpaRepository, UserRepository userRepository) {
+    public UserServiceImpl(ObjectMapper objectMapper, UserRepository userRepository) {
         this.objectMapper = objectMapper;
-        this.userJpaRepository = userJpaRepository;
         this.userRepository = userRepository;
     }
 
     @Override
     public User findUserById(Long id) {
-        return objectMapper.map(userJpaRepository.findById(id)
+        return objectMapper.map(userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found")), User.class);
     }
 
@@ -43,11 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserById(Long id, User user) {
         user.setId(id);
-        userJpaRepository.save(objectMapper.map(user, UserEntity.class));
+        userRepository.save(user);
     }
 
     @Override
     public void deleteUserById(Long id) {
-        userJpaRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }
