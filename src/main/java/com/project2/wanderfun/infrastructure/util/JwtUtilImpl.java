@@ -1,6 +1,7 @@
 package com.project2.wanderfun.infrastructure.util;
 
 import com.project2.wanderfun.application.util.JwtUtil;
+import com.project2.wanderfun.domain.model.enums.TokenType;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -15,59 +16,65 @@ import java.util.function.Function;
 @Component
 public class JwtUtilImpl implements JwtUtil{
     private static final Logger log = LoggerFactory.getLogger(JwtUtilImpl.class);
-    private final String JWT_SECRET = "wanderfun_secret_key_which_should_be_long_enough";
+    private final String JWT_SECRET = "f228fedebbc31e1011102c8473bb5e674d6deff16d48b7cc9f3df02bb727251948ae8177f874eda0985339a855991ed5a5414fe6dbe752a37d560e320b3d2841";
     private final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(JWT_SECRET));
     private static final long ACCESS_EXPIRATION_TIME = 30 * 60 * 1000;
     private static final long REFRESH_EXPIRATION_TIME = 7 * 24 * 60 * 60 * 1000;
 
     @Override
-    public String generateAccessToken(String email, String role) {
-        Date now = new Date();
-        Date expiryDate = new Date(System.currentTimeMillis() + ACCESS_EXPIRATION_TIME);
-        return Jwts.builder()
-                .setSubject(email)
-                .claim("role", role)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
+    public String generateAccessToken(Long id, String email, String role) {
+        try {
+            Date now = new Date();
+            Date expiryDate = new Date(now.getTime() + ACCESS_EXPIRATION_TIME);
+            return Jwts.builder()
+                    .subject(Long.toString(id))
+                    .claim("email", email)
+                    .claim("role", role)
+                    .setIssuedAt(now)
+                    .setExpiration(expiryDate)
+                    .signWith(key, SignatureAlgorithm.HS512)
+                    .compact();
+        } catch (Exception e) {
+            log.error("Error generating access token: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
-    public String generateRefreshToken(String email) {
-        Date now = new Date();
-        Date expiryDate = new Date(System.currentTimeMillis() + REFRESH_EXPIRATION_TIME);
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
+    public String generateRefreshToken(Long id) {
+        try {
+            Date now = new Date();
+            Date expiryDate = new Date(now.getTime() + REFRESH_EXPIRATION_TIME);
+            return Jwts.builder()
+                    .subject(Long.toString(id))
+                    .setIssuedAt(now)
+                    .setExpiration(expiryDate)
+                    .signWith(key, SignatureAlgorithm.HS256)
+                    .compact();
+        } catch (Exception e) {
+            log.error("Error generating refresh token: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
-    public String getEmailFromAccessToken(String accessToken) {
-        return extractClaim(accessToken, Claims::getSubject);
+    public String getIdFromToken(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
     @Override
-    public String getRoleFromAccessToken(String accessToken) {
-        return (String) extractClaim(accessToken, claims -> claims.get("role", String.class));
+    public String getEmailFromToken(String token) {
+        return (String) extractClaim(token, claims -> claims.get("email", String.class));
     }
 
     @Override
-    public String getEmailFromRefreshToken(String refreshToken) {
-        return extractClaim(refreshToken, Claims::getSubject);
+    public String getRoleFromToken(String token) {
+        return (String) extractClaim(token, claims -> claims.get("role", String.class));
     }
 
     @Override
-    public boolean validateAccessToken(String accessToken) {
-        return validateToken(accessToken);
-    }
-
-    @Override
-    public boolean validateRefreshToken(String refreshToken) {
-        return validateToken(refreshToken);
+    public Date getExpirationDateFromToken(String token) {
+        return extractClaim(token, Claims::getExpiration);
     }
 
     public boolean validateToken(String token) {

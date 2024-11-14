@@ -9,7 +9,7 @@ public class PlaceImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
 

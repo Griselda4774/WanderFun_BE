@@ -1,4 +1,4 @@
-package com.project2.wanderfun.adapter.controller;
+package com.project2.wanderfun.presentation.controller;
 
 import com.project2.wanderfun.application.dto.UserDto;
 import com.project2.wanderfun.application.usecase.UserUsecase;
@@ -23,6 +23,16 @@ public class UserController {
     @GetMapping("/findUserByEmail/{email}")
     public ResponseEntity<UserDto> findUserByEmail(@PathVariable String email) {
         UserDto userDto = userUsecase.findUserByEmail(email);
+        if (userDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        return ResponseEntity.ok(userDto);
+    }
+
+    @GetMapping("/findUserById/{id}")
+    public ResponseEntity<UserDto> findUserByEmail(@PathVariable long id) {
+        UserDto userDto = userUsecase.findUserById(id);
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }

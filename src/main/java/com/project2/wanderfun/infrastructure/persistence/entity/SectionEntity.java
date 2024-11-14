@@ -13,7 +13,7 @@ public class SectionEntity {
     private String content;
     private String imageUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
 
