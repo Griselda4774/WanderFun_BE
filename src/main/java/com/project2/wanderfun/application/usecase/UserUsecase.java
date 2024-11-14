@@ -24,4 +24,8 @@ public class UserUsecase {
             return null;
         }
     }
+
+    public UserDto findUserById(Long id) {
+        return objectMapper.map(userService.findUserById(id), UserDto.class);
+    }
 }

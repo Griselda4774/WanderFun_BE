@@ -9,7 +9,7 @@ public class FeedbackImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedbackId")
     private FeedbackEntity feedback;
 

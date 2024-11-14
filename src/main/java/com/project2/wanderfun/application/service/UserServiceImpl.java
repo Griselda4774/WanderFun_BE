@@ -4,6 +4,7 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.domain.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.domain.service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long id) {
-        return objectMapper.map(userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found")), User.class);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
+    @Transactional
     public User findUserByEmail(String email) {
-        return objectMapper.map(userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found")), User.class);
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override

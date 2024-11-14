@@ -22,7 +22,11 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return jpaUserRepository.findByEmail(email)
-                .map(entity -> objectMapper.map(entity, User.class));
+        try {
+            return jpaUserRepository.findByEmail(email)
+                    .map(entity -> objectMapper.map(entity, User.class));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

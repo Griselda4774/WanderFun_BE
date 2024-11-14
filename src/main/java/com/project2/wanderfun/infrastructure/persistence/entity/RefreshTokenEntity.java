@@ -17,9 +17,6 @@ public class RefreshTokenEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private Date expiryDate;
-
     public RefreshTokenEntity() {
     }
 
@@ -45,13 +42,5 @@ public class RefreshTokenEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
     }
 }

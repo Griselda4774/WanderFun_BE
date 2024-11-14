@@ -1,5 +1,7 @@
 package com.project2.wanderfun.domain.model;
 
+import com.project2.wanderfun.domain.model.enums.UserRole;
+
 public abstract class BaseUser {
     protected Long id;
     protected UserRole role;

@@ -20,31 +20,35 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken findRefreshTokenById(Long id) {
-        return null;
+        return refreshTokenRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
     }
 
     @Override
     public RefreshToken findRefreshTokenByEmail(String email) {
-        return null;
+        return refreshTokenRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
     }
 
     @Override
     public void createRefreshToken(RefreshToken refreshToken) {
-
+        refreshToken.setId(null);
+        refreshTokenRepository.save(refreshToken);
     }
 
     @Override
     public void updateRefreshTokenById(Long id, RefreshToken refreshToken) {
-
+        refreshToken.setId(id);
+        refreshTokenRepository.save(refreshToken);
     }
 
     @Override
     public void deleteRefreshTokenById(Long id) {
-
+        refreshTokenRepository.deleteById(id);
     }
 
     @Override
     public void deleteRefreshTokenByEmail(String email) {
-
+        refreshTokenRepository.deleteByEmail(email);
     }
 }

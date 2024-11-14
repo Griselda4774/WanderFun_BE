@@ -1,5 +1,7 @@
 package com.project2.wanderfun.domain.model;
 
+import com.project2.wanderfun.domain.model.enums.UserRole;
+
 public class Admin extends BaseUser{
     public Admin() {
     }

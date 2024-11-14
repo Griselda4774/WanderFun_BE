@@ -9,7 +9,7 @@ public class AlbumImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "albumId")
     private AlbumEntity album;
 

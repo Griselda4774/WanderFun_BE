@@ -6,7 +6,6 @@ public class RefreshToken {
     private Long id;
     private String token;
     private String email;
-    private Date expiryDate;
 
     public RefreshToken() {
     }
@@ -33,13 +32,5 @@ public class RefreshToken {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
     }
 }

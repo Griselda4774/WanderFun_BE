@@ -17,7 +17,7 @@ public class FeedbackEntity {
     private String comment;
     private LocalDateTime timeArrived;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
 
