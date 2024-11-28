@@ -9,7 +9,7 @@ public interface JwtUtil {
     public String generateRefreshToken(Long id);
     public String getIdFromToken(String token);
     public String getEmailFromToken(String token);
-    public String getRoleFromToken(String accessToken);
+    public String getRoleFromToken(String token);
     public Date getExpirationDateFromToken(String token);
-    public boolean validateToken(String accessToken);
+    public boolean validateToken(String token);
 }

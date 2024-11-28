@@ -55,6 +55,8 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/wanderfun/auth/register").permitAll()
                                 .requestMatchers("/wanderfun/auth/login").permitAll()
+                                .requestMatchers("/wanderfun/auth/register/admin").permitAll()
+                                .requestMatchers("/wanderfun/auth/refresh").permitAll()
                                 .requestMatchers("/wanderfun/user/findUserByEmail/**").hasAnyRole(UserRole.ADMIN.name())
                                 .requestMatchers("/wanderfun/user/findUserById/**").hasAnyRole(UserRole.ADMIN.name())
                                 .anyRequest().authenticated()

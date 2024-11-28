@@ -2,7 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.domain.model.RefreshToken;
-import com.project2.wanderfun.domain.repository.RefreshTokenRepository;
+import com.project2.wanderfun.application.repository.RefreshTokenRepository;
 import com.project2.wanderfun.infrastructure.persistence.entity.RefreshTokenEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaRefreshTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;

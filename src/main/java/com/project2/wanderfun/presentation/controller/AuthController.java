@@ -3,6 +3,7 @@ package com.project2.wanderfun.presentation.controller;
 import com.project2.wanderfun.application.dto.AccountDto;
 import com.project2.wanderfun.application.dto.LoginResponseDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.dto.TokenResponseDto;
 import com.project2.wanderfun.application.usecase.AuthUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,4 +59,44 @@ public class AuthController {
         response.setData(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<ResponseDto> logout(@RequestHeader("Authorization") String refreshToken) {
+        if (refreshToken.startsWith("Bearer ")) {
+            refreshToken = refreshToken.substring(7);
+        }
+
+        String result = authUsecase.logout(refreshToken);
+        if (result.equals("Logout successfully!")) {
+            ResponseDto response = new ResponseDto();
+            response.setStatusCode(HttpStatus.OK.toString());
+            response.setMessage("Logout successfully!");
+            response.setTimestamp(new Date());
+            response.setData(null);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        ResponseDto response = new ResponseDto();
+        response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setMessage("Logout failed!");
+        response.setTimestamp(new Date());
+        response.setData(null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @GetMapping("/refresh")
+    public ResponseEntity<ResponseDto> refresh(@RequestHeader("Authorization") String refreshToken) {
+        if (refreshToken.startsWith("Bearer ")) {
+            refreshToken = refreshToken.substring(7);
+        }
+
+        TokenResponseDto result = authUsecase.refresh(refreshToken);
+        ResponseDto<TokenResponseDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Refresh token successfully!");
+        response.setTimestamp(new Date());
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

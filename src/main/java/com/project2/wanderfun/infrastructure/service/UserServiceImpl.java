@@ -1,9 +1,10 @@
-package com.project2.wanderfun.application.service;
+package com.project2.wanderfun.infrastructure.service;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.domain.repository.UserRepository;
+import com.project2.wanderfun.application.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
-import com.project2.wanderfun.domain.service.UserService;
+import com.project2.wanderfun.application.service.UserService;
+import com.project2.wanderfun.presentation.exception.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     @Override
     @Transactional
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     @Override

@@ -1,9 +1,10 @@
-package com.project2.wanderfun.application.service;
+package com.project2.wanderfun.infrastructure.service;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.domain.model.RefreshToken;
-import com.project2.wanderfun.domain.repository.RefreshTokenRepository;
-import com.project2.wanderfun.domain.service.RefreshTokenService;
+import com.project2.wanderfun.application.repository.RefreshTokenRepository;
+import com.project2.wanderfun.application.service.RefreshTokenService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
+    @Transactional
     public RefreshToken findRefreshTokenByEmail(String email) {
         return refreshTokenRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
@@ -47,6 +49,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         refreshTokenRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public void deleteRefreshTokenByEmail(String email) {
         refreshTokenRepository.deleteByEmail(email);

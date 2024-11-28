@@ -63,7 +63,8 @@ public class JwtFilter extends OncePerRequestFilter {
     private boolean isPublicApi(HttpServletRequest request) {
         final List<Pair<String, String>> publicApis = Arrays.asList(
                 Pair.of("POST", "/wanderfun/auth/register"),
-                Pair.of("POST", "/wanderfun/auth/login")
+                Pair.of("POST", "/wanderfun/auth/login"),
+                Pair.of("POST", "/wanderfun/auth/register/admin")
         );
 
         String requestPath = request.getServletPath();

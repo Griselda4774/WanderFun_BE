@@ -2,15 +2,17 @@ package com.project2.wanderfun.application.usecase;
 
 import com.project2.wanderfun.application.dto.AccountDto;
 import com.project2.wanderfun.application.dto.LoginResponseDto;
+import com.project2.wanderfun.application.dto.TokenResponseDto;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.RefreshToken;
-import com.project2.wanderfun.domain.model.enums.TokenType;
 import com.project2.wanderfun.domain.model.enums.UserRole;
-import com.project2.wanderfun.domain.service.RefreshTokenService;
-import com.project2.wanderfun.domain.service.UserService;
+import com.project2.wanderfun.application.service.RefreshTokenService;
+import com.project2.wanderfun.application.service.UserService;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.infrastructure.security.CustomUserDetails;
+import com.project2.wanderfun.presentation.exception.InvalidRefreshTokenException;
+import com.project2.wanderfun.presentation.exception.UserAlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,38 +45,40 @@ public class AuthUsecase {
         this.refreshTokenService = refreshTokenService;
     }
 
-    public String register(AccountDto accountDto) {
+    public String register(AccountDto accountDto) throws UserAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
+        User existingUser = null;
         try {
-            try {
-                User existingUser = userService.findUserByEmail(user.getEmail());
-                return "User already exists";
-            } catch (Exception e) {
-                user.setRole(UserRole.USER);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userService.createUser(user);
-                return "Register successfully!";
-            }
+            existingUser = userService.findUserByEmail(user.getEmail());
         } catch (Exception e) {
-            return e.getMessage();
         }
+
+        if (existingUser != null) {
+            throw new UserAlreadyExistException("User already exists");
+        }
+
+        user.setRole(UserRole.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.createUser(user);
+        return "Register successfully!";
     }
 
-    public String registerAdmin(AccountDto accountDto) {
+    public String registerAdmin(AccountDto accountDto) throws UserAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
+        User existingUser = null;
         try {
-            try {
-                User existingUser = userService.findUserByEmail(user.getEmail());
-                return "User already exists";
-            } catch (Exception e) {
-                user.setRole(UserRole.ADMIN);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                userService.createUser(user);
-                return "Register successfully!";
-            }
+            existingUser = userService.findUserByEmail(user.getEmail());
         } catch (Exception e) {
-            return e.getMessage();
         }
+
+        if (existingUser != null) {
+            throw new UserAlreadyExistException("User already exists");
+        }
+
+        user.setRole(UserRole.ADMIN);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.createUser(user);
+        return "Register admin successfully!";
     }
 
     public LoginResponseDto login(AccountDto accountDto) {
@@ -95,6 +99,7 @@ public class AuthUsecase {
         RefreshToken refreshTokenModel = new RefreshToken();
         refreshTokenModel.setEmail(user.getEmail());
         refreshTokenModel.setToken(refreshToken);
+        refreshTokenService.deleteRefreshTokenByEmail(user.getEmail());
         refreshTokenService.createRefreshToken(refreshTokenModel);
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
@@ -105,5 +110,31 @@ public class AuthUsecase {
         loginResponseDto.setRefreshToken(refreshToken);
 
         return loginResponseDto;
+    }
+
+    public String logout(String refreshToken) {
+        String email = jwtUtil.getEmailFromToken(refreshToken);
+        refreshTokenService.deleteRefreshTokenByEmail(email);
+        return "Logout successfully!";
+    }
+
+    public TokenResponseDto refresh (String refreshToken) throws InvalidRefreshTokenException {
+        Long userId = Long.valueOf(jwtUtil.getIdFromToken(refreshToken));
+        User user = userService.findUserById(userId);
+        RefreshToken refreshTokenModel = refreshTokenService.findRefreshTokenByEmail(user.getEmail());
+
+        if (!jwtUtil.validateToken(refreshToken) || !refreshTokenModel.getToken().equals(refreshToken)) {
+            throw new InvalidRefreshTokenException("Invalid refresh token");
+        }
+
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail(), user.getRole().name());
+        String newRefreshToken = jwtUtil.generateRefreshToken(user.getId());
+        refreshTokenModel.setToken(newRefreshToken);
+        refreshTokenService.updateRefreshTokenById(refreshTokenModel.getId(), refreshTokenModel);
+
+        TokenResponseDto tokenResponseDto = new TokenResponseDto();
+        tokenResponseDto.setAccessToken(accessToken);
+        tokenResponseDto.setRefreshToken(refreshTokenModel.getToken());
+        return tokenResponseDto;
     }
 }
