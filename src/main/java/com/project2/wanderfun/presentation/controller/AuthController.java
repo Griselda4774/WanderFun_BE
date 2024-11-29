@@ -27,31 +27,28 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<ResponseDto<?>> register(@RequestBody @Validated AccountDto accountDto)
     throws RequestFailedException {
-        String result = authUsecase.register(accountDto);
-
-        ResponseDto<?> responseDto = new ResponseDto<>();
-
-        if (!result.equals("Register successfully!")) {
+        boolean result = authUsecase.register(accountDto);
+        if (result != true) {
             throw new RequestFailedException("Register failed!");
         }
+
+        ResponseDto<?> responseDto = new ResponseDto<>();
         responseDto.setStatusCode(HttpStatus.OK.toString());
-        responseDto.setMessage(result);
+        responseDto.setMessage("Register successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @PostMapping("/register/admin")
     public ResponseEntity<ResponseDto<?>> registerAdmin(@RequestBody @Validated AccountDto accountDto)
     throws RequestFailedException {
-        String result = authUsecase.registerAdmin(accountDto);
-
-        ResponseDto<?> responseDto = new ResponseDto<>();
-
-        if (!result.equals("Register admin successfully!")) {
+        boolean result = authUsecase.registerAdmin(accountDto);
+        if (result != true) {
             throw new RequestFailedException("Register admin failed!");
         }
 
+        ResponseDto<?> responseDto = new ResponseDto<>();
         responseDto.setStatusCode(HttpStatus.OK.toString());
-        responseDto.setMessage(result);
+        responseDto.setMessage("Register admin successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
@@ -59,12 +56,11 @@ public class AuthController {
     public ResponseEntity<ResponseDto> login(@RequestBody @Validated AccountDto accountDto)
     throws RequestFailedException {
         LoginResponseDto result = authUsecase.login(accountDto);
-        ResponseDto<LoginResponseDto> response = new ResponseDto<>();
-
         if (result == null) {
             throw new RequestFailedException("Login failed!");
         }
 
+        ResponseDto<LoginResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Login successfully!");
         response.setData(result);
@@ -78,13 +74,12 @@ public class AuthController {
             refreshToken = refreshToken.substring(7);
         }
 
-        String result = authUsecase.logout(refreshToken);
-        ResponseDto response = new ResponseDto();
-
-        if (!result.equals("Logout successfully!")) {
+        boolean result = authUsecase.logout(refreshToken);
+        if (result != true) {
             throw new RequestFailedException("Logout failed!");
         }
 
+        ResponseDto response = new ResponseDto();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Logout successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -97,6 +92,10 @@ public class AuthController {
         }
 
         TokenResponseDto result = authUsecase.refresh(refreshToken);
+        if (result == null) {
+            throw new RequestFailedException("Refresh token failed!");
+        }
+
         ResponseDto<TokenResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Refresh token successfully!");
