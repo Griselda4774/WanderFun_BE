@@ -1,7 +1,7 @@
 package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.domain.repository.BaseRepository;
+import com.project2.wanderfun.application.repository.BaseRepository;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaBaseRepository;
 
 import java.util.List;
@@ -44,5 +44,10 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
     @Override
     public void deleteById(ID id) {
         jpaBaseRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        jpaBaseRepository.deleteAll();
     }
 }

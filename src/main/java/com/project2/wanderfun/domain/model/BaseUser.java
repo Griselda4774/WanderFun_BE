@@ -9,8 +9,10 @@ public abstract class BaseUser {
     protected String password;
     protected String firstName;
     protected String lastName;
+    protected boolean isVerified;
 
     public BaseUser() {
+        this.setVerified(false);
     }
 
     public Long getId() {
@@ -59,5 +61,13 @@ public abstract class BaseUser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }

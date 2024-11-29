@@ -11,7 +11,7 @@
 	<groupId>com.project2</groupId>
 	<artifactId>wanderfun</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>wanderfun</name>
+    <name>wanderfun</name>
 	<description>Tourism Guide with interactive map</description>
 	<url/>
 	<licenses>
@@ -20,7 +20,7 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>

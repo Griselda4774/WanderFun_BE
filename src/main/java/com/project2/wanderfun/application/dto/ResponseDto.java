@@ -9,6 +9,8 @@ public class ResponseDto<T> {
     private T data;
 
     public ResponseDto() {
+        this.timestamp = new Date();
+        this.data = null;
     }
 
     public String getStatusCode() {

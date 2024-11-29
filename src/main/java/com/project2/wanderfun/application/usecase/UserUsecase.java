@@ -2,9 +2,11 @@ package com.project2.wanderfun.application.usecase;
 
 import com.project2.wanderfun.application.dto.UserDto;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.domain.service.UserService;
+import com.project2.wanderfun.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserUsecase {
@@ -17,15 +19,15 @@ public class UserUsecase {
         this.objectMapper = objectMapper;
     }
 
-    public UserDto findUserByEmail(String email) {
-        try {
-            return objectMapper.map(userService.findUserByEmail(email), UserDto.class);
-        } catch (Exception e) {
-            return null;
-        }
+    public List<UserDto> findAllUsers() {
+        return objectMapper.mapList(userService.findAll(), UserDto.class);
     }
 
     public UserDto findUserById(Long id) {
-        return objectMapper.map(userService.findUserById(id), UserDto.class);
+        return objectMapper.map(userService.findById(id), UserDto.class);
+    }
+
+    public UserDto findUserByEmail(String email) {
+        return objectMapper.map(userService.findByEmail(email), UserDto.class);
     }
 }

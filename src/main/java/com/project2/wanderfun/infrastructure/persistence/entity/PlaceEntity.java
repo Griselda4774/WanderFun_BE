@@ -20,8 +20,8 @@ public class PlaceEntity {
     private String name;
     private String iconUrl;
     private String coverImageUrl;
-    private Integer checkInPoint;
-    private Float checkInRange;
+    private int checkInPoint;
+    private float checkInRange;
     private String category;
     private LocalDateTime timeOpen;
     private LocalDateTime timeClose;
@@ -51,156 +51,156 @@ public class PlaceEntity {
         return id;
     }
 
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public String getCoverImageUrl() {
-        return coverImageUrl;
-    }
-
-    public Integer getCheckInPoint() {
-        return checkInPoint;
-    }
-
-    public Float getCheckInRange() {
-        return checkInRange;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public LocalDateTime getTimeOpen() {
-        return timeOpen;
-    }
-
-    public LocalDateTime getTimeClose() {
-        return timeClose;
-    }
-
-    public String getAlternativeName() {
-        return alternativeName;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public List<TripPlaceEntity> getTripPlaces() {
-        return tripPlaces;
-    }
-
-    public List<UserEntity> getUsersWhoFavorited() {
-        return usersWhoFavorited;
-    }
-
-    public List<SectionEntity> getSections() {
-        return sections;
-    }
-
-    public List<PlaceImageEntity> getPlaceImages() {
-        return placeImages;
-    }
-
-    public List<FeedbackEntity> getFeedbacks() {
-        return feedbacks;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
     }
 
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
     public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
     }
 
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
     }
 
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
     }
 
-    public void setCheckInPoint(Integer checkInPoint) {
+    public int getCheckInPoint() {
+        return checkInPoint;
+    }
+
+    public void setCheckInPoint(int checkInPoint) {
         this.checkInPoint = checkInPoint;
     }
 
-    public void setCheckInRange(Float checkInRange) {
+    public float getCheckInRange() {
+        return checkInRange;
+    }
+
+    public void setCheckInRange(float checkInRange) {
         this.checkInRange = checkInRange;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
     }
 
+    public LocalDateTime getTimeOpen() {
+        return timeOpen;
+    }
+
     public void setTimeOpen(LocalDateTime timeOpen) {
         this.timeOpen = timeOpen;
+    }
+
+    public LocalDateTime getTimeClose() {
+        return timeClose;
     }
 
     public void setTimeClose(LocalDateTime timeClose) {
         this.timeClose = timeClose;
     }
 
+    public String getAlternativeName() {
+        return alternativeName;
+    }
+
     public void setAlternativeName(String alternativeName) {
         this.alternativeName = alternativeName;
+    }
+
+    public String getOperator() {
+        return operator;
     }
 
     public void setOperator(String operator) {
         this.operator = operator;
     }
 
+    public String getLink() {
+        return link;
+    }
+
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public List<TripPlaceEntity> getTripPlaces() {
+        return tripPlaces;
     }
 
     public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
         this.tripPlaces = tripPlaces;
     }
 
+    public List<UserEntity> getUsersWhoFavorited() {
+        return usersWhoFavorited;
+    }
+
     public void setUsersWhoFavorited(List<UserEntity> usersWhoFavorited) {
         this.usersWhoFavorited = usersWhoFavorited;
+    }
+
+    public List<SectionEntity> getSections() {
+        return sections;
     }
 
     public void setSections(List<SectionEntity> sections) {
         this.sections = sections;
     }
 
+    public List<PlaceImageEntity> getPlaceImages() {
+        return placeImages;
+    }
+
     public void setPlaceImages(List<PlaceImageEntity> placeImages) {
         this.placeImages = placeImages;
+    }
+
+    public List<FeedbackEntity> getFeedbacks() {
+        return feedbacks;
     }
 
     public void setFeedbacks(List<FeedbackEntity> feedbacks) {

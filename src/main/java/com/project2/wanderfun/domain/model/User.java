@@ -14,8 +14,11 @@ public class User extends BaseUser{
     private List<String> favoritePlaceIds;
     private List<Trip> trips;
     private List<Album> albums;
+    private boolean isCreatedProfile;
 
     public User() {
+        this.setCreatedProfile(false);
+        this.setPoint(0);
     }
 
     @Override
@@ -140,5 +143,13 @@ public class User extends BaseUser{
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
+    }
+
+    public boolean getCreatedProfile() {
+        return isCreatedProfile;
+    }
+
+    public void setCreatedProfile(boolean createdProfile) {
+        isCreatedProfile = createdProfile;
     }
 }

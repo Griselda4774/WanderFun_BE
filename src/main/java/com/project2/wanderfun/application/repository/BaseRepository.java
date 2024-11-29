@@ -1,4 +1,4 @@
-package com.project2.wanderfun.domain.repository;
+package com.project2.wanderfun.application.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,4 +8,5 @@ public interface BaseRepository<Model, ID> {
     List<Model> findAll();
     Optional<Model> findById(ID id);
     void deleteById(ID id);
+    void deleteAll();
 }
