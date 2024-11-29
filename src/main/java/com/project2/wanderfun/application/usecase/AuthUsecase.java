@@ -46,7 +46,7 @@ public class AuthUsecase {
         this.refreshTokenService = refreshTokenService;
     }
 
-    public String register(AccountDto accountDto) throws ObjectAlreadyExistException {
+    public boolean register(AccountDto accountDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
         User existingUser = null;
         try {
@@ -61,10 +61,10 @@ public class AuthUsecase {
         user.setRole(UserRole.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
-        return "Register successfully!";
+        return true;
     }
 
-    public String registerAdmin(AccountDto accountDto) throws ObjectAlreadyExistException {
+    public boolean registerAdmin(AccountDto accountDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
         User existingUser = null;
         try {
@@ -79,7 +79,7 @@ public class AuthUsecase {
         user.setRole(UserRole.ADMIN);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
-        return "Register admin successfully!";
+        return true;
     }
 
     public LoginResponseDto login(AccountDto accountDto) throws WrongEmailOrPasswordException {
@@ -117,10 +117,10 @@ public class AuthUsecase {
         }
     }
 
-    public String logout(String refreshToken) {
+    public boolean logout(String refreshToken) {
         String email = jwtUtil.getEmailFromToken(refreshToken);
         refreshTokenService.deleteByEmail(email);
-        return "Logout successfully!";
+        return true;
     }
 
     public TokenResponseDto refresh (String refreshToken) throws ObjectInvalidException {
