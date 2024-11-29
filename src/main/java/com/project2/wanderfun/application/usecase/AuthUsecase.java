@@ -11,8 +11,9 @@ import com.project2.wanderfun.application.service.RefreshTokenService;
 import com.project2.wanderfun.application.service.UserService;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.infrastructure.security.CustomUserDetails;
-import com.project2.wanderfun.presentation.exception.InvalidRefreshTokenException;
-import com.project2.wanderfun.presentation.exception.UserAlreadyExistException;
+import com.project2.wanderfun.presentation.exception.ObjectAlreadyExistException;
+import com.project2.wanderfun.presentation.exception.ObjectInvalidException;
+import com.project2.wanderfun.presentation.exception.WrongEmailOrPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,92 +46,96 @@ public class AuthUsecase {
         this.refreshTokenService = refreshTokenService;
     }
 
-    public String register(AccountDto accountDto) throws UserAlreadyExistException {
+    public String register(AccountDto accountDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
         User existingUser = null;
         try {
-            existingUser = userService.findUserByEmail(user.getEmail());
+            existingUser = userService.findByEmail(user.getEmail());
         } catch (Exception e) {
         }
 
         if (existingUser != null) {
-            throw new UserAlreadyExistException("User already exists");
+            throw new ObjectAlreadyExistException(String.format("Email already used"));
         }
 
         user.setRole(UserRole.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.createUser(user);
+        userService.create(user);
         return "Register successfully!";
     }
 
-    public String registerAdmin(AccountDto accountDto) throws UserAlreadyExistException {
+    public String registerAdmin(AccountDto accountDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(accountDto, User.class);
         User existingUser = null;
         try {
-            existingUser = userService.findUserByEmail(user.getEmail());
+            existingUser = userService.findByEmail(user.getEmail());
         } catch (Exception e) {
         }
 
         if (existingUser != null) {
-            throw new UserAlreadyExistException("User already exists");
+            throw new ObjectAlreadyExistException(String.format("Email already used"));
         }
 
         user.setRole(UserRole.ADMIN);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.createUser(user);
+        userService.create(user);
         return "Register admin successfully!";
     }
 
-    public LoginResponseDto login(AccountDto accountDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        accountDto.getEmail(),
-                        accountDto.getPassword()
-                )
-        );
+    public LoginResponseDto login(AccountDto accountDto) throws WrongEmailOrPasswordException {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            accountDto.getEmail(),
+                            accountDto.getPassword()
+                    )
+            );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userDetails.getUser();
-        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail(), user.getRole().name());
-        String refreshToken = jwtUtil.generateRefreshToken(user.getId());
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            User user = userDetails.getUser();
+            String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail(), user.getRole().name());
+            String refreshToken = jwtUtil.generateRefreshToken(user.getId());
 
-        RefreshToken refreshTokenModel = new RefreshToken();
-        refreshTokenModel.setEmail(user.getEmail());
-        refreshTokenModel.setToken(refreshToken);
-        refreshTokenService.deleteRefreshTokenByEmail(user.getEmail());
-        refreshTokenService.createRefreshToken(refreshTokenModel);
+            RefreshToken refreshTokenModel = new RefreshToken();
+            refreshTokenModel.setEmail(user.getEmail());
+            refreshTokenModel.setToken(refreshToken);
+            refreshTokenService.deleteByEmail(user.getEmail());
+            refreshTokenService.create(refreshTokenModel);
 
-        LoginResponseDto loginResponseDto = new LoginResponseDto();
-        loginResponseDto.setId(user.getId());
-        loginResponseDto.setEmail(user.getEmail());
-        loginResponseDto.setRole(user.getRole());
-        loginResponseDto.setAccessToken(accessToken);
-        loginResponseDto.setRefreshToken(refreshToken);
+            LoginResponseDto loginResponseDto = new LoginResponseDto();
+            loginResponseDto.setId(user.getId());
+            loginResponseDto.setEmail(user.getEmail());
+            loginResponseDto.setRole(user.getRole());
+            loginResponseDto.setAccessToken(accessToken);
+            loginResponseDto.setRefreshToken(refreshToken);
 
-        return loginResponseDto;
+            return loginResponseDto;
+        } catch (Exception e) {
+            throw new WrongEmailOrPasswordException("Email or password is not correct!");
+        }
     }
 
     public String logout(String refreshToken) {
         String email = jwtUtil.getEmailFromToken(refreshToken);
-        refreshTokenService.deleteRefreshTokenByEmail(email);
+        refreshTokenService.deleteByEmail(email);
         return "Logout successfully!";
     }
 
-    public TokenResponseDto refresh (String refreshToken) throws InvalidRefreshTokenException {
+    public TokenResponseDto refresh (String refreshToken) throws ObjectInvalidException {
         Long userId = Long.valueOf(jwtUtil.getIdFromToken(refreshToken));
-        User user = userService.findUserById(userId);
-        RefreshToken refreshTokenModel = refreshTokenService.findRefreshTokenByEmail(user.getEmail());
+        User user = userService.findById(userId);
+        RefreshToken refreshTokenModel = refreshTokenService.findByEmail(user.getEmail());
 
         if (!jwtUtil.validateToken(refreshToken) || !refreshTokenModel.getToken().equals(refreshToken)) {
-            throw new InvalidRefreshTokenException("Invalid refresh token");
+            throw new ObjectInvalidException(String.format("%s is invalid", RefreshToken.class.getSimpleName()));
         }
 
         String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail(), user.getRole().name());
         String newRefreshToken = jwtUtil.generateRefreshToken(user.getId());
         refreshTokenModel.setToken(newRefreshToken);
-        refreshTokenService.updateRefreshTokenById(refreshTokenModel.getId(), refreshTokenModel);
+        refreshTokenService.updateById(refreshTokenModel.getId(), refreshTokenModel);
 
         TokenResponseDto tokenResponseDto = new TokenResponseDto();
         tokenResponseDto.setAccessToken(accessToken);

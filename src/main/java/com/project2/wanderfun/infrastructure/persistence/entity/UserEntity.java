@@ -22,6 +22,8 @@ public class UserEntity {
     private String gender;
     private String phoneNumber;
     private Integer point;
+    private boolean isVerified;
+    private boolean isCreatedProfile;
 
     @OneToMany(mappedBy = "user")
     private List<AlbumEntity> albums;
@@ -44,108 +46,124 @@ public class UserEntity {
         return id;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public Integer getPoint() {
-        return point;
-    }
-
-    public List<AlbumEntity> getAlbums() {
-        return albums;
-    }
-
-    public List<TripEntity> getTrips() {
-        return trips;
-    }
-
-    public List<PlaceEntity> getFavoritePlaces() {
-        return favoritePlaces;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setRole(String role) {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    public Integer getPoint() {
+        return point;
+    }
+
     public void setPoint(Integer point) {
         this.point = point;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
+    public boolean isCreatedProfile() {
+        return isCreatedProfile;
+    }
+
+    public void setCreatedProfile(boolean createdProfile) {
+        isCreatedProfile = createdProfile;
+    }
+
+    public List<AlbumEntity> getAlbums() {
+        return albums;
     }
 
     public void setAlbums(List<AlbumEntity> albums) {
         this.albums = albums;
     }
 
+    public List<TripEntity> getTrips() {
+        return trips;
+    }
+
     public void setTrips(List<TripEntity> trips) {
         this.trips = trips;
+    }
+
+    public List<PlaceEntity> getFavoritePlaces() {
+        return favoritePlaces;
     }
 
     public void setFavoritePlaces(List<PlaceEntity> favoritePlaces) {

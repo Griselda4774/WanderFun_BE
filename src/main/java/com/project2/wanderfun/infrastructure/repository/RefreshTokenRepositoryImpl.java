@@ -15,9 +15,9 @@ public class RefreshTokenRepositoryImpl extends BaseRepositoryImpl<RefreshToken,
     private final JpaRefreshTokenRepository jpaRefreshTokenRepository;
 
     @Autowired
-    public RefreshTokenRepositoryImpl(JpaRefreshTokenRepository refreshTokenJpaRepository, ObjectMapper objectMapper) {
-        super(refreshTokenJpaRepository, objectMapper, RefreshToken.class, RefreshTokenEntity.class);
-        this.jpaRefreshTokenRepository = refreshTokenJpaRepository;
+    public RefreshTokenRepositoryImpl(JpaRefreshTokenRepository jpaRefreshTokenRepository, ObjectMapper objectMapper) {
+        super(jpaRefreshTokenRepository, objectMapper, RefreshToken.class, RefreshTokenEntity.class);
+        this.jpaRefreshTokenRepository = jpaRefreshTokenRepository;
     }
 
     @Override

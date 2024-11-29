@@ -8,4 +8,5 @@ public interface BaseRepository<Model, ID> {
     List<Model> findAll();
     Optional<Model> findById(ID id);
     void deleteById(ID id);
+    void deleteAll();
 }

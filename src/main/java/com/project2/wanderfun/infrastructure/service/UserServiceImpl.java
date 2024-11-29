@@ -4,48 +4,25 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.application.service.UserService;
-import com.project2.wanderfun.presentation.exception.UserNotFoundException;
+import com.project2.wanderfun.presentation.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private final ObjectMapper objectMapper;
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(ObjectMapper objectMapper, UserRepository userRepository) {
-        this.objectMapper = objectMapper;
+    public UserServiceImpl(UserRepository userRepository, ObjectMapper objectMapper) {
+        super(userRepository, objectMapper, User.class);
         this.userRepository = userRepository;
     }
 
     @Override
-    public User findUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-    }
-
-    @Override
     @Transactional
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found"));
-    }
-
-    @Override
-    public void createUser(User user) {
-        user.setId(null);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void updateUserById(Long id, User user) {
-        user.setId(id);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", User.class.getSimpleName())));
     }
 }

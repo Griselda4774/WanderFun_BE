@@ -1,13 +1,16 @@
 package com.project2.wanderfun.infrastructure.filter;
 
+import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.infrastructure.security.CustomUserDetails;
 import com.project2.wanderfun.infrastructure.security.UserDetailServiceImpl;
+import com.project2.wanderfun.presentation.exception.UnauthorizedException;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.internal.Pair;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,21 +19,24 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailServiceImpl userDetailService;
+    private final ObjectMapper objectMapper;
 
-    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService) {
+    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService, ObjectMapper objectMapper) {
         this.jwtUtil = jwtUtil;
         this.userDetailService = userDetailService;
+        this.objectMapper = objectMapper;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+            throws UnauthorizedException, IOException{
         try {
             if (isPublicApi(request)) {
                 filterChain.doFilter(request, response);

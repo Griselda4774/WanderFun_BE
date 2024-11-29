@@ -45,4 +45,9 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
     public void deleteById(ID id) {
         jpaBaseRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAll() {
+        jpaBaseRepository.deleteAll();
+    }
 }

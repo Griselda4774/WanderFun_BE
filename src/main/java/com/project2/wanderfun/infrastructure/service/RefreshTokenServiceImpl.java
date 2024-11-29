@@ -4,54 +4,36 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.domain.model.RefreshToken;
 import com.project2.wanderfun.application.repository.RefreshTokenRepository;
 import com.project2.wanderfun.application.service.RefreshTokenService;
+import com.project2.wanderfun.presentation.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RefreshTokenServiceImpl implements RefreshTokenService {
+public class RefreshTokenServiceImpl extends BaseServiceImpl<RefreshToken> implements RefreshTokenService {
     private final ObjectMapper objectMapper;
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
     public RefreshTokenServiceImpl(ObjectMapper objectMapper, RefreshTokenRepository refreshTokenRepository) {
+        super(refreshTokenRepository, objectMapper, RefreshToken.class);
         this.objectMapper = objectMapper;
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
     @Override
-    public RefreshToken findRefreshTokenById(Long id) {
-        return refreshTokenRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
-    }
-
-    @Override
     @Transactional
-    public RefreshToken findRefreshTokenByEmail(String email) {
+    public RefreshToken findByEmail(String email) {
         return refreshTokenRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("RefreshToken not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", RefreshToken.class.getSimpleName())));
     }
 
     @Override
-    public void createRefreshToken(RefreshToken refreshToken) {
-        refreshToken.setId(null);
-        refreshTokenRepository.save(refreshToken);
-    }
-
-    @Override
-    public void updateRefreshTokenById(Long id, RefreshToken refreshToken) {
-        refreshToken.setId(id);
-        refreshTokenRepository.save(refreshToken);
-    }
-
-    @Override
-    public void deleteRefreshTokenById(Long id) {
-        refreshTokenRepository.deleteById(id);
-    }
-
     @Transactional
-    @Override
-    public void deleteRefreshTokenByEmail(String email) {
-        refreshTokenRepository.deleteByEmail(email);
+    public void deleteByEmail(String email) {
+        RefreshToken existingRefreshtoken = refreshTokenRepository.findByEmail(email).orElse(null);
+        if (existingRefreshtoken != null) {
+            refreshTokenRepository.deleteByEmail(email);
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.project2.wanderfun.application.dto.LoginResponseDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
 import com.project2.wanderfun.application.dto.TokenResponseDto;
 import com.project2.wanderfun.application.usecase.AuthUsecase;
+import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,64 +25,69 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Validated AccountDto accountDto) {
+    public ResponseEntity<ResponseDto<?>> register(@RequestBody @Validated AccountDto accountDto)
+    throws RequestFailedException {
         String result = authUsecase.register(accountDto);
-        if (result.equals("Register successfully!")) {
-            return ResponseEntity.ok(result);
+
+        ResponseDto<?> responseDto = new ResponseDto<>();
+
+        if (!result.equals("Register successfully!")) {
+            throw new RequestFailedException("Register failed!");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        responseDto.setStatusCode(HttpStatus.OK.toString());
+        responseDto.setMessage(result);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @PostMapping("/register/admin")
-    public ResponseEntity<String> registerAdmin(@RequestBody @Validated AccountDto accountDto) {
+    public ResponseEntity<ResponseDto<?>> registerAdmin(@RequestBody @Validated AccountDto accountDto)
+    throws RequestFailedException {
         String result = authUsecase.registerAdmin(accountDto);
-        if (result.equals("Register admin successfully!")) {
-            return ResponseEntity.ok(result);
+
+        ResponseDto<?> responseDto = new ResponseDto<>();
+
+        if (!result.equals("Register admin successfully!")) {
+            throw new RequestFailedException("Register admin failed!");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+
+        responseDto.setStatusCode(HttpStatus.OK.toString());
+        responseDto.setMessage(result);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDto> login(@RequestBody @Validated AccountDto accountDto) {
+    public ResponseEntity<ResponseDto> login(@RequestBody @Validated AccountDto accountDto)
+    throws RequestFailedException {
         LoginResponseDto result = authUsecase.login(accountDto);
         ResponseDto<LoginResponseDto> response = new ResponseDto<>();
-        if (result != null) {
-            response.setStatusCode(HttpStatus.OK.toString());
-            response.setMessage("Login successfully!");
-            response.setTimestamp(new Date());
-            response.setData(result);
-            return ResponseEntity.ok(response);
+
+        if (result == null) {
+            throw new RequestFailedException("Login failed!");
         }
 
-        response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
-        response.setMessage("Login failed!");
-        response.setTimestamp(new Date());
-        response.setData(null);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Login successfully!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<ResponseDto> logout(@RequestHeader("Authorization") String refreshToken) {
+    public ResponseEntity<ResponseDto> logout(@RequestHeader("Authorization") String refreshToken)
+    throws RequestFailedException {
         if (refreshToken.startsWith("Bearer ")) {
             refreshToken = refreshToken.substring(7);
         }
 
         String result = authUsecase.logout(refreshToken);
-        if (result.equals("Logout successfully!")) {
-            ResponseDto response = new ResponseDto();
-            response.setStatusCode(HttpStatus.OK.toString());
-            response.setMessage("Logout successfully!");
-            response.setTimestamp(new Date());
-            response.setData(null);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+        ResponseDto response = new ResponseDto();
+
+        if (!result.equals("Logout successfully!")) {
+            throw new RequestFailedException("Logout failed!");
         }
 
-        ResponseDto response = new ResponseDto();
-        response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
-        response.setMessage("Logout failed!");
-        response.setTimestamp(new Date());
-        response.setData(null);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Logout successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/refresh")
@@ -94,7 +100,6 @@ public class AuthController {
         ResponseDto<TokenResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Refresh token successfully!");
-        response.setTimestamp(new Date());
         response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

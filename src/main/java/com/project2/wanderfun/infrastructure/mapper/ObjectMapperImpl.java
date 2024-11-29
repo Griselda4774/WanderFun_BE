@@ -28,4 +28,12 @@ public class ObjectMapperImpl implements ObjectMapper {
                 .map(source -> modelMapper.map(source, destinationClass))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public <S, D> void copyProperties(S source, D destination) {
+        if (source == null || destination == null) {
+            throw new IllegalArgumentException("Source and destination objects must not be null");
+        }
+        modelMapper.map(source, destination);;
+    }
 }

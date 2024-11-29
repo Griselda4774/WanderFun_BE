@@ -15,9 +15,9 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
     private final JpaUserRepository jpaUserRepository;
 
     @Autowired
-    public UserRepositoryImpl(JpaUserRepository userJpaRepository, ObjectMapper objectMapper) {
-        super(userJpaRepository, objectMapper, User.class, UserEntity.class);
-        this.jpaUserRepository = userJpaRepository;
+    public UserRepositoryImpl(JpaUserRepository jpaUserRepository, ObjectMapper objectMapper) {
+        super(jpaUserRepository, objectMapper, User.class, UserEntity.class);
+        this.jpaUserRepository = jpaUserRepository;
     }
 
     @Override
