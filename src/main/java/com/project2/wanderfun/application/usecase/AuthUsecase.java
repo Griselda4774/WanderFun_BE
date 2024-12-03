@@ -1,8 +1,9 @@
 package com.project2.wanderfun.application.usecase;
 
-import com.project2.wanderfun.application.dto.AccountDto;
-import com.project2.wanderfun.application.dto.LoginResponseDto;
-import com.project2.wanderfun.application.dto.TokenResponseDto;
+import com.project2.wanderfun.application.dto.auth.LoginDto;
+import com.project2.wanderfun.application.dto.auth.LoginResponseDto;
+import com.project2.wanderfun.application.dto.auth.RegisterDto;
+import com.project2.wanderfun.application.dto.auth.TokenResponseDto;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.RefreshToken;
@@ -11,9 +12,9 @@ import com.project2.wanderfun.application.service.RefreshTokenService;
 import com.project2.wanderfun.application.service.UserService;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.infrastructure.security.CustomUserDetails;
-import com.project2.wanderfun.presentation.exception.ObjectAlreadyExistException;
-import com.project2.wanderfun.presentation.exception.ObjectInvalidException;
-import com.project2.wanderfun.presentation.exception.WrongEmailOrPasswordException;
+import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
+import com.project2.wanderfun.application.exception.ObjectInvalidException;
+import com.project2.wanderfun.application.exception.WrongEmailOrPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,8 +47,8 @@ public class AuthUsecase {
         this.refreshTokenService = refreshTokenService;
     }
 
-    public boolean register(AccountDto accountDto) throws ObjectAlreadyExistException {
-        User user = objectMapper.map(accountDto, User.class);
+    public boolean register(RegisterDto registerDto) throws ObjectAlreadyExistException {
+        User user = objectMapper.map(registerDto, User.class);
         User existingUser = null;
         try {
             existingUser = userService.findByEmail(user.getEmail());
@@ -58,14 +59,13 @@ public class AuthUsecase {
             throw new ObjectAlreadyExistException(String.format("Email already used"));
         }
 
-        user.setRole(UserRole.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
         return true;
     }
 
-    public boolean registerAdmin(AccountDto accountDto) throws ObjectAlreadyExistException {
-        User user = objectMapper.map(accountDto, User.class);
+    public boolean registerAdmin(RegisterDto registerDto) throws ObjectAlreadyExistException {
+        User user = objectMapper.map(registerDto, User.class);
         User existingUser = null;
         try {
             existingUser = userService.findByEmail(user.getEmail());
@@ -82,12 +82,12 @@ public class AuthUsecase {
         return true;
     }
 
-    public LoginResponseDto login(AccountDto accountDto) throws WrongEmailOrPasswordException {
+    public LoginResponseDto login(LoginDto loginDto) throws WrongEmailOrPasswordException {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            accountDto.getEmail(),
-                            accountDto.getPassword()
+                            loginDto.getEmail(),
+                            loginDto.getPassword()
                     )
             );
 
@@ -120,6 +120,7 @@ public class AuthUsecase {
     public boolean logout(String refreshToken) {
         String email = jwtUtil.getEmailFromToken(refreshToken);
         refreshTokenService.deleteByEmail(email);
+        SecurityContextHolder.clearContext();
         return true;
     }
 

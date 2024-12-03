@@ -1,47 +1,34 @@
-package com.project2.wanderfun.infrastructure.persistence.entity;
+package com.project2.wanderfun.application.dto.place;
 
-import jakarta.persistence.*;
+import com.project2.wanderfun.domain.model.Feedback;
+import com.project2.wanderfun.domain.model.enums.PlaceCategory;
+import com.project2.wanderfun.domain.model.Section;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "place")
-public class PlaceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PlaceDto {
     private Long id;
-    @Column(precision = 9, scale = 6)
     private BigDecimal longitude;
-    @Column(precision = 8, scale = 6)
     private BigDecimal latitude;
     private String address;
     private String name;
     private String iconUrl;
     private String coverImageUrl;
+    private List<Section> description;
     private int checkInPoint;
     private float checkInRange;
-    private String category;
-    private LocalDateTime timeOpen;
-    private LocalDateTime timeClose;
+    private PlaceCategory category;
+    private Date timeOpen;
+    private Date timeClose;
     private String alternativeName;
     private String operator;
     private String link;
+    private List<String> imageUrls;
+    private List<Feedback> feedbacks;
 
-    @OneToMany(mappedBy = "place")
-    private List<TripPlaceEntity> tripPlaces;
-
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-    private List<SectionEntity> description;
-
-    @OneToMany(mappedBy = "place")
-    private List<PlaceImageEntity> placeImages;
-
-    @OneToMany(mappedBy = "place")
-    private List<FeedbackEntity> feedbacks;
-
-    public PlaceEntity() {
+    public PlaceDto() {
     }
 
     public Long getId() {
@@ -100,6 +87,14 @@ public class PlaceEntity {
         this.coverImageUrl = coverImageUrl;
     }
 
+    public List<Section> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<Section> description) {
+        this.description = description;
+    }
+
     public int getCheckInPoint() {
         return checkInPoint;
     }
@@ -116,27 +111,27 @@ public class PlaceEntity {
         this.checkInRange = checkInRange;
     }
 
-    public String getCategory() {
+    public PlaceCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(PlaceCategory category) {
         this.category = category;
     }
 
-    public LocalDateTime getTimeOpen() {
+    public Date getTimeOpen() {
         return timeOpen;
     }
 
-    public void setTimeOpen(LocalDateTime timeOpen) {
+    public void setTimeOpen(Date timeOpen) {
         this.timeOpen = timeOpen;
     }
 
-    public LocalDateTime getTimeClose() {
+    public Date getTimeClose() {
         return timeClose;
     }
 
-    public void setTimeClose(LocalDateTime timeClose) {
+    public void setTimeClose(Date timeClose) {
         this.timeClose = timeClose;
     }
 
@@ -164,35 +159,19 @@ public class PlaceEntity {
         this.link = link;
     }
 
-    public List<TripPlaceEntity> getTripPlaces() {
-        return tripPlaces;
+    public List<String> getImageUrls() {
+        return imageUrls;
     }
 
-    public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
-        this.tripPlaces = tripPlaces;
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
     }
 
-    public List<SectionEntity> getDescription() {
-        return description;
-    }
-
-    public void setDescription(List<SectionEntity> sections) {
-        this.description = sections;
-    }
-
-    public List<PlaceImageEntity> getPlaceImages() {
-        return placeImages;
-    }
-
-    public void setPlaceImages(List<PlaceImageEntity> placeImages) {
-        this.placeImages = placeImages;
-    }
-
-    public List<FeedbackEntity> getFeedbacks() {
+    public List<Feedback> getFeedbacks() {
         return feedbacks;
     }
 
-    public void setFeedbacks(List<FeedbackEntity> feedbacks) {
+    public void setFeedbacks(List<Feedback> feedbacks) {
         this.feedbacks = feedbacks;
     }
 }

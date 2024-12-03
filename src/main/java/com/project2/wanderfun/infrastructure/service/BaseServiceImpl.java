@@ -3,7 +3,7 @@ package com.project2.wanderfun.infrastructure.service;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.BaseRepository;
 import com.project2.wanderfun.application.service.BaseService;
-import com.project2.wanderfun.presentation.exception.ObjectNotFoundException;
+import com.project2.wanderfun.application.exception.ObjectNotFoundException;
 
 import java.util.List;
 
@@ -31,6 +31,11 @@ public class BaseServiceImpl<Model> implements BaseService<Model> {
     @Override
     public void create(Model model) {
         baseRepository.save(model);
+    }
+
+    @Override
+    public void createAll(List<Model> models) {
+        baseRepository.saveAll(models);
     }
 
     @Override

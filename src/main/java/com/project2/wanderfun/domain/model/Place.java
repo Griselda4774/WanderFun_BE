@@ -1,5 +1,7 @@
 package com.project2.wanderfun.domain.model;
 
+import com.project2.wanderfun.domain.model.enums.PlaceCategory;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

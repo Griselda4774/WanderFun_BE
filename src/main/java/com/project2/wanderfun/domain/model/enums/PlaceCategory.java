@@ -1,4 +1,4 @@
-package com.project2.wanderfun.domain.model;
+package com.project2.wanderfun.domain.model.enums;
 
 public enum PlaceCategory {
     HOTEL,

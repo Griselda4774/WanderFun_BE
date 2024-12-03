@@ -1,20 +1,20 @@
-package com.project2.wanderfun.application.dto;
+package com.project2.wanderfun.application.dto.user;
 
 import java.util.Date;
 
-public class UserDto {
-    private Long id;
-    private String role;
-    private String email;
-    private String firstName;
-    private String lastName;
+public class UserResponseDto {
+    protected Long id;
+    protected String email;
+    protected String firstName;
+    protected String lastName;
+    protected boolean isVerified;
     private String avatarUrl;
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
-    private Integer point;
+    private int point;
 
-    public UserDto() {
+    public UserResponseDto() {
     }
 
     public Long getId() {
@@ -23,14 +23,6 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -55,6 +47,14 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 
     public String getAvatarUrl() {
@@ -89,11 +89,11 @@ public class UserDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Integer point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 }

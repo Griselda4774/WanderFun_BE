@@ -6,6 +6,7 @@ import com.project2.wanderfun.infrastructure.security.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -53,12 +54,15 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/wanderfun/auth/register").permitAll()
-                                .requestMatchers("/wanderfun/auth/login").permitAll()
-                                .requestMatchers("/wanderfun/auth/register/admin").permitAll()
-                                .requestMatchers("/wanderfun/auth/refresh").permitAll()
-                                .requestMatchers("/wanderfun/user/findUserByEmail/**").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers("/wanderfun/user/findUserById/**").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers("/wanderfun/auth/**").permitAll()
+                                .requestMatchers("/wanderfun/auth/admin/register").permitAll()
+
+                                .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").permitAll()
+                                .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
+
+                                .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()
+                                .requestMatchers("/wanderfun/place/**").hasAnyRole(UserRole.ADMIN.name())
+
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

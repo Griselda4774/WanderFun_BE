@@ -1,4 +1,4 @@
-package com.project2.wanderfun.application.dto;
+package com.project2.wanderfun.application.dto.auth;
 
 public class TokenResponseDto {
     private String accessToken;

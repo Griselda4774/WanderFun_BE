@@ -1,6 +1,7 @@
 package com.project2.wanderfun.presentation.exception.handler;
 
 import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.exception.*;
 import com.project2.wanderfun.presentation.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +11,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(NotHavePermissionException.class)
+    public ResponseEntity<ResponseDto<?>> handleNotHavePermissionException(NotHavePermissionException e) {
+        ResponseDto<?> response = new ResponseDto();
+        response.setStatusCode(HttpStatus.FORBIDDEN.toString());
+        response.setMessage(e.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ResponseDto<?>> handleUnauthorizedException(UnauthorizedException e) {
         ResponseDto<?> response = new ResponseDto();

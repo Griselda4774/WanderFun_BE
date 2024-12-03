@@ -7,7 +7,7 @@ import java.util.Date;
 public interface JwtUtil {
     public String generateAccessToken(Long id, String email, String role);
     public String generateRefreshToken(Long id);
-    public String getIdFromToken(String token);
+    public long getIdFromToken(String token);
     public String getEmailFromToken(String token);
     public String getRoleFromToken(String token);
     public Date getExpirationDateFromToken(String token);
