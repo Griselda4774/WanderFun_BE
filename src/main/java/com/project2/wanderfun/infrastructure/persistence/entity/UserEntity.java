@@ -2,6 +2,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,14 @@ public class UserEntity {
     private boolean isVerified;
     private boolean isCreatedProfile;
 
-    @OneToMany(mappedBy = "user")
-    private List<FavouritePlaceEntity> favoritePlaceIds;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FavouritePlaceEntity> favoritePlaceIds = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<AlbumEntity> albums;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlbumEntity> albums = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<TripEntity> trips;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripEntity> trips = new ArrayList<>();
 
     public UserEntity() {
     }

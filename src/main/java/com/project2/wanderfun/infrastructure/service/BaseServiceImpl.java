@@ -49,10 +49,7 @@ public class BaseServiceImpl<Model> implements BaseService<Model> {
 
     @Override
     public void deleteById(Long id) {
-        Model existingModel = baseRepository.findById(id).orElse(null);
-        if (existingModel != null) {
-            baseRepository.deleteById(id);
-        }
+        baseRepository.deleteById(id);
     }
 
     @Override

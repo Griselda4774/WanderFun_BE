@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,17 +30,14 @@ public class PlaceEntity {
     private String operator;
     private String link;
 
-    @OneToMany(mappedBy = "place")
-    private List<TripPlaceEntity> tripPlaces;
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SectionEntity> description = new ArrayList<>();
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-    private List<SectionEntity> description;
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlaceImageEntity> placeImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "place")
-    private List<PlaceImageEntity> placeImages;
-
-    @OneToMany(mappedBy = "place")
-    private List<FeedbackEntity> feedbacks;
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedbackEntity> feedbacks = new ArrayList<>();
 
     public PlaceEntity() {
     }
@@ -162,14 +160,6 @@ public class PlaceEntity {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public List<TripPlaceEntity> getTripPlaces() {
-        return tripPlaces;
-    }
-
-    public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
-        this.tripPlaces = tripPlaces;
     }
 
     public List<SectionEntity> getDescription() {

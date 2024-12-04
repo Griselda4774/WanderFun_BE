@@ -15,9 +15,7 @@ public class TripPlaceEntity {
     @JoinColumn(name = "tripId")
     private TripEntity trip;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "placeId")
-    private PlaceEntity place;
+    private String placeId;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -29,36 +27,36 @@ public class TripPlaceEntity {
         return id;
     }
 
-    public TripEntity getTrip() {
-        return trip;
-    }
-
-    public PlaceEntity getPlace() {
-        return place;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TripEntity getTrip() {
+        return trip;
     }
 
     public void setTrip(TripEntity trip) {
         this.trip = trip;
     }
 
-    public void setPlace(PlaceEntity place) {
-        this.place = place;
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     public void setEndTime(LocalDateTime endTime) {
