@@ -1,6 +1,7 @@
 package com.project2.wanderfun.presentation.controller;
 
-import com.project2.wanderfun.application.dto.PlaceDto;
+import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
+import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
 import com.project2.wanderfun.application.usecase.PlaceUsecase;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
@@ -35,6 +36,20 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/search/{name}")
+    public ResponseEntity<ResponseDto<List<PlaceDto>>> findAllPlacesByNameContaining(@PathVariable String name) {
+        List<PlaceDto> result = placeUsecase.findAllPlacesByNameContaining(name);
+        if (result == null) {
+            throw new RequestFailedException("Find all places by name containing failed!");
+        }
+
+        ResponseDto<List<PlaceDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all places by name containing successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto<PlaceDto>> findPlaceById(@PathVariable long id) {
         PlaceDto result = placeUsecase.findPlaceById(id);
@@ -49,9 +64,23 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ResponseDto<PlaceDto>> findPlaceByName(@PathVariable String name) {
+        PlaceDto result = placeUsecase.findPlaceByName(name);
+        if (result == null) {
+            throw new RequestFailedException("Find place by name failed!");
+        }
+
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find place by name successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createPlace(@RequestBody PlaceDto placeDto) {
-        boolean result = placeUsecase.createPlace(placeDto);
+    public ResponseEntity<ResponseDto<?>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
+        boolean result = placeUsecase.createPlace(placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Create place failed!");
         }
@@ -63,8 +92,8 @@ public class PlaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceDto placeDto) {
-        boolean result = placeUsecase.updatePlaceById(id, placeDto);
+    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
+        boolean result = placeUsecase.updatePlaceById(id, placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Update place failed!");
         }

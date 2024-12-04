@@ -1,9 +1,10 @@
 package com.project2.wanderfun.presentation.controller;
 
-import com.project2.wanderfun.application.dto.AccountDto;
-import com.project2.wanderfun.application.dto.LoginResponseDto;
-import com.project2.wanderfun.application.dto.ResponseDto;
-import com.project2.wanderfun.application.dto.TokenResponseDto;
+import com.project2.wanderfun.application.dto.*;
+import com.project2.wanderfun.application.dto.auth.LoginDto;
+import com.project2.wanderfun.application.dto.auth.LoginResponseDto;
+import com.project2.wanderfun.application.dto.auth.RegisterDto;
+import com.project2.wanderfun.application.dto.auth.TokenResponseDto;
 import com.project2.wanderfun.application.usecase.AuthUsecase;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping("wanderfun/auth")
@@ -25,9 +24,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDto<?>> register(@RequestBody @Validated AccountDto accountDto)
+    public ResponseEntity<ResponseDto<?>> register(@RequestBody @Validated RegisterDto registerDto)
     throws RequestFailedException {
-        boolean result = authUsecase.register(accountDto);
+        boolean result = authUsecase.register(registerDto);
         if (result != true) {
             throw new RequestFailedException("Register failed!");
         }
@@ -38,10 +37,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
-    @PostMapping("/register/admin")
-    public ResponseEntity<ResponseDto<?>> registerAdmin(@RequestBody @Validated AccountDto accountDto)
+    @PostMapping("/admin/register")
+    public ResponseEntity<ResponseDto<?>> registerAdmin(@RequestBody @Validated RegisterDto registerDto)
     throws RequestFailedException {
-        boolean result = authUsecase.registerAdmin(accountDto);
+        boolean result = authUsecase.registerAdmin(registerDto);
         if (result != true) {
             throw new RequestFailedException("Register admin failed!");
         }
@@ -53,9 +52,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDto> login(@RequestBody @Validated AccountDto accountDto)
+    public ResponseEntity<ResponseDto> login(@RequestBody @Validated LoginDto loginDto)
     throws RequestFailedException {
-        LoginResponseDto result = authUsecase.login(accountDto);
+        LoginResponseDto result = authUsecase.login(loginDto);
         if (result == null) {
             throw new RequestFailedException("Login failed!");
         }

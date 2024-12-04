@@ -1,19 +1,26 @@
-package com.project2.wanderfun.application.dto;
+package com.project2.wanderfun.application.dto.place;
 
-import com.project2.wanderfun.domain.model.Feedback;
-import com.project2.wanderfun.domain.model.PlaceCategory;
+import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 import com.project2.wanderfun.domain.model.Section;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class PlaceDto {
-    private Long id;
+public class PlaceCreateDto {
+    @NotBlank(message = "Longitude is required")
     private BigDecimal longitude;
+
+    @NotBlank(message = "Latitude is required")
     private BigDecimal latitude;
+
+    @NotBlank(message = "Address is required")
     private String address;
+
+    @NotBlank(message = "Name is required")
     private String name;
+
     private String iconUrl;
     private String coverImageUrl;
     private List<Section> description;
@@ -26,17 +33,8 @@ public class PlaceDto {
     private String operator;
     private String link;
     private List<String> imageUrls;
-    private List<Feedback> feedbacks;
 
-    public PlaceDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public PlaceCreateDto() {
     }
 
     public BigDecimal getLongitude() {
@@ -165,13 +163,5 @@ public class PlaceDto {
 
     public void setImageUrls(List<String> imageUrls) {
         this.imageUrls = imageUrls;
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
     }
 }

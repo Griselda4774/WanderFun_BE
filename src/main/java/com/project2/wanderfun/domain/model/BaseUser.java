@@ -13,6 +13,7 @@ public abstract class BaseUser {
 
     public BaseUser() {
         this.setVerified(false);
+        this.setRole(UserRole.USER);
     }
 
     public Long getId() {

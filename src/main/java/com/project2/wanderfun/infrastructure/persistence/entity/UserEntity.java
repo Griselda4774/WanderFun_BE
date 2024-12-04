@@ -26,18 +26,13 @@ public class UserEntity {
     private boolean isCreatedProfile;
 
     @OneToMany(mappedBy = "user")
+    private List<FavouritePlaceEntity> favoritePlaceIds;
+
+    @OneToMany(mappedBy = "user")
     private List<AlbumEntity> albums;
 
     @OneToMany(mappedBy = "user")
     private List<TripEntity> trips;
-
-    @ManyToMany
-    @JoinTable(
-            name = "favorite_place",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "placeId")
-    )
-    private List<PlaceEntity> favoritePlaces;
 
     public UserEntity() {
     }
@@ -162,11 +157,11 @@ public class UserEntity {
         this.trips = trips;
     }
 
-    public List<PlaceEntity> getFavoritePlaces() {
-        return favoritePlaces;
+    public List<FavouritePlaceEntity> getFavoritePlaceIds() {
+        return favoritePlaceIds;
     }
 
-    public void setFavoritePlaces(List<PlaceEntity> favoritePlaces) {
-        this.favoritePlaces = favoritePlaces;
+    public void setFavoritePlaceIds(List<FavouritePlaceEntity> favoritePlaceIds) {
+        this.favoritePlaceIds = favoritePlaceIds;
     }
 }

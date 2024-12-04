@@ -4,7 +4,7 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.application.service.UserService;
-import com.project2.wanderfun.presentation.exception.ObjectNotFoundException;
+import com.project2.wanderfun.application.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

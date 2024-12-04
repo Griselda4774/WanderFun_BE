@@ -4,20 +4,18 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.domain.model.RefreshToken;
 import com.project2.wanderfun.application.repository.RefreshTokenRepository;
 import com.project2.wanderfun.application.service.RefreshTokenService;
-import com.project2.wanderfun.presentation.exception.ObjectNotFoundException;
+import com.project2.wanderfun.application.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RefreshTokenServiceImpl extends BaseServiceImpl<RefreshToken> implements RefreshTokenService {
-    private final ObjectMapper objectMapper;
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
     public RefreshTokenServiceImpl(ObjectMapper objectMapper, RefreshTokenRepository refreshTokenRepository) {
         super(refreshTokenRepository, objectMapper, RefreshToken.class);
-        this.objectMapper = objectMapper;
         this.refreshTokenRepository = refreshTokenRepository;
     }
 

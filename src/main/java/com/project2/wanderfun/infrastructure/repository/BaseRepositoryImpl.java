@@ -29,6 +29,17 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
     }
 
     @Override
+    public List<Model> saveAll(List<Model> models) {
+        List<Entity> entities = models.stream()
+                .map(model -> objectMapper.map(model, entityClass))
+                .collect(Collectors.toList());
+        List<Entity> savedEntities = jpaBaseRepository.saveAll(entities);
+        return savedEntities.stream()
+                .map(entity -> objectMapper.map(entity, modelClass))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Model> findAll() {
         return jpaBaseRepository.findAll().stream()
                 .map(entity -> objectMapper.map(entity, modelClass))

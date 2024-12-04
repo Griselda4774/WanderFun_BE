@@ -1,4 +1,4 @@
-package com.project2.wanderfun.application.dto;
+package com.project2.wanderfun.application.dto.auth;
 
 import com.project2.wanderfun.domain.model.enums.UserRole;
 
