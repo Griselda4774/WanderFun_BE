@@ -3,6 +3,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +22,8 @@ public class TripEntity {
     private LocalDateTime endTime;
 
     // Relationships
-    @OneToMany(mappedBy = "trip")
-    private List<TripPlaceEntity> tripPlaces;
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripPlaceEntity> tripPlaces = new ArrayList<>();
 
     public TripEntity() {
     }

@@ -3,6 +3,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +22,8 @@ public class FeedbackEntity {
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
 
-    @OneToMany(mappedBy = "feedback")
-    private List<FeedbackImageEntity> feedbackImages;
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedbackImageEntity> feedbackImages = new ArrayList<>();;
 
     public FeedbackEntity() {
     }

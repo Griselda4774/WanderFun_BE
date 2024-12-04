@@ -11,6 +11,8 @@ import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaSectio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class SectionRepositoryImpl extends BaseRepositoryImpl<Section, SectionEntity, Long> implements SectionRepository {
     private final JpaSectionRepository jpaSectionRepository;
@@ -19,5 +21,13 @@ public class SectionRepositoryImpl extends BaseRepositoryImpl<Section, SectionEn
     public SectionRepositoryImpl(JpaSectionRepository jpaSectionRepository, ObjectMapper objectMapper) {
         super(jpaSectionRepository, objectMapper, Section.class, SectionEntity.class);
         this.jpaSectionRepository = jpaSectionRepository;
+    }
+
+    @Override
+    public List<Section> findAllByPlaceId(Long placeId) {
+        return jpaSectionRepository.findAllByPlaceId(placeId)
+                .stream()
+                .map(entity -> objectMapper.map(entity, Section.class))
+                .toList();
     }
 }

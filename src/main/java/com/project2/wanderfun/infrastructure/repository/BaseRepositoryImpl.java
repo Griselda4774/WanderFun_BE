@@ -54,7 +54,10 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
 
     @Override
     public void deleteById(ID id) {
-        jpaBaseRepository.deleteById(id);
+        Optional<Entity> entity = jpaBaseRepository.findById(id);
+        if (entity.isPresent()) {
+            jpaBaseRepository.delete(entity.get());
+        }
     }
 
     @Override

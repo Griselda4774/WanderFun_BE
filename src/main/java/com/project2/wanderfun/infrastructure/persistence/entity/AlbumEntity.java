@@ -2,6 +2,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,8 @@ public class AlbumEntity {
     private String description;
 
     // Relationships
-    @OneToMany(mappedBy = "album")
-    private List<AlbumImageEntity> albumImages;
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlbumImageEntity> albumImages = new ArrayList<>();;
 
     public AlbumEntity() {
     }
