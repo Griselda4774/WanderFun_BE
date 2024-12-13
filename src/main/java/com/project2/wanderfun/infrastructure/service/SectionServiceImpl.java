@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SectionServiceImpl extends BaseServiceImpl<Section> implements SectionService {
 
-    @Autowired
     public SectionServiceImpl(SectionRepository sectionRepository, ObjectMapper objectMapper) {
         super(sectionRepository, objectMapper, Section.class);
     }
