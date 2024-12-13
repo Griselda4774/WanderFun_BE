@@ -18,13 +18,11 @@ import java.util.Optional;
 @Repository
 public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, Long> implements PlaceRepository {
     private final JpaPlaceRepository jpaPlaceRepository;
-    private final SectionRepository sectionRepository;
 
     @Autowired
-    public PlaceRepositoryImpl(JpaPlaceRepository jpaPlaceRepository, ObjectMapper objectMapper, SectionRepository sectionRepository) {
+    public PlaceRepositoryImpl(JpaPlaceRepository jpaPlaceRepository, ObjectMapper objectMapper) {
         super(jpaPlaceRepository, objectMapper, Place.class, PlaceEntity.class);
         this.jpaPlaceRepository = jpaPlaceRepository;
-        this.sectionRepository = sectionRepository;
     }
 
     @Override
@@ -66,16 +64,6 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
                 .map(placeEntity -> objectMapper.map(placeEntity, Place.class))
                 .toList();
     }
-
-//    @Override
-//    public Optional<Place> findById(Long id) {
-//        Optional<Place> place = super.findById(id);
-//        if(place.isPresent()) {
-//            List<Section> section = sectionRepository.findAllByPlaceId(place.get().getId());
-//            place.get().setDescription(section);
-//        }
-//        return place;
-//    }
 
     @Override
     public List<Place> findAllByNameContaining(String name) {
