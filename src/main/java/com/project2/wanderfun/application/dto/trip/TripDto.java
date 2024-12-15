@@ -1,16 +1,18 @@
-package com.project2.wanderfun.domain.model;
+package com.project2.wanderfun.application.dto.trip;
+
+import com.project2.wanderfun.domain.model.TripPlace;
 
 import java.util.Date;
 import java.util.List;
 
-public class Trip {
+public class TripDto {
     private Long id;
     private String name;
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
 
-    public Trip() {
+    public TripDto() {
     }
 
     public Long getId() {

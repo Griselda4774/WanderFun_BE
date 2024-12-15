@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Long> implements TripRepository {
@@ -35,5 +36,12 @@ public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Lon
         TripEntity savedTripEntity = jpaTripRepository.save(tripEntity);
 
         return objectMapper.map(savedTripEntity, Trip.class);
+    }
+
+    @Override
+    public Optional<Trip> findByName(String name) {
+        Optional<Trip> trip = jpaTripRepository.findByName(name)
+                .map(entity -> objectMapper.map(entity, Trip.class));
+        return trip;
     }
 }
