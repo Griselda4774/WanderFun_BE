@@ -32,44 +32,44 @@ public class TripEntity {
         return id;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public List<TripPlaceEntity> getTripPlaces() {
-        return tripPlaces;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UserEntity getUser() {
+        return user;
     }
 
     public void setUser(UserEntity user) {
         this.user = user;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public List<TripPlaceEntity> getTripPlaces() {
+        return tripPlaces;
     }
 
     public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
