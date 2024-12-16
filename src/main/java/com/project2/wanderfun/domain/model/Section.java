@@ -5,6 +5,7 @@ public class Section {
     private String title;
     private String content;
     private String imageUrl;
+    private Long placeId;
 
     public Section() {
     }
@@ -39,5 +40,13 @@ public class Section {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 }

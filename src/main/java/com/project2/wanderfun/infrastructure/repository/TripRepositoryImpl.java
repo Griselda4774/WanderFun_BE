@@ -29,7 +29,7 @@ public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Lon
 
         if (trip.getTripPlaces() != null || trip.getTripPlaces().size() > 0) {
             List<TripPlaceEntity> tripPlaceEntities = objectMapper.mapList(trip.getTripPlaces(), TripPlaceEntity.class);
-            tripPlaceEntities.forEach(sectionEntity -> sectionEntity.setTrip(tripEntity));
+            tripPlaceEntities.forEach(tripPlaceEntity -> tripPlaceEntity.setTrip(tripEntity));
             tripEntity.setTripPlaces(tripPlaceEntities);
         }
 

@@ -8,6 +8,7 @@ import java.util.List;
 public class TripDto {
     private Long id;
     private String name;
+    private String imageUrl;
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
@@ -29,6 +30,14 @@ public class TripDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Date getStartTime() {

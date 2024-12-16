@@ -6,9 +6,11 @@ import java.util.List;
 public class Trip {
     private Long id;
     private String name;
+    private String imageUrl;
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
+    private Long userId;
 
     public Trip() {
     }
@@ -27,6 +29,14 @@ public class Trip {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Date getStartTime() {
@@ -51,5 +61,13 @@ public class Trip {
 
     public void setTripPlaces(List<TripPlace> tripPlaces) {
         this.tripPlaces = tripPlaces;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

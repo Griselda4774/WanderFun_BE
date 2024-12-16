@@ -10,6 +10,9 @@ public interface JwtUtil {
     public long getIdFromToken(String token);
     public String getEmailFromToken(String token);
     public String getRoleFromToken(String token);
+    public TokenType getTokenTypeFromToken(String token);
     public Date getExpirationDateFromToken(String token);
     public boolean validateToken(String token);
+    public boolean isAccessToken(String token);
+    public boolean isRefreshToken(String token);
 }

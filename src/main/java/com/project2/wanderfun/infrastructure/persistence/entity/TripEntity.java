@@ -18,6 +18,7 @@ public class TripEntity {
     private UserEntity user;
 
     private String name;
+    private String imageUrl;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
@@ -50,6 +51,14 @@ public class TripEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public LocalDateTime getStartTime() {

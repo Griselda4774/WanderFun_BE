@@ -2,6 +2,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,8 +16,13 @@ public class TripPlaceEntity {
     @JoinColumn(name = "tripId")
     private TripEntity trip;
 
-    private String placeId;
+    @Column(precision = 9, scale = 6)
+    private BigDecimal placeLongitude;
+    @Column(precision = 8, scale = 6)
+    private BigDecimal placeLatitude;
 
+    private String placeName;
+    private String placeImageUrl;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
@@ -39,12 +45,36 @@ public class TripPlaceEntity {
         this.trip = trip;
     }
 
-    public String getPlaceId() {
-        return placeId;
+    public BigDecimal getPlaceLongitude() {
+        return placeLongitude;
     }
 
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
+    public void setPlaceLongitude(BigDecimal placeLongitude) {
+        this.placeLongitude = placeLongitude;
+    }
+
+    public BigDecimal getPlaceLatitude() {
+        return placeLatitude;
+    }
+
+    public void setPlaceLatitude(BigDecimal placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlaceImageUrl() {
+        return placeImageUrl;
+    }
+
+    public void setPlaceImageUrl(String placeImageUrl) {
+        this.placeImageUrl = placeImageUrl;
     }
 
     public LocalDateTime getStartTime() {

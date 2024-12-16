@@ -117,19 +117,23 @@ public class AuthUsecase {
         }
     }
 
-    public boolean logout(String refreshToken) {
-        String email = jwtUtil.getEmailFromToken(refreshToken);
+    public boolean logout(String accessToken) {
+        String email = jwtUtil.getEmailFromToken(accessToken);
         refreshTokenService.deleteByEmail(email);
         SecurityContextHolder.clearContext();
         return true;
     }
 
     public TokenResponseDto refresh (String refreshToken) throws ObjectInvalidException {
+        if (!jwtUtil.validateToken(refreshToken) || !jwtUtil.isRefreshToken(refreshToken)) {
+            throw new ObjectInvalidException(String.format("%s is invalid", RefreshToken.class.getSimpleName()));
+        }
+
         Long userId = Long.valueOf(jwtUtil.getIdFromToken(refreshToken));
         User user = userService.findById(userId);
         RefreshToken refreshTokenModel = refreshTokenService.findByEmail(user.getEmail());
 
-        if (!jwtUtil.validateToken(refreshToken) || !refreshTokenModel.getToken().equals(refreshToken)) {
+        if (!refreshTokenModel.getToken().equals(refreshToken)) {
             throw new ObjectInvalidException(String.format("%s is invalid", RefreshToken.class.getSimpleName()));
         }
 

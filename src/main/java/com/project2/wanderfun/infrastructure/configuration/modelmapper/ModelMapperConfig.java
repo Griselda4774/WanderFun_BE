@@ -1,13 +1,8 @@
-package com.project2.wanderfun.infrastructure.configuration.modelMapper;
+package com.project2.wanderfun.infrastructure.configuration.modelmapper;
 
-import org.hibernate.collection.spi.PersistentBag;
-import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Configuration
