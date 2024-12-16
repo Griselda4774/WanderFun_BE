@@ -8,6 +8,7 @@ public class Album {
     private String description;
     private String placeId;
     private List<String> imageUrls;
+    private long userId;
 
     public Album() {
     }
@@ -50,5 +51,13 @@ public class Album {
 
     public void setImageUrls(List<String> imageUrls) {
         this.imageUrls = imageUrls;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

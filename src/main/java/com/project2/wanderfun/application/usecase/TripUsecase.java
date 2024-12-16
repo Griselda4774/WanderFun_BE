@@ -65,7 +65,7 @@ public class TripUsecase {
         return true;
     }
 
-    public boolean deleteAllPlaces() {
+    public boolean deleteAllTrips() {
         tripService.deleteAll();
         return true;
     }

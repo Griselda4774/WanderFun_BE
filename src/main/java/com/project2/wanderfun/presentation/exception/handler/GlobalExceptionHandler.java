@@ -100,7 +100,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleUnwantedException(Exception e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        response.setMessage("Something went wrong!");
+        response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 }

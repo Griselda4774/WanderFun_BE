@@ -31,6 +31,7 @@ public class JwtUtilImpl implements JwtUtil{
                     .subject(Long.toString(id))
                     .claim("email", email)
                     .claim("role", role)
+                    .claim("type", TokenType.ACCESS_TOKEN.name())
                     .setIssuedAt(now)
                     .setExpiration(expiryDate)
                     .signWith(key, SignatureAlgorithm.HS512)
@@ -48,6 +49,7 @@ public class JwtUtilImpl implements JwtUtil{
             Date expiryDate = new Date(now.getTime() + REFRESH_EXPIRATION_TIME);
             return Jwts.builder()
                     .subject(Long.toString(id))
+                    .claim("type", TokenType.REFRESH_TOKEN.name())
                     .setIssuedAt(now)
                     .setExpiration(expiryDate)
                     .signWith(key, SignatureAlgorithm.HS256)
@@ -65,12 +67,12 @@ public class JwtUtilImpl implements JwtUtil{
 
     @Override
     public String getEmailFromToken(String token) {
-        return (String) extractClaim(token, claims -> claims.get("email", String.class));
+        return extractClaim(token, claims -> claims.get("email", String.class));
     }
 
     @Override
     public String getRoleFromToken(String token) {
-        return (String) extractClaim(token, claims -> claims.get("role", String.class));
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
 
     @Override
@@ -78,6 +80,13 @@ public class JwtUtilImpl implements JwtUtil{
         return extractClaim(token, Claims::getExpiration);
     }
 
+
+    @Override
+    public TokenType getTokenTypeFromToken(String token) {
+        return TokenType.valueOf(extractClaim(token, claims -> claims.get("type", String.class)));
+    }
+
+    @Override
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(JWT_SECRET).build().parseClaimsJws(token);
@@ -92,6 +101,16 @@ public class JwtUtilImpl implements JwtUtil{
             log.error("JWT claims string is empty.");
         }
         return false;
+    }
+
+    @Override
+    public boolean isAccessToken(String token) {
+        return getTokenTypeFromToken(token) == TokenType.ACCESS_TOKEN;
+    }
+
+    @Override
+    public boolean isRefreshToken(String token) {
+        return getTokenTypeFromToken(token) == TokenType.REFRESH_TOKEN;
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

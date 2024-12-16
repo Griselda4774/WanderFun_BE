@@ -68,13 +68,13 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<ResponseDto> logout(@RequestHeader("Authorization") String refreshToken)
+    public ResponseEntity<ResponseDto> logout(@RequestHeader("Authorization") String accessToken)
     throws RequestFailedException {
-        if (refreshToken.startsWith("Bearer ")) {
-            refreshToken = refreshToken.substring(7);
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
         }
 
-        boolean result = authUsecase.logout(refreshToken);
+        boolean result = authUsecase.logout(accessToken);
         if (result != true) {
             throw new RequestFailedException("Logout failed!");
         }

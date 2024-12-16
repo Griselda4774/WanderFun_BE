@@ -60,6 +60,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+
+//            if(role == null && !isRefreshApi(request)) {
+//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+//                return;
+//            }
+
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
@@ -72,7 +78,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 Pair.of("POST", "/wanderfun/auth/login"),
                 Pair.of("POST", "/wanderfun/auth/admin/register"),
 
-                Pair.of("GET", "/wanderfun/place")
+                Pair.of("GET", "/wanderfun/place"),
+
+                // Swagger endpoints
+                Pair.of("GET", "/swagger-ui"),
+                Pair.of("GET", "/v3/api-docs")
         );
 
         String requestPath = request.getServletPath();
@@ -81,5 +91,15 @@ public class JwtFilter extends OncePerRequestFilter {
         return publicApis.stream()
                 .anyMatch(api -> api.getLeft().equalsIgnoreCase(requestMethod)
                         && requestPath.startsWith(api.getRight()));
+    }
+
+    private boolean isRefreshApi(HttpServletRequest request) {
+        final Pair<String, String> refreshApi = Pair.of("GET", "/wanderfun/auth/refresh");
+
+        String requestPath = request.getServletPath();
+        String requestMethod = request.getMethod();
+
+        return refreshApi.getLeft().equalsIgnoreCase(requestMethod)
+                && requestPath.startsWith(refreshApi.getRight());
     }
 }
