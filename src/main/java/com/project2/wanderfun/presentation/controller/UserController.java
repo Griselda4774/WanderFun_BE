@@ -68,13 +68,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/self/{id}")
-    public ResponseEntity<ResponseDto<SelfInfoDto>> getSelfInfoById(@PathVariable long id, @RequestHeader("Authorization") String accessToken) {
+    @GetMapping("/self")
+    public ResponseEntity<ResponseDto<SelfInfoDto>> getSelfInfo(@RequestHeader("Authorization") String accessToken) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
         }
 
-        SelfInfoDto result = userUsecase.getSelfInfoById(id, accessToken);
+        SelfInfoDto result = userUsecase.getSelfInfo(accessToken);
         if (result == null) {
             throw new RequestFailedException("Get self info failed!");
         }
@@ -86,23 +86,23 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/self/email/{email}")
-    public ResponseEntity<ResponseDto<SelfInfoDto>> getSelfInfoByEmail(@PathVariable String email, @RequestHeader("Authorization") String accessToken) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        SelfInfoDto result = userUsecase.getSelfInfoByEmail(email, accessToken);
-        if (result == null) {
-            throw new RequestFailedException("Get self info failed!");
-        }
-
-        ResponseDto<SelfInfoDto> response = new ResponseDto<>();
-        response.setStatusCode(HttpStatus.OK.toString());
-        response.setMessage("Get self info successful!");
-        response.setData(result);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
+//    @GetMapping("/self/email/{email}")
+//    public ResponseEntity<ResponseDto<SelfInfoDto>> getSelfInfoByEmail(@PathVariable String email, @RequestHeader("Authorization") String accessToken) {
+//        if (accessToken.startsWith("Bearer ")) {
+//            accessToken = accessToken.substring(7);
+//        }
+//
+//        SelfInfoDto result = userUsecase.getSelfInfoByEmail(email, accessToken);
+//        if (result == null) {
+//            throw new RequestFailedException("Get self info failed!");
+//        }
+//
+//        ResponseDto<SelfInfoDto> response = new ResponseDto<>();
+//        response.setStatusCode(HttpStatus.OK.toString());
+//        response.setMessage("Get self info successful!");
+//        response.setData(result);
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
 
     @PostMapping("")
     public ResponseEntity<ResponseDto<?>> createUser(@RequestBody @Validated UserCreateDto userCreateDto) {

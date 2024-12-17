@@ -2,12 +2,14 @@ package com.project2.wanderfun.application.dto.user;
 
 import com.project2.wanderfun.domain.model.Album;
 import com.project2.wanderfun.domain.model.Trip;
+import com.project2.wanderfun.domain.model.enums.UserRole;
 
 import java.util.Date;
 import java.util.List;
 
 public class SelfInfoDto {
     private Long id;
+    private UserRole role;
     private String email;
     private String firstName;
     private String lastName;
@@ -31,6 +33,14 @@ public class SelfInfoDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getEmail() {

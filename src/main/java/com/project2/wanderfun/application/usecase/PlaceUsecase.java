@@ -38,7 +38,7 @@ public class PlaceUsecase {
         return objectMapper.map(placeService.findByName(name), PlaceDto.class);
     }
 
-    public boolean createPlace(PlaceCreateDto placeCreateDto) {
+    public boolean createPlace(PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
         Place place = objectMapper.map(placeCreateDto, Place.class);
         Place existingPlace = null;
         try {
@@ -46,22 +46,27 @@ public class PlaceUsecase {
         } catch (Exception e) {}
 
         if(existingPlace != null) {
-            throw new ObjectAlreadyExistException("This name already used!");
+            throw new ObjectAlreadyExistException("This name is already used!");
         }
 
         placeService.create(place);
         return true;
     }
 
-    public boolean updatePlaceById(Long id, PlaceCreateDto placeCreateDto) {
+    public boolean updatePlaceById(Long id, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
         Place place = objectMapper.map(placeCreateDto, Place.class);
-        Place existingPlace = null;
-        try {
-            existingPlace = placeService.findByName(place.getName());
-        } catch (Exception e) {}
 
-        if(existingPlace != null) {
-            throw new ObjectAlreadyExistException("This name already used!");
+        Place currentPlace = placeService.findById(id);
+        if (!place.getName().equals(currentPlace.getName())) {
+            Place existingPlace;
+            try {
+                existingPlace = placeService.findByName(place.getName());
+            } catch (Exception e) {
+                existingPlace = null;
+            }
+            if (existingPlace != null) {
+                throw new ObjectAlreadyExistException("This name is already used!");
+            }
         }
 
         placeService.updateById(id, place);

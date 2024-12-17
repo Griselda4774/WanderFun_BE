@@ -36,7 +36,7 @@ public class PlaceEntity {
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlaceImageEntity> placeImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<FeedbackEntity> feedbacks = new ArrayList<>();
 
     public PlaceEntity() {

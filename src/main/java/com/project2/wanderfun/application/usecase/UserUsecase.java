@@ -7,9 +7,11 @@ import com.project2.wanderfun.application.dto.user.UserUpdateDto;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.UserService;
 import com.project2.wanderfun.application.util.JwtUtil;
+import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.User;
 import com.project2.wanderfun.application.exception.NotHavePermissionException;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
+import com.project2.wanderfun.domain.model.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class UserUsecase {
     }
 
     public List<UserResponseDto> findAllUsers() {
-        return objectMapper.mapList(userService.findAll(), UserResponseDto.class);
+        return objectMapper.mapList(userService.findByRole(UserRole.USER), UserResponseDto.class);
     }
 
     public UserResponseDto findUserById(Long id) {
@@ -43,23 +45,19 @@ public class UserUsecase {
         return objectMapper.map(userService.findByEmail(email), UserResponseDto.class);
     }
 
-    public SelfInfoDto getSelfInfoById(Long id, String accessToken) {
-        if (id != jwtUtil.getIdFromToken(accessToken)) {
-            throw new NotHavePermissionException("You don't have permission!");
-        }
-
-        return objectMapper.map(userService.findById(id), SelfInfoDto.class);
+    public SelfInfoDto getSelfInfo(String accessToken) {
+        return objectMapper.map(userService.findById(jwtUtil.getIdFromToken(accessToken)), SelfInfoDto.class);
     }
 
-    public SelfInfoDto getSelfInfoByEmail(String email, String accessToken) {
-        if (!email.equals(jwtUtil.getEmailFromToken(accessToken))) {
-            throw new NotHavePermissionException("You don't have permission!");
-        }
+//    public SelfInfoDto getSelfInfoByEmail(String email, String accessToken) {
+//        if (!email.equals(jwtUtil.getEmailFromToken(accessToken))) {
+//            throw new NotHavePermissionException("You don't have permission!");
+//        }
+//
+//        return objectMapper.map(userService.findByEmail(email), SelfInfoDto.class);
+//    }
 
-        return objectMapper.map(userService.findByEmail(email), SelfInfoDto.class);
-    }
-
-    public boolean createUser(UserCreateDto userCreateDto) {
+    public boolean createUser(UserCreateDto userCreateDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(userCreateDto, User.class);
         User existingUser = null;
         try {
@@ -76,16 +74,20 @@ public class UserUsecase {
         return true;
     }
 
-    public boolean updateUserById(Long id, UserUpdateDto userUpdateDto) {
+    public boolean updateUserById(Long id, UserUpdateDto userUpdateDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(userUpdateDto, User.class);
-        User existingUser = null;
-        try {
-            existingUser = userService.findByEmail(user.getEmail());
-        } catch (Exception e) {
-        }
 
-        if (existingUser != null) {
-            throw new ObjectAlreadyExistException(String.format("Email already used"));
+        User currentUser = userService.findById(id);
+        if (!user.getEmail().equals(currentUser.getEmail())) {
+            User existingUser;
+            try {
+                existingUser = userService.findByEmail(user.getEmail());
+            } catch (Exception e) {
+                existingUser = null;
+            }
+            if (existingUser != null) {
+                throw new ObjectAlreadyExistException("This email is already used!");
+            }
         }
 
         userService.updateById(id, user);

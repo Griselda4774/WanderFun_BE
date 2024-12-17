@@ -1,5 +1,6 @@
 package com.project2.wanderfun.infrastructure.util;
 
+import com.project2.wanderfun.application.exception.GenerateTokenFailedException;
 import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.enums.TokenType;
 import io.jsonwebtoken.*;
@@ -23,7 +24,7 @@ public class JwtUtilImpl implements JwtUtil{
     private static final long REFRESH_EXPIRATION_TIME = 2 * 24 * 60 * 60 * 1000;
 
     @Override
-    public String generateAccessToken(Long id, String email, String role) {
+    public String generateAccessToken(Long id, String email, String role) throws GenerateTokenFailedException {
         try {
             Date now = new Date();
             Date expiryDate = new Date(now.getTime() + ACCESS_EXPIRATION_TIME);
@@ -37,13 +38,12 @@ public class JwtUtilImpl implements JwtUtil{
                     .signWith(key, SignatureAlgorithm.HS512)
                     .compact();
         } catch (Exception e) {
-            log.error("Error generating access token: " + e.getMessage());
-            return null;
+            throw new GenerateTokenFailedException("Generate access token failed: " + e.getMessage());
         }
     }
 
     @Override
-    public String generateRefreshToken(Long id) {
+    public String generateRefreshToken(Long id) throws GenerateTokenFailedException {
         try {
             Date now = new Date();
             Date expiryDate = new Date(now.getTime() + REFRESH_EXPIRATION_TIME);
@@ -55,14 +55,13 @@ public class JwtUtilImpl implements JwtUtil{
                     .signWith(key, SignatureAlgorithm.HS256)
                     .compact();
         } catch (Exception e) {
-            log.error("Error generating refresh token: " + e.getMessage());
-            return null;
+            throw new GenerateTokenFailedException("Generate refresh token failed: " + e.getMessage());
         }
     }
 
     @Override
-    public long getIdFromToken(String token) {
-        return Long.parseLong(extractClaim(token, Claims::getSubject));
+    public Long getIdFromToken(String token) {
+        return Long.valueOf(extractClaim(token, Claims::getSubject));
     }
 
     @Override

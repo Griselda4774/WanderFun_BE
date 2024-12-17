@@ -52,8 +52,13 @@ public class TripController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createTrip(@RequestBody TripCreateDto tripCreateDto) {
-        boolean result = tripUsecase.createTrip(tripCreateDto);
+    public ResponseEntity<ResponseDto<?>> createTrip(@RequestHeader("Authorization") String accessToken,
+                                                     @RequestBody TripCreateDto tripCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = tripUsecase.createTrip(tripCreateDto, accessToken);
         if (!result) {
             throw new RequestFailedException("Create trip failed!");
         }
@@ -65,8 +70,14 @@ public class TripController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updateTripById(@PathVariable long id, @RequestBody TripCreateDto tripCreateDto) {
-        boolean result = tripUsecase.updateTripById(id, tripCreateDto);
+    public ResponseEntity<ResponseDto<?>> updateTripById(@RequestHeader("Authorization") String accessToken,
+                                                         @PathVariable long id,
+                                                         @RequestBody TripCreateDto tripCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = tripUsecase.updateTripById(id, tripCreateDto, accessToken);
         if (!result) {
             throw new RequestFailedException("Update trip failed!");
         }

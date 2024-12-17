@@ -64,7 +64,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
@@ -78,7 +77,7 @@ public class SecurityConfig {
                                 .requestMatchers("/wanderfun/auth/refresh").permitAll()
                                 .requestMatchers("/wanderfun/auth/admin/register").permitAll()
                                 // User
-                                .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
                                 .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
 
                                 // Place
@@ -91,7 +90,8 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults());
         return http.build();
     }
 }
