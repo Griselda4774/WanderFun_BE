@@ -6,6 +6,7 @@ import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.TripService;
+import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.Trip;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ import java.util.List;
 public class TripUsecase {
     private final TripService tripService;
     private final ObjectMapper objectMapper;
+    private final JwtUtil jwtUtil;
 
-    public TripUsecase(TripService tripService, ObjectMapper objectMapper) {
+    public TripUsecase(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
         this.tripService = tripService;
         this.objectMapper = objectMapper;
+        this.jwtUtil = jwtUtil;
     }
 
     public List<TripDto> findAllTrips() {
@@ -30,7 +33,7 @@ public class TripUsecase {
         return objectMapper.map(tripService.findById(id), TripDto.class);
     }
 
-    public boolean createTrip(TripCreateDto tripCreateDto) {
+    public boolean createTrip(TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException {
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
         Trip existingTrip = null;
         try {
@@ -38,24 +41,31 @@ public class TripUsecase {
         } catch (Exception e) {}
 
         if(existingTrip != null) {
-            throw new ObjectAlreadyExistException("This name already used!");
+            throw new ObjectAlreadyExistException("This name is already used!");
         }
 
+        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.create(trip);
         return true;
     }
 
-    public boolean updateTripById(Long id, TripCreateDto tripCreateDto) {
+    public boolean updateTripById(Long id, TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException{
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
-        Trip existingTrip = null;
-        try {
-            existingTrip = tripService.findByName(trip.getName());
-        } catch (Exception e) {}
 
-        if(existingTrip != null) {
-            throw new ObjectAlreadyExistException("This name already used!");
+        Trip currentTrip = tripService.findById(id);
+        if (!trip.getName().equals(currentTrip.getName())) {
+            Trip existingTrip;
+            try {
+                existingTrip = tripService.findByName(trip.getName());
+            } catch (Exception e) {
+                existingTrip = null;
+            }
+            if (existingTrip != null) {
+                throw new ObjectAlreadyExistException("This name is already used!");
+            }
         }
 
+        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.updateById(id, trip);
         return true;
     }

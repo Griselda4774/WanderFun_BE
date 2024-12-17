@@ -3,11 +3,13 @@ package com.project2.wanderfun.infrastructure.repository;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.UserRepository;
 import com.project2.wanderfun.domain.model.User;
+import com.project2.wanderfun.domain.model.enums.UserRole;
 import com.project2.wanderfun.infrastructure.persistence.entity.UserEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,5 +26,10 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
     public Optional<User> findByEmail (String email) {
         return jpaUserRepository.findByEmail(email)
                     .map(entity -> objectMapper.map(entity, User.class));
+    }
+
+    @Override
+    public List<User> findByRole(UserRole role) {
+        return objectMapper.mapList(jpaUserRepository.findAllByRole(role.name()), User.class);
     }
 }

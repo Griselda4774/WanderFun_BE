@@ -41,12 +41,6 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
             placeEntity.setPlaceImages(placeImageEntities);
         }
 
-        if (place.getFeedbacks() != null || place.getFeedbacks().size() > 0) {
-            List<SectionEntity> sectionEntities = objectMapper.mapList(place.getDescription(), SectionEntity.class);
-            sectionEntities.forEach(sectionEntity -> sectionEntity.setPlace(placeEntity));
-            placeEntity.setDescription(sectionEntities);
-        }
-
         PlaceEntity savedPlaceEntity = jpaPlaceRepository.save(placeEntity);
 
         return objectMapper.map(savedPlaceEntity, Place.class);

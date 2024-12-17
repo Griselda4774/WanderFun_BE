@@ -1,9 +1,12 @@
 package com.project2.wanderfun.application.dto.user;
 
+import com.project2.wanderfun.domain.model.enums.UserRole;
+
 import java.util.Date;
 
 public class UserResponseDto {
     protected Long id;
+    private UserRole role;
     protected String email;
     protected String firstName;
     protected String lastName;
@@ -23,6 +26,14 @@ public class UserResponseDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getEmail() {

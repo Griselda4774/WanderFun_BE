@@ -64,6 +64,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
+    @ExceptionHandler(GenerateTokenFailedException.class)
+    public ResponseEntity<ResponseDto<?>> handleGenerateTokenFailedException(GenerateTokenFailedException e) {
+        ResponseDto<?> response = new ResponseDto();
+        response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        response.setMessage(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
     @ExceptionHandler(RequestFailedException.class)
     public ResponseEntity<ResponseDto<?>> handleRequestFailedException(RequestFailedException e) {
         ResponseDto<?> response = new ResponseDto();
@@ -91,7 +99,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleMethodArgumentTypeMismatchException (MethodArgumentTypeMismatchException e) {
         ResponseDto<Map> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
-        response.setMessage("Can not convert data type!");
+        response.setMessage(e.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }

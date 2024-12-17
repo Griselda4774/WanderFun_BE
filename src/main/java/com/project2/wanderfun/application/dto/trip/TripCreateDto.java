@@ -11,6 +11,7 @@ public class TripCreateDto {
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
+    private Long userId;
 
     public TripCreateDto() {
     }
@@ -53,5 +54,13 @@ public class TripCreateDto {
 
     public void setTripPlaces(List<TripPlace> tripPlaces) {
         this.tripPlaces = tripPlaces;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
