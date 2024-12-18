@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ResponseDto<T> {
     private String statusCode;
-    private boolean isError;
+    private boolean error;
     private String errorType;
     private Date timestamp;
     private String message;
@@ -13,7 +13,7 @@ public class ResponseDto<T> {
     public ResponseDto() {
         this.timestamp = new Date();
         this.data = null;
-        this.isError = false;
+        this.error = false;
         this.errorType = null;
     }
 
@@ -26,11 +26,11 @@ public class ResponseDto<T> {
     }
 
     public boolean isError() {
-        return isError;
+        return error;
     }
 
-    public void setError(boolean error) {
-        isError = error;
+    public void setError(boolean isError) {
+        error = isError;
     }
 
     public String getErrorType() {
