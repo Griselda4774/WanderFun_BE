@@ -12,6 +12,7 @@ import org.modelmapper.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,38 +24,9 @@ public class ModelMapperConfig {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
                 .setSkipNullEnabled(true)
-                .setPropertyCondition(Conditions.isNotNull())
                 .setFieldMatchingEnabled(true)
-                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
-
-        modelMapper.addConverter(new AbstractConverter<List<Object>, List<Object>>() {
-            @Override
-            protected List<Object> convert(List<Object> sourceList) {
-                if (sourceList == null) {
-                    return new ArrayList<>();
-                }
-
-                List<Object> destinationList = new ArrayList<>();
-
-                for (int i = 0; i < sourceList.size(); i++) {
-                    Object sourceElement = sourceList.get(i);
-
-                    if (i >= destinationList.size()) {
-                        Object destinationElement = modelMapper.map(sourceElement, sourceElement.getClass());
-                        destinationList.add(destinationElement);
-                    } else {
-                        Object existingDestElement = destinationList.get(i);
-                        modelMapper.map(sourceElement, existingDestElement);
-                    }
-                }
-
-                while (destinationList.size() > sourceList.size()) {
-                    destinationList.remove(destinationList.size() - 1);
-                }
-
-                return destinationList;
-            }
-        });
+                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
+                .setPropertyCondition(context -> context.getSource() != null);
 
         return modelMapper;
     }
