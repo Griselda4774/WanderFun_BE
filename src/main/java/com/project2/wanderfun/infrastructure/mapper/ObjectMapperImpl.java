@@ -1,6 +1,7 @@
 package com.project2.wanderfun.infrastructure.mapper;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
+import com.project2.wanderfun.infrastructure.configuration.modelmapper.ModelMapperConfig;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,12 @@ import java.util.stream.Collectors;
 @Component
 public class ObjectMapperImpl implements ObjectMapper {
     private final ModelMapper modelMapper;
+    private final ModelMapperConfig modelMapperConfig;
 
     @Autowired
-    public ObjectMapperImpl(ModelMapper modelMapper) {
+    public ObjectMapperImpl(ModelMapper modelMapper, ModelMapperConfig modelMapperConfig) {
         this.modelMapper = modelMapper;
+        this.modelMapperConfig = modelMapperConfig;
     }
 
     @Override
@@ -37,27 +40,57 @@ public class ObjectMapperImpl implements ObjectMapper {
             throw new IllegalArgumentException("Source and destination objects must not be null");
         }
         modelMapper.map(source, destination);
+
+        for (Field field : source.getClass().getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                if (field.get(source) instanceof List) {
+                    Field destField = destination.getClass().getDeclaredField(field.getName());
+                    destField.setAccessible(true);
+
+                    List<?> sourceList = (List<?>) field.get(source);
+                    List<?> destList = (List<?>) destField.get(destination);
+
+                    mapList(
+                            (List)sourceList,
+                            (List)destList,
+                            Object.class,
+                            modelMapper
+                    );
+                }
+            } catch (Exception e) {
+            }
+        }
     }
 
-    @Override
-    public <S, D> List<D> copyList(List<S> sourceList, List<D> destinationList, Class<D> destinationClass) {
-        if (sourceList == null || destinationList == null) {
-            throw new IllegalArgumentException("Source and destination lists must not be null");
+    private  <S, D> void mapList(List<S> sourceList, List<D> destinationList, Class<D> destinationClass, ModelMapper modelMapper) {
+        if (destinationList == null) {
+            destinationList = new ArrayList<>();
+        }
+
+        if (sourceList == null || sourceList.isEmpty()) {
+            destinationList.clear();
+            return;
         }
 
         for (int i = 0; i < sourceList.size(); i++) {
-            S source = sourceList.get(i);
-            D destination = (i < destinationList.size()) ? destinationList.get(i) : null;
-            if (destination == null) {
-                destination = modelMapper.map(source, destinationClass);
-                destinationList.add(destination);
+            S sourceElement = sourceList.get(i);
+
+            if (i < destinationList.size()) {
+                D destinationElement = destinationList.get(i);
+                if (sourceElement != null) {
+                    modelMapper.map(sourceElement, destinationElement);
+                }
             } else {
-                modelMapper.map(source, destination);
+                if (sourceElement != null) {
+                    D newDestinationElement = modelMapper.map(sourceElement, destinationClass);
+                    destinationList.add(newDestinationElement);
+                }
             }
         }
+
         while (destinationList.size() > sourceList.size()) {
             destinationList.remove(destinationList.size() - 1);
         }
-        return destinationList;
     }
 }
