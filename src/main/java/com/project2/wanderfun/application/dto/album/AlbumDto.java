@@ -1,5 +1,6 @@
 package com.project2.wanderfun.application.dto.album;
 
+import com.project2.wanderfun.application.dto.albumimage.AlbumImageDto;
 import com.project2.wanderfun.domain.model.AlbumImage;
 
 import java.math.BigDecimal;
@@ -14,8 +15,7 @@ public class AlbumDto {
     private BigDecimal placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
-    private List<AlbumImage> albumImages;
-    private Long userId;
+    private List<AlbumImageDto> albumImages;
 
     public AlbumDto() {};
 
@@ -83,19 +83,11 @@ public class AlbumDto {
         this.placeCoverImageUrl = placeCoverImageUrl;
     }
 
-    public List<AlbumImage> getAlbumImages() {
+    public List<AlbumImageDto> getAlbumImages() {
         return albumImages;
     }
 
-    public void setAlbumImages(List<AlbumImage> albumImages) {
+    public void setAlbumImages(List<AlbumImageDto> albumImages) {
         this.albumImages = albumImages;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }
