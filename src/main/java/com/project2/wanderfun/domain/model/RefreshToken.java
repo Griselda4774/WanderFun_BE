@@ -1,7 +1,5 @@
 package com.project2.wanderfun.domain.model;
 
-import java.util.Date;
-
 public class RefreshToken {
     private Long id;
     private String token;

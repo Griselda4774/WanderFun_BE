@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "trip_place")
@@ -11,20 +12,17 @@ public class TripPlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tripId")
-    private TripEntity trip;
-
     @Column(precision = 9, scale = 6)
     private BigDecimal placeLongitude;
     @Column(precision = 8, scale = 6)
     private BigDecimal placeLatitude;
-
     private String placeName;
-    private String placeImageUrl;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String placeCoverImageUrl;
+    private Date startTime;
+    private Date endTime;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tripId")
+    private TripEntity trip;
 
     public TripPlaceEntity() {
     }
@@ -35,14 +33,6 @@ public class TripPlaceEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public TripEntity getTrip() {
-        return trip;
-    }
-
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
     }
 
     public BigDecimal getPlaceLongitude() {
@@ -69,27 +59,35 @@ public class TripPlaceEntity {
         this.placeName = placeName;
     }
 
-    public String getPlaceImageUrl() {
-        return placeImageUrl;
+    public String getPlaceCoverImageUrl() {
+        return placeCoverImageUrl;
     }
 
-    public void setPlaceImageUrl(String placeImageUrl) {
-        this.placeImageUrl = placeImageUrl;
+    public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
+        this.placeCoverImageUrl = placeCoverImageUrl;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public TripEntity getTrip() {
+        return trip;
+    }
+
+    public void setTrip(TripEntity trip) {
+        this.trip = trip;
     }
 }

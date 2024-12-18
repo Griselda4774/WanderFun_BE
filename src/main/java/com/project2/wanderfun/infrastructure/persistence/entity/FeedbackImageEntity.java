@@ -8,12 +8,10 @@ public class FeedbackImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String imageUrl;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedbackId")
     private FeedbackEntity feedback;
-
-    private String imageUrl;
 
     public FeedbackImageEntity() {
     }
@@ -22,23 +20,23 @@ public class FeedbackImageEntity {
         return id;
     }
 
-    public FeedbackEntity getFeedback() {
-        return feedback;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public FeedbackEntity getFeedback() {
+        return feedback;
     }
 
     public void setFeedback(FeedbackEntity feedback) {
         this.feedback = feedback;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

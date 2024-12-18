@@ -2,8 +2,6 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "refresh_token")
 public class RefreshTokenEntity {

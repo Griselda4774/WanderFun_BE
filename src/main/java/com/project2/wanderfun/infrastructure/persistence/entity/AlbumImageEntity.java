@@ -8,12 +8,10 @@ public class AlbumImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String imageUrl;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "albumId")
     private AlbumEntity album;
-
-    private String imageUrl;
 
     public AlbumImageEntity() {
     }
@@ -22,23 +20,23 @@ public class AlbumImageEntity {
         return id;
     }
 
-    public AlbumEntity getAlbum() {
-        return album;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public AlbumEntity getAlbum() {
+        return album;
     }
 
     public void setAlbum(AlbumEntity album) {
         this.album = album;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

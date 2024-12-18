@@ -1,28 +1,17 @@
-package com.project2.wanderfun.infrastructure.persistence.entity;
-
-import jakarta.persistence.*;
+package com.project2.wanderfun.domain.model;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "favourite_place")
-public class FavouritePlaceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FavouritePlace {
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private UserEntity user;
-    private String placeId;
-    @Column(precision = 9, scale = 6)
-    private BigDecimal placeLatitude;
-    @Column(precision = 8, scale = 6)
+    private Long userId;
+    private Long placeId;
     private BigDecimal placeLongitude;
+    private BigDecimal placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
 
-    public FavouritePlaceEntity() {
-    }
+    public FavouritePlace() {};
 
     public Long getId() {
         return id;
@@ -32,19 +21,19 @@ public class FavouritePlaceEntity {
         this.id = id;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getPlaceId() {
+    public Long getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(String placeId) {
+    public void setPlaceId(Long placeId) {
         this.placeId = placeId;
     }
 

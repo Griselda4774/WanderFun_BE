@@ -1,15 +1,10 @@
 package com.project2.wanderfun.application.usecase;
 
-import com.project2.wanderfun.application.dto.user.SelfInfoDto;
-import com.project2.wanderfun.application.dto.user.UserCreateDto;
-import com.project2.wanderfun.application.dto.user.UserResponseDto;
-import com.project2.wanderfun.application.dto.user.UserUpdateDto;
+import com.project2.wanderfun.application.dto.user.*;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.UserService;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.User;
-import com.project2.wanderfun.application.exception.NotHavePermissionException;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.domain.model.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +29,7 @@ public class UserUsecase {
     }
 
     public List<UserResponseDto> findAllUsers() {
-        return objectMapper.mapList(userService.findByRole(UserRole.USER), UserResponseDto.class);
+        return objectMapper.mapList(userService.findAllByRole(UserRole.USER), UserResponseDto.class);
     }
 
     public UserResponseDto findUserById(Long id) {
@@ -44,18 +39,6 @@ public class UserUsecase {
     public UserResponseDto findUserByEmail(String email) {
         return objectMapper.map(userService.findByEmail(email), UserResponseDto.class);
     }
-
-    public SelfInfoDto getSelfInfo(String accessToken) {
-        return objectMapper.map(userService.findById(jwtUtil.getIdFromToken(accessToken)), SelfInfoDto.class);
-    }
-
-//    public SelfInfoDto getSelfInfoByEmail(String email, String accessToken) {
-//        if (!email.equals(jwtUtil.getEmailFromToken(accessToken))) {
-//            throw new NotHavePermissionException("You don't have permission!");
-//        }
-//
-//        return objectMapper.map(userService.findByEmail(email), SelfInfoDto.class);
-//    }
 
     public boolean createUser(UserCreateDto userCreateDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(userCreateDto, User.class);
@@ -76,7 +59,6 @@ public class UserUsecase {
 
     public boolean updateUserById(Long id, UserUpdateDto userUpdateDto) throws ObjectAlreadyExistException {
         User user = objectMapper.map(userUpdateDto, User.class);
-
         User currentUser = userService.findById(id);
         if (!user.getEmail().equals(currentUser.getEmail())) {
             User existingUser;
@@ -101,6 +83,21 @@ public class UserUsecase {
 
     public boolean deleteAllUsers() {
         userService.deleteAll();
+        return true;
+    }
+
+    public SelfInfoDto getSelfInfo(String accessToken) {
+        return objectMapper.map(userService.findById(jwtUtil.getIdFromToken(accessToken)), SelfInfoDto.class);
+    }
+
+    public boolean updateSelfInfo(String accessToken, ChangeInfoDto changeInfoDto) {
+        User user = objectMapper.map(changeInfoDto, User.class);
+        userService.updateById(jwtUtil.getIdFromToken(accessToken), user);
+        return true;
+    }
+
+    public boolean deleteSelf(String accessToken) {
+        userService.deleteById(jwtUtil.getIdFromToken(accessToken));
         return true;
     }
 }

@@ -1,14 +1,19 @@
 package com.project2.wanderfun.domain.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Album {
     private Long id;
     private String name;
     private String description;
-    private String placeId;
-    private List<String> imageUrls;
-    private long userId;
+    private Long placeId;
+    private BigDecimal placeLongitude;
+    private BigDecimal placeLatitude;
+    private String placeName;
+    private String placeCoverImageUrl;
+    private List<AlbumImage> albumImages;
+    private Long userId;
 
     public Album() {
     }
@@ -37,27 +42,59 @@ public class Album {
         this.description = description;
     }
 
-    public String getPlaceId() {
+    public Long getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(String placeId) {
+    public void setPlaceId(Long placeId) {
         this.placeId = placeId;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public BigDecimal getPlaceLongitude() {
+        return placeLongitude;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setPlaceLongitude(BigDecimal placeLongitude) {
+        this.placeLongitude = placeLongitude;
     }
 
-    public long getUserId() {
+    public BigDecimal getPlaceLatitude() {
+        return placeLatitude;
+    }
+
+    public void setPlaceLatitude(BigDecimal placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlaceCoverImageUrl() {
+        return placeCoverImageUrl;
+    }
+
+    public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
+        this.placeCoverImageUrl = placeCoverImageUrl;
+    }
+
+    public List<AlbumImage> getAlbumImages() {
+        return albumImages;
+    }
+
+    public void setAlbumImages(List<AlbumImage> albumImages) {
+        this.albumImages = albumImages;
+    }
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

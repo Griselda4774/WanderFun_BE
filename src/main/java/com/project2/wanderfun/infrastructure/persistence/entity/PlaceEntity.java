@@ -21,6 +21,8 @@ public class PlaceEntity {
     private String name;
     private String iconUrl;
     private String coverImageUrl;
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SectionEntity> description = new ArrayList<>();
     private int checkInPoint;
     private float checkInRange;
     private String category;
@@ -29,9 +31,6 @@ public class PlaceEntity {
     private String alternativeName;
     private String operator;
     private String link;
-
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SectionEntity> description = new ArrayList<>();
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlaceImageEntity> placeImages = new ArrayList<>();
@@ -98,6 +97,14 @@ public class PlaceEntity {
         this.coverImageUrl = coverImageUrl;
     }
 
+    public List<SectionEntity> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<SectionEntity> description) {
+        this.description = description;
+    }
+
     public int getCheckInPoint() {
         return checkInPoint;
     }
@@ -160,14 +167,6 @@ public class PlaceEntity {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public List<SectionEntity> getDescription() {
-        return description;
-    }
-
-    public void setDescription(List<SectionEntity> sections) {
-        this.description = sections;
     }
 
     public List<PlaceImageEntity> getPlaceImages() {

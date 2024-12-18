@@ -12,19 +12,15 @@ public class TripEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private UserEntity user;
-
     private String name;
     private String imageUrl;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
-    // Relationships
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripPlaceEntity> tripPlaces = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private UserEntity user;
 
     public TripEntity() {
     }
@@ -35,14 +31,6 @@ public class TripEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 
     public String getName() {
@@ -83,5 +71,13 @@ public class TripEntity {
 
     public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
         this.tripPlaces = tripPlaces;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

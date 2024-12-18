@@ -29,7 +29,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
     }
 
     @Override
-    public List<User> findByRole(UserRole role) {
+    public List<User> findAllByRole(UserRole role) {
         return objectMapper.mapList(jpaUserRepository.findAllByRole(role.name()), User.class);
     }
 }

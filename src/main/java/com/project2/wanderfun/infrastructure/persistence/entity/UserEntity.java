@@ -12,28 +12,24 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String role;
     private String email;
     private String password;
     private String firstName;
     private String lastName;
+    private boolean isVerified;
     private String avatarUrl;
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
-    private Integer point;
-    private boolean isVerified;
+    private int point;
     private boolean isCreatedProfile;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<FavouritePlaceEntity> favoritePlaceIds = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<AlbumEntity> albums = new ArrayList<>();
-
+    private List<FavouritePlaceEntity> favoritePlaces = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TripEntity> trips = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<AlbumEntity> albums = new ArrayList<>();
 
     public UserEntity() {
     }
@@ -86,6 +82,14 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
     public String getAvatarUrl() {
         return avatarUrl;
     }
@@ -118,20 +122,12 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Integer point) {
+    public void setPoint(int point) {
         this.point = point;
-    }
-
-    public boolean isVerified() {
-        return isVerified;
-    }
-
-    public void setVerified(boolean verified) {
-        isVerified = verified;
     }
 
     public boolean isCreatedProfile() {
@@ -142,12 +138,12 @@ public class UserEntity {
         isCreatedProfile = createdProfile;
     }
 
-    public List<AlbumEntity> getAlbums() {
-        return albums;
+    public List<FavouritePlaceEntity> getFavoritePlaces() {
+        return favoritePlaces;
     }
 
-    public void setAlbums(List<AlbumEntity> albums) {
-        this.albums = albums;
+    public void setFavoritePlaces(List<FavouritePlaceEntity> favoritePlaces) {
+        this.favoritePlaces = favoritePlaces;
     }
 
     public List<TripEntity> getTrips() {
@@ -158,11 +154,11 @@ public class UserEntity {
         this.trips = trips;
     }
 
-    public List<FavouritePlaceEntity> getFavoritePlaceIds() {
-        return favoritePlaceIds;
+    public List<AlbumEntity> getAlbums() {
+        return albums;
     }
 
-    public void setFavoritePlaceIds(List<FavouritePlaceEntity> favoritePlaceIds) {
-        this.favoritePlaceIds = favoritePlaceIds;
+    public void setAlbums(List<AlbumEntity> albums) {
+        this.albums = albums;
     }
 }
