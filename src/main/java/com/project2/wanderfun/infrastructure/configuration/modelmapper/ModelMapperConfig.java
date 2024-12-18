@@ -8,12 +8,11 @@ import com.project2.wanderfun.domain.model.Album;
 import com.project2.wanderfun.domain.model.Feedback;
 import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.Trip;
-import org.modelmapper.Conditions;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
+import org.modelmapper.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,37 +27,34 @@ public class ModelMapperConfig {
                 .setFieldMatchingEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
 
-//        modelMapper.addMappings(new PropertyMap<Album, Album>() {
-//            @Override
-//            protected void configure() {
-//                for (int i = 0; i < source.getAlbumImages().size(); i++) {
-//
-//                    map(source.getAlbumImages().get(i), destination.getAlbumImages().get(i));
-//                }
-//            }
-//        });
-//
-//        modelMapper.addMappings(new PropertyMap<Feedback, Feedback>() {
-//            @Override
-//            protected void configure() {
-//                map(source.getFeedbackImages(), destination.getFeedbackImages());
-//            }
-//        });
-//
-//        modelMapper.addMappings(new PropertyMap<Place, Place>() {
-//            @Override
-//            protected void configure() {
-//                map(source.getDescription(), destination.getDescription());
-//                map(source.getPlaceImages(), destination.getPlaceImages());
-//            }
-//        });
-//
-//        modelMapper.addMappings(new PropertyMap<Trip, Trip>() {
-//            @Override
-//            protected void configure() {
-//                map(source.getTripPlaces(), destination.getTripPlaces());
-//            }
-//        });
+        modelMapper.addConverter(new AbstractConverter<List<Object>, List<Object>>() {
+            @Override
+            protected List<Object> convert(List<Object> sourceList) {
+                if (sourceList == null) {
+                    return new ArrayList<>();
+                }
+
+                List<Object> destinationList = new ArrayList<>();
+
+                for (int i = 0; i < sourceList.size(); i++) {
+                    Object sourceElement = sourceList.get(i);
+
+                    if (i >= destinationList.size()) {
+                        Object destinationElement = modelMapper.map(sourceElement, sourceElement.getClass());
+                        destinationList.add(destinationElement);
+                    } else {
+                        Object existingDestElement = destinationList.get(i);
+                        modelMapper.map(sourceElement, existingDestElement);
+                    }
+                }
+
+                while (destinationList.size() > sourceList.size()) {
+                    destinationList.remove(destinationList.size() - 1);
+                }
+
+                return destinationList;
+            }
+        });
 
         return modelMapper;
     }
