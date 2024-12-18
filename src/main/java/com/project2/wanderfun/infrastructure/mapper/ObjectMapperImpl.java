@@ -34,6 +34,28 @@ public class ObjectMapperImpl implements ObjectMapper {
         if (source == null || destination == null) {
             throw new IllegalArgumentException("Source and destination objects must not be null");
         }
-        modelMapper.map(source, destination);;
+        modelMapper.map(source, destination);
+    }
+
+    @Override
+    public <S, D> List<D> copyList(List<S> sourceList, List<D> destinationList, Class<D> destinationClass) {
+        if (sourceList == null || destinationList == null) {
+            throw new IllegalArgumentException("Source and destination lists must not be null");
+        }
+
+        for (int i = 0; i < sourceList.size(); i++) {
+            S source = sourceList.get(i);
+            D destination = (i < destinationList.size()) ? destinationList.get(i) : null;
+            if (destination == null) {
+                destination = modelMapper.map(source, destinationClass);
+                destinationList.add(destination);
+            } else {
+                modelMapper.map(source, destination);
+            }
+        }
+        while (destinationList.size() > sourceList.size()) {
+            destinationList.remove(destinationList.size() - 1);
+        }
+        return destinationList;
     }
 }

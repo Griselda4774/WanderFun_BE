@@ -3,7 +3,7 @@ package com.project2.wanderfun.domain.model;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Place {
@@ -18,12 +18,12 @@ public class Place {
     private int checkInPoint;
     private float checkInRange;
     private PlaceCategory category;
-    private Date timeOpen;
-    private Date timeClose;
+    private LocalTime timeOpen;
+    private LocalTime timeClose;
     private String alternativeName;
     private String operator;
     private String link;
-    private List<String> imageUrls;
+    private List<PlaceImage> placeImages;
     private List<Feedback> feedbacks;
 
     public Place() {
@@ -117,19 +117,19 @@ public class Place {
         this.category = category;
     }
 
-    public Date getTimeOpen() {
+    public LocalTime getTimeOpen() {
         return timeOpen;
     }
 
-    public void setTimeOpen(Date timeOpen) {
+    public void setTimeOpen(LocalTime timeOpen) {
         this.timeOpen = timeOpen;
     }
 
-    public Date getTimeClose() {
+    public LocalTime getTimeClose() {
         return timeClose;
     }
 
-    public void setTimeClose(Date timeClose) {
+    public void setTimeClose(LocalTime timeClose) {
         this.timeClose = timeClose;
     }
 
@@ -157,12 +157,12 @@ public class Place {
         this.link = link;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public List<PlaceImage> getPlaceImages() {
+        return placeImages;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setPlaceImages(List<PlaceImage> placeImages) {
+        this.placeImages = placeImages;
     }
 
     public List<Feedback> getFeedbacks() {

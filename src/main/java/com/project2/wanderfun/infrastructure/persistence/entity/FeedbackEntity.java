@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,19 +13,16 @@ public class FeedbackEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String userName;
     private String userAvatar;
-    private Float rating;
+    private float rating;
     private String comment;
-    private LocalDateTime timeArrived;
-
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedbackImageEntity> feedbackImages = new ArrayList<>();
+    private Date time;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
-
-    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FeedbackImageEntity> feedbackImages = new ArrayList<>();;
 
     public FeedbackEntity() {
     }
@@ -53,11 +51,11 @@ public class FeedbackEntity {
         this.userAvatar = userAvatar;
     }
 
-    public Float getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -69,12 +67,20 @@ public class FeedbackEntity {
         this.comment = comment;
     }
 
-    public LocalDateTime getTimeArrived() {
-        return timeArrived;
+    public List<FeedbackImageEntity> getFeedbackImages() {
+        return feedbackImages;
     }
 
-    public void setTimeArrived(LocalDateTime timeArrived) {
-        this.timeArrived = timeArrived;
+    public void setFeedbackImages(List<FeedbackImageEntity> feedbackImages) {
+        this.feedbackImages = feedbackImages;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public PlaceEntity getPlace() {
@@ -83,13 +89,5 @@ public class FeedbackEntity {
 
     public void setPlace(PlaceEntity place) {
         this.place = place;
-    }
-
-    public List<FeedbackImageEntity> getFeedbackImages() {
-        return feedbackImages;
-    }
-
-    public void setFeedbackImages(List<FeedbackImageEntity> feedbackImages) {
-        this.feedbackImages = feedbackImages;
     }
 }

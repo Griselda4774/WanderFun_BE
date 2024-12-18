@@ -11,74 +11,13 @@ public class User extends BaseUser{
     private String gender;
     private String phoneNumber;
     private int point;
-    private List<String> favoritePlaceIds;
+    private boolean isCreatedProfile;
+    private List<FavouritePlace> favouritePlaces;
     private List<Trip> trips;
     private List<Album> albums;
-    private boolean isCreatedProfile;
-
     public User() {
         this.setCreatedProfile(false);
         this.setPoint(0);
-    }
-
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public UserRole getRole() {
-        return super.getRole();
-    }
-
-    @Override
-    public void setRole(UserRole role) {
-        super.setRole(role);
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public void setEmail(String email) {
-        super.setEmail(email);
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public void setPassword(String password) {
-        super.setPassword(password);
-    }
-
-    @Override
-    public String getFirstName() {
-        return super.getFirstName();
-    }
-
-    @Override
-    public void setFirstName(String firstName) {
-        super.setFirstName(firstName);
-    }
-
-    @Override
-    public String getLastName() {
-        return super.getLastName();
-    }
-
-    @Override
-    public void setLastName(String lastName) {
-        super.setLastName(lastName);
     }
 
     public String getAvatarUrl() {
@@ -121,12 +60,20 @@ public class User extends BaseUser{
         this.point = point;
     }
 
-    public List<String> getFavoritePlaceIds() {
-        return favoritePlaceIds;
+    public boolean isCreatedProfile() {
+        return isCreatedProfile;
     }
 
-    public void setFavoritePlaceIds(List<String> favoritePlaceIds) {
-        this.favoritePlaceIds = favoritePlaceIds;
+    public void setCreatedProfile(boolean createdProfile) {
+        isCreatedProfile = createdProfile;
+    }
+
+    public List<FavouritePlace> getFavouritePlaces() {
+        return favouritePlaces;
+    }
+
+    public void setFavouritePlaces(List<FavouritePlace> favouritePlaces) {
+        this.favouritePlaces = favouritePlaces;
     }
 
     public List<Trip> getTrips() {
@@ -143,13 +90,5 @@ public class User extends BaseUser{
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
-    }
-
-    public boolean getCreatedProfile() {
-        return isCreatedProfile;
-    }
-
-    public void setCreatedProfile(boolean createdProfile) {
-        isCreatedProfile = createdProfile;
     }
 }

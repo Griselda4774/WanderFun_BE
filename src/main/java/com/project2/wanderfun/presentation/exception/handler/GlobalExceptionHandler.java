@@ -20,6 +20,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleNotHavePermissionException(NotHavePermissionException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.FORBIDDEN.toString());
+        response.setError(true);
+        response.setErrorType(NotHavePermissionException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
@@ -28,6 +30,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleUnauthorizedException(UnauthorizedException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.UNAUTHORIZED.toString());
+        response.setError(true);
+        response.setErrorType(UnauthorizedException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
@@ -36,6 +40,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleWrongEmailOrPasswordException(WrongEmailOrPasswordException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setError(true);
+        response.setErrorType(WrongEmailOrPasswordException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -44,6 +50,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleObjectNotFoundException(ObjectNotFoundException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.NOT_FOUND.toString());
+        response.setError(true);
+        response.setErrorType(ObjectNotFoundException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
@@ -52,6 +60,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleObjectAlreadyExistException(ObjectAlreadyExistException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.CONFLICT.toString());
+        response.setError(true);
+        response.setErrorType(ObjectAlreadyExistException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
@@ -60,6 +70,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleObjectInvalidException(ObjectInvalidException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setError(true);
+        response.setErrorType(ObjectInvalidException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -68,6 +80,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleGenerateTokenFailedException(GenerateTokenFailedException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        response.setError(true);
+        response.setErrorType(GenerateTokenFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
@@ -76,6 +90,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleRequestFailedException(RequestFailedException e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setError(true);
+        response.setErrorType(RequestFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -89,9 +105,10 @@ public class GlobalExceptionHandler {
 
         ResponseDto<Map> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setError(true);
+        response.setErrorType(MethodArgumentNotValidException.class.getSimpleName());
         response.setMessage("Information is invalid!");
         response.setData(errors);
-
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
@@ -99,8 +116,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleMethodArgumentTypeMismatchException (MethodArgumentTypeMismatchException e) {
         ResponseDto<Map> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        response.setError(true);
+        response.setErrorType(MethodArgumentTypeMismatchException.class.getSimpleName());
         response.setMessage(e.getMessage());
-
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
@@ -108,6 +126,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto<?>> handleUnwantedException(Exception e) {
         ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        response.setError(true);
+        response.setErrorType(Exception.class.getSimpleName());
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }

@@ -1,13 +1,11 @@
 package com.project2.wanderfun.application.usecase;
 
-import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.trip.TripCreateDto;
 import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.TripService;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.Trip;
 import org.springframework.stereotype.Service;
 
@@ -49,8 +47,8 @@ public class TripUsecase {
         return true;
     }
 
-    public boolean updateTripById(Long id, TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException{
-        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
+    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
+        Trip trip = objectMapper.map(tripDto, Trip.class);
 
         Trip currentTrip = tripService.findById(id);
         if (!trip.getName().equals(currentTrip.getName())) {
@@ -65,7 +63,6 @@ public class TripUsecase {
             }
         }
 
-        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.updateById(id, trip);
         return true;
     }

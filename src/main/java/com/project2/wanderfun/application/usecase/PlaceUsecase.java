@@ -53,8 +53,8 @@ public class PlaceUsecase {
         return true;
     }
 
-    public boolean updatePlaceById(Long id, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
-        Place place = objectMapper.map(placeCreateDto, Place.class);
+    public boolean updatePlaceById(Long id, PlaceDto placeDto) throws ObjectAlreadyExistException {
+        Place place = objectMapper.map(placeDto, Place.class);
 
         Place currentPlace = placeService.findById(id);
         if (!place.getName().equals(currentPlace.getName())) {

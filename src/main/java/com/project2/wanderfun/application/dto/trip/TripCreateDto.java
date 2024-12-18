@@ -1,5 +1,6 @@
 package com.project2.wanderfun.application.dto.trip;
 
+import com.project2.wanderfun.application.dto.tripplace.TripPlaceCreateDto;
 import com.project2.wanderfun.domain.model.TripPlace;
 
 import java.util.Date;
@@ -10,8 +11,7 @@ public class TripCreateDto {
     private String imageUrl;
     private Date startTime;
     private Date endTime;
-    private List<TripPlace> tripPlaces;
-    private Long userId;
+    private List<TripPlaceCreateDto> tripPlaces;
 
     public TripCreateDto() {
     }
@@ -48,19 +48,11 @@ public class TripCreateDto {
         this.endTime = endTime;
     }
 
-    public List<TripPlace> getTripPlaces() {
+    public List<TripPlaceCreateDto> getTripPlaces() {
         return tripPlaces;
     }
 
-    public void setTripPlaces(List<TripPlace> tripPlaces) {
+    public void setTripPlaces(List<TripPlaceCreateDto> tripPlaces) {
         this.tripPlaces = tripPlaces;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }

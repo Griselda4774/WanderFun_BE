@@ -70,14 +70,9 @@ public class TripController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updateTripById(@RequestHeader("Authorization") String accessToken,
-                                                         @PathVariable long id,
-                                                         @RequestBody TripCreateDto tripCreateDto) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        boolean result = tripUsecase.updateTripById(id, tripCreateDto, accessToken);
+    public ResponseEntity<ResponseDto<?>> updateTripById(@PathVariable long id,
+                                                         @RequestBody TripDto tripDto) {
+        boolean result = tripUsecase.updateTripById(id, tripDto);
         if (!result) {
             throw new RequestFailedException("Update trip failed!");
         }

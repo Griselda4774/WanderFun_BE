@@ -32,7 +32,6 @@ public class JwtUtilImpl implements JwtUtil{
                     .subject(Long.toString(id))
                     .claim("email", email)
                     .claim("role", role)
-                    .claim("type", TokenType.ACCESS_TOKEN.name())
                     .setIssuedAt(now)
                     .setExpiration(expiryDate)
                     .signWith(key, SignatureAlgorithm.HS512)
@@ -49,7 +48,6 @@ public class JwtUtilImpl implements JwtUtil{
             Date expiryDate = new Date(now.getTime() + REFRESH_EXPIRATION_TIME);
             return Jwts.builder()
                     .subject(Long.toString(id))
-                    .claim("type", TokenType.REFRESH_TOKEN.name())
                     .setIssuedAt(now)
                     .setExpiration(expiryDate)
                     .signWith(key, SignatureAlgorithm.HS256)

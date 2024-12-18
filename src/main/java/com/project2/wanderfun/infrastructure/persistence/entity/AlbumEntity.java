@@ -2,6 +2,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,21 @@ public class AlbumEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
+    private String description;
+    private Long placeId;
+    @Column(precision = 9, scale = 6)
+    private BigDecimal placeLongitude;
+    @Column(precision = 8, scale = 6)
+    private BigDecimal placeLatitude;
+    private String placeName;
+    private String placeCoverImageUrl;
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlbumImageEntity> albumImages = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private UserEntity user;
-
-    private String name;
-    private String placeId;
-    private String description;
-
-    // Relationships
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AlbumImageEntity> albumImages = new ArrayList<>();;
 
     public AlbumEntity() {
     }
@@ -31,47 +35,79 @@ public class AlbumEntity {
         return id;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPlaceId() {
-        return placeId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public List<AlbumImageEntity> getAlbumImages() {
-        return albumImages;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public Long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
+    }
+
+    public BigDecimal getPlaceLongitude() {
+        return placeLongitude;
+    }
+
+    public void setPlaceLongitude(BigDecimal placeLongitude) {
+        this.placeLongitude = placeLongitude;
+    }
+
+    public BigDecimal getPlaceLatitude() {
+        return placeLatitude;
+    }
+
+    public void setPlaceLatitude(BigDecimal placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlaceCoverImageUrl() {
+        return placeCoverImageUrl;
+    }
+
+    public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
+        this.placeCoverImageUrl = placeCoverImageUrl;
+    }
+
+    public List<AlbumImageEntity> getAlbumImages() {
+        return albumImages;
+    }
+
     public void setAlbumImages(List<AlbumImageEntity> albumImages) {
         this.albumImages = albumImages;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

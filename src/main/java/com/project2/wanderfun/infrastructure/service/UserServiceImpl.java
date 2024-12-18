@@ -31,7 +31,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     @Transactional
-    public List<User> findByRole(UserRole role) {
-        return userRepository.findByRole(role);
+    public List<User> findAllByRole(UserRole role) {
+        return userRepository.findAllByRole(role);
     }
 }

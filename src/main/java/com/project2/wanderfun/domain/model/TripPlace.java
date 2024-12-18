@@ -8,7 +8,7 @@ public class TripPlace {
     private BigDecimal placeLongitude;
     private BigDecimal placeLatitude;
     private String placeName;
-    private String placeImageUrl;
+    private String placeCoverImageUrl;
     private Date startTime;
     private Date endTime;
     private Long tripId;
@@ -48,12 +48,12 @@ public class TripPlace {
         this.placeName = placeName;
     }
 
-    public String getPlaceImageUrl() {
-        return placeImageUrl;
+    public String getPlaceCoverImageUrl() {
+        return placeCoverImageUrl;
     }
 
-    public void setPlaceImageUrl(String placeImageUrl) {
-        this.placeImageUrl = placeImageUrl;
+    public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
+        this.placeCoverImageUrl = placeCoverImageUrl;
     }
 
     public Date getStartTime() {
