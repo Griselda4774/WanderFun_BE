@@ -93,8 +93,8 @@ public class PlaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceDto placeDto) {
-        boolean result = placeUsecase.updatePlaceById(id, placeDto);
+    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
+        boolean result = placeUsecase.updatePlaceById(id, placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Update place failed!");
         }

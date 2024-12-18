@@ -47,8 +47,8 @@ public class TripUsecase {
         return true;
     }
 
-    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
-        Trip trip = objectMapper.map(tripDto, Trip.class);
+    public boolean updateTripById(Long id, TripCreateDto tripCreateDto) throws ObjectAlreadyExistException{
+        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
 
         Trip currentTrip = tripService.findById(id);
         if (!trip.getName().equals(currentTrip.getName())) {

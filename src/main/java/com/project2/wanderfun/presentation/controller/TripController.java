@@ -71,8 +71,8 @@ public class TripController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDto<?>> updateTripById(@PathVariable long id,
-                                                         @RequestBody TripDto tripDto) {
-        boolean result = tripUsecase.updateTripById(id, tripDto);
+                                                         @RequestBody TripCreateDto tripCreateDto) {
+        boolean result = tripUsecase.updateTripById(id, tripCreateDto);
         if (!result) {
             throw new RequestFailedException("Update trip failed!");
         }
