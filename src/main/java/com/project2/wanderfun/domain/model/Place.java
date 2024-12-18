@@ -3,8 +3,7 @@ package com.project2.wanderfun.domain.model;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Place {
@@ -19,8 +18,8 @@ public class Place {
     private int checkInPoint;
     private float checkInRange;
     private PlaceCategory category;
-    private LocalDateTime timeOpen;
-    private LocalDateTime timeClose;
+    private LocalTime timeOpen;
+    private LocalTime timeClose;
     private String alternativeName;
     private String operator;
     private String link;
@@ -118,19 +117,19 @@ public class Place {
         this.category = category;
     }
 
-    public LocalDateTime getTimeOpen() {
+    public LocalTime getTimeOpen() {
         return timeOpen;
     }
 
-    public void setTimeOpen(LocalDateTime timeOpen) {
+    public void setTimeOpen(LocalTime timeOpen) {
         this.timeOpen = timeOpen;
     }
 
-    public LocalDateTime getTimeClose() {
+    public LocalTime getTimeClose() {
         return timeClose;
     }
 
-    public void setTimeClose(LocalDateTime timeClose) {
+    public void setTimeClose(LocalTime timeClose) {
         this.timeClose = timeClose;
     }
 

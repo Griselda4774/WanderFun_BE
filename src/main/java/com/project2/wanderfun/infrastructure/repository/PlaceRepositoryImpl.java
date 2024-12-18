@@ -35,8 +35,8 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
             placeEntity.setDescription(sectionEntities);
         }
 
-        if (place.getImageUrls() != null || place.getImageUrls().size() > 0) {
-            List<PlaceImageEntity> placeImageEntities = objectMapper.mapList(place.getImageUrls(), PlaceImageEntity.class);
+        if (place.getPlaceImages() != null || place.getPlaceImages().size() > 0) {
+            List<PlaceImageEntity> placeImageEntities = objectMapper.mapList(place.getPlaceImages(), PlaceImageEntity.class);
             placeImageEntities.forEach(placeImageEntity -> placeImageEntity.setPlace(placeEntity));
             placeEntity.setPlaceImages(placeImageEntities);
         }

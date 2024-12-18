@@ -1,23 +1,17 @@
-package com.project2.wanderfun.application.dto.album;
-
-import com.project2.wanderfun.domain.model.AlbumImage;
+package com.project2.wanderfun.application.dto.tripplace;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Date;
 
-public class AlbumDto {
+public class TripPlaceDto {
     private Long id;
-    private String name;
-    private String description;
-    private Long placeId;
     private BigDecimal placeLongitude;
     private BigDecimal placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
-    private List<AlbumImage> albumImages;
-    private Long userId;
-
-    public AlbumDto() {};
+    private Date startTime;
+    private Date endTime;
+    private Long tripId;
 
     public Long getId() {
         return id;
@@ -25,30 +19,6 @@ public class AlbumDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 
     public BigDecimal getPlaceLongitude() {
@@ -83,19 +53,27 @@ public class AlbumDto {
         this.placeCoverImageUrl = placeCoverImageUrl;
     }
 
-    public List<AlbumImage> getAlbumImages() {
-        return albumImages;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setAlbumImages(List<AlbumImage> albumImages) {
-        this.albumImages = albumImages;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
     }
 }

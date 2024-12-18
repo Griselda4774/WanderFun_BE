@@ -1,11 +1,12 @@
 package com.project2.wanderfun.application.dto.place;
 
-import com.project2.wanderfun.domain.model.Feedback;
+import com.project2.wanderfun.application.dto.feedbackimage.FeedbackImageDto;
+import com.project2.wanderfun.application.dto.placeimage.PlaceImageDto;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 import com.project2.wanderfun.domain.model.Section;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 public class PlaceDto {
@@ -20,13 +21,13 @@ public class PlaceDto {
     private int checkInPoint;
     private float checkInRange;
     private PlaceCategory category;
-    private Date timeOpen;
-    private Date timeClose;
+    private LocalTime timeOpen;
+    private LocalTime timeClose;
     private String alternativeName;
     private String operator;
     private String link;
-    private List<String> imageUrls;
-    private List<Feedback> feedbacks;
+    private List<PlaceImageDto> placeImages;
+    private List<FeedbackImageDto> feedbacks;
 
     public PlaceDto() {
     }
@@ -119,19 +120,19 @@ public class PlaceDto {
         this.category = category;
     }
 
-    public Date getTimeOpen() {
+    public LocalTime getTimeOpen() {
         return timeOpen;
     }
 
-    public void setTimeOpen(Date timeOpen) {
+    public void setTimeOpen(LocalTime timeOpen) {
         this.timeOpen = timeOpen;
     }
 
-    public Date getTimeClose() {
+    public LocalTime getTimeClose() {
         return timeClose;
     }
 
-    public void setTimeClose(Date timeClose) {
+    public void setTimeClose(LocalTime timeClose) {
         this.timeClose = timeClose;
     }
 
@@ -159,19 +160,19 @@ public class PlaceDto {
         this.link = link;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public List<PlaceImageDto> getPlaceImages() {
+        return placeImages;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setPlaceImages(List<PlaceImageDto> placeImages) {
+        this.placeImages = placeImages;
     }
 
-    public List<Feedback> getFeedbacks() {
+    public List<FeedbackImageDto> getFeedbacks() {
         return feedbacks;
     }
 
-    public void setFeedbacks(List<Feedback> feedbacks) {
+    public void setFeedbacks(List<FeedbackImageDto> feedbacks) {
         this.feedbacks = feedbacks;
     }
 }
