@@ -12,7 +12,7 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
     private final JpaBaseRepository<Entity, ID> jpaBaseRepository;
     protected final ObjectMapper objectMapper;
     private final Class<Model> modelClass;
-    private final  Class<Entity> entityClass;
+    private final Class<Entity> entityClass;
 
     public BaseRepositoryImpl(JpaBaseRepository<Entity, ID> jpaBaseRepository, ObjectMapper objectMapper, Class<Model> modelClass, Class<Entity> entityClass) {
         this.jpaBaseRepository = jpaBaseRepository;
