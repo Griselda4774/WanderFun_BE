@@ -14,12 +14,10 @@ import java.util.stream.Collectors;
 @Component
 public class ObjectMapperImpl implements ObjectMapper {
     private final ModelMapper modelMapper;
-    private final ModelMapperConfig modelMapperConfig;
 
     @Autowired
-    public ObjectMapperImpl(ModelMapper modelMapper, ModelMapperConfig modelMapperConfig) {
+    public ObjectMapperImpl(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-        this.modelMapperConfig = modelMapperConfig;
     }
 
     @Override

@@ -1,18 +1,8 @@
 package com.project2.wanderfun.infrastructure.configuration.modelmapper;
 
-import com.project2.wanderfun.application.dto.album.AlbumCreateDto;
-import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
-import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
-import com.project2.wanderfun.application.dto.trip.TripCreateDto;
-import com.project2.wanderfun.domain.model.*;
 import org.modelmapper.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Configuration
 public class ModelMapperConfig {
