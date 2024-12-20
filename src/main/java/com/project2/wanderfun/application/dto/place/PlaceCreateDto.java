@@ -3,6 +3,7 @@ package com.project2.wanderfun.application.dto.place;
 import com.project2.wanderfun.application.dto.placeimage.PlaceImageCreateDto;
 import com.project2.wanderfun.application.dto.section.SectionCreateDto;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
@@ -11,8 +12,10 @@ import java.util.List;
 
 public class PlaceCreateDto {
     @NotBlank(message = "Longitude is required")
+    @Digits(integer = 3, fraction = 6, message = "Longitude must have at most 3 integer digits and 6 fraction digits")
     private BigDecimal longitude;
     @NotBlank(message = "Latitude is required")
+    @Digits(integer = 2, fraction = 6, message = "Latitude must have at most 2 integer digits and 6 fraction digits")
     private BigDecimal latitude;
     @NotBlank(message = "Address is required")
     private String address;

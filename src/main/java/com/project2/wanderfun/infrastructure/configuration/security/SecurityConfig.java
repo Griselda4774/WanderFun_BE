@@ -11,8 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -76,6 +74,7 @@ public class SecurityConfig {
                                 .requestMatchers("/wanderfun/auth/logout").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
                                 .requestMatchers("/wanderfun/auth/refresh").permitAll()
                                 .requestMatchers("/wanderfun/auth/admin/register").permitAll()
+
                                 // User
                                 .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
                                 .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
@@ -86,6 +85,9 @@ public class SecurityConfig {
 
                                 // Trip
                                 .requestMatchers("/wanderfun/trip/**").hasAnyRole(UserRole.USER.name())
+
+                                // Album
+                                .requestMatchers("/wanderfun/album/**").hasAnyRole(UserRole.USER.name())
 
                                 .anyRequest().authenticated()
                 )

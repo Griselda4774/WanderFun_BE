@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin
@@ -78,6 +79,22 @@ public class PlaceController {
         response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/coordinates")
+    public ResponseEntity<ResponseDto<PlaceDto>> findPlaceByLongitudeAndLatitude(@RequestParam BigDecimal longitude,
+                                                                             @RequestParam BigDecimal latitude) {
+        PlaceDto result = placeUsecase.findPlaceByLongitudeAndLatitude(longitude, latitude);
+        if (result == null) {
+            throw new RequestFailedException("Find place by longitude and latitude failed!");
+        }
+
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find place by longitude and latitude successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 
     @PostMapping("")
     public ResponseEntity<ResponseDto<?>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
