@@ -12,6 +12,7 @@ import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaPlaceR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,10 +72,13 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
     public Optional<Place> findByName(String name) {
         Optional<Place> place = jpaPlaceRepository.findByName(name)
                 .map(entity -> objectMapper.map(entity, Place.class));
-//        if(place.isPresent()) {
-//            List<Section> section = sectionRepository.findAllByPlaceId(place.get().getId());
-//            place.get().setDescription(section);
-//        }
+        return place;
+    }
+
+    @Override
+    public Optional<Place> findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+        Optional<Place> place = jpaPlaceRepository.findByLongitudeAndLatitude(longitude, latitude)
+                .map(entity -> objectMapper.map(entity, Place.class));
         return place;
     }
 }

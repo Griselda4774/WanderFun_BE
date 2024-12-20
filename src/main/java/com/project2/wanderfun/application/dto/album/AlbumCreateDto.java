@@ -1,6 +1,7 @@
 package com.project2.wanderfun.application.dto.album;
 
 import com.project2.wanderfun.application.dto.albumimage.AlbumImageCreateDto;
+import jakarta.validation.constraints.Digits;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,7 +10,9 @@ public class AlbumCreateDto {
     private String name;
     private String description;
     private Long placeId;
+    @Digits(integer = 3, fraction = 6, message = "Longitude must have at most 3 integer digits and 6 fraction digits")
     private BigDecimal placeLongitude;
+    @Digits(integer = 2, fraction = 6, message = "Latitude must have at most 2 integer digits and 6 fraction digits")
     private BigDecimal placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;

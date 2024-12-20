@@ -4,6 +4,7 @@ import com.project2.wanderfun.application.dto.feedbackimage.FeedbackImageDto;
 import com.project2.wanderfun.application.dto.placeimage.PlaceImageDto;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 import com.project2.wanderfun.domain.model.Section;
+import jakarta.validation.constraints.Digits;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -11,7 +12,9 @@ import java.util.List;
 
 public class PlaceDto {
     private Long id;
+    @Digits(integer = 3, fraction = 6, message = "Longitude must have at most 3 integer digits and 6 fraction digits")
     private BigDecimal longitude;
+    @Digits(integer = 2, fraction = 6, message = "Latitude must have at most 2 integer digits and 6 fraction digits")
     private BigDecimal latitude;
     private String address;
     private String name;

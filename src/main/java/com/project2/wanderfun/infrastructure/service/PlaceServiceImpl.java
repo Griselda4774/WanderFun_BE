@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -36,6 +37,13 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
     @Transactional
     public Place findByName(String name) {
         return placeRepository.findByName(name)
+                .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", Place.class.getSimpleName())));
+    }
+
+    @Override
+    @Transactional
+    public Place findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+        return placeRepository.findByLongitudeAndLatitude(longitude, latitude)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", Place.class.getSimpleName())));
     }
 }

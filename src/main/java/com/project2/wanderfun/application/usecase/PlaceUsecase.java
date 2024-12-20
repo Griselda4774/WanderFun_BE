@@ -9,6 +9,7 @@ import com.project2.wanderfun.domain.model.Place;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -38,15 +39,29 @@ public class PlaceUsecase {
         return objectMapper.map(placeService.findByName(name), PlaceDto.class);
     }
 
+    public PlaceDto findPlaceByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+        return objectMapper.map(placeService.findByLongitudeAndLatitude(longitude, latitude), PlaceDto.class);
+    }
+
     public boolean createPlace(PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
         Place place = objectMapper.map(placeCreateDto, Place.class);
-        Place existingPlace = null;
+        Place existingPlace;
         try {
             existingPlace = placeService.findByName(place.getName());
-        } catch (Exception e) {}
-
+        } catch (Exception e) {
+            existingPlace = null;
+        }
         if(existingPlace != null) {
             throw new ObjectAlreadyExistException("This name is already used!");
+        }
+
+        try {
+            existingPlace = placeService.findByLongitudeAndLatitude(place.getLongitude(), place.getLatitude());
+        } catch (Exception e) {
+            existingPlace = null;
+        }
+        if(existingPlace != null) {
+            throw new ObjectAlreadyExistException("This longitude and latitude is already used!");
         }
 
         placeService.create(place);
@@ -66,6 +81,18 @@ public class PlaceUsecase {
             }
             if (existingPlace != null) {
                 throw new ObjectAlreadyExistException("This name is already used!");
+            }
+        }
+
+        if (!place.getLongitude().equals(currentPlace.getLongitude()) || !place.getLatitude().equals(currentPlace.getLatitude())) {
+            Place existingPlace;
+            try {
+                existingPlace = placeService.findByLongitudeAndLatitude(place.getLongitude(), place.getLatitude());
+            } catch (Exception e) {
+                existingPlace = null;
+            }
+            if (existingPlace != null) {
+                throw new ObjectAlreadyExistException("This longitude and latitude is already used!");
             }
         }
 
