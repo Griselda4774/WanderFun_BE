@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Place {
     private Long id;
-    private BigDecimal longitude;
-    private BigDecimal latitude;
+    private double longitude;
+    private double latitude;
     private String address;
     private String name;
     private String iconUrl;
@@ -37,19 +37,19 @@ public class Place {
         this.id = id;
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

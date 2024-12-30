@@ -10,10 +10,8 @@ public class AlbumCreateDto {
     private String name;
     private String description;
     private Long placeId;
-    @Digits(integer = 3, fraction = 6, message = "Longitude must have at most 3 integer digits and 6 fraction digits")
-    private BigDecimal placeLongitude;
-    @Digits(integer = 2, fraction = 6, message = "Latitude must have at most 2 integer digits and 6 fraction digits")
-    private BigDecimal placeLatitude;
+    private double placeLongitude;
+    private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
     private List<AlbumImageCreateDto> albumImages;
@@ -44,19 +42,19 @@ public class AlbumCreateDto {
         this.placeId = placeId;
     }
 
-    public BigDecimal getPlaceLongitude() {
+    public double getPlaceLongitude() {
         return placeLongitude;
     }
 
-    public void setPlaceLongitude(BigDecimal placeLongitude) {
+    public void setPlaceLongitude(double placeLongitude) {
         this.placeLongitude = placeLongitude;
     }
 
-    public BigDecimal getPlaceLatitude() {
+    public double getPlaceLatitude() {
         return placeLatitude;
     }
 
-    public void setPlaceLatitude(BigDecimal placeLatitude) {
+    public void setPlaceLatitude(double placeLatitude) {
         this.placeLatitude = placeLatitude;
     }
 

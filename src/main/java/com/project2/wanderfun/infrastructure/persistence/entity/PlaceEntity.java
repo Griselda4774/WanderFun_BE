@@ -14,10 +14,8 @@ public class PlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(precision = 9, scale = 6)
-    private BigDecimal longitude;
-    @Column(precision = 8, scale = 6)
-    private BigDecimal latitude;
+    private double longitude;
+    private double latitude;
     private String address;
     private String name;
     private String iconUrl;
@@ -50,19 +48,19 @@ public class PlaceEntity {
         this.id = id;
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

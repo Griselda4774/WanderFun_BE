@@ -86,17 +86,17 @@ public class AlbumController {
     public ResponseEntity<ResponseDto<?>> deleteAlbumById(@PathVariable long id) {
         boolean result = albumUsecase.deleteAlbumById(id);
         if (!result) {
-            throw new RequestFailedException("Delete trip failed!");
+            throw new RequestFailedException("Delete album failed!");
         }
 
         ResponseDto<?> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
-        response.setMessage("Delete trip successful!");
+        response.setMessage("Delete album successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<?>> deleteAllTrips() {
+    public ResponseEntity<ResponseDto<?>> deleteAllAlbums() {
         boolean result = albumUsecase.deleteAllAlbums();
         if (!result) {
             throw new RequestFailedException("Delete all albums failed!");

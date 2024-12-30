@@ -12,10 +12,8 @@ public class TripPlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(precision = 9, scale = 6)
-    private BigDecimal placeLongitude;
-    @Column(precision = 8, scale = 6)
-    private BigDecimal placeLatitude;
+    private double placeLongitude;
+    private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
     private Date startTime;
@@ -35,19 +33,19 @@ public class TripPlaceEntity {
         this.id = id;
     }
 
-    public BigDecimal getPlaceLongitude() {
+    public double getPlaceLongitude() {
         return placeLongitude;
     }
 
-    public void setPlaceLongitude(BigDecimal placeLongitude) {
+    public void setPlaceLongitude(double placeLongitude) {
         this.placeLongitude = placeLongitude;
     }
 
-    public BigDecimal getPlaceLatitude() {
+    public double getPlaceLatitude() {
         return placeLatitude;
     }
 
-    public void setPlaceLatitude(BigDecimal placeLatitude) {
+    public void setPlaceLatitude(double placeLatitude) {
         this.placeLatitude = placeLatitude;
     }
 

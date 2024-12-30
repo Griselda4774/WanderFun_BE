@@ -15,10 +15,8 @@ public class AlbumEntity {
     private String name;
     private String description;
     private Long placeId;
-    @Column(precision = 9, scale = 6)
-    private BigDecimal placeLongitude;
-    @Column(precision = 8, scale = 6)
-    private BigDecimal placeLatitude;
+    private double placeLongitude;
+    private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -63,19 +61,19 @@ public class AlbumEntity {
         this.placeId = placeId;
     }
 
-    public BigDecimal getPlaceLongitude() {
+    public double getPlaceLongitude() {
         return placeLongitude;
     }
 
-    public void setPlaceLongitude(BigDecimal placeLongitude) {
+    public void setPlaceLongitude(double placeLongitude) {
         this.placeLongitude = placeLongitude;
     }
 
-    public BigDecimal getPlaceLatitude() {
+    public double getPlaceLatitude() {
         return placeLatitude;
     }
 
-    public void setPlaceLatitude(BigDecimal placeLatitude) {
+    public void setPlaceLatitude(double placeLatitude) {
         this.placeLatitude = placeLatitude;
     }
 

@@ -6,8 +6,8 @@ public class FavouritePlace {
     private Long id;
     private Long userId;
     private Long placeId;
-    private BigDecimal placeLongitude;
-    private BigDecimal placeLatitude;
+    private double placeLongitude;
+    private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
 
@@ -37,19 +37,19 @@ public class FavouritePlace {
         this.placeId = placeId;
     }
 
-    public BigDecimal getPlaceLongitude() {
+    public double getPlaceLongitude() {
         return placeLongitude;
     }
 
-    public void setPlaceLongitude(BigDecimal placeLongitude) {
+    public void setPlaceLongitude(double placeLongitude) {
         this.placeLongitude = placeLongitude;
     }
 
-    public BigDecimal getPlaceLatitude() {
+    public double getPlaceLatitude() {
         return placeLatitude;
     }
 
-    public void setPlaceLatitude(BigDecimal placeLatitude) {
+    public void setPlaceLatitude(double placeLatitude) {
         this.placeLatitude = placeLatitude;
     }
 
