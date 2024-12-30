@@ -14,10 +14,8 @@ public class FavouritePlaceEntity {
     @JoinColumn(name = "userId")
     private UserEntity user;
     private String placeId;
-    @Column(precision = 9, scale = 6)
-    private BigDecimal placeLatitude;
-    @Column(precision = 8, scale = 6)
-    private BigDecimal placeLongitude;
+    private double placeLatitude;
+    private double placeLongitude;
     private String placeName;
     private String placeCoverImageUrl;
 
@@ -48,19 +46,19 @@ public class FavouritePlaceEntity {
         this.placeId = placeId;
     }
 
-    public BigDecimal getPlaceLongitude() {
+    public double getPlaceLongitude() {
         return placeLongitude;
     }
 
-    public void setPlaceLongitude(BigDecimal placeLongitude) {
+    public void setPlaceLongitude(double placeLongitude) {
         this.placeLongitude = placeLongitude;
     }
 
-    public BigDecimal getPlaceLatitude() {
+    public double getPlaceLatitude() {
         return placeLatitude;
     }
 
-    public void setPlaceLatitude(BigDecimal placeLatitude) {
+    public void setPlaceLatitude(double placeLatitude) {
         this.placeLatitude = placeLatitude;
     }
 

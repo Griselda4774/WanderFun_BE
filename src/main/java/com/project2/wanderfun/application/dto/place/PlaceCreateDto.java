@@ -12,11 +12,9 @@ import java.util.List;
 
 public class PlaceCreateDto {
     @NotBlank(message = "Longitude is required")
-    @Digits(integer = 3, fraction = 6, message = "Longitude must have at most 3 integer digits and 6 fraction digits")
-    private BigDecimal longitude;
+    private double longitude;
     @NotBlank(message = "Latitude is required")
-    @Digits(integer = 2, fraction = 6, message = "Latitude must have at most 2 integer digits and 6 fraction digits")
-    private BigDecimal latitude;
+    private double latitude;
     @NotBlank(message = "Address is required")
     private String address;
     @NotBlank(message = "Name is required")
@@ -37,19 +35,19 @@ public class PlaceCreateDto {
     public PlaceCreateDto() {
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
