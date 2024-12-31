@@ -12,6 +12,7 @@ public class UserResponseDto {
     protected String lastName;
     protected boolean isVerified;
     private String avatarUrl;
+    private String avatarPublicId;
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
@@ -74,6 +75,14 @@ public class UserResponseDto {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getAvatarPublicId() {
+        return avatarPublicId;
+    }
+
+    public void setAvatarPublicId(String avatarPublicId) {
+        this.avatarPublicId = avatarPublicId;
     }
 
     public Date getDateOfBirth() {

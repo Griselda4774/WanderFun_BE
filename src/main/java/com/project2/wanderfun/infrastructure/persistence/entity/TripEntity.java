@@ -14,6 +14,7 @@ public class TripEntity {
     private Long id;
     private String name;
     private String imageUrl;
+    private String imagePublicId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -47,6 +48,14 @@ public class TripEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public LocalDateTime getStartTime() {

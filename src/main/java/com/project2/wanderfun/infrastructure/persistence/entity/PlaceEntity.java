@@ -19,7 +19,9 @@ public class PlaceEntity {
     private String address;
     private String name;
     private String iconUrl;
+    private String iconPublicId;
     private String coverImageUrl;
+    private String coverImagePublicId;
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SectionEntity> description = new ArrayList<>();
     private int checkInPoint;
@@ -88,12 +90,28 @@ public class PlaceEntity {
         this.iconUrl = iconUrl;
     }
 
+    public String getIconPublicId() {
+        return iconPublicId;
+    }
+
+    public void setIconPublicId(String iconPublicId) {
+        this.iconPublicId = iconPublicId;
+    }
+
     public String getCoverImageUrl() {
         return coverImageUrl;
     }
 
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
+    }
+
+    public String getCoverImagePublicId() {
+        return coverImagePublicId;
+    }
+
+    public void setCoverImagePublicId(String coverImagePublicId) {
+        this.coverImagePublicId = coverImagePublicId;
     }
 
     public List<SectionEntity> getDescription() {

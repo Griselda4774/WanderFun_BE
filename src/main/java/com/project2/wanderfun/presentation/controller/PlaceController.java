@@ -81,8 +81,8 @@ public class PlaceController {
     }
 
     @GetMapping("/coordinates")
-    public ResponseEntity<ResponseDto<PlaceDto>> findPlaceByLongitudeAndLatitude(@RequestParam BigDecimal longitude,
-                                                                             @RequestParam BigDecimal latitude) {
+    public ResponseEntity<ResponseDto<PlaceDto>> findPlaceByLongitudeAndLatitude(@RequestParam double longitude,
+                                                                             @RequestParam double latitude) {
         PlaceDto result = placeUsecase.findPlaceByLongitudeAndLatitude(longitude, latitude);
         if (result == null) {
             throw new RequestFailedException("Find place by longitude and latitude failed!");

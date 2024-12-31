@@ -11,6 +11,7 @@ public class SectionEntity {
     private String title;
     private String content;
     private String imageUrl;
+    private String imagePublicId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
@@ -48,6 +49,14 @@ public class SectionEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public PlaceEntity getPlace() {

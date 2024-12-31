@@ -9,6 +9,7 @@ public class TripDto {
     private Long id;
     private String name;
     private String imageUrl;
+    private String imagePublicId;
     private Date startTime;
     private Date endTime;
     private List<TripPlaceDto> tripPlaces;
@@ -38,6 +39,14 @@ public class TripDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Date getStartTime() {

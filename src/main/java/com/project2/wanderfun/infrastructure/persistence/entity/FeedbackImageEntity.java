@@ -9,6 +9,7 @@ public class FeedbackImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imageUrl;
+    private String imagePublicId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedbackId")
     private FeedbackEntity feedback;
@@ -30,6 +31,14 @@ public class FeedbackImageEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public FeedbackEntity getFeedback() {

@@ -42,7 +42,7 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 
     @Override
     @Transactional
-    public Place findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+    public Place findByLongitudeAndLatitude(double longitude, double latitude) {
         return placeRepository.findByLongitudeAndLatitude(longitude, latitude)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", Place.class.getSimpleName())));
     }

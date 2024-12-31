@@ -9,6 +9,7 @@ public class PlaceImageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imageUrl;
+    private String imagePublicId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
     private PlaceEntity place;
@@ -26,6 +27,14 @@ public class PlaceImageEntity {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public void setId(Long id) {

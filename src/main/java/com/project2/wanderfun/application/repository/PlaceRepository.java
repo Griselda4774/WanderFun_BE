@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface PlaceRepository extends BaseRepository<Place, Long>{
     List<Place> findAllByNameContaining(String name);
     Optional<Place> findByName(String name);
-    Optional<Place> findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude);
+    Optional<Place> findByLongitudeAndLatitude(double longitude, double latitude);
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class User extends BaseUser{
     private String avatarUrl;
+    private String avatarPublicId;
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
@@ -26,6 +27,14 @@ public class User extends BaseUser{
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getAvatarPublicId() {
+        return avatarPublicId;
+    }
+
+    public void setAvatarPublicId(String avatarPublicId) {
+        this.avatarPublicId = avatarPublicId;
     }
 
     public Date getDateOfBirth() {

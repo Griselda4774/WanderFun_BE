@@ -76,7 +76,7 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
     }
 
     @Override
-    public Optional<Place> findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+    public Optional<Place> findByLongitudeAndLatitude(double longitude, double latitude) {
         Optional<Place> place = jpaPlaceRepository.findByLongitudeAndLatitude(longitude, latitude)
                 .map(entity -> objectMapper.map(entity, Place.class));
         return place;

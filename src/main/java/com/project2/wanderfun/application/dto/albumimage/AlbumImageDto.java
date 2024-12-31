@@ -3,6 +3,7 @@ package com.project2.wanderfun.application.dto.albumimage;
 public class AlbumImageDto {
     private Long id;
     private String imageUrl;
+    private String imagePublicId;
     private Long albumId;
 
     public AlbumImageDto() {};
@@ -21,6 +22,14 @@ public class AlbumImageDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public String setImagePublicId(String imagePublicId) {
+        return this.imagePublicId = imagePublicId;
     }
 
     public Long getAlbumId() {
