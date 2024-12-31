@@ -1,6 +1,7 @@
 package com.project2.wanderfun.infrastructure.configuration.modelmapper;
 
 import org.modelmapper.*;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +14,9 @@ public class ModelMapperConfig {
                 .setSkipNullEnabled(true)
                 .setFieldMatchingEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
-                .setPropertyCondition(context -> context.getSource() != null);
+                .setPropertyCondition(context -> context.getSource() != null)
+                .setMatchingStrategy(MatchingStrategies.STRICT);;
+
         return modelMapper;
     }
 }
