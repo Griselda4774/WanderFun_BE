@@ -7,6 +7,7 @@ public class Trip {
     private Long id;
     private String name;
     private String imageUrl;
+    private String imagePublicId;
     private Date startTime;
     private Date endTime;
     private List<TripPlace> tripPlaces;
@@ -37,6 +38,14 @@ public class Trip {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Date getStartTime() {

@@ -16,6 +16,7 @@ public class SelfInfoDto {
     private boolean isVerified;
     private boolean isCreatedProfile;
     private String avatarUrl;
+    private String avatarPublicId;
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
@@ -89,6 +90,14 @@ public class SelfInfoDto {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getAvatarPublicId() {
+        return avatarPublicId;
+    }
+
+    public void setAvatarPublicId(String avatarPublicId) {
+        this.avatarPublicId = avatarPublicId;
     }
 
     public Date getDateOfBirth() {

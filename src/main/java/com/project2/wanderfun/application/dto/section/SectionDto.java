@@ -5,6 +5,7 @@ public class SectionDto {
     private String title;
     private String content;
     private String imageUrl;
+    private String imagePublicId;
     private Long placeId;
 
     public SectionDto() {};
@@ -39,6 +40,14 @@ public class SectionDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Long getPlaceId() {

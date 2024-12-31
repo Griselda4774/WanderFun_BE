@@ -20,7 +20,9 @@ public class PlaceCreateDto {
     @NotBlank(message = "Name is required")
     private String name;
     private String iconUrl;
+    private String iconPublicId;
     private String coverImageUrl;
+    private String coverImagePublicId;
     private List<SectionCreateDto> description;
     private int checkInPoint;
     private float checkInRange;
@@ -75,12 +77,28 @@ public class PlaceCreateDto {
         this.iconUrl = iconUrl;
     }
 
+    public String getIconPublicId() {
+        return iconPublicId;
+    }
+
+    public void setIconPublicId(String iconPublicId) {
+        this.iconPublicId = iconPublicId;
+    }
+
     public String getCoverImageUrl() {
         return coverImageUrl;
     }
 
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
+    }
+
+    public String getCoverImagePublicId() {
+        return coverImagePublicId;
+    }
+
+    public void setCoverImagePublicId(String coverImagePublicId) {
+        this.coverImagePublicId = coverImagePublicId;
     }
 
     public List<SectionCreateDto> getDescription() {

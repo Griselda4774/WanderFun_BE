@@ -13,7 +13,9 @@ public class Place {
     private String address;
     private String name;
     private String iconUrl;
+    private String iconPublicId;
     private String coverImageUrl;
+    private String coverImagePublicId;
     private List<Section> description;
     private int checkInPoint;
     private float checkInRange;
@@ -77,12 +79,28 @@ public class Place {
         this.iconUrl = iconUrl;
     }
 
+    public String getIconPublicId() {
+        return iconPublicId;
+    }
+
+    public void setIconPublicId(String iconPublicId) {
+        this.iconPublicId = iconPublicId;
+    }
+
     public String getCoverImageUrl() {
         return coverImageUrl;
     }
 
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
+    }
+
+    public String getCoverImagePublicId() {
+        return coverImagePublicId;
+    }
+
+    public void setCoverImagePublicId(String coverImagePublicId) {
+        this.coverImagePublicId = coverImagePublicId;
     }
 
     public List<Section> getDescription() {

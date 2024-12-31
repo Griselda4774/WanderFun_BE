@@ -39,7 +39,7 @@ public class PlaceUsecase {
         return objectMapper.map(placeService.findByName(name), PlaceDto.class);
     }
 
-    public PlaceDto findPlaceByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude) {
+    public PlaceDto findPlaceByLongitudeAndLatitude(double longitude, double latitude) {
         return objectMapper.map(placeService.findByLongitudeAndLatitude(longitude, latitude), PlaceDto.class);
     }
 
@@ -84,7 +84,7 @@ public class PlaceUsecase {
             }
         }
 
-        if (!place.getLongitude().equals(currentPlace.getLongitude()) || !place.getLatitude().equals(currentPlace.getLatitude())) {
+        if (place.getLongitude() != currentPlace.getLongitude() || place.getLatitude() != currentPlace.getLatitude()) {
             Place existingPlace;
             try {
                 existingPlace = placeService.findByLongitudeAndLatitude(place.getLongitude(), place.getLatitude());

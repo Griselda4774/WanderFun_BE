@@ -5,6 +5,7 @@ public class Section {
     private String title;
     private String content;
     private String imageUrl;
+    private String imagePublicId;
     private Long placeId;
 
     public Section() {
@@ -40,6 +41,14 @@ public class Section {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Long getPlaceId() {

@@ -3,6 +3,7 @@ package com.project2.wanderfun.application.dto.feedbackimage;
 public class FeedbackImageDto {
     private Long id;
     private String imageUrl;
+    private String imagePublicId;
     private Long feedbackId;
 
     public FeedbackImageDto() {};
@@ -21,6 +22,14 @@ public class FeedbackImageDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Long getFeedbackId() {

@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>{
     List<PlaceEntity> findAllByNameContaining(String name);
     Optional<PlaceEntity> findByName(String name);
-    Optional<PlaceEntity> findByLongitudeAndLatitude(BigDecimal longitude, BigDecimal latitude);
+    Optional<PlaceEntity> findByLongitudeAndLatitude(double longitude, double latitude);
 }
