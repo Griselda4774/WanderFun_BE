@@ -89,6 +89,9 @@ public class SecurityConfig {
                                 // Album
                                 .requestMatchers("/wanderfun/album/**").hasAnyRole(UserRole.USER.name())
 
+                                // Cloudinary
+                                .requestMatchers("/wanderfun/cloudinary/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
+
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
