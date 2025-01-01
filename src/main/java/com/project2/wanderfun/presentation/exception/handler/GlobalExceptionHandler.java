@@ -86,6 +86,26 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
+    @ExceptionHandler(GenerateCloudinarySignatureFailedException.class)
+    public ResponseEntity<ResponseDto<?>> handleGenerateCloudinarySignatureFailedException(GenerateCloudinarySignatureFailedException e) {
+        ResponseDto<?> response = new ResponseDto();
+        response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        response.setError(true);
+        response.setErrorType(GenerateCloudinarySignatureFailedException.class.getSimpleName());
+        response.setMessage(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    @ExceptionHandler(CloudinaryDeleteImageFailedException.class)
+    public ResponseEntity<ResponseDto<?>> handleCloudinaryDeleteImageFailedException(CloudinaryDeleteImageFailedException e) {
+        ResponseDto<?> response = new ResponseDto();
+        response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        response.setError(true);
+        response.setErrorType(CloudinaryDeleteImageFailedException.class.getSimpleName());
+        response.setMessage(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
     @ExceptionHandler(RequestFailedException.class)
     public ResponseEntity<ResponseDto<?>> handleRequestFailedException(RequestFailedException e) {
         ResponseDto<?> response = new ResponseDto();
