@@ -36,7 +36,7 @@ public class CloudinaryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("")
     public ResponseEntity<ResponseDto<?>> deleteImage(@RequestParam String publicId) {
         boolean result = cloudinaryUsecase.deleteImage(publicId);
 
