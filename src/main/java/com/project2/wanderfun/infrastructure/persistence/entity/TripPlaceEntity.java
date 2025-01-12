@@ -12,6 +12,7 @@ public class TripPlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long placeId;
     private double placeLongitude;
     private double placeLatitude;
     private String placeName;
@@ -31,6 +32,14 @@ public class TripPlaceEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 
     public double getPlaceLongitude() {

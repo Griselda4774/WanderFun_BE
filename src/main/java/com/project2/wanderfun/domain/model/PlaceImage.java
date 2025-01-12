@@ -4,7 +4,7 @@ public class PlaceImage {
     private Long id;
     private String imageUrl;
     private String imagePublicId;
-    private Long placeId;
+    private Long placeId;   
 
     public PlaceImage() {};
 

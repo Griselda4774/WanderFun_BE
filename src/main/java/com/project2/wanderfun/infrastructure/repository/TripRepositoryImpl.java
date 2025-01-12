@@ -48,4 +48,15 @@ public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Lon
                 .map(entity -> objectMapper.map(entity, Trip.class));
         return trip;
     }
+
+    @Override
+    public List<Trip> findAllByUser_Id(Long userId) {
+        List<Trip> trips = objectMapper.mapList(jpaTripRepository.findAllByUser_Id(userId), Trip.class);
+        return trips;
+    }
+
+    @Override
+    public void deleteAllByUser_Id(Long userId) {
+        jpaTripRepository.deleteAllByUser_Id(userId);
+    }
 }

@@ -97,52 +97,52 @@ public class PlaceController {
 
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
+    public ResponseEntity<ResponseDto<PlaceDto>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
         boolean result = placeUsecase.createPlace(placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Create place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Create place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
+    public ResponseEntity<ResponseDto<PlaceDto>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
         boolean result = placeUsecase.updatePlaceById(id, placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Update place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> deletePlaceById(@PathVariable long id) {
+    public ResponseEntity<ResponseDto<PlaceDto>> deletePlaceById(@PathVariable long id) {
         boolean result = placeUsecase.deletePlaceById(id);
         if (!result) {
             throw new RequestFailedException("Delete place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<?>> deleteAllPlaces() {
+    public ResponseEntity<ResponseDto<PlaceDto>> deleteAllPlaces() {
         boolean result = placeUsecase.deleteAllPlaces();
         if (!result) {
             throw new RequestFailedException("Delete all places failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all places successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

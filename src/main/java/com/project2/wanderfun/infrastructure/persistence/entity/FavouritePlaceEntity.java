@@ -13,7 +13,7 @@ public class FavouritePlaceEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private UserEntity user;
-    private String placeId;
+    private Long placeId;
     private double placeLatitude;
     private double placeLongitude;
     private String placeName;
@@ -38,11 +38,11 @@ public class FavouritePlaceEntity {
         this.user = user;
     }
 
-    public String getPlaceId() {
+    public Long getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(String placeId) {
+    public void setPlaceId(Long placeId) {
         this.placeId = placeId;
     }
 

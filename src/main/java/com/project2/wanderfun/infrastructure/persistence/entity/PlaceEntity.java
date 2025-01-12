@@ -22,7 +22,7 @@ public class PlaceEntity {
     private String iconPublicId;
     private String coverImageUrl;
     private String coverImagePublicId;
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SectionEntity> description = new ArrayList<>();
     private int checkInPoint;
     private float checkInRange;
@@ -33,10 +33,10 @@ public class PlaceEntity {
     private String operator;
     private String link;
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PlaceImageEntity> placeImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FeedbackEntity> feedbacks = new ArrayList<>();
 
     public PlaceEntity() {

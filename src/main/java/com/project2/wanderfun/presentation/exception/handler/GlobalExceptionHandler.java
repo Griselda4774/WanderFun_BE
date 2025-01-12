@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(NotHavePermissionException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(UnauthorizedException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(WrongEmailOrPasswordException.class)
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(WrongEmailOrPasswordException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(ObjectNotFoundException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(ObjectAlreadyExistException.class)
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(ObjectAlreadyExistException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(ObjectInvalidException.class)
@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(ObjectInvalidException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(GenerateTokenFailedException.class)
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(GenerateTokenFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(GenerateCloudinarySignatureFailedException.class)
@@ -93,7 +93,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(GenerateCloudinarySignatureFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(CloudinaryDeleteImageFailedException.class)
@@ -103,7 +103,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(CloudinaryDeleteImageFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(RequestFailedException.class)
@@ -113,23 +113,23 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(RequestFailedException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseDto<Map>> handleValidationException(MethodArgumentNotValidException e) {
+    public ResponseEntity<ResponseDto<?>> handleValidationException(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         for (FieldError error : e.getBindingResult().getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
 
-        ResponseDto<Map> response = new ResponseDto();
+        ResponseDto<?> response = new ResponseDto();
         response.setStatusCode(HttpStatus.BAD_REQUEST.toString());
         response.setError(true);
         response.setErrorType(MethodArgumentNotValidException.class.getSimpleName());
         response.setMessage("Information is invalid!");
-        response.setData(errors);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        response.setErrorData(errors);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -139,7 +139,7 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(MethodArgumentTypeMismatchException.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @ExceptionHandler(Exception.class)
@@ -149,6 +149,6 @@ public class GlobalExceptionHandler {
         response.setError(true);
         response.setErrorType(Exception.class.getSimpleName());
         response.setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

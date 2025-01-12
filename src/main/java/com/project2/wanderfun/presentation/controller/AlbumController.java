@@ -23,8 +23,12 @@ public class AlbumController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ResponseDto<List<AlbumDto>>> findAllAlbums() {
-        List<AlbumDto> result = albumUsecase.findAllAlbums();
+    public ResponseEntity<ResponseDto<List<AlbumDto>>> findAllAlbums(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        List<AlbumDto> result = albumUsecase.findAllAlbums(accessToken);
         if(result == null) {
             throw new RequestFailedException("Find all albums failed!");
         }
@@ -69,14 +73,14 @@ public class AlbumController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updateAlbumById(@PathVariable long id,
+    public ResponseEntity<ResponseDto<AlbumDto>> updateAlbumById(@PathVariable long id,
                                                          @RequestBody AlbumCreateDto albumCreateDto) {
         boolean result = albumUsecase.updateAlbumById(id, albumCreateDto);
         if (!result) {
             throw new RequestFailedException("Update album failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<AlbumDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update album successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -89,20 +93,23 @@ public class AlbumController {
             throw new RequestFailedException("Delete album failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<AlbumDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete album successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<?>> deleteAllAlbums() {
-        boolean result = albumUsecase.deleteAllAlbums();
+    public ResponseEntity<ResponseDto<AlbumDto>> deleteAllAlbums(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        boolean result = albumUsecase.deleteAllAlbums(accessToken);
         if (!result) {
             throw new RequestFailedException("Delete all albums failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<AlbumDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all albums successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

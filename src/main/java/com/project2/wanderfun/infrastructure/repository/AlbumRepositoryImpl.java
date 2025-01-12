@@ -48,4 +48,15 @@ public class AlbumRepositoryImpl extends BaseRepositoryImpl<Album, AlbumEntity, 
                 .map(entity -> objectMapper.map(entity, Album.class));
         return album;
     }
+
+    @Override
+    public List<Album> findAllByUser_Id(Long userId) {
+        List<Album> albums = objectMapper.mapList(jpaAlbumRepository.findAllByUser_Id(userId), Album.class);
+        return albums;
+    }
+
+    @Override
+    public void deleteAllByUser_Id(Long userId) {
+        jpaAlbumRepository.deleteAllByUser_Id(userId);
+    }
 }
