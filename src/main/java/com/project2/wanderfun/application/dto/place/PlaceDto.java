@@ -23,6 +23,7 @@ public class PlaceDto {
     private List<Section> description;
     private int checkInPoint;
     private float checkInRange;
+    private int checkInCount;
     private PlaceCategory category;
     private LocalTime timeOpen;
     private LocalTime timeClose;
@@ -129,6 +130,10 @@ public class PlaceDto {
 
     public void setCheckInRange(float checkInRange) {
         this.checkInRange = checkInRange;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
     }
 
     public PlaceCategory getCategory() {

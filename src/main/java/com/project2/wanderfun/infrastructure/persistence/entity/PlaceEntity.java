@@ -26,6 +26,7 @@ public class PlaceEntity {
     private List<SectionEntity> description = new ArrayList<>();
     private int checkInPoint;
     private float checkInRange;
+    private int checkInCount;
     private String category;
     private LocalTime timeOpen;
     private LocalTime timeClose;
@@ -136,6 +137,14 @@ public class PlaceEntity {
 
     public void setCheckInRange(float checkInRange) {
         this.checkInRange = checkInRange;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 
     public String getCategory() {

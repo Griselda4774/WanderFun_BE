@@ -8,16 +8,19 @@ import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
+import com.project2.wanderfun.application.service.CheckInService;
 import com.project2.wanderfun.application.service.FavouritePlaceService;
 import com.project2.wanderfun.application.service.FeedbackService;
 import com.project2.wanderfun.application.service.PlaceService;
 import com.project2.wanderfun.application.util.JwtUtil;
+import com.project2.wanderfun.domain.model.CheckIn;
 import com.project2.wanderfun.domain.model.FavouritePlace;
 import com.project2.wanderfun.domain.model.Feedback;
 import com.project2.wanderfun.domain.model.Place;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,14 +31,17 @@ public class PlaceUsecase {
     private final JwtUtil jwtUtil;
     private final FeedbackService feedbackService;
     private final FavouritePlaceService favouritePlaceService;
+    private final CheckInService checkInService;
 
     @Autowired
-    public PlaceUsecase(PlaceService placeService, ObjectMapper objectMapper, JwtUtil jwtUtil, FeedbackService feedbackService, FavouritePlaceService favouritePlaceService) {
+    public PlaceUsecase(PlaceService placeService, ObjectMapper objectMapper, JwtUtil jwtUtil, FeedbackService feedbackService,
+                        FavouritePlaceService favouritePlaceService, CheckInService checkInService) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.jwtUtil = jwtUtil;
         this.feedbackService = feedbackService;
         this.favouritePlaceService = favouritePlaceService;
+        this.checkInService = checkInService;
     }
 
     public List<PlaceDto> findAllPlaces() {
@@ -159,6 +165,33 @@ public class PlaceUsecase {
                 .filter(validIds::contains)
                 .collect(Collectors.toList());
         favouritePlaceService.deleteByIds(filteredIds);
+        return true;
+    }
+
+    public boolean checkInPlace(Long placeId, String accessToken) {
+        CheckIn checkIn;
+        CheckIn existingCheckIn;
+        Place place = placeService.findById(placeId);
+        try {
+            existingCheckIn = checkInService.findByPlaceId(placeId);
+        } catch (Exception e) {
+            existingCheckIn = null;
+        }
+        if(existingCheckIn != null) {
+            checkIn = existingCheckIn;
+            checkIn.addCount();
+            checkIn.addTotalPoint(place.getCheckInPoint());
+            checkIn.setLastCheckInTime(new Date());
+            checkInService.updateById(checkIn.getId(), checkIn);
+        } else {
+            checkIn = new CheckIn();
+            checkIn.setPlaceId(placeId);
+            checkIn.setUserId(jwtUtil.getIdFromToken(accessToken));
+            checkIn.addCount();
+            checkIn.addTotalPoint(place.getCheckInPoint());
+            checkIn.setLastCheckInTime(new Date());
+            checkInService.create(checkIn);
+        }
         return true;
     }
 }

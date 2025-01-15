@@ -11,6 +11,8 @@ public class CheckIn {
     private Long userId;
 
     public CheckIn() {
+        totalPoint = 0;
+        count = 0;
     }
 
     public Long getId() {
@@ -59,5 +61,13 @@ public class CheckIn {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public void addTotalPoint(int point) {
+        this.totalPoint += point;
+    }
+
+    public void addCount() {
+        this.count++;
     }
 }

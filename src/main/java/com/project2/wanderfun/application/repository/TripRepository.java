@@ -1,6 +1,5 @@
 package com.project2.wanderfun.application.repository;
 
-import com.project2.wanderfun.domain.model.Place;
 import com.project2.wanderfun.domain.model.Trip;
 
 import java.util.List;
