@@ -1,9 +1,14 @@
 package com.project2.wanderfun.presentation.controller;
 
+import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
+import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
+import com.project2.wanderfun.application.dto.feedback.FeedbackDto;
 import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.usecase.PlaceUsecase;
+import com.project2.wanderfun.domain.model.FavouritePlace;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -147,4 +152,49 @@ public class PlaceController {
         response.setMessage("Delete all places successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/favourite")
+    public ResponseEntity<ResponseDto<List<FavouritePlaceDto>>> findAllFavouritePlaces(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        List<FavouritePlaceDto> result = placeUsecase.findAllFavouritePlaces(accessToken);
+        if(result == null) {
+            throw new RequestFailedException("Find all favourite places failed!");
+        }
+
+        ResponseDto<List<FavouritePlaceDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all favourite places successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/feedback/{placeId}")
+    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestBody FeedbackCreateDto feedbackCreateDto, @PathVariable long placeId) {
+        boolean result = placeUsecase.createFeedback(feedbackCreateDto, placeId);
+        if (!result) {
+            throw new RequestFailedException("Create feedback failed!");
+        }
+
+        ResponseDto<FeedbackDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Create feedback successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/favourite/{placeId}")
+    public ResponseEntity<ResponseDto<FavouritePlaceDto>> createFeedback(@PathVariable long placeId, @RequestHeader("Authorization") String accessToken) {
+        boolean result = placeUsecase.addFavouritePlace(placeId, accessToken);
+        if (!result) {
+            throw new RequestFailedException("Add favourite place failed!");
+        }
+
+        ResponseDto<FavouritePlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Add favourite place successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
 }

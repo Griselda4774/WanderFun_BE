@@ -9,6 +9,7 @@ import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.Album;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -43,6 +44,7 @@ public class AlbumUsecase {
         }
 
         album.setUserId(jwtUtil.getIdFromToken(accessToken));
+        album.setLastModified(new Date());
         albumService.create(album);
         return true;
     }
@@ -63,6 +65,7 @@ public class AlbumUsecase {
             }
         }
 
+        album.setLastModified(new Date());
         albumService.updateById(id, album);
         return true;
     }

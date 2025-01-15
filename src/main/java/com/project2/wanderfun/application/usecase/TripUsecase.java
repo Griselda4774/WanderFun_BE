@@ -76,4 +76,5 @@ public class TripUsecase {
         tripService.deleteAllByUserId(jwtUtil.getIdFromToken(accessToken));
         return true;
     }
+
 }

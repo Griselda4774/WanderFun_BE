@@ -12,7 +12,6 @@ public class FeedbackCreateDto {
     private String comment;
     private List<FeedbackImageCreateDto> feedbackImages;
     private Date time;
-    private Long placeId;
 
     public FeedbackCreateDto() {
     }
@@ -63,13 +62,5 @@ public class FeedbackCreateDto {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 }

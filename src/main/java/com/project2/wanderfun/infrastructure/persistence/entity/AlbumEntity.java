@@ -19,7 +19,7 @@ public class AlbumEntity {
     private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AlbumImageEntity> albumImages = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

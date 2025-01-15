@@ -1,10 +1,7 @@
 package com.project2.wanderfun.application.dto.album;
 
 import com.project2.wanderfun.application.dto.albumimage.AlbumImageDto;
-import com.project2.wanderfun.domain.model.AlbumImage;
-import jakarta.validation.constraints.Digits;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class AlbumDto {

@@ -17,6 +17,7 @@ public class UserResponseDto {
     private String gender;
     private String phoneNumber;
     private int point;
+    private int rank;
 
     public UserResponseDto() {
     }
@@ -115,5 +116,13 @@ public class UserResponseDto {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

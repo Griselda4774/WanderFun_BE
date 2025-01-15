@@ -31,6 +31,12 @@ public class ModelMapperConfig {
                         FavouritePlace::setUserId
                 );
 
+        modelMapper.createTypeMap(CheckInEntity.class, CheckIn.class)
+                .addMapping(
+                        src -> src.getUser().getId(),
+                        CheckIn::setUserId
+                );
+
         modelMapper.createTypeMap(FeedbackEntity.class, Feedback.class)
                 .addMapping(
                         src -> src.getPlace().getId(),

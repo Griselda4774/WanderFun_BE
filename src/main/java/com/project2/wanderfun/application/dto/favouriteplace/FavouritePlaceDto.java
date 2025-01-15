@@ -1,35 +1,21 @@
-package com.project2.wanderfun.application.dto.album;
+package com.project2.wanderfun.application.dto.favouriteplace;
 
-import com.project2.wanderfun.application.dto.albumimage.AlbumImageCreateDto;
-
-import java.util.List;
-
-public class AlbumCreateDto {
-    private String name;
-    private String description;
+public class FavouritePlaceDto {
+    private Long id;
     private Long placeId;
     private double placeLongitude;
     private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
-    private List<AlbumImageCreateDto> albumImages;
 
-    public AlbumCreateDto() {};
+    public FavouritePlaceDto() {};
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getPlaceId() {
@@ -70,13 +56,5 @@ public class AlbumCreateDto {
 
     public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
         this.placeCoverImageUrl = placeCoverImageUrl;
-    }
-
-    public List<AlbumImageCreateDto> getAlbumImages() {
-        return albumImages;
-    }
-
-    public void setAlbumImages(List<AlbumImageCreateDto> albumImages) {
-        this.albumImages = albumImages;
     }
 }
