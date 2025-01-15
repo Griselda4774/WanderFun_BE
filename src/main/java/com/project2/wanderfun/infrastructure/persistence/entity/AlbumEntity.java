@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class AlbumEntity {
     private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
+    private Date lastModified;
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AlbumImageEntity> albumImages = new ArrayList<>();
 
@@ -107,5 +109,13 @@ public class AlbumEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }
