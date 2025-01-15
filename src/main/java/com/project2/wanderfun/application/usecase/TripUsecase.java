@@ -23,8 +23,8 @@ public class TripUsecase {
         this.jwtUtil = jwtUtil;
     }
 
-    public List<TripDto> findAllTrips() {
-        return objectMapper.mapList(tripService.findAll(), TripDto.class);
+    public List<TripDto> findAllTrips(String accessToken) {
+        return objectMapper.mapList(tripService.findAllByUserId(jwtUtil.getIdFromToken(accessToken)), TripDto.class);
     }
 
     public TripDto findTripById(Long id) {
@@ -72,8 +72,9 @@ public class TripUsecase {
         return true;
     }
 
-    public boolean deleteAllTrips() {
-        tripService.deleteAll();
+    public boolean deleteAllTrips(String accessToken) {
+        tripService.deleteAllByUserId(jwtUtil.getIdFromToken(accessToken));
         return true;
     }
+
 }

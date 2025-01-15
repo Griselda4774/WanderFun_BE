@@ -1,7 +1,5 @@
 package com.project2.wanderfun.domain.model;
 
-import com.project2.wanderfun.domain.model.enums.UserRole;
-
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +10,12 @@ public class User extends BaseUser{
     private String gender;
     private String phoneNumber;
     private int point;
+    private int rank;
     private boolean isCreatedProfile;
     private List<FavouritePlace> favouritePlaces;
     private List<Trip> trips;
     private List<Album> albums;
+    private List<CheckIn> checkIns;
     public User() {
         this.setCreatedProfile(false);
         this.setPoint(0);
@@ -69,6 +69,22 @@ public class User extends BaseUser{
         this.point = point;
     }
 
+    public void addPoint(int point) {
+        this.point += point;
+    }
+
+    public void subtractPoint(int point) {
+        this.point -= point;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public boolean isCreatedProfile() {
         return isCreatedProfile;
     }
@@ -99,5 +115,13 @@ public class User extends BaseUser{
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
+    }
+
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
     }
 }

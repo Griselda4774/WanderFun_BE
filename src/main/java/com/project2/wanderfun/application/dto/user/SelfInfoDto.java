@@ -1,5 +1,7 @@
 package com.project2.wanderfun.application.dto.user;
 
+import com.project2.wanderfun.application.dto.checkin.CheckInDto;
+import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
 import com.project2.wanderfun.domain.model.Album;
 import com.project2.wanderfun.domain.model.Trip;
 import com.project2.wanderfun.domain.model.enums.UserRole;
@@ -21,9 +23,11 @@ public class SelfInfoDto {
     private String gender;
     private String phoneNumber;
     private int point;
-    private List<String> favoritePlaceIds;
+    private List<FavouritePlaceDto> favoritePlaces;
     private List<Trip> trips;
     private List<Album> albums;
+    private List<CheckInDto> checkIns;
+
 
     public SelfInfoDto() {
     }
@@ -132,12 +136,12 @@ public class SelfInfoDto {
         this.point = point;
     }
 
-    public List<String> getFavoritePlaceIds() {
-        return favoritePlaceIds;
+    public List<FavouritePlaceDto> getFavoritePlaceIds() {
+        return favoritePlaces;
     }
 
-    public void setFavoritePlaceIds(List<String> favoritePlaceIds) {
-        this.favoritePlaceIds = favoritePlaceIds;
+    public void setFavoritePlaceIds(List<FavouritePlaceDto> favoritePlaces) {
+        this.favoritePlaces = favoritePlaces;
     }
 
     public List<Trip> getTrips() {

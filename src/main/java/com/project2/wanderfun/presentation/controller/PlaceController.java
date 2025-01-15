@@ -1,9 +1,15 @@
 package com.project2.wanderfun.presentation.controller;
 
+import com.project2.wanderfun.application.dto.checkin.CheckInDto;
+import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
+import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
+import com.project2.wanderfun.application.dto.feedback.FeedbackDto;
 import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.usecase.PlaceUsecase;
+import com.project2.wanderfun.domain.model.FavouritePlace;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,54 +103,127 @@ public class PlaceController {
 
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
+    public ResponseEntity<ResponseDto<PlaceDto>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
         boolean result = placeUsecase.createPlace(placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Create place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Create place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
+    public ResponseEntity<ResponseDto<PlaceDto>> updatePlaceById(@PathVariable long id, @RequestBody PlaceCreateDto placeCreateDto) {
         boolean result = placeUsecase.updatePlaceById(id, placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Update place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> deletePlaceById(@PathVariable long id) {
+    public ResponseEntity<ResponseDto<PlaceDto>> deletePlaceById(@PathVariable long id) {
         boolean result = placeUsecase.deletePlaceById(id);
         if (!result) {
             throw new RequestFailedException("Delete place failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<?>> deleteAllPlaces() {
+    public ResponseEntity<ResponseDto<PlaceDto>> deleteAllPlaces() {
         boolean result = placeUsecase.deleteAllPlaces();
         if (!result) {
             throw new RequestFailedException("Delete all places failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all places successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @PostMapping("/feedback/{placeId}")
+    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestBody FeedbackCreateDto feedbackCreateDto, @PathVariable long placeId) {
+        boolean result = placeUsecase.createFeedback(feedbackCreateDto, placeId);
+        if (!result) {
+            throw new RequestFailedException("Create feedback failed!");
+        }
+
+        ResponseDto<FeedbackDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Create feedback successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/favourite")
+    public ResponseEntity<ResponseDto<List<FavouritePlaceDto>>> findAllFavouritePlaces(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        List<FavouritePlaceDto> result = placeUsecase.findAllFavouritePlaces(accessToken);
+        if(result == null) {
+            throw new RequestFailedException("Find all favourite places failed!");
+        }
+
+        ResponseDto<List<FavouritePlaceDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all favourite places successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/favourite/{placeId}")
+    public ResponseEntity<ResponseDto<FavouritePlaceDto>> addFavouritePlace(@PathVariable long placeId, @RequestHeader("Authorization") String accessToken) {
+        boolean result = placeUsecase.addFavouritePlace(placeId, accessToken);
+        if (!result) {
+            throw new RequestFailedException("Add favourite place failed!");
+        }
+
+        ResponseDto<FavouritePlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Add favourite place successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/favourite/list")
+    public ResponseEntity<ResponseDto<FavouritePlaceDto>> deleteFavouritePlaceByIds(@RequestBody List<Long> ids, @RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        boolean result = placeUsecase.deleteFavouritePlaceByIds(ids, accessToken);
+        if (!result) {
+            throw new RequestFailedException("Delete favourite place by ids failed!");
+        }
+
+        ResponseDto<FavouritePlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Delete favourite place by ids successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/checkin/{placeId}")
+    public ResponseEntity<ResponseDto<CheckInDto>> checkInPlace(@PathVariable long placeId, @RequestHeader("Authorization") String accessToken) {
+        boolean result = placeUsecase.checkInPlace(placeId, accessToken);
+        if (!result) {
+            throw new RequestFailedException("Check in place failed!");
+        }
+
+        ResponseDto<CheckInDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Check in place successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

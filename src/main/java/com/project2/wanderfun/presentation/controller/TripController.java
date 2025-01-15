@@ -24,8 +24,11 @@ public class TripController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ResponseDto<List<TripDto>>> findAllTrips() {
-        List<TripDto> result = tripUsecase.findAllTrips();
+    public ResponseEntity<ResponseDto<List<TripDto>>> findAllTrips(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        List<TripDto> result = tripUsecase.findAllTrips(accessToken);
         if(result == null) {
             throw new RequestFailedException("Find all trips failed!");
         }
@@ -52,7 +55,7 @@ public class TripController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createTrip(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity<ResponseDto<TripDto>> createTrip(@RequestHeader("Authorization") String accessToken,
                                                      @RequestBody TripCreateDto tripCreateDto) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
@@ -63,47 +66,47 @@ public class TripController {
             throw new RequestFailedException("Create trip failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<TripDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Create trip successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updateTripById(@PathVariable long id,
+    public ResponseEntity<ResponseDto<TripDto>> updateTripById(@PathVariable long id,
                                                          @RequestBody TripCreateDto tripCreateDto) {
         boolean result = tripUsecase.updateTripById(id, tripCreateDto);
         if (!result) {
             throw new RequestFailedException("Update trip failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<TripDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update trip successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> deleteTripById(@PathVariable long id) {
+    public ResponseEntity<ResponseDto<TripDto>> deleteTripById(@PathVariable long id) {
         boolean result = tripUsecase.deleteTripById(id);
         if (!result) {
             throw new RequestFailedException("Delete trip failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<TripDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete trip successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<?>> deleteAllTrips() {
-        boolean result = tripUsecase.deleteAllTrips();
+    public ResponseEntity<ResponseDto<TripDto>> deleteAllTrips(@RequestHeader("Authorization") String accessToken) {
+        boolean result = tripUsecase.deleteAllTrips(accessToken);
         if (!result) {
             throw new RequestFailedException("Delete all trips failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<TripDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all trips successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

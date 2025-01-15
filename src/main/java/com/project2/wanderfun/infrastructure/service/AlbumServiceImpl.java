@@ -8,6 +8,8 @@ import com.project2.wanderfun.domain.model.Album;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AlbumServiceImpl extends BaseServiceImpl<Album> implements AlbumService {
     private final AlbumRepository albumRepository;
@@ -22,5 +24,18 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album> implements AlbumSer
     public Album findByName(String name) {
         return albumRepository.findByName(name)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", Album.class.getSimpleName())));
+    }
+
+    @Override
+    @Transactional
+    public List<Album> findAllByUserId(Long userId) {
+        List<Album> albums = albumRepository.findAllByUser_Id(userId);
+        return albums;
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByUserId(Long userId) {
+        albumRepository.deleteAllByUser_Id(userId);
     }
 }

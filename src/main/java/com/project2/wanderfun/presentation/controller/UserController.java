@@ -66,52 +66,52 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createUser(@RequestBody @Validated UserCreateDto userCreateDto) {
+    public ResponseEntity<ResponseDto<UserResponseDto>> createUser(@RequestBody @Validated UserCreateDto userCreateDto) {
         boolean result = userUsecase.createUser(userCreateDto);
         if (!result) {
             throw new RequestFailedException("Create user failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<UserResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.CREATED.toString());
         response.setMessage("Create user successful!");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> updateUserById(@PathVariable long id, @RequestBody @Validated UserUpdateDto userUpdateDto) {
+    public ResponseEntity<ResponseDto<UserResponseDto>> updateUserById(@PathVariable long id, @RequestBody @Validated UserUpdateDto userUpdateDto) {
         boolean result = userUsecase.updateUserById(id, userUpdateDto);
         if (!result) {
             throw new RequestFailedException("Update user failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<UserResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update user successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<ResponseDto<?>> deleteAllUsers() {
+    public ResponseEntity<ResponseDto<UserResponseDto>> deleteAllUsers() {
         boolean result = userUsecase.deleteAllUsers();
         if (!result) {
             throw new RequestFailedException("Delete all users failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<UserResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all users successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> deleteUserById(@PathVariable long id) {
+    public ResponseEntity<ResponseDto<UserResponseDto>> deleteUserById(@PathVariable long id) {
         boolean result = userUsecase.deleteUserById(id);
         if (!result) {
             throw new RequestFailedException("Delete user failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<UserResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete user successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -136,7 +136,7 @@ public class UserController {
     }
 
     @PutMapping("/self")
-    public ResponseEntity<ResponseDto<?>> updateSelfInfo(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity<ResponseDto<SelfInfoDto>> updateSelfInfo(@RequestHeader("Authorization") String accessToken,
                                                          @RequestBody @Validated ChangeInfoDto changeInfoDto) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
@@ -147,20 +147,20 @@ public class UserController {
             throw new RequestFailedException("Update self info failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<SelfInfoDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update self info successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("self")
-    public ResponseEntity<ResponseDto<?>> deleteSelf(@RequestHeader("Authorization") String accessToken) {
+    public ResponseEntity<ResponseDto<SelfInfoDto>> deleteSelf(@RequestHeader("Authorization") String accessToken) {
         boolean result = userUsecase.deleteSelf(accessToken);
         if (!result) {
             throw new RequestFailedException("Delete self failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<SelfInfoDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete self successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

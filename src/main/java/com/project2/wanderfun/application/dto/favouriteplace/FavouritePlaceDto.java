@@ -1,30 +1,14 @@
-package com.project2.wanderfun.infrastructure.persistence.entity;
+package com.project2.wanderfun.application.dto.favouriteplace;
 
-import jakarta.persistence.*;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-@Entity
-@Table(name = "trip_place")
-public class TripPlaceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FavouritePlaceDto {
     private Long id;
     private Long placeId;
     private double placeLongitude;
     private double placeLatitude;
     private String placeName;
     private String placeCoverImageUrl;
-    private Date startTime;
-    private Date endTime;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tripId")
-    private TripEntity trip;
 
-    public TripPlaceEntity() {
-    }
+    public FavouritePlaceDto() {};
 
     public Long getId() {
         return id;
@@ -72,29 +56,5 @@ public class TripPlaceEntity {
 
     public void setPlaceCoverImageUrl(String placeCoverImageUrl) {
         this.placeCoverImageUrl = placeCoverImageUrl;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public TripEntity getTrip() {
-        return trip;
-    }
-
-    public void setTrip(TripEntity trip) {
-        this.trip = trip;
     }
 }

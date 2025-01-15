@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface PlaceService extends BaseService<Place>{
-    public List<Place> findAllByNameContaining(String name);
-    public Place findByName(String name);
-    public Place findByLongitudeAndLatitude(double longitude, double latitude);
+    List<Place> findAllByNameContaining(String name);
+    Place findByName(String name);
+    Place findByLongitudeAndLatitude(double longitude, double latitude);
 }

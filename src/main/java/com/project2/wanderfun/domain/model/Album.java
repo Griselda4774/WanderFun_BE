@@ -1,6 +1,7 @@
 package com.project2.wanderfun.domain.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class Album {
@@ -13,6 +14,7 @@ public class Album {
     private String placeName;
     private String placeCoverImageUrl;
     private List<AlbumImage> albumImages;
+    private Date lastModified;
     private Long userId;
 
     public Album() {
@@ -88,6 +90,14 @@ public class Album {
 
     public void setAlbumImages(List<AlbumImage> albumImages) {
         this.albumImages = albumImages;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 
     public Long getUserId() {

@@ -31,6 +31,8 @@ public class UserEntity {
     private List<TripEntity> trips = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<AlbumEntity> albums = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<CheckInEntity> checkIns = new ArrayList<>();
 
     public UserEntity() {
     }
@@ -169,5 +171,9 @@ public class UserEntity {
 
     public void setAlbums(List<AlbumEntity> albums) {
         this.albums = albums;
+    }
+
+    public List<CheckInEntity> getCheckIns() {
+        return checkIns;
     }
 }
