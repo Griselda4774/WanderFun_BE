@@ -4,9 +4,7 @@ import com.project2.wanderfun.application.dto.feedbackimage.FeedbackImageDto;
 import com.project2.wanderfun.application.dto.placeimage.PlaceImageDto;
 import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 import com.project2.wanderfun.domain.model.Section;
-import jakarta.validation.constraints.Digits;
 
-import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -134,6 +132,10 @@ public class PlaceDto {
 
     public int getCheckInCount() {
         return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 
     public PlaceCategory getCategory() {

@@ -92,6 +92,10 @@ public class SecurityConfig {
                                 // Cloudinary
                                 .requestMatchers("/wanderfun/cloudinary/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
 
+                                // Leaderboard
+                                .requestMatchers("/wanderfun/leaderboard/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/wanderfun/leaderboard/**").hasAnyRole(UserRole.ADMIN.name())
+
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

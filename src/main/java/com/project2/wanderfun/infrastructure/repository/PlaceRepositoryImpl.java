@@ -62,10 +62,7 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
 
     @Override
     public List<Place> findAllByNameContaining(String name) {
-        return jpaPlaceRepository.findAllByNameContaining(name)
-                .stream()
-                .map(entity -> objectMapper.map(entity, Place.class))
-                .toList();
+        return objectMapper.mapList(jpaPlaceRepository.findAllByNameContaining(name), Place.class);
     }
 
     @Override
@@ -80,5 +77,10 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
         Optional<Place> place = jpaPlaceRepository.findByLongitudeAndLatitude(longitude, latitude)
                 .map(entity -> objectMapper.map(entity, Place.class));
         return place;
+    }
+
+    @Override
+    public List<Place> findByOrderByCheckInCountDesc() {
+        return objectMapper.mapList(jpaPlaceRepository.findByOrderByCheckInCountDesc(), Place.class);
     }
 }

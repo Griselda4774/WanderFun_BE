@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface UserRepository extends BaseRepository<User, Long>{
     Optional<User> findByEmail(String email);
     List<User> findAllByRole(UserRole role);
+    List<User> findByOrderByPointDesc();
 }
