@@ -9,7 +9,7 @@ public class FeedbackDto {
     private Long id;
     private String userName;
     private String userAvatar;
-    private float rating;
+    private int rating;
     private String comment;
     private List<FeedbackImage> feedbackImages;
     private Date time;
@@ -41,11 +41,11 @@ public class FeedbackDto {
         this.userAvatar = userAvatar;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

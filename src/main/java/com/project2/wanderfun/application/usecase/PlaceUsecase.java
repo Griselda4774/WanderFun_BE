@@ -5,18 +5,13 @@ import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
 import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
+import com.project2.wanderfun.application.dto.place.PlaceMiniDto;
 import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
-import com.project2.wanderfun.application.service.CheckInService;
-import com.project2.wanderfun.application.service.FavouritePlaceService;
-import com.project2.wanderfun.application.service.FeedbackService;
-import com.project2.wanderfun.application.service.PlaceService;
+import com.project2.wanderfun.application.service.*;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.CheckIn;
-import com.project2.wanderfun.domain.model.FavouritePlace;
-import com.project2.wanderfun.domain.model.Feedback;
-import com.project2.wanderfun.domain.model.Place;
+import com.project2.wanderfun.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,28 +27,30 @@ public class PlaceUsecase {
     private final FeedbackService feedbackService;
     private final FavouritePlaceService favouritePlaceService;
     private final CheckInService checkInService;
+    private final UserService userService;
 
     @Autowired
     public PlaceUsecase(PlaceService placeService, ObjectMapper objectMapper, JwtUtil jwtUtil, FeedbackService feedbackService,
-                        FavouritePlaceService favouritePlaceService, CheckInService checkInService) {
+                        FavouritePlaceService favouritePlaceService, CheckInService checkInService, UserService userService) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.jwtUtil = jwtUtil;
         this.feedbackService = feedbackService;
         this.favouritePlaceService = favouritePlaceService;
         this.checkInService = checkInService;
+        this.userService = userService;
     }
 
-    public List<PlaceDto> findAllPlaces() {
-        return objectMapper.mapList(placeService.findAll(), PlaceDto.class);
+    public List<PlaceMiniDto> findAllPlaces() {
+        return objectMapper.mapList(placeService.findAll(), PlaceMiniDto.class);
     }
 
     public PlaceDto findPlaceById(Long id) {
         return objectMapper.map(placeService.findById(id), PlaceDto.class);
     }
 
-    public List<PlaceDto> findAllPlacesByNameContaining(String name) {
-        return objectMapper.mapList(placeService.findAllByNameContaining(name), PlaceDto.class);
+    public List<PlaceMiniDto> findAllPlacesByNameContaining(String name) {
+        return objectMapper.mapList(placeService.findAllByNameContaining(name), PlaceMiniDto.class);
     }
 
     public PlaceDto findPlaceByName(String name) {
@@ -93,15 +90,17 @@ public class PlaceUsecase {
         Place place = objectMapper.map(placeCreateDto, Place.class);
 
         Place currentPlace = placeService.findById(id);
-        if (!place.getName().equals(currentPlace.getName())) {
-            Place existingPlace;
-            try {
-                existingPlace = placeService.findByName(place.getName());
-            } catch (Exception e) {
-                existingPlace = null;
-            }
-            if (existingPlace != null) {
-                throw new ObjectAlreadyExistException("This name is already used!");
+        if (place.getName() != null) {
+            if (!place.getName().equals(currentPlace.getName())) {
+                Place existingPlace;
+                try {
+                    existingPlace = placeService.findByName(place.getName());
+                } catch (Exception e) {
+                    existingPlace = null;
+                }
+                if (existingPlace != null) {
+                    throw new ObjectAlreadyExistException("This name is already used!");
+                }
             }
         }
 
@@ -131,10 +130,17 @@ public class PlaceUsecase {
         return true;
     }
 
-    public boolean createFeedback(FeedbackCreateDto feedbackCreateDto, Long placeId) {
+    public boolean createFeedback(FeedbackCreateDto feedbackCreateDto, Long placeId, String accessToken) {
         Feedback feedback = objectMapper.map(feedbackCreateDto, Feedback.class);
         feedback.setPlaceId(placeId);
+        feedback.setTime(new Date());
+        User user = userService.findById(jwtUtil.getIdFromToken(accessToken));
+        feedback.setUserName(user.getLastName() + " " + user.getFirstName());
+        feedback.setUserAvatar(user.getAvatarUrl());
         feedbackService.create(feedback);
+        Place place = placeService.findById(placeId);
+        place.calculateAverageRating();
+        placeService.updateById(placeId, place);
         return true;
     }
 
