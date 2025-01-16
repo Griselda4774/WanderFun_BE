@@ -25,6 +25,12 @@ public class ModelMapperConfig {
                         AlbumImage::setAlbumId
                 );
 
+        modelMapper.createTypeMap(AlbumEntity.class, Album.class)
+                .addMapping(
+                        src -> src.getUser().getId(),
+                        Album::setUserId
+                );
+
         modelMapper.createTypeMap(FavouritePlaceEntity.class, FavouritePlace.class)
                 .addMapping(
                         src -> src.getUser().getId(),
