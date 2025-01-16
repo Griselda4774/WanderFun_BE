@@ -2,8 +2,6 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;

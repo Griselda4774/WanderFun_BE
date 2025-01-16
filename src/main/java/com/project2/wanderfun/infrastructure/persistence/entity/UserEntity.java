@@ -24,6 +24,8 @@ public class UserEntity {
     private String gender;
     private String phoneNumber;
     private int point;
+    @Column(name = "user_rank")
+    private int rank;
     private boolean isCreatedProfile;
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<FavouritePlaceEntity> favoritePlaces = new ArrayList<>();
@@ -139,6 +141,14 @@ public class UserEntity {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public boolean isCreatedProfile() {

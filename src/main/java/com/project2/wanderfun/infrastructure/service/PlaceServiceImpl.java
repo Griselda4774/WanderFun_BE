@@ -46,4 +46,10 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
         return placeRepository.findByLongitudeAndLatitude(longitude, latitude)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", Place.class.getSimpleName())));
     }
+
+    @Override
+    @Transactional
+    public List<Place> findByOrderByCheckInCountDesc() {
+        return placeRepository.findByOrderByCheckInCountDesc();
+    }
 }

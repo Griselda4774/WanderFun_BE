@@ -34,4 +34,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public List<User> findAllByRole(UserRole role) {
         return userRepository.findAllByRole(role);
     }
+
+    @Override
+    @Transactional
+    public List<User> findByOrderByPointDesc() {
+        return userRepository.findByOrderByPointDesc();
+    }
 }

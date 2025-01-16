@@ -48,6 +48,11 @@ public class BaseServiceImpl<Model> implements BaseService<Model> {
     }
 
     @Override
+    public void updateAll(List<Model> models) {
+        baseRepository.saveAll(models);
+    }
+
+    @Override
     public void deleteById(Long id) {
         baseRepository.deleteById(id);
     }

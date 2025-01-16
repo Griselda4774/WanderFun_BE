@@ -23,6 +23,7 @@ public class SelfInfoDto {
     private String gender;
     private String phoneNumber;
     private int point;
+    private int rank;
     private List<FavouritePlaceDto> favoritePlaces;
     private List<Trip> trips;
     private List<Album> albums;
@@ -134,6 +135,14 @@ public class SelfInfoDto {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public List<FavouritePlaceDto> getFavoritePlaceIds() {

@@ -4,6 +4,7 @@ import com.project2.wanderfun.application.dto.ResponseDto;
 import com.project2.wanderfun.application.dto.album.AlbumCreateDto;
 import com.project2.wanderfun.application.dto.album.AlbumDto;
 import com.project2.wanderfun.application.usecase.AlbumUsecase;
+import com.project2.wanderfun.domain.model.Album;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class AlbumController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> createAlbum(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity<ResponseDto<AlbumDto>> createAlbum(@RequestHeader("Authorization") String accessToken,
                                                      @RequestBody AlbumCreateDto albumCreateDto) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
@@ -66,7 +67,7 @@ public class AlbumController {
             throw new RequestFailedException("Create album failed!");
         }
 
-        ResponseDto<?> response = new ResponseDto<>();
+        ResponseDto<AlbumDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Create album successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -87,7 +88,7 @@ public class AlbumController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto<?>> deleteAlbumById(@PathVariable long id) {
+    public ResponseEntity<ResponseDto<AlbumDto>> deleteAlbumById(@PathVariable long id) {
         boolean result = albumUsecase.deleteAlbumById(id);
         if (!result) {
             throw new RequestFailedException("Delete album failed!");

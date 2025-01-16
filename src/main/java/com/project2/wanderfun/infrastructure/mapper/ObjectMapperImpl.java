@@ -37,11 +37,30 @@ public class ObjectMapperImpl implements ObjectMapper {
         if (source == null || destination == null) {
             throw new IllegalArgumentException("Source and destination objects must not be null");
         }
+        Object destinationIdValue = null;
+
+        try {
+            Field idField = destination.getClass().getDeclaredField("id");
+            idField.setAccessible(true);
+            destinationIdValue = idField.get(destination);
+        } catch (NoSuchFieldException | IllegalAccessException e) {}
+
         modelMapper.map(source, destination);
+
+        if (destinationIdValue != null) {
+            try {
+                Field idField = destination.getClass().getDeclaredField("id");
+                idField.setAccessible(true);
+                idField.set(destination, destinationIdValue);
+            } catch (NoSuchFieldException | IllegalAccessException e) {}
+        }
 
         for (Field field : source.getClass().getDeclaredFields()) {
             try {
                 field.setAccessible(true);
+                if ("id".equals(field.getName())) {
+                    continue;
+                }
                 if (field.get(source) instanceof List) {
                     Field destField = destination.getClass().getDeclaredField(field.getName());
                     destField.setAccessible(true);
@@ -56,8 +75,7 @@ public class ObjectMapperImpl implements ObjectMapper {
                             modelMapper
                     );
                 }
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 

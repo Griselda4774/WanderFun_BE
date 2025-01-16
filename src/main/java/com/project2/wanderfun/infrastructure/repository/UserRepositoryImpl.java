@@ -32,4 +32,9 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
     public List<User> findAllByRole(UserRole role) {
         return objectMapper.mapList(jpaUserRepository.findAllByRole(role.name()), User.class);
     }
+
+    @Override
+    public List<User> findByOrderByPointDesc() {
+        return objectMapper.mapList(jpaUserRepository.findByRoleOrderByPointDesc(UserRole.USER.name()), User.class);
+    }
 }

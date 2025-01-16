@@ -74,11 +74,17 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private boolean isPublicApi(HttpServletRequest request) {
         final List<Pair<String, String>> publicApis = Arrays.asList(
+                // Auth endpoints
                 Pair.of("POST", "/wanderfun/auth/register"),
                 Pair.of("POST", "/wanderfun/auth/login"),
                 Pair.of("POST", "/wanderfun/auth/admin/register"),
 
+                // Place endpoints
                 Pair.of("GET", "/wanderfun/place"),
+
+                // Leaderboard endpoints
+                Pair.of("GET", "/wanderfun/leaderboard/user"),
+                Pair.of("GET", "/wanderfun/leaderboard/place"),
 
                 // Swagger endpoints
                 Pair.of("GET", "/swagger-ui"),
