@@ -19,6 +19,7 @@ public class Place {
     private int checkInPoint;
     private float checkInRange;
     private int checkInCount;
+    private float averageRating;
     private PlaceCategory category;
     private LocalTime timeOpen;
     private LocalTime timeClose;
@@ -133,6 +134,27 @@ public class Place {
 
     public void setCheckInCount(int checkInCount) {
         this.checkInCount = checkInCount;
+    }
+
+    public float getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(float averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public void calculateAverageRating() {
+        float sum = 0;
+        for (Feedback feedback : feedbacks) {
+            sum += feedback.getRating();
+        }
+        if (!feedbacks.isEmpty()) {
+            averageRating = Math.round((sum / feedbacks.size()) * 100) / 100.0f;
+        } else {
+            averageRating = 0;
+        }
+
     }
 
     public PlaceCategory getCategory() {

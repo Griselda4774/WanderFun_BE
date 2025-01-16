@@ -7,6 +7,7 @@ import com.project2.wanderfun.application.dto.feedback.FeedbackDto;
 import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
+import com.project2.wanderfun.application.dto.place.PlaceMiniDto;
 import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.usecase.PlaceUsecase;
 import com.project2.wanderfun.domain.model.FavouritePlace;
@@ -31,13 +32,13 @@ public class PlaceController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ResponseDto<List<PlaceDto>>> findAllPlaces() {
-        List<PlaceDto> result = placeUsecase.findAllPlaces();
+    public ResponseEntity<ResponseDto<List<PlaceMiniDto>>> findAllPlaces() {
+        List<PlaceMiniDto> result = placeUsecase.findAllPlaces();
         if(result == null) {
             throw new RequestFailedException("Find all places failed!");
         }
 
-        ResponseDto<List<PlaceDto>> response = new ResponseDto<>();
+        ResponseDto<List<PlaceMiniDto>> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Find all places successful!");
         response.setData(result);
@@ -45,13 +46,13 @@ public class PlaceController {
     }
 
     @GetMapping("/search/{name}")
-    public ResponseEntity<ResponseDto<List<PlaceDto>>> findAllPlacesByNameContaining(@PathVariable String name) {
-        List<PlaceDto> result = placeUsecase.findAllPlacesByNameContaining(name);
+    public ResponseEntity<ResponseDto<List<PlaceMiniDto>>> findAllPlacesByNameContaining(@PathVariable String name) {
+        List<PlaceMiniDto> result = placeUsecase.findAllPlacesByNameContaining(name);
         if (result == null) {
             throw new RequestFailedException("Find all places by name containing failed!");
         }
 
-        ResponseDto<List<PlaceDto>> response = new ResponseDto<>();
+        ResponseDto<List<PlaceMiniDto>> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Find all places by name containing successful!");
         response.setData(result);
@@ -155,8 +156,13 @@ public class PlaceController {
     }
 
     @PostMapping("/feedback/{placeId}")
-    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestBody FeedbackCreateDto feedbackCreateDto, @PathVariable long placeId) {
-        boolean result = placeUsecase.createFeedback(feedbackCreateDto, placeId);
+    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestHeader("Authorization") String accessToken,
+                                                                   @RequestBody FeedbackCreateDto feedbackCreateDto,
+                                                                   @PathVariable long placeId) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        boolean result = placeUsecase.createFeedback(feedbackCreateDto, placeId, accessToken);
         if (!result) {
             throw new RequestFailedException("Create feedback failed!");
         }

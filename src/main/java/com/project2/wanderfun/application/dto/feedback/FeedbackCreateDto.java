@@ -2,41 +2,21 @@ package com.project2.wanderfun.application.dto.feedback;
 
 import com.project2.wanderfun.application.dto.feedbackimage.FeedbackImageCreateDto;
 
-import java.util.Date;
 import java.util.List;
 
 public class FeedbackCreateDto {
-    private String userName;
-    private String userAvatar;
-    private float rating;
+    private int rating;
     private String comment;
     private List<FeedbackImageCreateDto> feedbackImages;
-    private Date time;
 
     public FeedbackCreateDto() {
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserAvatar() {
-        return userAvatar;
-    }
-
-    public void setUserAvatar(String userAvatar) {
-        this.userAvatar = userAvatar;
-    }
-
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -54,13 +34,5 @@ public class FeedbackCreateDto {
 
     public void setFeedbackImages(List<FeedbackImageCreateDto> feedbackImages) {
         this.feedbackImages = feedbackImages;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
     }
 }

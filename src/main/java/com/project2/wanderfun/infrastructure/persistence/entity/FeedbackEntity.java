@@ -15,7 +15,7 @@ public class FeedbackEntity {
     private Long id;
     private String userName;
     private String userAvatar;
-    private float rating;
+    private int rating;
     private String comment;
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FeedbackImageEntity> feedbackImages = new ArrayList<>();
@@ -51,11 +51,11 @@ public class FeedbackEntity {
         this.userAvatar = userAvatar;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
