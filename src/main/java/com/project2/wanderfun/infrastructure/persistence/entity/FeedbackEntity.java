@@ -2,10 +2,7 @@ package com.project2.wanderfun.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "feedback")
@@ -17,8 +14,8 @@ public class FeedbackEntity {
     private String userAvatar;
     private int rating;
     private String comment;
-    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FeedbackImageEntity> feedbackImages = new ArrayList<>();
+    private String imageUrl;
+    private String imagePublicId;
     private Date time;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "placeId")
@@ -67,12 +64,20 @@ public class FeedbackEntity {
         this.comment = comment;
     }
 
-    public List<FeedbackImageEntity> getFeedbackImages() {
-        return feedbackImages;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setFeedbackImages(List<FeedbackImageEntity> feedbackImages) {
-        this.feedbackImages = feedbackImages;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Date getTime() {

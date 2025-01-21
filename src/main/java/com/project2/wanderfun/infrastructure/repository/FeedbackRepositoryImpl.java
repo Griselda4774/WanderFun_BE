@@ -27,12 +27,6 @@ public class FeedbackRepositoryImpl extends BaseRepositoryImpl<Feedback, Feedbac
     public Feedback save(Feedback feedback) {
         FeedbackEntity feedbackEntity = objectMapper.map(feedback, FeedbackEntity.class);
 
-        if (feedback.getFeedbackImages() != null || feedback.getFeedbackImages().size() > 0) {
-            List<FeedbackImageEntity> feedbackImageEntities = objectMapper.mapList(feedback.getFeedbackImages(), FeedbackImageEntity.class);
-            feedbackImageEntities.forEach(feedbackImageEntity -> feedbackImageEntity.setFeedback(feedbackEntity));
-            feedbackEntity.setFeedbackImages(feedbackImageEntities);
-        }
-
        PlaceEntity placeEntity = jpaPlaceRepository.findById(feedback.getPlaceId()).get();
         feedbackEntity.setPlace(placeEntity);
 

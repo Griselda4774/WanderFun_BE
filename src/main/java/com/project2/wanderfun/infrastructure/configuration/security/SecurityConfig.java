@@ -81,7 +81,13 @@ public class SecurityConfig {
 
                                 // Place
                                 .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()
-                                .requestMatchers("/wanderfun/place/**").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST,"/wanderfun/place").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT,"/wanderfun/place/").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE,"/wanderfun/place/").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE,"/wanderfun/place").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers("/wanderfun/place/feedback/**").hasAnyRole(UserRole.USER.name())
+                                .requestMatchers("/wanderfun/place/favourite/**").hasAnyRole(UserRole.USER.name())
+                                .requestMatchers("/wanderfun/place/checkin/**").hasAnyRole(UserRole.USER.name())
 
                                 // Trip
                                 .requestMatchers("/wanderfun/trip/**").hasAnyRole(UserRole.USER.name())

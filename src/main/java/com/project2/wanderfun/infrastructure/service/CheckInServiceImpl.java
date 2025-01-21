@@ -5,7 +5,6 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.CheckInRepository;
 import com.project2.wanderfun.application.service.CheckInService;
 import com.project2.wanderfun.domain.model.CheckIn;
-import com.project2.wanderfun.domain.model.Trip;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +28,8 @@ public class CheckInServiceImpl extends BaseServiceImpl<CheckIn> implements Chec
 
     @Override
     @Transactional
-    public CheckIn findByPlaceId(Long placeId) {
-        return checkInRepository.findByPlaceId(placeId)
+    public CheckIn findByPlaceIdAndUserId(Long placeId, Long userId) {
+        return checkInRepository.findByPlaceIdAndUser_Id(placeId, userId)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", CheckIn.class.getSimpleName())));
     }
 }

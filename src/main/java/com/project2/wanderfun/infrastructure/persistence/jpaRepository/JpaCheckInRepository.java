@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface JpaCheckInRepository extends JpaBaseRepository<CheckInEntity, Long> {
     List<CheckInEntity> findAllByUser_Id(Long userId);
-    Optional<CheckInEntity> findByPlaceId(Long placeId);
+    Optional<CheckInEntity> findByPlaceIdAndUser_Id(Long placeId, Long userId);
 }

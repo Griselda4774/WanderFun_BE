@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CheckInRepository extends BaseRepository<CheckIn, Long> {
     List<CheckIn> findAllByUser_Id(Long userId);
-    Optional<CheckIn> findByPlaceId(Long placeId);
+    Optional<CheckIn> findByPlaceIdAndUser_Id(Long placeId, Long userId);
 }

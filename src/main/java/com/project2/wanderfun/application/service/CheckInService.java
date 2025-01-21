@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CheckInService extends BaseService<CheckIn>{
     List<CheckIn> findAllByUserId(Long userId);
-    CheckIn findByPlaceId(Long placeId);
+    CheckIn findByPlaceIdAndUserId(Long placeId, Long userId);
 }
