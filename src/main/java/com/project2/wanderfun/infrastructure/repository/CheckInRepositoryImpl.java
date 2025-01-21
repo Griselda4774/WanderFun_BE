@@ -44,8 +44,8 @@ public class CheckInRepositoryImpl extends BaseRepositoryImpl<CheckIn, CheckInEn
     }
 
     @Override
-    public Optional<CheckIn> findByPlaceId(Long placeId) {
-        Optional<CheckIn> checkIn = jpaCheckInRepository.findByPlaceId(placeId)
+    public Optional<CheckIn> findByPlaceIdAndUser_Id(Long placeId, Long userId) {
+        Optional<CheckIn> checkIn = jpaCheckInRepository.findByPlaceIdAndUser_Id(placeId, userId)
                 .map(entity -> objectMapper.map(entity, CheckIn.class));
         return checkIn;
     }

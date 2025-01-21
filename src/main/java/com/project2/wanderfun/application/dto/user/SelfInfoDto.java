@@ -168,4 +168,12 @@ public class SelfInfoDto {
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
+
+    public List<CheckInDto> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckInDto> checkIns) {
+        this.checkIns = checkIns;
+    }
 }

@@ -9,7 +9,8 @@ public class Feedback {
     private String userAvatar;
     private int rating;
     private String comment;
-    private List<FeedbackImage> feedbackImages;
+    private String imageUrl;
+    private String imagePublicId;
     private Date time;
     private Long placeId;
 
@@ -56,12 +57,20 @@ public class Feedback {
         this.comment = comment;
     }
 
-    public List<FeedbackImage> getFeedbackImages() {
-        return feedbackImages;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setFeedbackImages(List<FeedbackImage> feedbackImages) {
-        this.feedbackImages = feedbackImages;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
     }
 
     public Date getTime() {

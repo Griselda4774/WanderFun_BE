@@ -1,5 +1,6 @@
 package com.project2.wanderfun.application.usecase;
 
+import com.project2.wanderfun.application.dto.checkin.CheckInDto;
 import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceCreateDto;
 import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
 import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
@@ -174,12 +175,16 @@ public class PlaceUsecase {
         return true;
     }
 
+    public CheckInDto findCheckInByPlaceIdAndUserId(Long placeId, String accessToken) {
+        return objectMapper.map(checkInService.findByPlaceIdAndUserId(placeId, jwtUtil.getIdFromToken(accessToken)), CheckInDto.class);
+    }
+
     public boolean checkInPlace(Long placeId, String accessToken) {
         CheckIn checkIn;
         CheckIn existingCheckIn;
         Place place = placeService.findById(placeId);
         try {
-            existingCheckIn = checkInService.findByPlaceId(placeId);
+            existingCheckIn = checkInService.findByPlaceIdAndUserId(placeId, jwtUtil.getIdFromToken(accessToken));
         } catch (Exception e) {
             existingCheckIn = null;
         }

@@ -219,8 +219,30 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/checkin/{placeId}")
+    public ResponseEntity<ResponseDto<CheckInDto>> findCheckInByPlaceIdAndUserId(@PathVariable long placeId, @RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        CheckInDto result = placeUsecase.findCheckInByPlaceIdAndUserId(placeId, accessToken);
+        if (result == null) {
+            throw new RequestFailedException("Find check in place failed!");
+        }
+
+        ResponseDto<CheckInDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find check in place successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PostMapping("/checkin/{placeId}")
     public ResponseEntity<ResponseDto<CheckInDto>> checkInPlace(@PathVariable long placeId, @RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
         boolean result = placeUsecase.checkInPlace(placeId, accessToken);
         if (!result) {
             throw new RequestFailedException("Check in place failed!");

@@ -20,7 +20,7 @@ public class JwtUtilImpl implements JwtUtil{
     private static final Logger log = LoggerFactory.getLogger(JwtUtilImpl.class);
     private final String JWT_SECRET = "f228fedebbc31e1011102c8473bb5e674d6deff16d48b7cc9f3df02bb727251948ae8177f874eda0985339a855991ed5a5414fe6dbe752a37d560e320b3d2841";
     private final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(JWT_SECRET));
-    private static final long ACCESS_EXPIRATION_TIME = 30 * 60 * 1000;
+    private static final long ACCESS_EXPIRATION_TIME = 300 * 60 * 1000;
     private static final long REFRESH_EXPIRATION_TIME = 2 * 24 * 60 * 60 * 1000;
 
     @Override
