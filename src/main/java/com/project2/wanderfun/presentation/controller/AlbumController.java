@@ -74,7 +74,7 @@ public class AlbumController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<AlbumDto>> updateAlbumById(@PathVariable long id,
+    public ResponseEntity<ResponseDto<AlbumDto>> updateAlbumById(@PathVariable Long id,
                                                          @RequestBody AlbumCreateDto albumCreateDto) {
         boolean result = albumUsecase.updateAlbumById(id, albumCreateDto);
         if (!result) {
