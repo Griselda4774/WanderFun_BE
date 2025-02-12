@@ -42,6 +42,8 @@ public class TripUsecase {
             throw new ObjectAlreadyExistException("This name is already used!");
         }
 
+        trip.setStartTime(trip.getTripPlaces().get(0).getStartTime());
+        trip.setEndTime(trip.getTripPlaces().get(trip.getTripPlaces().size() - 1).getEndTime());
         trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.create(trip);
         return true;
@@ -63,6 +65,8 @@ public class TripUsecase {
             }
         }
 
+        trip.setStartTime(trip.getTripPlaces().get(0).getStartTime());
+        trip.setEndTime(trip.getTripPlaces().get(trip.getTripPlaces().size() - 1).getEndTime());
         tripService.updateById(id, trip);
         return true;
     }

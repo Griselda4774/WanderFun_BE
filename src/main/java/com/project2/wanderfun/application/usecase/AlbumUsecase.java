@@ -7,6 +7,7 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.AlbumService;
 import com.project2.wanderfun.application.util.JwtUtil;
 import com.project2.wanderfun.domain.model.Album;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ public class AlbumUsecase {
     private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
 
+    @Autowired
     public AlbumUsecase(AlbumService albumService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
         this.albumService = albumService;
         this.objectMapper = objectMapper;

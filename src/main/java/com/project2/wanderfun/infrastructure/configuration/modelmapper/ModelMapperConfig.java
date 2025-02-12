@@ -4,11 +4,19 @@ import com.project2.wanderfun.domain.model.*;
 import com.project2.wanderfun.infrastructure.persistence.entity.*;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 @Configuration
 public class ModelMapperConfig {
+//    private static final String CUSTOM_DATE_FORMAT = "MMM dd, yyyy hh:mm:ss a";
+
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
@@ -18,6 +26,23 @@ public class ModelMapperConfig {
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
                 .setPropertyCondition(context -> context.getSource() != null)
                 .setMatchingStrategy(MatchingStrategies.STRICT);
+
+//        Converter<String, Date> stringToDateConverter = context -> {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat(CUSTOM_DATE_FORMAT, Locale.ENGLISH);
+//            try {
+//                return dateFormat.parse(context.getSource());
+//            } catch (ParseException e) {
+//                throw new RuntimeException("Failed to parse date: " + context.getSource(), e);
+//            }
+//        };
+//
+//        Converter<Date, String> dateToStringConverter = context -> {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat(CUSTOM_DATE_FORMAT, Locale.ENGLISH);
+//            return dateFormat.format(context.getSource());
+//        };
+//
+//        modelMapper.addConverter(stringToDateConverter);
+//        modelMapper.addConverter(dateToStringConverter);
 
         modelMapper.createTypeMap(AlbumImageEntity.class, AlbumImage.class)
                 .addMapping(

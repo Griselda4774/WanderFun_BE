@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,8 @@ public class TripEntity {
     private String name;
     private String imageUrl;
     private String imagePublicId;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Date startTime;
+    private Date endTime;
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripPlaceEntity> tripPlaces = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,19 +59,19 @@ public class TripEntity {
         this.imagePublicId = imagePublicId;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
