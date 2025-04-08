@@ -4,7 +4,7 @@ import com.project2.wanderfun.application.exception.ObjectNotFoundException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.CheckInRepository;
 import com.project2.wanderfun.application.service.CheckInService;
-import com.project2.wanderfun.domain.model.CheckIn;
+import com.project2.wanderfun.domain.model.users.CheckIn;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

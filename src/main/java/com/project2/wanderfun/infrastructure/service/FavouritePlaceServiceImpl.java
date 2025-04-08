@@ -3,7 +3,7 @@ package com.project2.wanderfun.infrastructure.service;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.FavouritePlaceRepository;
 import com.project2.wanderfun.application.service.FavouritePlaceService;
-import com.project2.wanderfun.domain.model.FavouritePlace;
+import com.project2.wanderfun.domain.model.users.FavouritePlace;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

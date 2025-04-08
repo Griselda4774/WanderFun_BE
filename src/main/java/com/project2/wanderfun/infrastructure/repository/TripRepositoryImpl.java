@@ -2,7 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.TripRepository;
-import com.project2.wanderfun.domain.model.Trip;
+import com.project2.wanderfun.domain.model.trips.Trip;
 import com.project2.wanderfun.infrastructure.persistence.entity.*;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaTripRepository;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaUserRepository;

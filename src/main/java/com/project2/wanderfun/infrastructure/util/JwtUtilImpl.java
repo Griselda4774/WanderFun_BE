@@ -2,14 +2,13 @@ package com.project2.wanderfun.infrastructure.util;
 
 import com.project2.wanderfun.application.exception.GenerateTokenFailedException;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.enums.TokenType;
+import com.project2.wanderfun.domain.model.tokens.TokenType;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;

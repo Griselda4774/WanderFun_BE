@@ -6,7 +6,7 @@ import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.AlbumService;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.Album;
+import com.project2.wanderfun.domain.model.albums.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.repository;
 
-import com.project2.wanderfun.domain.model.Feedback;
+import com.project2.wanderfun.domain.model.places.Feedback;
 
 import java.util.List;
 

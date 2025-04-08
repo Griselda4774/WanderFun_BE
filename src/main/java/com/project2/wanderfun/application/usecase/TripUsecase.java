@@ -6,7 +6,7 @@ import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.TripService;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.Trip;
+import com.project2.wanderfun.domain.model.trips.Trip;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

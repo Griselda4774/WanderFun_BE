@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.dto.user;
 
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.users.UserRole;
 
 import java.util.Date;
 

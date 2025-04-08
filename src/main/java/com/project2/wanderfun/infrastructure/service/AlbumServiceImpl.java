@@ -4,7 +4,7 @@ import com.project2.wanderfun.application.exception.ObjectNotFoundException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.AlbumRepository;
 import com.project2.wanderfun.application.service.AlbumService;
-import com.project2.wanderfun.domain.model.Album;
+import com.project2.wanderfun.domain.model.albums.Album;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

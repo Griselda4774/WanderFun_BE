@@ -2,7 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.FavouritePlaceRepository;
-import com.project2.wanderfun.domain.model.FavouritePlace;
+import com.project2.wanderfun.domain.model.users.FavouritePlace;
 import com.project2.wanderfun.infrastructure.persistence.entity.FavouritePlaceEntity;
 import com.project2.wanderfun.infrastructure.persistence.entity.UserEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaFavouritePlaceRepository;

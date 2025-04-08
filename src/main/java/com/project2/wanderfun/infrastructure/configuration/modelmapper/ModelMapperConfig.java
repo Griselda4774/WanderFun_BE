@@ -1,17 +1,15 @@
 package com.project2.wanderfun.infrastructure.configuration.modelmapper;
 
 import com.project2.wanderfun.domain.model.*;
+import com.project2.wanderfun.domain.model.places.Feedback;
+import com.project2.wanderfun.domain.model.places.Section;
+import com.project2.wanderfun.domain.model.trips.Trip;
+import com.project2.wanderfun.domain.model.trips.TripPlace;
 import com.project2.wanderfun.infrastructure.persistence.entity.*;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 @Configuration
 public class ModelMapperConfig {
@@ -44,66 +42,68 @@ public class ModelMapperConfig {
 //        modelMapper.addConverter(stringToDateConverter);
 //        modelMapper.addConverter(dateToStringConverter);
 
-        modelMapper.createTypeMap(AlbumImageEntity.class, AlbumImage.class)
-                .addMapping(
-                        src -> src.getAlbum().getId(),
-                        AlbumImage::setAlbumId
-                );
-
-        modelMapper.createTypeMap(AlbumEntity.class, Album.class)
-                .addMapping(
-                        src -> src.getUser().getId(),
-                        Album::setUserId
-                );
-
-        modelMapper.createTypeMap(FavouritePlaceEntity.class, FavouritePlace.class)
-                .addMapping(
-                        src -> src.getUser().getId(),
-                        FavouritePlace::setUserId
-                );
-
-        modelMapper.createTypeMap(CheckInEntity.class, CheckIn.class)
-                .addMapping(
-                        src -> src.getUser().getId(),
-                        CheckIn::setUserId
-                );
-
-        modelMapper.createTypeMap(FeedbackEntity.class, Feedback.class)
-                .addMapping(
-                        src -> src.getPlace().getId(),
-                        Feedback::setPlaceId
-                );
-
-        modelMapper.createTypeMap(FeedbackImageEntity.class, FeedbackImage.class)
-                .addMapping(
-                        src -> src.getFeedback().getId(),
-                        FeedbackImage::setFeedbackId
-                );
 
 
-        modelMapper.createTypeMap(PlaceImageEntity.class, PlaceImage.class)
-                .addMapping(
-                        src -> src.getPlace().getId(),
-                        PlaceImage::setPlaceId
-                );
-
-        modelMapper.createTypeMap(SectionEntity.class, Section.class)
-                .addMapping(
-                        src -> src.getPlace().getId(),
-                        Section::setPlaceId
-                );
-
-        modelMapper.createTypeMap(TripEntity.class, Trip.class)
-                .addMapping(
-                        src -> src.getUser().getId(),
-                        Trip::setUserId
-                );
-
-        modelMapper.createTypeMap(TripPlaceEntity.class, TripPlace.class)
-                .addMapping(
-                        src -> src.getTrip().getId(),
-                        TripPlace::setTripId
-                );
+//        modelMapper.createTypeMap(AlbumImageEntity.class, AlbumImage.class)
+//                .addMapping(
+//                        src -> src.getAlbum().getId(),
+//                        AlbumImage::setAlbumId
+//                );
+//
+//        modelMapper.createTypeMap(AlbumEntity.class, Album.class)
+//                .addMapping(
+//                        src -> src.getUser().getId(),
+//                        Album::setUserId
+//                );
+//
+//        modelMapper.createTypeMap(FavouritePlaceEntity.class, FavouritePlace.class)
+//                .addMapping(
+//                        src -> src.getUser().getId(),
+//                        FavouritePlace::setUserId
+//                );
+//
+//        modelMapper.createTypeMap(CheckInEntity.class, CheckIn.class)
+//                .addMapping(
+//                        src -> src.getUser().getId(),
+//                        CheckIn::setUserId
+//                );
+//
+//        modelMapper.createTypeMap(FeedbackEntity.class, Feedback.class)
+//                .addMapping(
+//                        src -> src.getPlace().getId(),
+//                        Feedback::setPlaceId
+//                );
+//
+//        modelMapper.createTypeMap(FeedbackImageEntity.class, FeedbackImage.class)
+//                .addMapping(
+//                        src -> src.getFeedback().getId(),
+//                        FeedbackImage::setFeedbackId
+//                );
+//
+//
+//        modelMapper.createTypeMap(PlaceImageEntity.class, PlaceImage.class)
+//                .addMapping(
+//                        src -> src.getPlace().getId(),
+//                        PlaceImage::setPlaceId
+//                );
+//
+//        modelMapper.createTypeMap(SectionEntity.class, Section.class)
+//                .addMapping(
+//                        src -> src.getPlace().getId(),
+//                        Section::setPlaceId
+//                );
+//
+//        modelMapper.createTypeMap(TripEntity.class, Trip.class)
+//                .addMapping(
+//                        src -> src.getUser().getId(),
+//                        Trip::setUserId
+//                );
+//
+//        modelMapper.createTypeMap(TripPlaceEntity.class, TripPlace.class)
+//                .addMapping(
+//                        src -> src.getTrip().getId(),
+//                        TripPlace::setTripId
+//                );
 
         return modelMapper;
     }

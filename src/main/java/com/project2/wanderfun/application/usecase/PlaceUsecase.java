@@ -1,18 +1,20 @@
 package com.project2.wanderfun.application.usecase;
 
 import com.project2.wanderfun.application.dto.checkin.CheckInDto;
-import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceCreateDto;
 import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
 import com.project2.wanderfun.application.dto.feedback.FeedbackCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.place.PlaceMiniDto;
-import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.exception.ObjectAlreadyExistException;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.service.*;
 import com.project2.wanderfun.application.util.JwtUtil;
-import com.project2.wanderfun.domain.model.*;
+import com.project2.wanderfun.domain.model.places.Feedback;
+import com.project2.wanderfun.domain.model.places.Place;
+import com.project2.wanderfun.domain.model.users.CheckIn;
+import com.project2.wanderfun.domain.model.users.FavouritePlace;
+import com.project2.wanderfun.domain.model.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

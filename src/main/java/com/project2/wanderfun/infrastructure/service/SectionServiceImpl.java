@@ -3,8 +3,7 @@ package com.project2.wanderfun.infrastructure.service;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.SectionRepository;
 import com.project2.wanderfun.application.service.SectionService;
-import com.project2.wanderfun.domain.model.Section;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project2.wanderfun.domain.model.places.Section;
 import org.springframework.stereotype.Service;
 
 @Service

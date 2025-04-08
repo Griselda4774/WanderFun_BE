@@ -8,16 +8,13 @@ import com.project2.wanderfun.application.dto.place.PlaceCreateDto;
 import com.project2.wanderfun.application.dto.place.PlaceDto;
 import com.project2.wanderfun.application.dto.ResponseDto;
 import com.project2.wanderfun.application.dto.place.PlaceMiniDto;
-import com.project2.wanderfun.application.dto.trip.TripDto;
 import com.project2.wanderfun.application.usecase.PlaceUsecase;
-import com.project2.wanderfun.domain.model.FavouritePlace;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin

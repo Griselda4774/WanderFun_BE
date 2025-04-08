@@ -2,9 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.PlaceRepository;
-import com.project2.wanderfun.application.repository.SectionRepository;
-import com.project2.wanderfun.domain.model.Place;
-import com.project2.wanderfun.domain.model.Section;
+import com.project2.wanderfun.domain.model.places.Place;
 import com.project2.wanderfun.infrastructure.persistence.entity.PlaceEntity;
 import com.project2.wanderfun.infrastructure.persistence.entity.PlaceImageEntity;
 import com.project2.wanderfun.infrastructure.persistence.entity.SectionEntity;
@@ -12,7 +10,6 @@ import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaPlaceR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

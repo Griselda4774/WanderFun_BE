@@ -1,6 +1,6 @@
 package com.project2.wanderfun.infrastructure.security;
 
-import com.project2.wanderfun.domain.model.User;
+import com.project2.wanderfun.domain.model.users.User;
 import com.project2.wanderfun.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

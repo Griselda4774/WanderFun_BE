@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.repository;
 
-import com.project2.wanderfun.domain.model.RefreshToken;
+import com.project2.wanderfun.domain.model.tokens.RefreshToken;
 
 import java.util.Optional;
 

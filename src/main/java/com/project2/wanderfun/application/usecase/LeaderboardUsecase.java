@@ -7,10 +7,10 @@ import com.project2.wanderfun.application.service.LeaderboardPlaceService;
 import com.project2.wanderfun.application.service.LeaderboardUserService;
 import com.project2.wanderfun.application.service.PlaceService;
 import com.project2.wanderfun.application.service.UserService;
-import com.project2.wanderfun.domain.model.LeaderboardPlace;
-import com.project2.wanderfun.domain.model.LeaderboardUser;
-import com.project2.wanderfun.domain.model.Place;
-import com.project2.wanderfun.domain.model.User;
+import com.project2.wanderfun.domain.model.statistics.LeaderboardPlace;
+import com.project2.wanderfun.domain.model.statistics.LeaderboardUser;
+import com.project2.wanderfun.domain.model.places.Place;
+import com.project2.wanderfun.domain.model.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

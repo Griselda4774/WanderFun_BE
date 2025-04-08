@@ -1,4 +1,4 @@
-package com.project2.wanderfun.domain.model.enums;
+package com.project2.wanderfun.domain.model.tokens;
 
 public enum TokenType {
     ACCESS_TOKEN,

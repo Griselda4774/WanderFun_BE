@@ -2,9 +2,9 @@ package com.project2.wanderfun.application.dto.user;
 
 import com.project2.wanderfun.application.dto.checkin.CheckInDto;
 import com.project2.wanderfun.application.dto.favouriteplace.FavouritePlaceDto;
-import com.project2.wanderfun.domain.model.Album;
-import com.project2.wanderfun.domain.model.Trip;
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.albums.Album;
+import com.project2.wanderfun.domain.model.trips.Trip;
+import com.project2.wanderfun.domain.model.users.UserRole;
 
 import java.util.Date;
 import java.util.List;

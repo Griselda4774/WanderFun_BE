@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.dto.auth;
 
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.users.UserRole;
 
 public class LoginResponseDto {
     private Long id;

@@ -4,7 +4,6 @@ import com.project2.wanderfun.application.dto.ResponseDto;
 import com.project2.wanderfun.application.dto.album.AlbumCreateDto;
 import com.project2.wanderfun.application.dto.album.AlbumDto;
 import com.project2.wanderfun.application.usecase.AlbumUsecase;
-import com.project2.wanderfun.domain.model.Album;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

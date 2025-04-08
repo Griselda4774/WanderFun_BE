@@ -3,7 +3,7 @@ package com.project2.wanderfun.infrastructure.service;
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.FeedbackRepository;
 import com.project2.wanderfun.application.service.FeedbackService;
-import com.project2.wanderfun.domain.model.Feedback;
+import com.project2.wanderfun.domain.model.places.Feedback;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

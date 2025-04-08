@@ -2,8 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.CheckInRepository;
-import com.project2.wanderfun.domain.model.CheckIn;
-import com.project2.wanderfun.domain.model.Trip;
+import com.project2.wanderfun.domain.model.users.CheckIn;
 import com.project2.wanderfun.infrastructure.persistence.entity.CheckInEntity;
 import com.project2.wanderfun.infrastructure.persistence.entity.UserEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaCheckInRepository;

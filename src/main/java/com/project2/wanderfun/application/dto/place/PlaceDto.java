@@ -2,8 +2,7 @@ package com.project2.wanderfun.application.dto.place;
 
 import com.project2.wanderfun.application.dto.feedback.FeedbackDto;
 import com.project2.wanderfun.application.dto.placeimage.PlaceImageDto;
-import com.project2.wanderfun.domain.model.enums.PlaceCategory;
-import com.project2.wanderfun.domain.model.Section;
+import com.project2.wanderfun.domain.model.places.Section;
 
 import java.time.LocalTime;
 import java.util.List;

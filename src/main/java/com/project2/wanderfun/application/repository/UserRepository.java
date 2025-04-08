@@ -1,7 +1,7 @@
 package com.project2.wanderfun.application.repository;
 
-import com.project2.wanderfun.domain.model.User;
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.users.User;
+import com.project2.wanderfun.domain.model.users.UserRole;
 
 import java.util.List;
 import java.util.Optional;

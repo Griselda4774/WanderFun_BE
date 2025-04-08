@@ -2,7 +2,6 @@ package com.project2.wanderfun.application.dto.place;
 
 import com.project2.wanderfun.application.dto.placeimage.PlaceImageCreateDto;
 import com.project2.wanderfun.application.dto.section.SectionCreateDto;
-import com.project2.wanderfun.domain.model.enums.PlaceCategory;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalTime;

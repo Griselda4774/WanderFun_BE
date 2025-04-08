@@ -2,7 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.LeaderboardUserRepository;
-import com.project2.wanderfun.domain.model.LeaderboardUser;
+import com.project2.wanderfun.domain.model.statistics.LeaderboardUser;
 import com.project2.wanderfun.infrastructure.persistence.entity.LeaderboardUserEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaLeaderboardUserRepository;
 import org.springframework.stereotype.Repository;

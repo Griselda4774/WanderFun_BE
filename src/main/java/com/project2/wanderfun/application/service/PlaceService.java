@@ -1,8 +1,7 @@
 package com.project2.wanderfun.application.service;
 
-import com.project2.wanderfun.domain.model.Place;
+import com.project2.wanderfun.domain.model.places.Place;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface PlaceService extends BaseService<Place>{

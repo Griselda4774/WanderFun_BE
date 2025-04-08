@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.service;
 
-import com.project2.wanderfun.domain.model.Album;
+import com.project2.wanderfun.domain.model.albums.Album;
 
 import java.util.List;
 

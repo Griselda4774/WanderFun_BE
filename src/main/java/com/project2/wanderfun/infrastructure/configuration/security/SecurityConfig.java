@@ -1,6 +1,6 @@
 package com.project2.wanderfun.infrastructure.configuration.security;
 
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.users.UserRole;
 import com.project2.wanderfun.infrastructure.filter.JwtFilter;
 import com.project2.wanderfun.infrastructure.security.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

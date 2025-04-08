@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.util;
 
-import com.project2.wanderfun.domain.model.enums.TokenType;
+import com.project2.wanderfun.domain.model.tokens.TokenType;
 
 import java.util.Date;
 

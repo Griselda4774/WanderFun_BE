@@ -1,9 +1,7 @@
 package com.project2.wanderfun.application.dto.trip;
 
 import com.project2.wanderfun.application.dto.tripplace.TripPlaceCreateDto;
-import com.project2.wanderfun.domain.model.TripPlace;
 
-import java.util.Date;
 import java.util.List;
 
 public class TripCreateDto {

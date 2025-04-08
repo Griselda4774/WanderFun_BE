@@ -5,14 +5,11 @@ import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.PlaceRepository;
 import com.project2.wanderfun.application.repository.SectionRepository;
 import com.project2.wanderfun.application.service.PlaceService;
-import com.project2.wanderfun.domain.model.Place;
-import com.project2.wanderfun.domain.model.Section;
-import com.project2.wanderfun.infrastructure.persistence.entity.SectionEntity;
+import com.project2.wanderfun.domain.model.places.Place;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service

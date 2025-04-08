@@ -1,12 +1,9 @@
 package com.project2.wanderfun.presentation.controller;
 
 import com.project2.wanderfun.application.dto.ResponseDto;
-import com.project2.wanderfun.application.dto.album.AlbumCreateDto;
-import com.project2.wanderfun.application.dto.album.AlbumDto;
 import com.project2.wanderfun.application.dto.leaderboard.LeaderboardPlaceDto;
 import com.project2.wanderfun.application.dto.leaderboard.LeaderboardUserDto;
 import com.project2.wanderfun.application.usecase.LeaderboardUsecase;
-import com.project2.wanderfun.domain.model.LeaderboardPlace;
 import com.project2.wanderfun.presentation.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

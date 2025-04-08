@@ -2,7 +2,7 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.FeedbackRepository;
-import com.project2.wanderfun.domain.model.Feedback;
+import com.project2.wanderfun.domain.model.places.Feedback;
 import com.project2.wanderfun.infrastructure.persistence.entity.*;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaFeedbackRepository;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaPlaceRepository;

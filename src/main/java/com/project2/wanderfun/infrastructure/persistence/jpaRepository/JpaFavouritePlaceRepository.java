@@ -1,6 +1,5 @@
 package com.project2.wanderfun.infrastructure.persistence.jpaRepository;
 
-import com.project2.wanderfun.domain.model.FavouritePlace;
 import com.project2.wanderfun.infrastructure.persistence.entity.FavouritePlaceEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.service;
 
-import com.project2.wanderfun.domain.model.CheckIn;
+import com.project2.wanderfun.domain.model.users.CheckIn;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package com.project2.wanderfun.infrastructure.repository;
 
 import com.project2.wanderfun.application.mapper.ObjectMapper;
 import com.project2.wanderfun.application.repository.UserRepository;
-import com.project2.wanderfun.domain.model.User;
-import com.project2.wanderfun.domain.model.enums.UserRole;
+import com.project2.wanderfun.domain.model.users.User;
+import com.project2.wanderfun.domain.model.users.UserRole;
 import com.project2.wanderfun.infrastructure.persistence.entity.UserEntity;
 import com.project2.wanderfun.infrastructure.persistence.jpaRepository.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

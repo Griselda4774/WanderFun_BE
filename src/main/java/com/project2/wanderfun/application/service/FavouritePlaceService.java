@@ -1,6 +1,6 @@
 package com.project2.wanderfun.application.service;
 
-import com.project2.wanderfun.domain.model.FavouritePlace;
+import com.project2.wanderfun.domain.model.users.FavouritePlace;
 
 import java.util.List;
 
