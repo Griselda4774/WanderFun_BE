@@ -1,23 +1,23 @@
 package com.wanderfun.infrastructurelayer.security;
 
-import com.wanderfun.domainlayer.model.users.User;
-import com.wanderfun.applicationlayer.service.UserService;
+import com.wanderfun.applicationlayer.service.account.AccountService;
+import com.wanderfun.domainlayer.model.accounts.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
-    private final UserService userService;
+    private final AccountService accountService;
 
     @Autowired
-    public UserDetailServiceImpl(UserService userService) {
-        this.userService = userService;
+    public UserDetailServiceImpl(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Override
     public CustomUserDetails loadUserByUsername(String username){
-        User user = userService.findByEmail(username);
-        return new CustomUserDetails(user);
+        Account account = accountService.findByEmail(username);
+        return new CustomUserDetails(account);
     }
 }

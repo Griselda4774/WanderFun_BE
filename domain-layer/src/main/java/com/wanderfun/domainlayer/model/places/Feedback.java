@@ -6,10 +6,11 @@ import java.time.LocalTime;
 
 public class Feedback {
     private Long id;
-    private User user;
+    private User author;
     private float rating;
-    private String comment;
+    private String content;
     private LocalTime createAt;
+    private LocalTime updateAt;
     private Long placeDetailId;
 
     public Feedback() {

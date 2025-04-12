@@ -6,9 +6,10 @@ import java.time.LocalTime;
 
 public class Comment {
     private Long id;
-    private User user;
+    private User author;
     private String content;
     private LocalTime createAt;
+    private LocalTime updateAt;
     private Long postId;
     private Long parentId;
     private int like;

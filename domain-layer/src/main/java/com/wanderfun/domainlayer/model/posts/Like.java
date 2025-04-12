@@ -4,7 +4,7 @@ import com.wanderfun.domainlayer.model.users.User;
 
 public class Like {
     private Long id;
-    private User user;
+    private User author;
     private Long targetId;
     private LikeTargetType targetType;
 

@@ -1,6 +1,4 @@
-package com.wanderfun.infrastructurelayer.persistence.jpaRepository;
-
-import com.wanderfun.infrastructurelayer.persistence.entity.LeaderboardUserEntity;
-
-public interface JpaLeaderboardUserRepository extends JpaBaseRepository<LeaderboardUserEntity, Long> {
-}
+//package com.wanderfun.infrastructurelayer.persistence.jpaRepository;
+//
+//public interface JpaLeaderboardUserRepository extends JpaBaseRepository<LeaderboardUserEntity, Long> {
+//}

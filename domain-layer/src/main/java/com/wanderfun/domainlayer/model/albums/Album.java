@@ -8,6 +8,7 @@ public class Album {
     private Long id;
     private String name;
     private String description;
+    private LocalTime createdAt;
     private LocalTime updatedAt;
     private Place place;
     private Long userId;

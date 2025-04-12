@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.security;
 
+import com.wanderfun.domainlayer.model.accounts.Account;
 import com.wanderfun.domainlayer.model.users.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,33 +10,33 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
-    User user;
+    Account account;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(Account account) {
+        this.account = account;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole().name().toUpperCase()));
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + account.getRole().name().toUpperCase()));
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return account.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return account.getEmail();
     }
 
     @Override

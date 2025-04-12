@@ -11,6 +11,9 @@ public class Place {
     private String name;
     private PlaceCategory category;
     private Image coverImage;
+    private float rating;
+    private int totalRating;
+    private int totalFeedback;
 
     public Place() {
     }

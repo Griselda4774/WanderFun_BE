@@ -1,6 +1,6 @@
 package com.wanderfun.domainlayer.repository;
 
-import com.wanderfun.domainlayer.model.users.FavouritePlace;
+import com.wanderfun.domainlayer.model.favoriteplaces.FavouritePlace;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
 CREATE TABLE `administrative_regions` (
-                                          `id` bigint PRIMARY KEY,
-                                          `name` varchar(255),
-                                          `name_en` varchar(255),
-                                          `code_name` varchar(255),
-                                          `code_name_en` varchar(255)
+                                          `id` INTEGER NOT NULL PRIMARY KEY,
+                                          `name` VARCHAR(255) NOT NULL,
+                                          `name_en` VARCHAR(255) NOT NULL,
+                                          `code_name` VARCHAR(255) NULL,
+                                          `code_name_en` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `administrative_units` (
-                                        `id` bigint PRIMARY KEY,
+                                        `id` INTEGER PRIMARY KEY ,
                                         `full_name` varchar(255),
                                         `full_name_en` varchar(255),
                                         `short_name` varchar(255),

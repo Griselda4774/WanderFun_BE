@@ -1,10 +1,10 @@
 package com.wanderfun.infrastructurelayer.configuration.modelmapper;
 
-import com.wanderfun.domainlayer.model.*;
-import com.wanderfun.domainlayer.model.places.Feedback;
-import com.wanderfun.domainlayer.model.places.Section;
-import com.wanderfun.domainlayer.model.trips.Trip;
-import com.wanderfun.domainlayer.model.trips.TripPlace;
+//import com.wanderfun.domainlayer.model.*;
+//import com.wanderfun.domainlayer.model.places.Feedback;
+//import com.wanderfun.domainlayer.model.places.Section;
+//import com.wanderfun.domainlayer.model.trips.Trip;
+//import com.wanderfun.domainlayer.model.trips.TripPlace;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
