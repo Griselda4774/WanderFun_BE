@@ -4,7 +4,7 @@
 //import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 //import com.wanderfun.domainlayer.repository.PlaceRepository;
 //import com.wanderfun.domainlayer.repository.SectionRepository;
-//import com.wanderfun.applicationlayer.service.PlaceService;
+//import com.wanderfun.applicationlayer.service.place.PlaceService;
 //import com.wanderfun.domainlayer.model.places.Place;
 //import jakarta.transaction.Transactional;
 //import org.springframework.beans.factory.annotation.Autowired;
