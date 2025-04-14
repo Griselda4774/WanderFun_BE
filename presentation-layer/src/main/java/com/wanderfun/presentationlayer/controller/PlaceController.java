@@ -1,4 +1,4 @@
-//package com.wanderfun.presentationlayer.controller;
+package com.wanderfun.presentationlayer.controller;
 //
 //import com.wanderfun.applicationlayer.dto.checkin.CheckInDto;
 //import com.wanderfun.applicationlayer.dto.favouriteplace.FavouritePlaceDto;
@@ -9,25 +9,28 @@
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
 //import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
-//import com.wanderfun.presentationlayer.exception.RequestFailedException;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//@CrossOrigin
-//@RestController
-//@RequestMapping("wanderfun/place")
-//public class PlaceController {
-//    private final PlaceUsecase placeUsecase;
-//
-//    @Autowired
-//    public PlaceController(PlaceUsecase placeUsecase) {
-//        this.placeUsecase = placeUsecase;
-//    }
-//
+import com.wanderfun.applicationlayer.dto.PlaceCategoryCreateDto;
+import com.wanderfun.applicationlayer.dto.ResponseDto;
+import com.wanderfun.domainlayer.model.places.PlaceCategory;
+import com.wanderfun.presentationlayer.exception.RequestFailedException;
+import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping("wanderfun/place")
+public class PlaceController {
+    private final PlaceUsecase placeUsecase;
+
+    @Autowired
+    public PlaceController(PlaceUsecase placeUsecase) {
+        this.placeUsecase = placeUsecase;
+    }
+
 //    @GetMapping("")
 //    public ResponseEntity<ResponseDto<List<PlaceMiniDto>>> findAllPlaces() {
 //        List<PlaceMiniDto> result = placeUsecase.findAllPlaces();
@@ -250,5 +253,81 @@
 //        response.setMessage("Check in place successful!");
 //        return ResponseEntity.status(HttpStatus.OK).body(response);
 //    }
-//
-//}
+
+    @GetMapping("/categories")
+    public ResponseEntity<ResponseDto<List<PlaceCategory>>> findAllPlaceCategory(@RequestHeader("Authorization") String accessToken){
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+        List<PlaceCategory> result = placeUsecase.findAllPlaceCategory();
+
+        if(result == null) {
+            throw new RequestFailedException("Find all favourite places failed!");
+        }
+
+        ResponseDto<List<PlaceCategory>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all place categories successfully!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/categories/{placeCategoryId}")
+    public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable long placeCategoryId) {
+        PlaceCategory result = placeUsecase.findPlaceCategoryById(placeCategoryId);
+        if (result == null) {
+            throw new RequestFailedException("Find place category failed!");
+        }
+
+        ResponseDto<PlaceCategory> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find place category successfully!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/categories/{placeCategoryId}")
+    public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@PathVariable long placeCategoryId,
+                                                                       @RequestHeader("Authorization") String accessToken,
+                                                                       @RequestBody PlaceCategoryCreateDto placeCategoryCreateDto){
+        boolean result = placeUsecase.createPlaceCategory(placeCategoryCreateDto);
+
+        if (!result) {
+            throw new RequestFailedException("Create place category failed!");
+        }
+
+        ResponseDto<PlaceCategory> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Create place category successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PutMapping("/categories/{placeCategoryId}")
+    public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Long placeCategoryId,
+                                                                          @RequestBody PlaceCategoryCreateDto placeCategoryCreateDto) {
+        boolean result = placeUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryCreateDto);
+
+        if (!result) {
+            throw new RequestFailedException("Update place category failed!");
+        }
+
+        ResponseDto<PlaceCategory> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Update place category successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/categories/{placeCategoryId}")
+    public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Long placeCategoryId) {
+        boolean result = placeUsecase.deletePlaceCategoryById(placeCategoryId);
+
+        if (!result) {
+            throw new RequestFailedException("Delete place category failed!");
+        }
+
+        ResponseDto<PlaceCategory> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Delete place category successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+}
