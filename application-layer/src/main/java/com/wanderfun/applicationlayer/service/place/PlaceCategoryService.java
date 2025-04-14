@@ -1,5 +1,8 @@
 package com.wanderfun.applicationlayer.service.place;
 
-public interface PlaceCategoryService {
+import com.wanderfun.applicationlayer.service.BaseService;
+import com.wanderfun.domainlayer.model.places.PlaceCategory;
+
+public interface PlaceCategoryService extends BaseService<PlaceCategory> {
 
 }

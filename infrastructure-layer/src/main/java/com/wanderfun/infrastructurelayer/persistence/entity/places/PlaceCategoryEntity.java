@@ -1,20 +1,27 @@
 package com.wanderfun.infrastructurelayer.persistence.entity.places;
 
-import com.wanderfun.infrastructurelayer.persistence.entity.images.Image;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "place_categories")
-public class PlaceCategory {
-    @Id
-    private Integer id;
-    private String name;
-    private String nameEn;
-    private Image iconImage;
+public class PlaceCategoryEntity {
 
-    public PlaceCategory() {}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 255)
+    private String name;
+
+    @Column(name = "name_en", nullable = false, length = 255)
+    private String nameEn;
+
+    @Column(name = "icon_image_id")
+    private Long iconImageId;
+
+    public PlaceCategoryEntity() {
+    }
 
     public Integer getId() {
         return id;
@@ -40,11 +47,11 @@ public class PlaceCategory {
         this.nameEn = nameEn;
     }
 
-    public Image getIconImage() {
-        return iconImage;
+    public Long getIconImageId() {
+        return iconImageId;
     }
 
-    public void setIconImage(Image iconImage) {
-        this.iconImage = iconImage;
+    public void setIconImageId(Long iconImageId) {
+        this.iconImageId = iconImageId;
     }
 }
