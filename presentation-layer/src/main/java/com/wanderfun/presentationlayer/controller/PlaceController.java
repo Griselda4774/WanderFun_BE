@@ -9,7 +9,7 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
 //import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
-import com.wanderfun.applicationlayer.dto.PlaceCategoryCreateDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceCategoryCreateDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;

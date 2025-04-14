@@ -1,4 +1,4 @@
-package com.wanderfun.domainlayer.model.tokens;
+package com.wanderfun.domainlayer.model.auths;
 
 public enum TokenType {
     ACCESS_TOKEN,

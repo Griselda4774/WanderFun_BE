@@ -1,4 +1,4 @@
-package com.wanderfun.domainlayer.model.accounts;
+package com.wanderfun.domainlayer.model.auths;
 
 import com.wanderfun.domainlayer.model.users.UserRole;
 

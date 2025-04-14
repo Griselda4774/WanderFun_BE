@@ -1,9 +1,9 @@
-package com.wanderfun.infrastructurelayer.service.accounts;
+package com.wanderfun.infrastructurelayer.service.auths;
 
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-import com.wanderfun.applicationlayer.service.account.AccountService;
-import com.wanderfun.domainlayer.model.accounts.Account;
+import com.wanderfun.applicationlayer.service.auths.AccountService;
+import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.repository.account.AccountRepository;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;
 import jakarta.transaction.Transactional;
