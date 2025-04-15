@@ -1,6 +1,8 @@
 package com.wanderfun.applicationlayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.places.PlaceCategoryCreateDto;
+
+import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
+
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 
 import java.util.List;
@@ -11,9 +13,9 @@ public interface PlaceUsecase {
 
     PlaceCategory findPlaceCategoryById(Long id);
 
-    boolean createPlaceCategory(PlaceCategoryCreateDto placeCategoryCreateDto);
+    boolean createPlaceCategory(PlaceCategoryDto placeCategoryDto);
 
-    boolean updatePlaceCategoryById(Long id, PlaceCategoryCreateDto placeCategoryCreateDto);
+    boolean updatePlaceCategoryById(Long id, PlaceCategoryDto placeCategoryDto);
 
     boolean deletePlaceCategoryById(Long id);
 }

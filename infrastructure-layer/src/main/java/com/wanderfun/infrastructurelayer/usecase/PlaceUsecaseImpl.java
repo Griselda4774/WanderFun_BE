@@ -1,6 +1,7 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.places.PlaceCategoryCreateDto;
+
+import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.place.PlaceCategoryService;
@@ -34,8 +35,8 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
 
 
     @Override
-    public boolean createPlaceCategory(PlaceCategoryCreateDto placeCategoryCreateDto) throws ObjectAlreadyExistException {
-        PlaceCategory placeCategory = objectMapper.map(placeCategoryCreateDto ,PlaceCategory.class);
+    public boolean createPlaceCategory(PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
+        PlaceCategory placeCategory = objectMapper.map(placeCategoryDto,PlaceCategory.class);
         PlaceCategory existingPlaceCategory = null;
         try {
             existingPlaceCategory = placeCategoryService.findByName(placeCategory.getName());
@@ -50,8 +51,8 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean updatePlaceCategoryById(Long id, PlaceCategoryCreateDto placeCategoryCreateDto) throws ObjectAlreadyExistException {
-        PlaceCategory placeCategory = objectMapper.map(placeCategoryCreateDto, PlaceCategory.class);
+    public boolean updatePlaceCategoryById(Long id, PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
+        PlaceCategory placeCategory = objectMapper.map(placeCategoryDto, PlaceCategory.class);
 
         PlaceCategory currentPlaceCategory = placeCategoryService.findById(id);
         if (!placeCategory.getName().equals(currentPlaceCategory.getName())) {

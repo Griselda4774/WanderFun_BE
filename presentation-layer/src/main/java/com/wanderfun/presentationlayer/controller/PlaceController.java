@@ -9,7 +9,7 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
 //import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
-import com.wanderfun.applicationlayer.dto.places.PlaceCategoryCreateDto;
+import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
@@ -289,8 +289,8 @@ public class PlaceController {
     @PostMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@PathVariable long placeCategoryId,
                                                                        @RequestHeader("Authorization") String accessToken,
-                                                                       @RequestBody PlaceCategoryCreateDto placeCategoryCreateDto){
-        boolean result = placeUsecase.createPlaceCategory(placeCategoryCreateDto);
+                                                                       @RequestBody PlaceCategoryDto placeCategoryDto){
+        boolean result = placeUsecase.createPlaceCategory(placeCategoryDto);
 
         if (!result) {
             throw new RequestFailedException("Create place category failed!");
@@ -304,8 +304,8 @@ public class PlaceController {
 
     @PutMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Long placeCategoryId,
-                                                                          @RequestBody PlaceCategoryCreateDto placeCategoryCreateDto) {
-        boolean result = placeUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryCreateDto);
+                                                                          @RequestBody PlaceCategoryDto placeCategoryDto) {
+        boolean result = placeUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
 
         if (!result) {
             throw new RequestFailedException("Update place category failed!");
