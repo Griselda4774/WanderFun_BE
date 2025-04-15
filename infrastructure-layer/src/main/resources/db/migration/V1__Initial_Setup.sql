@@ -11,8 +11,10 @@ CREATE TABLE accounts (
 );
 
 CREATE TABLE refresh_tokens (
-    account_id BIGINT NOT NULL PRIMARY KEY,
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    account_id BIGINT NOT NULL,
     token VARCHAR(512) NOT NULL UNIQUE,
+    PRIMARY KEY (id),
     FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
 

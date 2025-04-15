@@ -7,12 +7,11 @@ import jakarta.persistence.*;
 public class RefreshTokenEntity {
 
     @Id
-    @Column(name = "account_id")
-    private Long accountId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_id", nullable = false)
     private AccountEntity account;
 
     @Column(name = "token", nullable = false, unique = true, length = 512)
@@ -20,12 +19,12 @@ public class RefreshTokenEntity {
 
     public RefreshTokenEntity() {}
 
-    public Long getAccountId() {
-        return accountId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AccountEntity getAccount() {

@@ -1,10 +1,19 @@
 package com.wanderfun.domainlayer.model.auths;
 
 public class RefreshToken {
+    private Long id;
     private String token;
     private Long AccountId;
 
     public RefreshToken() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getToken() {

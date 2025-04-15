@@ -61,6 +61,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
             throw new ObjectAlreadyExistException(String.format("Email already used!"));
         }
 
+        account.setRole(UserRole.USER);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountService.create(account);
         return true;
