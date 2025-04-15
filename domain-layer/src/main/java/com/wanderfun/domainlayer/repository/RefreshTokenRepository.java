@@ -1,10 +1,10 @@
 package com.wanderfun.domainlayer.repository;
 
-import com.wanderfun.domainlayer.model.tokens.RefreshToken;
+import com.wanderfun.domainlayer.model.auths.RefreshToken;
 
 import java.util.Optional;
 
 public interface RefreshTokenRepository extends BaseRepository<RefreshToken, Long> {
-    Optional<RefreshToken> findByEmail(String email);
-    void deleteByEmail(String email);
+    Optional<RefreshToken> findByAccountId(Long accountId);
+    void deleteByAccountId(Long accountId);
 }

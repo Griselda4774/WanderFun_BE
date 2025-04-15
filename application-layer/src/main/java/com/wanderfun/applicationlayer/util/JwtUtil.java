@@ -1,6 +1,6 @@
 package com.wanderfun.applicationlayer.util;
 
-import com.wanderfun.domainlayer.model.tokens.TokenType;
+import com.wanderfun.domainlayer.model.auths.TokenType;
 
 import java.util.Date;
 

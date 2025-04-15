@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.persistence.entity.accounts;
+package com.wanderfun.infrastructurelayer.persistence.entity.auths;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

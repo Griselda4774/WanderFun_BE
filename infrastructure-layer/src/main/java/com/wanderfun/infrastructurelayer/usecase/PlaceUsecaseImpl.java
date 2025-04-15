@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
+
 import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;

@@ -1,7 +1,6 @@
 package com.wanderfun.infrastructurelayer.security;
 
-import com.wanderfun.domainlayer.model.accounts.Account;
-import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.domainlayer.model.auths.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
