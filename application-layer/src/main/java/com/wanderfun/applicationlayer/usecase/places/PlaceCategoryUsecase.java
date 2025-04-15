@@ -1,7 +1,8 @@
-package com.wanderfun.applicationlayer.usecase.places;
+package com.wanderfun.applicationlayer.usecase;
 
 
-import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
+
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 
 import java.util.List;
