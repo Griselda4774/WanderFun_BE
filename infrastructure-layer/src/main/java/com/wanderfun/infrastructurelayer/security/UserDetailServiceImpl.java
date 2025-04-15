@@ -12,6 +12,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     public UserDetailServiceImpl(AccountService accountService) {
+        super();
         this.accountService = accountService;
     }
 

@@ -34,15 +34,15 @@ public class SecurityConfig {
         this.userDetailService = userDetailService;
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails swaggerUser = User.withUsername("admin")
-                .password(passwordEncoder.encode("12345678"))
-                .roles("SWAGGER")
-                .build();
-
-        return new InMemoryUserDetailsManager(swaggerUser);
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
+//        UserDetails swaggerUser = User.withUsername("admin")
+//                .password(passwordEncoder.encode("12345678"))
+//                .roles("SWAGGER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(swaggerUser);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,7 +51,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(
-            UserDetailServiceImpl userDetailService,
             PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailService);
