@@ -9,7 +9,7 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
 //import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
-import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
@@ -286,9 +286,8 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@PathVariable long placeCategoryId,
-                                                                       @RequestHeader("Authorization") String accessToken,
+    @PostMapping("/categories")
+    public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@RequestHeader("Authorization") String accessToken,
                                                                        @RequestBody PlaceCategoryDto placeCategoryDto){
         boolean result = placeUsecase.createPlaceCategory(placeCategoryDto);
 
