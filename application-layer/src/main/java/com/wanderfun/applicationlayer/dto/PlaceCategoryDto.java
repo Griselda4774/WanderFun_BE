@@ -2,11 +2,16 @@ package com.wanderfun.applicationlayer.dto;
 
 import com.wanderfun.domainlayer.model.images.Image;
 
-public class PlaceCategoryCreateDto {
+public class PlaceCategoryDto {
 
+    private Integer id;
     private String name;
     private String nameEn;
     private Image iconImage;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
