@@ -17,12 +17,6 @@ public class ImageEntity {
     @Column(name = "image_public_id", length = 1024)
     private String imagePublicId;
 
-    @Column(name = "target_type", nullable = false, length = 20)
-    private String targetType;
-
-    @Column(name = "target_id", nullable = false)
-    private Long targetId;
-
     public ImageEntity() {
     }
 
@@ -32,22 +26,6 @@ public class ImageEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(Long targetId) {
-        this.targetId = targetId;
-    }
-
-    public String getTargetType() {
-        return targetType;
-    }
-
-    public void setTargetType(String targetType) {
-        this.targetType = targetType;
     }
 
     public String getImagePublicId() {

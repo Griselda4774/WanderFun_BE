@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RefreshTokenServiceImpl extends BaseServiceImpl<RefreshToken> implements RefreshTokenService {
+public class RefreshTokenServiceImpl extends BaseServiceImpl<RefreshToken, Long> implements RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Autowired

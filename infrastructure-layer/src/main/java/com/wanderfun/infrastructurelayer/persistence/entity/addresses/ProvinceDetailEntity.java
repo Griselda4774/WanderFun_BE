@@ -10,7 +10,7 @@ public class ProvinceDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "province_code", nullable = false)
     private ProvinceEntity province;
 

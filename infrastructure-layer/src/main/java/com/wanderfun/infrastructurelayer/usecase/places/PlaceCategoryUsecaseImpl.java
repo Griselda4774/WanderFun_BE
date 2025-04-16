@@ -1,11 +1,11 @@
-package com.wanderfun.infrastructurelayer.usecase;
+package com.wanderfun.infrastructurelayer.usecase.places;
 
 
 import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.place.PlaceCategoryService;
-import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PlaceUsecaseImpl implements PlaceUsecase {
+public class PlaceCategoryUsecaseImpl implements PlaceCategoryUsecase {
      private final PlaceCategoryService placeCategoryService;
      private final ObjectMapper objectMapper;
 
      @Autowired
-     public PlaceUsecaseImpl(PlaceCategoryService placeCategoryService, ObjectMapper objectMapper) {
+     public PlaceCategoryUsecaseImpl(PlaceCategoryService placeCategoryService, ObjectMapper objectMapper) {
          this.placeCategoryService = placeCategoryService;
          this.objectMapper = objectMapper;
      }
@@ -29,7 +29,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public PlaceCategory findPlaceCategoryById(Long id) {
+    public PlaceCategory findPlaceCategoryById(Integer id) {
         return placeCategoryService.findById(id);
     }
 
@@ -51,7 +51,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean updatePlaceCategoryById(Long id, PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
+    public boolean updatePlaceCategoryById(Integer id, PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
         PlaceCategory placeCategory = objectMapper.map(placeCategoryDto, PlaceCategory.class);
 
         PlaceCategory currentPlaceCategory = placeCategoryService.findById(id);
@@ -85,7 +85,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean deletePlaceCategoryById(Long id) {
+    public boolean deletePlaceCategoryById(Integer id) {
         placeCategoryService.deleteById(id);
         return true;
     }

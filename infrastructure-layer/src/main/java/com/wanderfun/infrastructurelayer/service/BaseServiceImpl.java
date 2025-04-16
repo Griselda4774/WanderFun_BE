@@ -7,19 +7,19 @@ import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 
 import java.util.List;
 
-public class BaseServiceImpl<Model> implements BaseService<Model> {
+public class BaseServiceImpl<Model, ID> implements BaseService<Model, ID> {
     private final Class<Model> modelClass;
-    private final BaseRepository<Model, Long> baseRepository;
+    private final BaseRepository<Model, ID> baseRepository;
     protected final ObjectMapper objectMapper;
 
-    public BaseServiceImpl(BaseRepository<Model, Long> baseRepository, ObjectMapper objectMapper, Class<Model> modelClass) {
+    public BaseServiceImpl(BaseRepository<Model, ID> baseRepository, ObjectMapper objectMapper, Class<Model> modelClass) {
         this.modelClass = modelClass;
         this.baseRepository = baseRepository;
         this.objectMapper = objectMapper;
     }
 
     @Override
-    public Model findById(Long id) {
+    public Model findById(ID id) {
         return baseRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", modelClass.getSimpleName())));
     }
 
@@ -39,7 +39,7 @@ public class BaseServiceImpl<Model> implements BaseService<Model> {
     }
 
     @Override
-    public void updateById(Long id, Model model) {
+    public void updateById(ID id, Model model) {
         Model existingModel = baseRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", modelClass.getSimpleName())));
 
@@ -53,7 +53,7 @@ public class BaseServiceImpl<Model> implements BaseService<Model> {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(ID id) {
         baseRepository.deleteById(id);
     }
 

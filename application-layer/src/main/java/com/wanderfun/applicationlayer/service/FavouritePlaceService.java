@@ -4,7 +4,7 @@ import com.wanderfun.domainlayer.model.favoriteplaces.FavouritePlace;
 
 import java.util.List;
 
-public interface FavouritePlaceService extends BaseService<FavouritePlace> {
+public interface FavouritePlaceService extends BaseService<FavouritePlace, Long> {
     List<FavouritePlace> findAllByUserId(Long userId);
     void deleteByIds(List<Long> ids);
 }

@@ -1,5 +1,7 @@
 package com.wanderfun.infrastructurelayer.persistence.entity.places;
 
+import com.wanderfun.infrastructurelayer.persistence.entity.addresses.AddressEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,18 +18,20 @@ public class PlaceEntity {
     @Column(nullable = false)
     private double latitude;
 
-    @Column(name = "address_id", nullable = false)
-    private Long addressId;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = false)
+    private AddressEntity address;
 
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private PlaceCategoryEntity category;
 
-    @Column(name = "cover_image_id")
-    private Long coverImageId;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "cover_image_id")
+    private ImageEntity coverImage;
 
     public PlaceEntity() {};
 
@@ -55,12 +59,12 @@ public class PlaceEntity {
         this.latitude = latitude;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public AddressEntity getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressEntity address) {
+        this.address = address;
     }
 
     public String getName() {
@@ -79,12 +83,12 @@ public class PlaceEntity {
         this.category = category;
     }
 
-    public Long getCoverImageId() {
-        return coverImageId;
+    public ImageEntity getCoverImage() {
+        return coverImage;
     }
 
-    public void setCoverImageId(Long coverImageId) {
-        this.coverImageId = coverImageId;
+    public void setCoverImage(ImageEntity coverImage) {
+        this.coverImage = coverImage;
     }
 }
 

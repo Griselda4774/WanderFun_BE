@@ -10,26 +10,20 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "province_code", referencedColumnName = "code", nullable = false)
     private ProvinceEntity province;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "district_code", referencedColumnName = "code", nullable = false)
     private DistrictEntity district;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ward_code", referencedColumnName = "code")
     private WardEntity ward;
 
     @Column(name = "street", length = 255)
     private String street;
-
-    @Column(name = "target_type", nullable = false, length = 20)
-    private String targetType;
-
-    @Column(name = "target_id", nullable = false)
-    private Long targetId;
 
     public AddressEntity() {}
 
@@ -71,22 +65,6 @@ public class AddressEntity {
 
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    public String getTargetType() {
-        return targetType;
-    }
-
-    public void setTargetType(String targetType) {
-        this.targetType = targetType;
-    }
-
-    public Long getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(Long targetId) {
-        this.targetId = targetId;
     }
 }
 

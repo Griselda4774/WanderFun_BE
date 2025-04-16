@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.repository.place;
+package com.wanderfun.infrastructurelayer.repository.places;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategory, PlaceCategoryEntity, Long> implements PlaceCategoryRepository {
+public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategory, PlaceCategoryEntity, Integer> implements PlaceCategoryRepository {
     private final JpaPlaceCategoryRepository jpaPlaceCategoryRepository;
 
     @Autowired
@@ -34,7 +34,7 @@ public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategor
     }
 
     @Override
-    public Optional<PlaceCategory> findById(Long id) {
+    public Optional<PlaceCategory> findById(Integer id) {
         return jpaPlaceCategoryRepository.findById(id)
                 .map(entity -> objectMapper.map(entity, PlaceCategory.class));
     }
