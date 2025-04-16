@@ -25,12 +25,6 @@ public class AddressEntity {
     @Column(name = "street", length = 255)
     private String street;
 
-    @Column(name = "target_type", nullable = false, length = 20)
-    private String targetType;
-
-    @Column(name = "target_id", nullable = false)
-    private Long targetId;
-
     public AddressEntity() {}
 
     public Long getId() {
@@ -71,22 +65,6 @@ public class AddressEntity {
 
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    public String getTargetType() {
-        return targetType;
-    }
-
-    public void setTargetType(String targetType) {
-        this.targetType = targetType;
-    }
-
-    public Long getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(Long targetId) {
-        this.targetId = targetId;
     }
 }
 

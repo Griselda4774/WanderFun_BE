@@ -6,8 +6,6 @@ public class Address {
     private District district;
     private Ward ward;
     private String street;
-    private AddressTargetType targetType;
-    private Long targetId;
 
     public Address() {
     }

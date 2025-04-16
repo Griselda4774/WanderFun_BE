@@ -110,8 +110,6 @@ CREATE TABLE addresses (
     district_code VARCHAR(20) NOT NULL,
     ward_code VARCHAR(20),
     street VARCHAR(255),
-    target_type VARCHAR(20) NOT NULL,
-    target_id BIGINT NOT NULL,
     CONSTRAINT fk_addresses_province FOREIGN KEY (province_code) REFERENCES provinces(code),
     CONSTRAINT fk_addresses_district FOREIGN KEY (district_code) REFERENCES districts(code),
     CONSTRAINT fk_addresses_ward FOREIGN KEY (ward_code) REFERENCES wards(code)
