@@ -1,11 +1,13 @@
-//package com.wanderfun.infrastructurelayer.repository;
+//package com.wanderfun.infrastructurelayer.repository.trips;
 //
 //import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-//import com.wanderfun.domainlayer.repository.TripRepository;
+//import com.wanderfun.domainlayer.repository.trip.TripRepository;
 //import com.wanderfun.domainlayer.model.trips.Trip;
 //import com.wanderfun.infrastructurelayer.persistence.entity.*;
-//import com.wanderfun.infrastructurelayer.persistence.jpaRepository.JpaTripRepository;
-//import com.wanderfun.infrastructurelayer.persistence.jpaRepository.JpaUserRepository;
+//import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
+//import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripPlaceEntity;
+//import com.wanderfun.infrastructurelayer.persistence.jpaRepository.trips.JpaTripRepository;
+//import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Repository;
 //
@@ -28,8 +30,8 @@
 //    public Trip save(Trip trip) {
 //        TripEntity tripEntity = objectMapper.map(trip, TripEntity.class);
 //
-//        if (trip.getTripPlaces() != null || trip.getTripPlaces().size() > 0) {
-//            List<TripPlaceEntity> tripPlaceEntities = objectMapper.mapList(trip.getTripPlaces(), TripPlaceEntity.class);
+//        if (trip.getListTripPlaces() != null || !trip.getListTripPlaces().isEmpty()) {
+//            List<TripPlaceEntity> tripPlaceEntities = objectMapper.mapList(trip.getListTripPlaces(), TripPlaceEntity.class);
 //            tripPlaceEntities.forEach(tripPlaceEntity -> tripPlaceEntity.setTrip(tripEntity));
 //            tripEntity.setTripPlaces(tripPlaceEntities);
 //        }
@@ -44,19 +46,17 @@
 //
 //    @Override
 //    public Optional<Trip> findByName(String name) {
-//        Optional<Trip> trip = jpaTripRepository.findByName(name)
+//        return jpaTripRepository.findByName(name)
 //                .map(entity -> objectMapper.map(entity, Trip.class));
-//        return trip;
 //    }
 //
 //    @Override
 //    public List<Trip> findAllByUser_Id(Long userId) {
-//        List<Trip> trips = objectMapper.mapList(jpaTripRepository.findAllByUser_Id(userId), Trip.class);
-//        return trips;
+//        return objectMapper.mapList(jpaTripRepository.findAllByUser_Id(userId), Trip.class);
 //    }
 //
 //    @Override
-//    public void deleteAllByUser_Id(Long userId) {
+//    public void deleteAllByUserId(Long userId) {
 //        jpaTripRepository.deleteAllByUser_Id(userId);
 //    }
 //}

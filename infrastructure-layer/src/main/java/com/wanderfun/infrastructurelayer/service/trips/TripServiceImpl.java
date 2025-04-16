@@ -2,8 +2,8 @@
 //
 //import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 //import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-//import com.wanderfun.domainlayer.repository.TripRepository;
-//import com.wanderfun.applicationlayer.service.TripService;
+//import com.wanderfun.domainlayer.repository.trip.TripRepository;
+//import com.wanderfun.applicationlayer.service.trips.TripService;
 //import com.wanderfun.domainlayer.model.trips.Trip;
 //import jakarta.transaction.Transactional;
 //import org.springframework.stereotype.Service;
