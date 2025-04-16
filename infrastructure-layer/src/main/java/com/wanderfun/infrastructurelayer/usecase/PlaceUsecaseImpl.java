@@ -29,7 +29,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public PlaceCategory findPlaceCategoryById(Long id) {
+    public PlaceCategory findPlaceCategoryById(Integer id) {
         return placeCategoryService.findById(id);
     }
 
@@ -51,7 +51,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean updatePlaceCategoryById(Long id, PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
+    public boolean updatePlaceCategoryById(Integer id, PlaceCategoryDto placeCategoryDto) throws ObjectAlreadyExistException {
         PlaceCategory placeCategory = objectMapper.map(placeCategoryDto, PlaceCategory.class);
 
         PlaceCategory currentPlaceCategory = placeCategoryService.findById(id);
@@ -85,7 +85,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean deletePlaceCategoryById(Long id) {
+    public boolean deletePlaceCategoryById(Integer id) {
         placeCategoryService.deleteById(id);
         return true;
     }

@@ -17,14 +17,14 @@ public class PlaceEntity {
     @Column(nullable = false)
     private double latitude;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private AddressEntity address;
 
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private PlaceCategoryEntity category;
 

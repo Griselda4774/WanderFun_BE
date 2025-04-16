@@ -33,7 +33,7 @@ CREATE TABLE images (
 
 -- Addresses Group --
 CREATE TABLE administrative_regions (
-    id INT NOT NULL PRIMARY KEY,
+    id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     name_en VARCHAR(255) NOT NULL,
     code_name VARCHAR(255),
@@ -41,7 +41,7 @@ CREATE TABLE administrative_regions (
 );
 
 CREATE TABLE administrative_units (
-    id INT NOT NULL PRIMARY KEY,
+    id INTEGER NOT NULL PRIMARY KEY,
     full_name VARCHAR(255),
     full_name_en VARCHAR(255),
     short_name VARCHAR(255),
@@ -64,7 +64,7 @@ CREATE TABLE provinces (
 );
 
 CREATE TABLE province_details (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     province_code VARCHAR(20) NOT NULL UNIQUE,
     longitude DOUBLE NOT NULL,
     latitude DOUBLE NOT NULL,
@@ -133,14 +133,15 @@ CREATE TABLE places (
     name VARCHAR(255) NOT NULL,
     category_id INTEGER NOT NULL,
     cover_image_id BIGINT,
-    FOREIGN KEY (category_id) REFERENCES place_categories(id)
+    FOREIGN KEY (category_id) REFERENCES place_categories(id),
+    FOREIGN KEY (address_id) REFERENCES addresses(id)
 );
 
 CREATE TABLE place_details (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     place_id BIGINT NOT NULL,
     description TEXT,
-    check_in_point INT DEFAULT 0,
+    check_in_point INTEGER DEFAULT 0,
     check_in_range_meter FLOAT DEFAULT 100,
     time_open TIME,
     time_close TIME,
@@ -153,4 +154,14 @@ CREATE TABLE place_details (
     operator VARCHAR(255),
     url VARCHAR(1024),
     FOREIGN KEY (place_id) REFERENCES places(id)
+);
+
+CREATE TABLE sections (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT,
+    image_id BIGINT,
+    place_id BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (place_id) REFERENCES place_details(place_id)
 );

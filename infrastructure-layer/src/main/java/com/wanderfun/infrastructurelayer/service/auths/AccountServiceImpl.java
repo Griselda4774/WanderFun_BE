@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountServiceImpl extends BaseServiceImpl<Account> implements AccountService{
+public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implements AccountService{
     private final AccountRepository accountRepository;
 
     @Autowired

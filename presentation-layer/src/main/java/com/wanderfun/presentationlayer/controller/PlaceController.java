@@ -273,7 +273,7 @@ public class PlaceController {
     }
 
     @GetMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable long placeCategoryId) {
+    public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable Integer placeCategoryId) {
         PlaceCategory result = placeUsecase.findPlaceCategoryById(placeCategoryId);
         if (result == null) {
             throw new RequestFailedException("Find place category failed!");
@@ -303,7 +303,7 @@ public class PlaceController {
     }
 
     @PutMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Long placeCategoryId,
+    public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Integer placeCategoryId,
                                                                           @RequestBody PlaceCategoryDto placeCategoryDto) {
         boolean result = placeUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
 
@@ -318,7 +318,7 @@ public class PlaceController {
     }
 
     @DeleteMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Long placeCategoryId) {
+    public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Integer placeCategoryId) {
         boolean result = placeUsecase.deletePlaceCategoryById(placeCategoryId);
 
         if (!result) {

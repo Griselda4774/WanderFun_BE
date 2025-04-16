@@ -3,6 +3,8 @@ package com.wanderfun.infrastructurelayer.persistence.entity.places;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "place_details")
@@ -12,7 +14,7 @@ public class PlaceDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "place_id", nullable = false)
     private PlaceEntity place;
 
@@ -54,6 +56,9 @@ public class PlaceDetailEntity {
 
     @Column(length = 1024)
     private String url;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SectionEntity> sectionList = new ArrayList<SectionEntity>();
 
     public PlaceDetailEntity() {};
 
@@ -175,6 +180,14 @@ public class PlaceDetailEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<SectionEntity> getSectionList() {
+        return sectionList;
+    }
+
+    public void setSectionList(List<SectionEntity> sectionList) {
+        this.sectionList = sectionList;
     }
 }
 

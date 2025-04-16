@@ -125,6 +125,7 @@
                     <url>jdbc:mysql://localhost:3306/wanderfun_db</url>
                     <user>root</user>
                     <password>12345678</password>
+                    <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>
 

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory> implements PlaceCategoryService {
+public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory, Integer> implements PlaceCategoryService {
     private final PlaceCategoryRepository placeCategoryRepository;
 
     @Autowired
@@ -36,7 +36,7 @@ public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory> imp
 
     @Override
     @Transactional
-    public PlaceCategory findById(Long id) {
+    public PlaceCategory findById(Integer id) {
         return placeCategoryRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", PlaceCategory.class.getName())));
     }

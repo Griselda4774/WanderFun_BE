@@ -5,7 +5,7 @@ import com.wanderfun.domainlayer.model.users.UserRole;
 
 import java.util.List;
 
-public interface UserService extends BaseService<User> {
+public interface UserService extends BaseService<User, Long> {
     User findByEmail(String email);
     List<User> findAllByRole(UserRole role);
     List<User> findByOrderByPointDesc();
