@@ -1,17 +1,35 @@
-package com.wanderfun.domainlayer.model.trips;
+package com.wanderfun.infrastructurelayer.persistence.entity.trips;
+
+import com.wanderfun.domainlayer.model.trips.TripPlace;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
-public class Trip {
-    private Long id;
-    private String name;
-    private Date startTime;
-    private Date endTime;
-    private Long authorId;
-    private List<TripPlace> listTripPlaces;
+@Entity
+@Table(name = "trips")
+public class TripEntity {
 
-    public Trip() {}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 255)
+    private String name;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_time", nullable = false)
+    private Date startTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_time", nullable = false)
+    private Date endTime;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripPlace> listTripPlaces;
 
     public Long getId() {
         return id;
@@ -45,12 +63,12 @@ public class Trip {
         this.endTime = endTime;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public List<TripPlace> getListTripPlaces() {

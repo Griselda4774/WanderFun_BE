@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.service.place;
+package com.wanderfun.infrastructurelayer.service.places;
 
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;

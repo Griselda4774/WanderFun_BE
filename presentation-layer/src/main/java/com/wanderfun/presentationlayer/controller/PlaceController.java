@@ -301,6 +301,8 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    
+
     @PutMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Integer placeCategoryId,
                                                                           @RequestBody PlaceCategoryDto placeCategoryDto) {

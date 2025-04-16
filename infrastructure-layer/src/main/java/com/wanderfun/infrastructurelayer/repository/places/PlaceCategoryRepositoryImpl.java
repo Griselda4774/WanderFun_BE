@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.repository.place;
+package com.wanderfun.infrastructurelayer.repository.places;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
