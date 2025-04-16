@@ -14,7 +14,7 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
     SELECT p FROM PlaceEntity p
     JOIN p.address a
     JOIN a.province pr
-    WHERE pr.name = :provinceName
-    """)
+    WHERE LOWER(pr.name) = LOWER(:provinceName)
+""")
     List<PlaceEntity> findByProvinceName(@Param("provinceName") String provinceName);
 }

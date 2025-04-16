@@ -10,4 +10,5 @@ public interface PlaceService extends BaseService<Place, Long> {
     Place findByName(String name);
     Place findByLongitudeAndLatitude(double longitude, double latitude);
     List<Place> findByOrderByCheckInCountDesc();
+    List<Place> findByProvinceName(String provinceName);
 }

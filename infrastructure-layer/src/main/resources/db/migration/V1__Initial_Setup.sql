@@ -9,7 +9,9 @@ CREATE TABLE accounts (
     is_deleted BIT DEFAULT 0,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE refresh_tokens (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -17,7 +19,9 @@ CREATE TABLE refresh_tokens (
     token VARCHAR(512) NOT NULL UNIQUE,
     PRIMARY KEY (id),
     FOREIGN KEY (account_id) REFERENCES accounts(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 -- ----------------------------------
 
 -- Images Group --
@@ -28,7 +32,9 @@ CREATE TABLE images (
     target_type VARCHAR(20) NOT NULL,
     target_id BIGINT NOT NULL,
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 -- ----------------------------------
 
 -- Addresses Group --
@@ -38,7 +44,9 @@ CREATE TABLE administrative_regions (
     name_en VARCHAR(255) NOT NULL,
     code_name VARCHAR(255),
     code_name_en VARCHAR(255)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE administrative_units (
     id INTEGER NOT NULL PRIMARY KEY,
@@ -48,7 +56,9 @@ CREATE TABLE administrative_units (
     short_name_en VARCHAR(255),
     code_name VARCHAR(255),
     code_name_en VARCHAR(255)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE provinces (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -61,7 +71,9 @@ CREATE TABLE provinces (
     administrative_unit_id INT,
     FOREIGN KEY (administrative_region_id) REFERENCES administrative_regions(id),
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE province_details (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -76,7 +88,9 @@ CREATE TABLE province_details (
     local_food TEXT,
     how_to_get_there TEXT,
     FOREIGN KEY (province_code) REFERENCES provinces(code)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE districts (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -89,7 +103,9 @@ CREATE TABLE districts (
     administrative_unit_id INTEGER,
     FOREIGN KEY (province_code) REFERENCES provinces(code),
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE wards (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -102,7 +118,9 @@ CREATE TABLE wards (
     administrative_unit_id INTEGER,
     FOREIGN KEY (district_code) REFERENCES districts(code),
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE addresses (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -113,7 +131,9 @@ CREATE TABLE addresses (
     CONSTRAINT fk_addresses_province FOREIGN KEY (province_code) REFERENCES provinces(code),
     CONSTRAINT fk_addresses_district FOREIGN KEY (district_code) REFERENCES districts(code),
     CONSTRAINT fk_addresses_ward FOREIGN KEY (ward_code) REFERENCES wards(code)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 -- ----------------------------------
 
 -- Places Group --
@@ -123,7 +143,9 @@ CREATE TABLE place_categories (
     name_en VARCHAR(255) NOT NULL,
     icon_image_id BIGINT,
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE places (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -135,7 +157,9 @@ CREATE TABLE places (
     cover_image_id BIGINT,
     FOREIGN KEY (category_id) REFERENCES place_categories(id),
     FOREIGN KEY (address_id) REFERENCES addresses(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE place_details (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -154,7 +178,9 @@ CREATE TABLE place_details (
     operator VARCHAR(255),
     url VARCHAR(1024),
     FOREIGN KEY (place_id) REFERENCES places(id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE sections (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -164,4 +190,6 @@ CREATE TABLE sections (
     place_id BIGINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (place_id) REFERENCES place_details(place_id)
-);
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
