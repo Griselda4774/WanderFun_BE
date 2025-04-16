@@ -1,12 +1,11 @@
-package com.wanderfun.domainlayer.model.images;
+package com.wanderfun.applicationlayer.dto.images;
 
-public class Image {
+public class ImageDto {
     private Long id;
     private String imageUrl;
     private String imagePublicId;
 
-    public Image() {
-    }
+    public ImageDto() {}
 
     public Long getId() {
         return id;

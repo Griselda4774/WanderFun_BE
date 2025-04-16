@@ -8,12 +8,12 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.place.PlaceDto;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
-//import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+//import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
-import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +23,12 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("wanderfun/place")
-public class PlaceController {
-    private final PlaceUsecase placeUsecase;
+public class PlaceCategoryController {
+    private final PlaceCategoryUsecase placeCategoryUsecase;
 
     @Autowired
-    public PlaceController(PlaceUsecase placeUsecase) {
-        this.placeUsecase = placeUsecase;
+    public PlaceCategoryController(PlaceCategoryUsecase placeCategoryUsecase) {
+        this.placeCategoryUsecase = placeCategoryUsecase;
     }
 
 //    @GetMapping("")
@@ -259,7 +259,7 @@ public class PlaceController {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
         }
-        List<PlaceCategory> result = placeUsecase.findAllPlaceCategory();
+        List<PlaceCategory> result = placeCategoryUsecase.findAllPlaceCategory();
 
         if(result == null) {
             throw new RequestFailedException("Find all favourite places failed!");
@@ -274,7 +274,7 @@ public class PlaceController {
 
     @GetMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable Integer placeCategoryId) {
-        PlaceCategory result = placeUsecase.findPlaceCategoryById(placeCategoryId);
+        PlaceCategory result = placeCategoryUsecase.findPlaceCategoryById(placeCategoryId);
         if (result == null) {
             throw new RequestFailedException("Find place category failed!");
         }
@@ -290,7 +290,7 @@ public class PlaceController {
     public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@PathVariable long placeCategoryId,
                                                                        @RequestHeader("Authorization") String accessToken,
                                                                        @RequestBody PlaceCategoryDto placeCategoryDto){
-        boolean result = placeUsecase.createPlaceCategory(placeCategoryDto);
+        boolean result = placeCategoryUsecase.createPlaceCategory(placeCategoryDto);
 
         if (!result) {
             throw new RequestFailedException("Create place category failed!");
@@ -305,7 +305,7 @@ public class PlaceController {
     @PutMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Integer placeCategoryId,
                                                                           @RequestBody PlaceCategoryDto placeCategoryDto) {
-        boolean result = placeUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
+        boolean result = placeCategoryUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
 
         if (!result) {
             throw new RequestFailedException("Update place category failed!");
@@ -319,7 +319,7 @@ public class PlaceController {
 
     @DeleteMapping("/categories/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Integer placeCategoryId) {
-        boolean result = placeUsecase.deletePlaceCategoryById(placeCategoryId);
+        boolean result = placeCategoryUsecase.deletePlaceCategoryById(placeCategoryId);
 
         if (!result) {
             throw new RequestFailedException("Delete place category failed!");
