@@ -1,83 +1,83 @@
-//package com.wanderfun.applicationlayer.usecase;
-//
-//import com.wanderfun.applicationlayer.dto.trips.TripDto;
-//import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
-//import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-//import com.wanderfun.applicationlayer.service.trips.TripService;
-//import com.wanderfun.applicationlayer.util.JwtUtil;
-//import com.wanderfun.domainlayer.model.trips.Trip;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//
-//@Service
-//public class TripUsecase {
-//    private final TripService tripService;
-//    private final ObjectMapper objectMapper;
-//    private final JwtUtil jwtUtil;
-//
-//    public TripUsecase(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
-//        this.tripService = tripService;
-//        this.objectMapper = objectMapper;
-//        this.jwtUtil = jwtUtil;
-//    }
-//
-//    public List<TripDto> findAllTrips(String accessToken) {
-//        return objectMapper.mapList(tripService.findAllByUserId(jwtUtil.getIdFromToken(accessToken)), TripDto.class);
-//    }
-//
-//    public TripDto findTripById(Long id) {
-//        return objectMapper.map(tripService.findById(id), TripDto.class);
-//    }
-//
-//    public boolean createTrip(TripDto tripDto, String accessToken) throws ObjectAlreadyExistException {
-//        Trip trip = objectMapper.map(tripDto, Trip.class);
-//        Trip existingTrip = null;
-//        try {
-//            existingTrip = tripService.findByName(trip.getName());
-//        } catch (Exception e) {}
-//
-//        if(existingTrip != null) {
-//            throw new ObjectAlreadyExistException("This name is already used!");
-//        }
-//
-//        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
-//        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
-//        trip.setAuthorId(jwtUtil.getIdFromToken(accessToken));
-//        tripService.create(trip);
-//        return true;
-//    }
-//
-//    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
-//        Trip trip = objectMapper.map(tripDto, Trip.class);
-//
-//        Trip currentTrip = tripService.findById(id);
-//        if (!trip.getName().equals(currentTrip.getName())) {
-//            Trip existingTrip;
-//            try {
-//                existingTrip = tripService.findByName(trip.getName());
-//            } catch (Exception e) {
-//                existingTrip = null;
-//            }
-//            if (existingTrip != null) {
-//                throw new ObjectAlreadyExistException("This name is already used!");
-//            }
-//        }
-//
-//        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
-//        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
-//        tripService.updateById(id, trip);
-//        return true;
-//    }
-//
-//    public boolean deleteTripById(Long id) {
-//        tripService.deleteById(id);
-//        return true;
-//    }
-//
-//    public boolean deleteAllTrips(String accessToken) {
-//        tripService.deleteAllByUserId(jwtUtil.getIdFromToken(accessToken));
-//        return true;
-//    }
-//
-//}
+package com.wanderfun.applicationlayer.usecase;
+
+import com.wanderfun.applicationlayer.dto.trips.TripDto;
+import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
+import com.wanderfun.applicationlayer.mapper.ObjectMapper;
+import com.wanderfun.applicationlayer.service.trips.TripService;
+import com.wanderfun.applicationlayer.util.JwtUtil;
+import com.wanderfun.domainlayer.model.trips.Trip;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TripUsecase {
+    private final TripService tripService;
+    private final ObjectMapper objectMapper;
+    private final JwtUtil jwtUtil;
+
+    public TripUsecase(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
+        this.tripService = tripService;
+        this.objectMapper = objectMapper;
+        this.jwtUtil = jwtUtil;
+    }
+
+    public List<TripDto> findAllTrips(String accessToken) {
+        return objectMapper.mapList(tripService.findAllByUserId(jwtUtil.getIdFromToken(accessToken)), TripDto.class);
+    }
+
+    public TripDto findTripById(Long id) {
+        return objectMapper.map(tripService.findById(id), TripDto.class);
+    }
+
+    public boolean createTrip(TripDto tripDto, String accessToken) throws ObjectAlreadyExistException {
+        Trip trip = objectMapper.map(tripDto, Trip.class);
+        Trip existingTrip = null;
+        try {
+            existingTrip = tripService.findByName(trip.getName());
+        } catch (Exception e) {}
+
+        if(existingTrip != null) {
+            throw new ObjectAlreadyExistException("This name is already used!");
+        }
+
+        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
+        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
+        trip.setAuthorId(jwtUtil.getIdFromToken(accessToken));
+        tripService.create(trip);
+        return true;
+    }
+
+    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
+        Trip trip = objectMapper.map(tripDto, Trip.class);
+
+        Trip currentTrip = tripService.findById(id);
+        if (!trip.getName().equals(currentTrip.getName())) {
+            Trip existingTrip;
+            try {
+                existingTrip = tripService.findByName(trip.getName());
+            } catch (Exception e) {
+                existingTrip = null;
+            }
+            if (existingTrip != null) {
+                throw new ObjectAlreadyExistException("This name is already used!");
+            }
+        }
+
+        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
+        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
+        tripService.updateById(id, trip);
+        return true;
+    }
+
+    public boolean deleteTripById(Long id) {
+        tripService.deleteById(id);
+        return true;
+    }
+
+    public boolean deleteAllTrips(String accessToken) {
+        tripService.deleteAllByUserId(jwtUtil.getIdFromToken(accessToken));
+        return true;
+    }
+
+}
