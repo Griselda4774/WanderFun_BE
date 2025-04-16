@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.dto;
+package com.wanderfun.applicationlayer.dto.places;
 
 import com.wanderfun.domainlayer.model.images.Image;
 

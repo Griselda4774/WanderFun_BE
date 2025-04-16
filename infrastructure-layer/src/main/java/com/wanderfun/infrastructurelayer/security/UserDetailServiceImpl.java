@@ -1,7 +1,7 @@
 package com.wanderfun.infrastructurelayer.security;
 
-import com.wanderfun.applicationlayer.service.account.AccountService;
-import com.wanderfun.domainlayer.model.accounts.Account;
+import com.wanderfun.applicationlayer.service.auths.AccountService;
+import com.wanderfun.domainlayer.model.auths.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     public UserDetailServiceImpl(AccountService accountService) {
+        super();
         this.accountService = accountService;
     }
 

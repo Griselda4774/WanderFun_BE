@@ -1,6 +1,6 @@
 package com.wanderfun.domainlayer.repository.account;
 
-import com.wanderfun.domainlayer.model.accounts.Account;
+import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.repository.BaseRepository;
 
 import java.util.Optional;

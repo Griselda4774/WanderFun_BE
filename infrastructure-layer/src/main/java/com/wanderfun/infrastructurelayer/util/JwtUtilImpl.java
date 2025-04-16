@@ -2,7 +2,7 @@ package com.wanderfun.infrastructurelayer.util;
 
 import com.wanderfun.applicationlayer.exception.GenerateTokenFailedException;
 import com.wanderfun.applicationlayer.util.JwtUtil;
-import com.wanderfun.domainlayer.model.tokens.TokenType;
+import com.wanderfun.domainlayer.model.auths.TokenType;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
