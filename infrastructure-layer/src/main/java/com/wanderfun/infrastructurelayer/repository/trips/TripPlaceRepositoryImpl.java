@@ -1,7 +1,7 @@
 //package com.wanderfun.infrastructurelayer.repository;
 //
 //import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-//import com.wanderfun.domainlayer.repository.TripPlaceRepository;
+//import com.wanderfun.domainlayer.repository.trip.TripPlaceRepository;
 //import com.wanderfun.domainlayer.model.trips.TripPlace;
 //import com.wanderfun.infrastructurelayer.persistence.jpaRepository.JpaTripPlaceRepository;
 //import org.springframework.stereotype.Repository;

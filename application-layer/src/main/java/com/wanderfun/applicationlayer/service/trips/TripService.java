@@ -1,5 +1,6 @@
-package com.wanderfun.applicationlayer.service;
+package com.wanderfun.applicationlayer.service.trips;
 
+import com.wanderfun.applicationlayer.service.BaseService;
 import com.wanderfun.domainlayer.model.trips.Trip;
 
 import java.util.List;
