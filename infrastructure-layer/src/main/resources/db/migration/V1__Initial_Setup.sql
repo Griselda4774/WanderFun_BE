@@ -1,4 +1,4 @@
--- Auths
+-- Auths Group --
 CREATE TABLE accounts (
     id BIGINT NOT NULL AUTO_INCREMENT,
     role VARCHAR(20) NOT NULL,
@@ -18,8 +18,9 @@ CREATE TABLE refresh_tokens (
     PRIMARY KEY (id),
     FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
+-- ----------------------------------
 
--- Images
+-- Images Group --
 CREATE TABLE images (
     id BIGINT NOT NULL AUTO_INCREMENT,
     image_url VARCHAR(1024) NOT NULL,
@@ -28,8 +29,9 @@ CREATE TABLE images (
     target_id BIGINT NOT NULL,
     PRIMARY KEY (id)
 );
+-- ----------------------------------
 
--- Addresses
+-- Addresses Group --
 CREATE TABLE administrative_regions (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -63,7 +65,7 @@ CREATE TABLE provinces (
 
 CREATE TABLE province_details (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    province_code VARCHAR(20) NOT NULL,
+    province_code VARCHAR(20) NOT NULL UNIQUE,
     longitude DOUBLE NOT NULL,
     latitude DOUBLE NOT NULL,
     area_km2 DOUBLE,
@@ -114,9 +116,9 @@ CREATE TABLE addresses (
     CONSTRAINT fk_addresses_district FOREIGN KEY (district_code) REFERENCES districts(code),
     CONSTRAINT fk_addresses_ward FOREIGN KEY (ward_code) REFERENCES wards(code)
 );
+-- ----------------------------------
 
-
--- Places
+-- Places Group --
 CREATE TABLE place_categories (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -154,7 +156,3 @@ CREATE TABLE place_details (
     url VARCHAR(1024),
     FOREIGN KEY (place_id) REFERENCES places(id)
 );
-
-
-
-
