@@ -29,8 +29,6 @@ CREATE TABLE images (
     id BIGINT NOT NULL AUTO_INCREMENT,
     image_url VARCHAR(1024) NOT NULL,
     image_public_id VARCHAR(1024),
-    target_type VARCHAR(20) NOT NULL,
-    target_id BIGINT NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
@@ -156,7 +154,8 @@ CREATE TABLE places (
     category_id INTEGER NOT NULL,
     cover_image_id BIGINT,
     FOREIGN KEY (category_id) REFERENCES place_categories(id),
-    FOREIGN KEY (address_id) REFERENCES addresses(id)
+    FOREIGN KEY (address_id) REFERENCES addresses(id),
+    FOREIGN KEY (cover_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;

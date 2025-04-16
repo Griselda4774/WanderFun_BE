@@ -26,9 +26,11 @@ public class RefreshTokenRepositoryImpl extends BaseRepositoryImpl<RefreshToken,
     public RefreshToken save(RefreshToken refreshToken) {
         RefreshTokenEntity refreshTokenEntity = objectMapper.map(refreshToken, RefreshTokenEntity.class);
 
-        AccountEntity accountEntity = new AccountEntity();
-        accountEntity.setId(refreshToken.getAccountId());
-        refreshTokenEntity.setAccount(accountEntity);
+        if (refreshToken.getAccountId() != null) {
+            AccountEntity accountEntity = new AccountEntity();
+            accountEntity.setId(refreshToken.getAccountId());
+            refreshTokenEntity.setAccount(accountEntity);
+        }
 
         RefreshTokenEntity savedRefreshTokenEntity = jpaRefreshTokenRepository.save(refreshTokenEntity);
 

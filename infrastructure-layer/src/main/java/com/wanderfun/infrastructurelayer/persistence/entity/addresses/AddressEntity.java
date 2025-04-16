@@ -10,15 +10,15 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "province_code", referencedColumnName = "code", nullable = false)
     private ProvinceEntity province;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "district_code", referencedColumnName = "code", nullable = false)
     private DistrictEntity district;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ward_code", referencedColumnName = "code")
     private WardEntity ward;
 
