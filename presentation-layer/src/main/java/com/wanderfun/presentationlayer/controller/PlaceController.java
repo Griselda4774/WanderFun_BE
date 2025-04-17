@@ -116,7 +116,6 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-
     @PostMapping("")
     public ResponseEntity<ResponseDto<PlaceDto>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
         boolean result = placeUsecase.create(placeCreateDto);
@@ -131,13 +130,13 @@ public class PlaceController {
     }
 
     @PostMapping("/all")
-    public ResponseEntity<ResponseDto<PlaceDto>> createAllPlaces(@RequestBody List<PlaceCreateDto> placeCreateDtos) {
+    public ResponseEntity<ResponseDto<List<PlaceDto>>> createAllPlaces(@RequestBody List<PlaceCreateDto> placeCreateDtos) {
         boolean result = placeUsecase.createAll(placeCreateDtos);
         if (!result) {
             throw new RequestFailedException("Create all place failed!");
         }
 
-        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        ResponseDto<List<PlaceDto>> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Create all place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

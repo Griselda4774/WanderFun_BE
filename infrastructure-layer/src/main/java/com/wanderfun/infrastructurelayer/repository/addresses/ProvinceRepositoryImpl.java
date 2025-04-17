@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProvinceRepositoryImpl extends BaseRepositoryImpl<Province, ProvinceEntity, String> implements ProvinceRepository {
@@ -24,5 +25,11 @@ public class ProvinceRepositoryImpl extends BaseRepositoryImpl<Province, Provinc
     @Override
     public List<Province> findAllByNameContaining(String name) {
         return objectMapper.mapList(jpaProvinceRepository.findAllByNameContaining(name), Province.class);
+    }
+
+    @Override
+    public Optional<Province> findByName(String name) {
+        return jpaProvinceRepository.findByName(name)
+                .map(provinceEntity -> objectMapper.map(provinceEntity, Province.class));
     }
 }

@@ -4,7 +4,6 @@ import com.wanderfun.applicationlayer.dto.addresses.AddressCreateDto;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 
 public class PlaceCreateDto {
-    private Long id;
     private double longitude;
     private double latitude;
     private AddressCreateDto address;
@@ -13,14 +12,6 @@ public class PlaceCreateDto {
     private ImageDto coverImage;
 
     public PlaceCreateDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public double getLongitude() {
