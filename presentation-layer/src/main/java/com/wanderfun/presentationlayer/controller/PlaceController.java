@@ -129,6 +129,19 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PostMapping("")
+    public ResponseEntity<ResponseDto<PlaceDto>> createAllPlaces(@RequestBody List<PlaceDto> placeDtoList) {
+        boolean result = placeUsecase.createAll(placeDtoList);
+        if (!result) {
+            throw new RequestFailedException("Create all place failed!");
+        }
+
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Create all place successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDto<PlaceDto>> updatePlaceById(@PathVariable Long id, @RequestBody PlaceDto placeDto) {
         boolean result = placeUsecase.updateById(id, placeDto);
