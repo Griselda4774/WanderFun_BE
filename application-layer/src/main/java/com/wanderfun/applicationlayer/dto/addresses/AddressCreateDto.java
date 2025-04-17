@@ -1,21 +1,12 @@
 package com.wanderfun.applicationlayer.dto.addresses;
 
 public class AddressCreateDto {
-    private Long id;
     private String provinceCode;
     private String districtCode;
     private String wardCode;
     private String street;
 
     public AddressCreateDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getProvinceCode() {

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DistrictService extends BaseService<District, String> {
     List<District> findAllByProvinceCode(String provinceCode);
+    District findByNameAndProvinceCode(String name, String provinceCode);
 }

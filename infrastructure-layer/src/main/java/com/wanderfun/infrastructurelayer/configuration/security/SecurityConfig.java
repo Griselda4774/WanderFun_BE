@@ -73,6 +73,9 @@ public class SecurityConfig {
                         .requestMatchers("/wanderfun/auth/refresh").permitAll()
                         .requestMatchers("/wanderfun/auth/admin/register").permitAll()
 
+                        // Address
+                        .requestMatchers(HttpMethod.GET, "/wanderfun/address/**").permitAll()
+
                         // User
                         .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
                         .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())

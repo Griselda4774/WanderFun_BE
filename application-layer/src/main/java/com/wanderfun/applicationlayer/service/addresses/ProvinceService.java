@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ProvinceService extends BaseService<Province, String> {
     List<Province> findAllByNameContaining(String name);
+    Province findByName(String name);
 }

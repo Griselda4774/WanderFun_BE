@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DistrictRepositoryImpl extends BaseRepositoryImpl<District, DistrictEntity, String> implements DistrictRepository {
@@ -24,5 +25,11 @@ public class DistrictRepositoryImpl extends BaseRepositoryImpl<District, Distric
     @Override
     public List<District> findAllByProvinceCode(String provinceCode) {
         return objectMapper.mapList(jpaDistrictRepository.findAllByProvince_Code(provinceCode), District.class);
+    }
+
+    @Override
+    public Optional<District> findByNameAndProvinceCode(String name, String provinceCode) {
+        return jpaDistrictRepository.findByNameAndProvince_Code(name, provinceCode)
+                .map(districtEntity -> objectMapper.map(districtEntity, District.class));
     }
 }

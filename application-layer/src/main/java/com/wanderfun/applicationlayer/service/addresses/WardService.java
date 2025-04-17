@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WardService extends BaseService<Ward, String> {
     List<Ward> findAllByDistrictCode(String districtCode);
+    Ward findByNameAndDistrictCode(String name, String districtCode);
 }
