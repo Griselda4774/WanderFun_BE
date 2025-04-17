@@ -1,6 +1,6 @@
 package com.wanderfun.applicationlayer.dto.places;
 
-import com.wanderfun.applicationlayer.dto.PlaceCategoryDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.addresses.AddressDto;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 
