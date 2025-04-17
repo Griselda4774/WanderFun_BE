@@ -62,50 +62,53 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                // Swagger
-                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .authorizeHttpRequests(authorize -> authorize
+                        // Swagger
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-                                // Auth
-                                .requestMatchers("/wanderfun/auth/register").permitAll()
-                                .requestMatchers("/wanderfun/auth/login").permitAll()
-                                .requestMatchers("/wanderfun/auth/logout").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
-                                .requestMatchers("/wanderfun/auth/refresh").permitAll()
-                                .requestMatchers("/wanderfun/auth/admin/register").permitAll()
+                        // Auth
+                        .requestMatchers("/wanderfun/auth/register").permitAll()
+                        .requestMatchers("/wanderfun/auth/login").permitAll()
+                        .requestMatchers("/wanderfun/auth/logout").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
+                        .requestMatchers("/wanderfun/auth/refresh").permitAll()
+                        .requestMatchers("/wanderfun/auth/admin/register").permitAll()
 
-                                // User
-                                .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
-                                .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
+                        // User
+                        .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
+                        .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
 
-                                // Place
-                                .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/wanderfun/place").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers(HttpMethod.PUT,"/wanderfun/place/").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers(HttpMethod.DELETE,"/wanderfun/place/").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers(HttpMethod.DELETE,"/wanderfun/place").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers("/wanderfun/place/feedback/**").hasAnyRole(UserRole.USER.name())
-                                .requestMatchers("/wanderfun/place/favourite/**").hasAnyRole(UserRole.USER.name())
-                                .requestMatchers("/wanderfun/place/checkin/**").hasAnyRole(UserRole.USER.name())
+                        // Place
+                        .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/wanderfun/place").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST,"/wanderfun/place/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE,"/wanderfun/place").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers("/wanderfun/place/feedback/**").hasRole(UserRole.USER.name())
+                        .requestMatchers("/wanderfun/place/favourite/**").hasRole(UserRole.USER.name())
+                        .requestMatchers("/wanderfun/place/checkin/**").hasRole(UserRole.USER.name())
 
-                                // Trip
-                                .requestMatchers("/wanderfun/trip/**").hasAnyRole(UserRole.USER.name())
+                        // Trip
+                        .requestMatchers("/wanderfun/trip/**").hasRole(UserRole.USER.name())
 
-                                // Album
-                                .requestMatchers("/wanderfun/album/**").hasAnyRole(UserRole.USER.name())
+                        // Album
+                        .requestMatchers("/wanderfun/album/**").hasRole(UserRole.USER.name())
 
-                                // Cloudinary
-                                .requestMatchers("/wanderfun/cloudinary/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
+                        // Cloudinary
+                        .requestMatchers("/wanderfun/cloudinary/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
 
-                                // Leaderboard
-                                .requestMatchers("/wanderfun/leaderboard/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/wanderfun/leaderboard/**").hasAnyRole(UserRole.ADMIN.name())
+                        // Leaderboard
+                        .requestMatchers("/wanderfun/leaderboard/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/wanderfun/leaderboard/**").hasRole(UserRole.ADMIN.name())
 
-                                .anyRequest().authenticated()
+                        // Default
+                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults());
+
         return http.build();
     }
+
 }

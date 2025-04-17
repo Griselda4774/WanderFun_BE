@@ -8,8 +8,9 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.place.PlaceDto;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
-//import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
+import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
@@ -117,8 +118,8 @@ public class PlaceController {
 
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<PlaceDto>> createPlace(@RequestBody PlaceDto placeDto) {
-        boolean result = placeUsecase.create(placeDto);
+    public ResponseEntity<ResponseDto<PlaceDto>> createPlace(@RequestBody PlaceCreateDto placeCreateDto) {
+        boolean result = placeUsecase.create(placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Create place failed!");
         }
@@ -129,9 +130,22 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PostMapping("/all")
+    public ResponseEntity<ResponseDto<PlaceDto>> createAllPlaces(@RequestBody List<PlaceCreateDto> placeCreateDtos) {
+        boolean result = placeUsecase.createAll(placeCreateDtos);
+        if (!result) {
+            throw new RequestFailedException("Create all place failed!");
+        }
+
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Create all place successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<PlaceDto>> updatePlaceById(@PathVariable Long id, @RequestBody PlaceDto placeDto) {
-        boolean result = placeUsecase.updateById(id, placeDto);
+    public ResponseEntity<ResponseDto<PlaceDto>> updatePlaceById(@PathVariable Long id, @RequestBody PlaceCreateDto placeCreateDto) {
+        boolean result = placeUsecase.updateById(id, placeCreateDto);
         if (!result) {
             throw new RequestFailedException("Update place failed!");
         }

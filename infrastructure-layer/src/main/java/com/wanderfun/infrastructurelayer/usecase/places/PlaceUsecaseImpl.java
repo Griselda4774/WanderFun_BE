@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.usecase.places;
 
+import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
@@ -57,25 +58,37 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public boolean create(PlaceDto placeDto) {
-        Place place = objectMapper.map(placeDto, Place.class);
-        checkPlaceBeforeCreate(place);
+    public boolean create(PlaceCreateDto placeCreateDto) {
+        Place place = objectMapper.map(placeCreateDto, Place.class);
+        checkPlaceBeforeCreate(place, placeCreateDto);
         placeService.create(place);
         return true;
     }
 
     @Override
-    public boolean createAll(List<PlaceDto> placeDtoList) {
-        List<Place> placeList = objectMapper.mapList(placeDtoList, Place.class);
-        for (Place place : placeList) {
-            checkPlaceBeforeCreate(place);
-        }
+    public boolean createAll(List<PlaceCreateDto> placeCreateDtoList) {
+        List<Place> placeList = placeCreateDtoList.stream()
+                .map(placeCreateDto -> {
+                    Place place = objectMapper.map(placeCreateDto, Place.class);
+                    checkPlaceBeforeCreate(place, placeCreateDto);
+                    return place;
+                })
+                .toList();
+
+
+        placeService.createAll(placeList);
         return true;
     }
 
     @Override
-    public boolean updateById(Long id, PlaceDto placeDto) throws ObjectAlreadyExistException {
-        Place place = objectMapper.map(placeDto, Place.class);
+    public boolean updateById(Long id, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
+        Place place = objectMapper.map(placeCreateDto, Place.class);
+
+        place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
+        place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
+        place.getAddress().getWard().setCode(placeCreateDto.getAddress().getWardCode());
+
+        place.getCategory().setId(placeCreateDto.getCategoryId());
 
         Place currentPlace = placeService.findById(id);
         // Check new name
@@ -138,7 +151,13 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         return true;
     }
 
-    private void checkPlaceBeforeCreate(Place place) throws ObjectAlreadyExistException {
+    private void checkPlaceBeforeCreate(Place place, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
+        place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
+        place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
+        place.getAddress().getWard().setCode(placeCreateDto.getAddress().getWardCode());
+
+        place.getCategory().setId(placeCreateDto.getCategoryId());
+
         // Check unique name
         try {
             placeService.findByName(place.getName());

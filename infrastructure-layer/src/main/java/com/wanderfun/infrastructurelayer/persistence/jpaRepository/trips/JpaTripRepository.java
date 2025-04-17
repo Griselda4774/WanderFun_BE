@@ -1,5 +1,7 @@
-//package com.wanderfun.infrastructurelayer.persistence.jpaRepository;
+//package com.wanderfun.infrastructurelayer.persistence.jpaRepository.trips;
 //
+//import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
+//import com.wanderfun.infrastructurelayer.persistence.jpaRepository.JpaBaseRepository;
 //import org.springframework.stereotype.Repository;
 //
 //import java.util.List;

@@ -11,6 +11,53 @@ public class Trip {
     private Long authorId;
     private List<TripPlace> listTripPlaces;
 
-    public Trip() {
+    public Trip() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public List<TripPlace> getListTripPlaces() {
+        return listTripPlaces;
+    }
+
+    public void setListTripPlaces(List<TripPlace> listTripPlaces) {
+        this.listTripPlaces = listTripPlaces;
     }
 }

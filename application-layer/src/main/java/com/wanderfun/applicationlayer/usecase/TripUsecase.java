@@ -1,10 +1,9 @@
 //package com.wanderfun.applicationlayer.usecase;
 //
-//import com.wanderfun.applicationlayer.dto.trip.TripCreateDto;
-//import com.wanderfun.applicationlayer.dto.trip.TripDto;
+//import com.wanderfun.applicationlayer.dto.trips.TripDto;
 //import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 //import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-//import com.wanderfun.applicationlayer.service.TripService;
+//import com.wanderfun.applicationlayer.service.trips.TripService;
 //import com.wanderfun.applicationlayer.util.JwtUtil;
 //import com.wanderfun.domainlayer.model.trips.Trip;
 //import org.springframework.stereotype.Service;
@@ -31,8 +30,8 @@
 //        return objectMapper.map(tripService.findById(id), TripDto.class);
 //    }
 //
-//    public boolean createTrip(TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException {
-//        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
+//    public boolean createTrip(TripDto tripDto, String accessToken) throws ObjectAlreadyExistException {
+//        Trip trip = objectMapper.map(tripDto, Trip.class);
 //        Trip existingTrip = null;
 //        try {
 //            existingTrip = tripService.findByName(trip.getName());
@@ -42,15 +41,15 @@
 //            throw new ObjectAlreadyExistException("This name is already used!");
 //        }
 //
-//        trip.setStartTime(trip.getTripPlaces().get(0).getStartTime());
-//        trip.setEndTime(trip.getTripPlaces().get(trip.getTripPlaces().size() - 1).getEndTime());
-//        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
+//        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
+//        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
+//        trip.setAuthorId(jwtUtil.getIdFromToken(accessToken));
 //        tripService.create(trip);
 //        return true;
 //    }
 //
-//    public boolean updateTripById(Long id, TripCreateDto tripCreateDto) throws ObjectAlreadyExistException{
-//        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
+//    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
+//        Trip trip = objectMapper.map(tripDto, Trip.class);
 //
 //        Trip currentTrip = tripService.findById(id);
 //        if (!trip.getName().equals(currentTrip.getName())) {
@@ -65,8 +64,8 @@
 //            }
 //        }
 //
-//        trip.setStartTime(trip.getTripPlaces().get(0).getStartTime());
-//        trip.setEndTime(trip.getTripPlaces().get(trip.getTripPlaces().size() - 1).getEndTime());
+//        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
+//        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
 //        tripService.updateById(id, trip);
 //        return true;
 //    }

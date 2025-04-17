@@ -1,22 +1,18 @@
 package com.wanderfun.applicationlayer.dto.places;
 
-import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
-import com.wanderfun.applicationlayer.dto.addresses.AddressDto;
+import com.wanderfun.applicationlayer.dto.addresses.AddressCreateDto;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 
-public class PlaceDto {
+public class PlaceCreateDto {
     private Long id;
     private double longitude;
     private double latitude;
-    private AddressDto address;
+    private AddressCreateDto address;
     private String name;
-    private PlaceCategoryDto category;
+    private Integer categoryId;
     private ImageDto coverImage;
-    private float rating;
-    private int totalRating;
-    private int totalFeedback;
 
-    public PlaceDto() {
+    public PlaceCreateDto() {
     }
 
     public Long getId() {
@@ -43,11 +39,11 @@ public class PlaceDto {
         this.latitude = latitude;
     }
 
-    public AddressDto getAddress() {
+    public AddressCreateDto getAddress() {
         return address;
     }
 
-    public void setAddress(AddressDto address) {
+    public void setAddress(AddressCreateDto address) {
         this.address = address;
     }
 
@@ -59,12 +55,12 @@ public class PlaceDto {
         this.name = name;
     }
 
-    public PlaceCategoryDto getCategory() {
-        return category;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(PlaceCategoryDto category) {
-        this.category = category;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public ImageDto getCoverImage() {
@@ -73,29 +69,5 @@ public class PlaceDto {
 
     public void setCoverImage(ImageDto coverImage) {
         this.coverImage = coverImage;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
-    public int getTotalRating() {
-        return totalRating;
-    }
-
-    public void setTotalRating(int totalRating) {
-        this.totalRating = totalRating;
-    }
-
-    public int getTotalFeedback() {
-        return totalFeedback;
-    }
-
-    public void setTotalFeedback(int totalFeedback) {
-        this.totalFeedback = totalFeedback;
     }
 }

@@ -1,5 +1,7 @@
 package com.wanderfun.domainlayer.model.auths;
 
+
+
 import com.wanderfun.domainlayer.model.users.UserRole;
 
 import java.time.LocalDateTime;
