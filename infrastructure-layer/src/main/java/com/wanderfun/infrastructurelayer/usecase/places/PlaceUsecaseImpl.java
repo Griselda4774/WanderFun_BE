@@ -8,7 +8,11 @@ import com.wanderfun.applicationlayer.service.addresses.AddressService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
 import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.domainlayer.model.addresses.Address;
+import com.wanderfun.domainlayer.model.addresses.District;
+import com.wanderfun.domainlayer.model.addresses.Province;
+import com.wanderfun.domainlayer.model.addresses.Ward;
 import com.wanderfun.domainlayer.model.places.Place;
+import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -152,10 +156,17 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     private void checkPlaceBeforeCreate(Place place, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
+
+        place.getAddress().setProvince(new Province());
         place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
+
+        place.getAddress().setDistrict(new District());
         place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
+
+        place.getAddress().setWard(new Ward());
         place.getAddress().getWard().setCode(placeCreateDto.getAddress().getWardCode());
 
+        place.setCategory(new PlaceCategory());
         place.getCategory().setId(placeCreateDto.getCategoryId());
 
         // Check unique name

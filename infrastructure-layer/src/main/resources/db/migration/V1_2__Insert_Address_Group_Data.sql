@@ -506,7 +506,7 @@ INSERT INTO districts(code,name,name_en,full_name,full_name_en,code_name,provinc
 ('549','An Nhơn','An Nhon','Thị xã An Nhơn','An Nhon Town','an_nhon','52',6),
 ('550','Tuy Phước','Tuy Phuoc','Huyện Tuy Phước','Tuy Phuoc District','tuy_phuoc','52',7),
 ('551','Vân Canh','Van Canh','Huyện Vân Canh','Van Canh District','van_canh','52',7),
-('555','Tuy Hoà','Tuy Hoa','Thành phố Tuy Hoà','Tuy Hoa City','tuy_hoa','54',4),
+('555','Tuy Hòa','Tuy Hoa','Thành phố Tuy Hòa','Tuy Hoa City','tuy_hoa','54',4),
 ('557','Sông Cầu','Song Cau','Thị xã Sông Cầu','Song Cau Town','song_cau','54',6);
 
 INSERT INTO districts(code,name,name_en,full_name,full_name_en,code_name,province_code,administrative_unit_id) VALUES
@@ -2365,7 +2365,7 @@ INSERT INTO wards(code,name,name_en,full_name,full_name_en,code_name,district_co
 ('04447','Viễn Sơn','Vien Son','Xã Viễn Sơn','Vien Son Commune','vien_son','136',10),
 ('04450','Mỏ Vàng','Mo Vang','Xã Mỏ Vàng','Mo Vang Commune','mo_vang','136',10),
 ('04453','Nà Hẩu','Na Hau','Xã Nà Hẩu','Na Hau Commune','na_hau','136',10),
-('04456','Mù Căng Chải','Mu Cang Chai','Thị trấn Mù Căng Chải','Mu Cang Chai Township','mu_cang_chai','137',9),
+('04456','Mù Cang Chải','Mu Cang Chai','Thị trấn Mù Cang Chải','Mu Cang Chai Township','mu_cang_chai','137',9),
 ('04459','Hồ Bốn','Ho Bon','Xã Hồ Bốn','Ho Bon Commune','ho_bon','137',10),
 ('04462','Nậm Có','Nam Co','Xã Nậm Có','Nam Co Commune','nam_co','137',10),
 ('04465','Khao Mang','Khao Mang','Xã Khao Mang','Khao Mang Commune','khao_mang','137',10),
