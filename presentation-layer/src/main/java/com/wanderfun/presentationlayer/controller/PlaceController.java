@@ -129,7 +129,7 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("")
+    @PostMapping("/all")
     public ResponseEntity<ResponseDto<PlaceDto>> createAllPlaces(@RequestBody List<PlaceDto> placeDtoList) {
         boolean result = placeUsecase.createAll(placeDtoList);
         if (!result) {
