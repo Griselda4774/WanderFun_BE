@@ -2,9 +2,9 @@ package com.wanderfun.presentationlayer.controller;
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
+import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
-import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
