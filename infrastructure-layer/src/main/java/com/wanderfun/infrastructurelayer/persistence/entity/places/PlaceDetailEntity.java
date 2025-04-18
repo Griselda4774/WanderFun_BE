@@ -57,8 +57,8 @@ public class PlaceDetailEntity {
     @Column(length = 1024)
     private String url;
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SectionEntity> sectionList = new ArrayList<SectionEntity>();
+    @OneToMany(mappedBy = "placeDetail", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SectionEntity> sectionList = new ArrayList<>();
 
     public PlaceDetailEntity() {};
 

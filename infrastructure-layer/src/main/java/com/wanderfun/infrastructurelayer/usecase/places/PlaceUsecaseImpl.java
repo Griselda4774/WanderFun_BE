@@ -3,6 +3,7 @@ package com.wanderfun.infrastructurelayer.usecase.places;
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
+import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.AddressService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
@@ -15,8 +16,10 @@ import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PlaceUsecaseImpl implements PlaceUsecase {
@@ -73,12 +76,16 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     public boolean createAll(List<PlaceCreateDto> placeCreateDtoList) {
         List<Place> placeList = placeCreateDtoList.stream()
                 .map(placeCreateDto -> {
-                    Place place = objectMapper.map(placeCreateDto, Place.class);
-                    checkPlaceBeforeCreate(place, placeCreateDto);
-                    return place;
+                    try {
+                        Place place = objectMapper.map(placeCreateDto, Place.class);
+                        checkPlaceBeforeCreate(place, placeCreateDto);
+                        return place;
+                    } catch (ObjectAlreadyExistException e) {
+                        return null;
+                    }
                 })
+                .filter(Objects::nonNull)
                 .toList();
-
 
         placeService.createAll(placeList);
         return true;
@@ -88,11 +95,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     public boolean updateById(Long id, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
         Place place = objectMapper.map(placeCreateDto, Place.class);
 
-        place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
-        place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
-        place.getAddress().getWard().setCode(placeCreateDto.getAddress().getWardCode());
-
-        place.getCategory().setId(placeCreateDto.getCategoryId());
+        setUpPlaceInputData(place, placeCreateDto);
 
         Place currentPlace = placeService.findById(id);
         // Check new name
@@ -101,7 +104,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                 try {
                     placeService.findByName(place.getName());
                     throw new ObjectAlreadyExistException("This name is already used!");
-                } catch (Exception ignored) {}
+                } catch (ObjectNotFoundException ignored) {}
             }
         }
 
@@ -110,7 +113,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
             try {
                 placeService.findByLongitudeAndLatitude(place.getLongitude(), place.getLatitude());
                 throw new ObjectAlreadyExistException("This longitude and latitude is already used!");
-            } catch (Exception ignored) {}
+            } catch (ObjectNotFoundException ignored) {}
         }
 
         // Check new address
@@ -124,13 +127,13 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                         place.getAddress().getWard().getCode(),
                         place.getAddress().getStreet());
                 addressExists = true;
-            } catch (Exception ignored) {}
+            } catch (ObjectNotFoundException ignored) {}
 
             if (!addressExists) {
                 if (place.getAddress().getId() != null) {
                     try {
                         addressService.updateById(place.getAddress().getId(), place.getAddress());
-                    } catch (Exception e) {
+                    } catch (ObjectNotFoundException e) {
                         addressService.create(place.getAddress());
                     }
                 } else {
@@ -155,31 +158,40 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         return true;
     }
 
-    private void checkPlaceBeforeCreate(Place place, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
-
+    private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {
         place.getAddress().setProvince(new Province());
         place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
 
         place.getAddress().setDistrict(new District());
         place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
 
+        String wardCode = placeCreateDto.getAddress().getWardCode();
         place.getAddress().setWard(new Ward());
-        place.getAddress().getWard().setCode(placeCreateDto.getAddress().getWardCode());
+        place.getAddress().getWard().setCode(
+                StringUtils.hasText(wardCode) ? wardCode : null
+        );
+
+        String street = placeCreateDto.getAddress().getStreet();
+        place.getAddress().setStreet(StringUtils.hasText(street) ? street : null);
 
         place.setCategory(new PlaceCategory());
         place.getCategory().setId(placeCreateDto.getCategoryId());
+    }
+
+    private void checkPlaceBeforeCreate(Place place, PlaceCreateDto placeCreateDto) throws ObjectAlreadyExistException {
+        setUpPlaceInputData(place, placeCreateDto);
 
         // Check unique name
         try {
             placeService.findByName(place.getName());
             throw new ObjectAlreadyExistException("This name is already used!");
-        } catch (Exception ignored) {}
+        } catch (ObjectNotFoundException ignored) {}
 
         // Check unique longitude and latitude
         try {
             placeService.findByLongitudeAndLatitude(place.getLongitude(), place.getLatitude());
             throw new ObjectAlreadyExistException("This longitude and latitude is already used!");
-        } catch (Exception ignored) {}
+        } catch (ObjectNotFoundException ignored) {}
 
         // Check existing address
         Address existingAddress;
@@ -190,7 +202,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                         place.getAddress().getWard().getCode(),
                         place.getAddress().getStreet());
                 place.setAddress(existingAddress);
-            } catch (Exception e) {
+            } catch (ObjectNotFoundException e) {
                 addressService.create(place.getAddress());
                 existingAddress = addressService.findExistingAddress(place.getAddress().getProvince().getCode(),
                         place.getAddress().getDistrict().getCode(),

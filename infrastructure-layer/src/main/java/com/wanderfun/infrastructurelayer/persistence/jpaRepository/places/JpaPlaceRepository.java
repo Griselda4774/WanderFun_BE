@@ -18,6 +18,7 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
     List<PlaceEntity> findByProvinceName(@Param("provinceName") String provinceName);
 
     List<PlaceEntity> findAllByNameContaining(String name);
-    Optional<PlaceEntity> findByName(String name);
+    @Query("SELECT p FROM PlaceEntity p WHERE p.name = :name")
+    Optional<PlaceEntity> findByName(@Param("name")String name);
     Optional<PlaceEntity> findByLongitudeAndLatitude(double longitude, double latitude);
 }

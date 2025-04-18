@@ -54,7 +54,6 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
         }
 
         PlaceEntity savedPlaceEntity = jpaPlaceRepository.save(placeEntity);
-
         return objectMapper.map(savedPlaceEntity, Place.class);
     }
 

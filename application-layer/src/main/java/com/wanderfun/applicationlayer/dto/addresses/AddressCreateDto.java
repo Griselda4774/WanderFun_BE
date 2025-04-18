@@ -1,7 +1,11 @@
 package com.wanderfun.applicationlayer.dto.addresses;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AddressCreateDto {
+    @NotBlank
     private String provinceCode;
+    @NotBlank
     private String districtCode;
     private String wardCode;
     private String street;

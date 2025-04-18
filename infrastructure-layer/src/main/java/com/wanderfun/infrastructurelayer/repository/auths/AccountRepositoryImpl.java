@@ -2,7 +2,7 @@ package com.wanderfun.infrastructurelayer.repository.auths;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.auths.Account;
-import com.wanderfun.domainlayer.repository.account.AccountRepository;
+import com.wanderfun.domainlayer.repository.auths.AccountRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.auths.JpaAccountRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;

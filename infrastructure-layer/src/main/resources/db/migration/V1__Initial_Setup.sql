@@ -140,7 +140,8 @@ CREATE TABLE place_categories (
     name VARCHAR(255) NOT NULL,
     name_en VARCHAR(255) NOT NULL,
     icon_image_id BIGINT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (icon_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
@@ -186,9 +187,10 @@ CREATE TABLE sections (
     title VARCHAR(255) NOT NULL,
     content TEXT,
     image_id BIGINT,
-    place_id BIGINT NOT NULL,
+    place_detail_id BIGINT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (place_id) REFERENCES place_details(place_id)
+    FOREIGN KEY (place_detail_id) REFERENCES place_details(id),
+    FOREIGN KEY (image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;

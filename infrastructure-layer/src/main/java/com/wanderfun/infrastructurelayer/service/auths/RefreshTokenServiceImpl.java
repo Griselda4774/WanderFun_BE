@@ -2,7 +2,7 @@ package com.wanderfun.infrastructurelayer.service.auths;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
-import com.wanderfun.domainlayer.repository.RefreshTokenRepository;
+import com.wanderfun.domainlayer.repository.auths.RefreshTokenRepository;
 import com.wanderfun.applicationlayer.service.auths.RefreshTokenService;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;

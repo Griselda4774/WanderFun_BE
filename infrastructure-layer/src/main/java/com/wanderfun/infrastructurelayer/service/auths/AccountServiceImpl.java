@@ -4,7 +4,7 @@ import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.auths.AccountService;
 import com.wanderfun.domainlayer.model.auths.Account;
-import com.wanderfun.domainlayer.repository.account.AccountRepository;
+import com.wanderfun.domainlayer.repository.auths.AccountRepository;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
