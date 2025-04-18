@@ -8,6 +8,7 @@ import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.places.JpaPlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
