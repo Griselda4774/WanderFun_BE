@@ -10,7 +10,7 @@ public class PlaceCreateDto {
     private String name;
     private Integer categoryId;
     private ImageDto coverImage;
-    private PlaceDetailDto placeDetailDto;
+    private PlaceDetailDto placeDetail;
 
     public PlaceCreateDto() {
     }
@@ -64,10 +64,10 @@ public class PlaceCreateDto {
     }
 
     public PlaceDetailDto getPlaceDetailDto() {
-        return placeDetailDto;
+        return placeDetail;
     }
 
-    public void setPlaceDetailDto(PlaceDetailDto placeDetailDto) {
-        this.placeDetailDto = placeDetailDto;
+    public void setPlaceDetail(PlaceDetailDto placeDetail) {
+        this.placeDetail = placeDetail;
     }
 }
