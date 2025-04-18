@@ -4,7 +4,6 @@ import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.addresses.Address;
 import com.wanderfun.domainlayer.repository.addresses.AddressRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.addresses.AddressEntity;
-import com.wanderfun.infrastructurelayer.persistence.entity.addresses.WardEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.addresses.JpaAddressRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
