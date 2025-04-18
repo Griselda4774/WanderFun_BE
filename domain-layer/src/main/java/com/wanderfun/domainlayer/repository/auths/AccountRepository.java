@@ -1,4 +1,4 @@
-package com.wanderfun.domainlayer.repository.account;
+package com.wanderfun.domainlayer.repository.auths;
 
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.repository.BaseRepository;

@@ -2,7 +2,7 @@ package com.wanderfun.infrastructurelayer.repository.auths;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
-import com.wanderfun.domainlayer.repository.RefreshTokenRepository;
+import com.wanderfun.domainlayer.repository.auths.RefreshTokenRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.auths.JpaRefreshTokenRepository;

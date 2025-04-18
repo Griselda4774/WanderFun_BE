@@ -26,4 +26,16 @@ public class AddressRepositoryImpl extends BaseRepositoryImpl<Address, AddressEn
         return jpaAddressRepository.findExistingAddress(provinceCode, districtCode, wardCode, street)
                 .map(addressEntity -> objectMapper.map(addressEntity, Address.class));
     }
+
+    @Override
+    public Address save(Address address) {
+        AddressEntity addressEntity = objectMapper.map(address, AddressEntity.class);
+
+        if (address.getWard().getCode() == null) {
+            addressEntity.setWard(null);
+        }
+
+        AddressEntity savedAddressEntity = jpaAddressRepository.save(addressEntity);
+        return objectMapper.map(savedAddressEntity, Address.class);
+    }
 }

@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface JpaAddressRepository extends JpaBaseRepository<AddressEntity, Long> {
     @Query("""
         SELECT a FROM AddressEntity a
-        WHERE a.street = :street
-        AND a.ward.code = :ward_code
+        WHERE ((:street IS NULL AND a.street IS NULL) OR (:street IS NOT NULL AND a.street = :street))
+        AND ((:ward_code IS NULL AND a.ward IS NULL) OR (:ward_code IS NOT NULL AND a.ward.code = :ward_code))
         AND a.district.code = :district_code
         AND a.province.code = :province_code
     """)

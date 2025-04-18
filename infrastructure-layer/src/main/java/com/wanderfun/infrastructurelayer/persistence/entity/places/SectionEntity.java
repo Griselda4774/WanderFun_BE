@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.persistence.entity.places;
 
+import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,13 +16,54 @@ public class SectionEntity {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "image_id")
-    private Long imageId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private ImageEntity imageId;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "place_id", nullable = false)
-    private PlaceDetailEntity place;
+    @JoinColumn(name = "place_detail_id", nullable = false)
+    private PlaceDetailEntity placeDetail;
 
     public SectionEntity() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public ImageEntity getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(ImageEntity imageId) {
+        this.imageId = imageId;
+    }
+
+    public PlaceDetailEntity getPlaceDetail() {
+        return placeDetail;
+    }
+
+    public void setPlaceDetail(PlaceDetailEntity placeDetail) {
+        this.placeDetail = placeDetail;
+    }
 }
 
