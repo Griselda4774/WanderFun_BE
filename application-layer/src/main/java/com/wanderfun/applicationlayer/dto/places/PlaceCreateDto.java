@@ -2,12 +2,18 @@ package com.wanderfun.applicationlayer.dto.places;
 
 import com.wanderfun.applicationlayer.dto.addresses.AddressCreateDto;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
+import jakarta.validation.constraints.NotBlank;
 
 public class PlaceCreateDto {
+    @NotBlank
     private double longitude;
+    @NotBlank
     private double latitude;
+    @NotBlank
     private AddressCreateDto address;
+    @NotBlank
     private String name;
+    @NotBlank
     private Integer categoryId;
     private ImageDto coverImage;
     private PlaceDetailDto placeDetail;
