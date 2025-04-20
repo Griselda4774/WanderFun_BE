@@ -85,7 +85,9 @@ CREATE TABLE province_details (
     local_transport TEXT,
     local_food TEXT,
     how_to_get_there TEXT,
-    FOREIGN KEY (province_code) REFERENCES provinces(code)
+    cover_image_id BIGINT,
+    FOREIGN KEY (province_code) REFERENCES provinces(code),
+    FOREIGN KEY (cover_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;

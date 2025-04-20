@@ -4,7 +4,7 @@ import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.addresses.DistrictDto;
 import com.wanderfun.applicationlayer.dto.addresses.ProvinceDto;
 import com.wanderfun.applicationlayer.dto.addresses.WardDto;
-import com.wanderfun.applicationlayer.usecase.AddressUsecase;
+import com.wanderfun.applicationlayer.usecase.addresses.AddressUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class AddressController {
     }
 
     @GetMapping("/province/search/{key}")
-    public ResponseEntity<ResponseDto<List<ProvinceDto>>> findAllProvinces(@PathVariable String key) {
+    public ResponseEntity<ResponseDto<List<ProvinceDto>>> findAllProvincesByNameContaining(@PathVariable String key) {
         List<ProvinceDto> result = addressUsecase.findAllProvincesByNameContaining(key);
         if (result == null) {
             throw new RequestFailedException("Find all province by name containing failed!");

@@ -1,8 +1,9 @@
-package com.wanderfun.applicationlayer.usecase;
+package com.wanderfun.applicationlayer.usecase.addresses;
 
 import com.wanderfun.applicationlayer.dto.addresses.DistrictDto;
 import com.wanderfun.applicationlayer.dto.addresses.ProvinceDto;
 import com.wanderfun.applicationlayer.dto.addresses.WardDto;
+import com.wanderfun.domainlayer.model.addresses.ProvinceDetail;
 
 import java.util.List;
 
@@ -14,7 +15,10 @@ public interface AddressUsecase {
     DistrictDto findDistrictByNameAndProvinceCode(String name, String provinceCode);
     List<WardDto> findAllWardsByDistrictCode(String districtCode);
     WardDto findWardByNameAndDistrictCode(String name, String districtCode);
-//    Address findAddressById(Long id);
-//    boolean createAddress(Address address);
-//    boolean updateAddressById(Long id, Address address);
+    ProvinceDetail findAllProvinceDetails();
+    ProvinceDetail findProvinceDetailByProvinceCode(String provinceCode);
+    boolean createProvinceDetail(ProvinceDetail provinceDetail);
+    boolean createAllProvinceDetails(List<ProvinceDetail> provinceDetails);
+    boolean updateProvinceDetailById(Integer id, ProvinceDetail provinceDetail);
+    boolean deleteProvinceDetailById(Integer id);
 }

@@ -5,7 +5,7 @@ import com.wanderfun.applicationlayer.dto.auths.LoginDto;
 import com.wanderfun.applicationlayer.dto.auths.LoginResponseDto;
 import com.wanderfun.applicationlayer.dto.auths.RegisterDto;
 import com.wanderfun.applicationlayer.dto.auths.TokenResponseDto;
-import com.wanderfun.applicationlayer.usecase.AuthUsecase;
+import com.wanderfun.applicationlayer.usecase.auths.AuthUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
