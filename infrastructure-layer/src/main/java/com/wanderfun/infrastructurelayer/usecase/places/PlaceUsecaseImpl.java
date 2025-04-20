@@ -1,11 +1,13 @@
 package com.wanderfun.infrastructurelayer.usecase.places;
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceDetailDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.AddressService;
+import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
 import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.domainlayer.model.addresses.Address;
@@ -14,24 +16,31 @@ import com.wanderfun.domainlayer.model.addresses.Province;
 import com.wanderfun.domainlayer.model.addresses.Ward;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
+import com.wanderfun.domainlayer.model.places.PlaceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceUsecaseImpl implements PlaceUsecase {
     private final PlaceService placeService;
     private final ObjectMapper objectMapper;
     private final AddressService addressService;
+    private final PlaceDetailService placeDetailService;
 
     @Autowired
-    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService) {
+    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.addressService = addressService;
+        this.placeDetailService = placeDetailService;
     }
 
     @Override
@@ -61,19 +70,28 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
 
     @Override
     public List<PlaceDto> findAllByProvinceName(String provinceName) {
-        return objectMapper.mapList(placeService.findAllByProvinceName(provinceName), PlaceDto.class);
+        List<Place> places = placeService.findAllByProvinceName(provinceName);
+        List<PlaceDto> placeDtoList = objectMapper.mapList(places, PlaceDto.class);
+        return placeDtoList;
     }
 
     @Override
     public boolean create(PlaceCreateDto placeCreateDto) {
         Place place = objectMapper.map(placeCreateDto, Place.class);
         checkPlaceBeforeCreate(place, placeCreateDto);
-        placeService.create(place);
+        Place savedPlace = placeService.create(place);
+        handlePlaceDetail(savedPlace, placeCreateDto);
         return true;
     }
 
     @Override
     public boolean createAll(List<PlaceCreateDto> placeCreateDtoList) {
+        Map<String, PlaceCreateDto> placeDtoMap = placeCreateDtoList.stream()
+                .collect(Collectors.toMap(
+                        PlaceCreateDto::getName,
+                        Function.identity()
+                ));
+
         List<Place> placeList = placeCreateDtoList.stream()
                 .map(placeCreateDto -> {
                     try {
@@ -87,7 +105,14 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                 .filter(Objects::nonNull)
                 .toList();
 
-        placeService.createAll(placeList);
+        List<Place> savedPlaceList = placeService.createAll(placeList);
+        savedPlaceList.forEach(place -> {
+            PlaceCreateDto dto = placeDtoMap.get(place.getName());
+            if (dto != null) {
+                handlePlaceDetail(place, dto);
+            }
+        });
+
         return true;
     }
 
@@ -148,7 +173,9 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
             place.setAddress(existingAddress);
         }
 
-        placeService.updateById(id, place);
+        Place savedPlace = placeService.updateById(id, place);
+        handlePlaceDetail(savedPlace, placeCreateDto);
+
         return true;
     }
 
@@ -210,6 +237,17 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                         place.getAddress().getStreet());
                 place.setAddress(existingAddress);
             }
+        }
+    }
+
+    private void handlePlaceDetail(Place savedPlace, PlaceCreateDto placeCreateDto) {
+        PlaceDetail placeDetail = objectMapper.map(placeCreateDto.getPlaceDetailDto(), PlaceDetail.class);
+        placeDetail.setPlaceId(savedPlace.getId());
+        try {
+            PlaceDetail existingPlaceDetail = placeDetailService.findByPlaceId(savedPlace.getId());
+            placeDetailService.updateById(existingPlaceDetail.getId(), placeDetail);
+        } catch (Exception e) {
+            placeDetailService.create(placeDetail);
         }
     }
 }

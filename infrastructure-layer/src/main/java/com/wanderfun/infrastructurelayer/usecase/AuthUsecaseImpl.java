@@ -10,7 +10,7 @@ import com.wanderfun.applicationlayer.exception.WrongEmailOrPasswordException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.auths.RefreshTokenService;
 import com.wanderfun.applicationlayer.service.auths.AccountService;
-import com.wanderfun.applicationlayer.usecase.AuthUsecase;
+import com.wanderfun.applicationlayer.usecase.auths.AuthUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;

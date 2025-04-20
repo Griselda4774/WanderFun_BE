@@ -29,27 +29,27 @@ public class BaseServiceImpl<Model, ID> implements BaseService<Model, ID> {
     }
 
     @Override
-    public void create(Model model) {
-        baseRepository.save(model);
+    public Model create(Model model) {
+        return baseRepository.save(model);
     }
 
     @Override
-    public void createAll(List<Model> models) {
-        baseRepository.saveAll(models);
+    public List<Model> createAll(List<Model> models) {
+        return baseRepository.saveAll(models);
     }
 
     @Override
-    public void updateById(ID id, Model model) {
+    public Model updateById(ID id, Model model) {
         Model existingModel = baseRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", modelClass.getSimpleName())));
 
         objectMapper.copyProperties(model, existingModel);
-        baseRepository.save(existingModel);
+        return baseRepository.save(existingModel);
     }
 
     @Override
-    public void updateAll(List<Model> models) {
-        baseRepository.saveAll(models);
+    public List<Model> updateAll(List<Model> models) {
+        return baseRepository.saveAll(models);
     }
 
     @Override
