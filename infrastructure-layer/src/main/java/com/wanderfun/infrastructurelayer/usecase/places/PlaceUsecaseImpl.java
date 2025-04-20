@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.usecase.places;
 
+import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDetailDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
@@ -54,8 +55,18 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public PlaceDto findById(long id) {
-        return objectMapper.map(placeService.findById(id), PlaceDto.class);
+    public FullPlaceDto findById(Long id) throws ObjectNotFoundException {
+        FullPlaceDto fullPlaceDto = objectMapper.map(placeService.findById(id), FullPlaceDto.class);
+
+        try {
+            PlaceDetail placeDetail = placeDetailService.findByPlaceId(id);
+            PlaceDetailDto placeDetailDto = objectMapper.map(placeDetail, PlaceDetailDto.class);
+            fullPlaceDto.setPlaceDetail(placeDetailDto);
+        } catch (ObjectNotFoundException e) {
+            fullPlaceDto.setPlaceDetail(new PlaceDetailDto());
+        }
+
+        return fullPlaceDto;
     }
 
     @Override

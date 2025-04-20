@@ -8,7 +8,7 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.place.PlaceDto;
 //import com.wanderfun.applicationlayer.dto.ResponseDto;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
+import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
@@ -74,13 +74,13 @@ public class PlaceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto<PlaceDto>> findPlaceById(@PathVariable Long id) {
-        PlaceDto result = placeUsecase.findById(id);
+    public ResponseEntity<ResponseDto<FullPlaceDto>> findPlaceById(@PathVariable Long id) {
+        FullPlaceDto result = placeUsecase.findById(id);
         if (result == null) {
             throw new RequestFailedException("Find place failed!");
         }
 
-        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        ResponseDto<FullPlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Find place successful!");
         response.setData(result);
