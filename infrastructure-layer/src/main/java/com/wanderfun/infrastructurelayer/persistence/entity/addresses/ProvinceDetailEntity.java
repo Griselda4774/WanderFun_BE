@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.persistence.entity.addresses;
 
+import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -40,6 +41,10 @@ public class ProvinceDetailEntity {
 
     @Column(name = "how_to_get_there", columnDefinition = "TEXT")
     private String howToGetThere;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "cover_image_id")
+    private ImageEntity coverImage;
 
     public ProvinceDetailEntity() {};
 
@@ -129,6 +134,14 @@ public class ProvinceDetailEntity {
 
     public void setHowToGetThere(String howToGetThere) {
         this.howToGetThere = howToGetThere;
+    }
+
+    public ImageEntity getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(ImageEntity coverImage) {
+        this.coverImage = coverImage;
     }
 }
 

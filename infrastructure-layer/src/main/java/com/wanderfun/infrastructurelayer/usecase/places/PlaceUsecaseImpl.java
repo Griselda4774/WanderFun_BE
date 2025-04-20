@@ -70,7 +70,9 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
 
     @Override
     public List<PlaceDto> findAllByProvinceName(String provinceName) {
-        return objectMapper.mapList(placeService.findAllByProvinceName(provinceName), PlaceDto.class);
+        List<Place> places = placeService.findAllByProvinceName(provinceName);
+        List<PlaceDto> placeDtoList = objectMapper.mapList(places, PlaceDto.class);
+        return placeDtoList;
     }
 
     @Override

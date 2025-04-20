@@ -13,9 +13,9 @@ import java.util.Optional;
 public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long> {
     @Query("""
         SELECT p FROM PlaceEntity p
-        WHERE p.address.province.name = :provinceName
+        WHERE p.address.province.nameEn = :province_name
     """)
-    List<PlaceEntity> findByProvinceName(@Param("provinceName") String provinceName);
+    List<PlaceEntity> findByProvinceName(@Param("province_name") String provinceName);
 
     List<PlaceEntity> findAllByNameContaining(String name);
     @Query("SELECT p FROM PlaceEntity p WHERE p.name = :name")

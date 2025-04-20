@@ -1,8 +1,10 @@
 package com.wanderfun.applicationlayer.dto.addresses;
 
+import com.wanderfun.applicationlayer.dto.images.ImageDto;
+
 public class ProvinceDetailDto {
     private Integer id;
-    private String provinceCode;
+    private String provinceName;
     private double longitude;
     private double latitude;
     private double area_km2;
@@ -12,6 +14,7 @@ public class ProvinceDetailDto {
     private String localTransport;
     private String localFood;
     private String howToGetThere;
+    private ImageDto coverImage;
 
     public ProvinceDetailDto() {
     }
@@ -25,11 +28,11 @@ public class ProvinceDetailDto {
     }
 
     public String getProvinceCode() {
-        return provinceCode;
+        return provinceName;
     }
 
     public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
+        this.provinceName = provinceCode;
     }
 
     public double getLongitude() {
@@ -102,5 +105,13 @@ public class ProvinceDetailDto {
 
     public void setHowToGetThere(String howToGetThere) {
         this.howToGetThere = howToGetThere;
+    }
+
+    public ImageDto getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(ImageDto coverImage) {
+        this.coverImage = coverImage;
     }
 }

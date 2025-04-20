@@ -1,6 +1,5 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.addresses.AddressDto;
 import com.wanderfun.applicationlayer.dto.addresses.DistrictDto;
 import com.wanderfun.applicationlayer.dto.addresses.ProvinceDto;
 import com.wanderfun.applicationlayer.dto.addresses.WardDto;
@@ -8,8 +7,8 @@ import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.DistrictService;
 import com.wanderfun.applicationlayer.service.addresses.ProvinceService;
 import com.wanderfun.applicationlayer.service.addresses.WardService;
-import com.wanderfun.applicationlayer.usecase.AddressUsecase;
-import com.wanderfun.domainlayer.model.addresses.Address;
+import com.wanderfun.applicationlayer.usecase.addresses.AddressUsecase;
+import com.wanderfun.domainlayer.model.addresses.ProvinceDetail;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,5 +61,35 @@ public class AddressUsecaseImpl implements AddressUsecase {
     @Override
     public WardDto findWardByNameAndDistrictCode(String name, String districtCode) {
         return objectMapper.map(wardService.findByNameAndDistrictCode(name, districtCode), WardDto.class);
+    }
+
+    @Override
+    public ProvinceDetail findAllProvinceDetails() {
+        return null;
+    }
+
+    @Override
+    public ProvinceDetail findProvinceDetailByProvinceCode(String provinceCode) {
+        return null;
+    }
+
+    @Override
+    public boolean createProvinceDetail(ProvinceDetail provinceDetail) {
+        return false;
+    }
+
+    @Override
+    public boolean createAllProvinceDetails(List<ProvinceDetail> provinceDetails) {
+        return false;
+    }
+
+    @Override
+    public boolean updateProvinceDetailById(Integer id, ProvinceDetail provinceDetail) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteProvinceDetailById(Integer id) {
+        return false;
     }
 }
