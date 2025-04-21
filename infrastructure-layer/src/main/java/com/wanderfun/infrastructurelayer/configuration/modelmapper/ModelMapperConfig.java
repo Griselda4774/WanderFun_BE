@@ -1,9 +1,17 @@
 package com.wanderfun.infrastructurelayer.configuration.modelmapper;
 
+import com.wanderfun.domainlayer.model.images.Image;
+import com.wanderfun.domainlayer.model.places.Section;
+import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Configuration
 public class ModelMapperConfig {
@@ -18,6 +26,13 @@ public class ModelMapperConfig {
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
                 .setPropertyCondition(context -> context.getSource() != null)
                 .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        modelMapper.addConverter(new AbstractConverter<Collection<?>, List<?>>() {
+            @Override
+            protected List<?> convert(Collection<?> source) {
+                return source == null ? null : new ArrayList<>(source);
+            }
+        });
 
         return modelMapper;
     }

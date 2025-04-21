@@ -6,6 +6,7 @@ import com.wanderfun.domainlayer.repository.place.PlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceDetailEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.mapper.PlaceDetailEntityMapper;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.places.JpaPlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 
@@ -19,12 +20,14 @@ import java.util.Optional;
 public class PlaceDetailRepositoryImpl extends BaseRepositoryImpl<PlaceDetail, PlaceDetailEntity, Long> implements PlaceDetailRepository {
     private final JpaPlaceDetailRepository jpaPlaceDetailRepository;
     private final ObjectMapper objectMapper;
+    private final PlaceDetailEntityMapper placeDetailEntityMapper;
 
     @Autowired
-    public PlaceDetailRepositoryImpl(JpaPlaceDetailRepository jpaPlaceDetailRepository, ObjectMapper objectMapper) {
+    public PlaceDetailRepositoryImpl(JpaPlaceDetailRepository jpaPlaceDetailRepository, ObjectMapper objectMapper, PlaceDetailEntityMapper placeDetailEntityMapper) {
         super(jpaPlaceDetailRepository, objectMapper, PlaceDetail.class, PlaceDetailEntity.class);
         this.jpaPlaceDetailRepository = jpaPlaceDetailRepository;
         this.objectMapper = objectMapper;
+        this.placeDetailEntityMapper = placeDetailEntityMapper;
     }
 
     @Override
@@ -52,6 +55,6 @@ public class PlaceDetailRepositoryImpl extends BaseRepositoryImpl<PlaceDetail, P
     @Override
     public Optional<PlaceDetail> findByPlaceId(Long placeId) {
         return jpaPlaceDetailRepository.findByPlace_Id(placeId)
-                .map(placeDetailEntity -> objectMapper.map(placeDetailEntity, PlaceDetail.class));
+                .map(placeDetailEntityMapper::toModel);
     }
 }
