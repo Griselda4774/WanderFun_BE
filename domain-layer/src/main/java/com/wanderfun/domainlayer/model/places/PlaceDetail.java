@@ -1,6 +1,7 @@
 package com.wanderfun.domainlayer.model.places;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceDetail {
@@ -19,7 +20,7 @@ public class PlaceDetail {
     private String alternativeName;
     private String operator;
     private String url;
-    private List<Section> sectionList;
+    private List<Section> sectionList = new ArrayList<>();
 
     public PlaceDetail() {
     }

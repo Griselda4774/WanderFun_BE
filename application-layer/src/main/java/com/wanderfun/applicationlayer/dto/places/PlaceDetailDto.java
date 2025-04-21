@@ -5,7 +5,6 @@ import java.util.List;
 
 public class PlaceDetailDto {
     private Long id;
-    private Long placeId;
     private String description;
     private int checkInPoint;
     private float checkInRangeMeter;
@@ -30,14 +29,6 @@ public class PlaceDetailDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 
     public String getDescription() {

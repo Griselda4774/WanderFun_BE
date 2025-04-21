@@ -18,7 +18,7 @@ public class SectionEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
-    private ImageEntity imageId;
+    private ImageEntity image;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "place_detail_id", nullable = false)
@@ -50,12 +50,12 @@ public class SectionEntity {
         this.content = content;
     }
 
-    public ImageEntity getImageId() {
-        return imageId;
+    public ImageEntity getImage() {
+        return image;
     }
 
-    public void setImageId(ImageEntity imageId) {
-        this.imageId = imageId;
+    public void setImage(ImageEntity image) {
+        this.image = image;
     }
 
     public PlaceDetailEntity getPlaceDetail() {
