@@ -6,6 +6,7 @@ import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.domainlayer.model.places.PlaceDetail;
 import com.wanderfun.domainlayer.repository.place.PlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ public class PlaceDetailServiceImpl extends BaseServiceImpl<PlaceDetail, Long> i
     }
 
     @Override
+    @Transactional
     public PlaceDetail findByPlaceId(Long placeId) {
-        return placeDetailRepository.findByPlaceId(placeId).map(placeDetailEntity -> objectMapper.map(placeDetailEntity, PlaceDetail.class))
+        return placeDetailRepository.findByPlaceId(placeId)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", PlaceDetail.class.getSimpleName())));
     }
 }
