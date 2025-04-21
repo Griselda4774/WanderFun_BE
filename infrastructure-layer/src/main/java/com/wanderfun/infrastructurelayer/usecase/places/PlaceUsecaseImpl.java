@@ -197,6 +197,9 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {
+        if (place.getAddress() == null) {
+            place.setAddress(new Address());
+        }
         place.getAddress().setProvince(new Province());
         place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
 
