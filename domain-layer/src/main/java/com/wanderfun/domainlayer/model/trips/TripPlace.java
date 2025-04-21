@@ -10,6 +10,7 @@ public class TripPlace {
     private Long tripId;
     private Date startTime;
     private Date endTime;
+    private String placeNote;
 
     public TripPlace() {}
 
@@ -51,5 +52,13 @@ public class TripPlace {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getPlaceNote() {
+        return placeNote;
+    }
+
+    public void setPlaceNote(String placeNote) {
+        this.placeNote = placeNote;
     }
 }
