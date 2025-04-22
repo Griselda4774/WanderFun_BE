@@ -260,7 +260,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         try {
             PlaceDetail existingPlaceDetail = placeDetailService.findByPlaceId(savedPlace.getId());
             placeDetailService.updateById(existingPlaceDetail.getId(), placeDetail);
-        } catch (Exception e) {
+        } catch (ObjectNotFoundException e) {
             placeDetailService.create(placeDetail);
         }
     }
