@@ -4,6 +4,7 @@ import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.repository.BaseRepository;
 import com.wanderfun.applicationlayer.service.BaseService;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class BaseServiceImpl<Model, ID> implements BaseService<Model, ID> {
     }
 
     @Override
+    @Transactional
     public Model updateById(ID id, Model model) {
         Model existingModel = baseRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", modelClass.getSimpleName())));
