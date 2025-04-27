@@ -54,9 +54,8 @@ public class PlaceCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@PathVariable long placeCategoryId,
-                                                                       @RequestHeader("Authorization") String accessToken,
+    @PostMapping("/categories")
+    public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@RequestHeader("Authorization") String accessToken,
                                                                        @RequestBody PlaceCategoryDto placeCategoryDto){
         boolean result = placeCategoryUsecase.createPlaceCategory(placeCategoryDto);
 
