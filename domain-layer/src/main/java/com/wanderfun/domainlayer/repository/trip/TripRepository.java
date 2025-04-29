@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface TripRepository extends BaseRepository<Trip, Long> {
     Optional<Trip> findByName(String name);
-    List<Trip> findAllByUser_Id(Long userId);
+    List<Trip> findAllByUserId(Long userId);
     void deleteAllByUserId(Long userId);
 }
