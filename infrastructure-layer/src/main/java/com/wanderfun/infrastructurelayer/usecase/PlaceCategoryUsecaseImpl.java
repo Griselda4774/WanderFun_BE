@@ -1,11 +1,11 @@
-package com.wanderfun.infrastructurelayer.usecase.places;
+package com.wanderfun.infrastructurelayer.usecase;
 
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.place.PlaceCategoryService;
-import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
+import com.wanderfun.applicationlayer.usecase.PlaceCategoryUsecase;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

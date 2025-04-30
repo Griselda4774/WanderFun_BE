@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.usecase.addresses;
+package com.wanderfun.applicationlayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.addresses.DistrictDto;
 import com.wanderfun.applicationlayer.dto.addresses.ProvinceDto;
