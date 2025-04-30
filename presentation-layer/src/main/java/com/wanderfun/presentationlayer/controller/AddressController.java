@@ -4,7 +4,7 @@ import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.addresses.DistrictDto;
 import com.wanderfun.applicationlayer.dto.addresses.ProvinceDto;
 import com.wanderfun.applicationlayer.dto.addresses.WardDto;
-import com.wanderfun.applicationlayer.usecase.addresses.AddressUsecase;
+import com.wanderfun.applicationlayer.usecase.AddressUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.usecase.places;
+package com.wanderfun.infrastructurelayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
@@ -10,7 +10,7 @@ import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.AddressService;
 import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
-import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
+import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
 import com.wanderfun.domainlayer.model.addresses.Address;
 import com.wanderfun.domainlayer.model.addresses.District;
 import com.wanderfun.domainlayer.model.addresses.Province;
@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
