@@ -40,12 +40,10 @@ public class PlaceDetailRepositoryImpl extends BaseRepositoryImpl<PlaceDetail, P
             placeDetailEntity.setPlace(placeEntity);
         }
 
-        if (placeDetail.getSectionList() != null) {
-            if (!placeDetail.getSectionList().isEmpty()) {
-                List<SectionEntity> sectionEntityList = objectMapper.mapList(placeDetail.getSectionList(), SectionEntity.class);
-                sectionEntityList.forEach(sectionEntity -> sectionEntity.setPlaceDetail(placeDetailEntity));
-                placeDetailEntity.setSectionList(sectionEntityList);
-            }
+        if (placeDetail.getSectionList() != null && !placeDetail.getSectionList().isEmpty()) {
+            List<SectionEntity> sectionEntityList = objectMapper.mapList(placeDetail.getSectionList(), SectionEntity.class);
+            sectionEntityList.forEach(sectionEntity -> sectionEntity.setPlaceDetail(placeDetailEntity));
+            placeDetailEntity.setSectionList(sectionEntityList);
         }
 
         PlaceDetailEntity savedPlaceDetailEntity = jpaPlaceDetailRepository.save(placeDetailEntity);

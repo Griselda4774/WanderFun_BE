@@ -7,7 +7,7 @@ import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.DistrictService;
 import com.wanderfun.applicationlayer.service.addresses.ProvinceService;
 import com.wanderfun.applicationlayer.service.addresses.WardService;
-import com.wanderfun.applicationlayer.usecase.addresses.AddressUsecase;
+import com.wanderfun.applicationlayer.usecase.AddressUsecase;
 import com.wanderfun.domainlayer.model.addresses.ProvinceDetail;
 import org.springframework.stereotype.Service;
 

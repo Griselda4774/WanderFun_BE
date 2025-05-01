@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.usecase.places;
+package com.wanderfun.applicationlayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;

@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.usecase.auths;
+package com.wanderfun.applicationlayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.auths.LoginDto;
 import com.wanderfun.applicationlayer.dto.auths.LoginResponseDto;

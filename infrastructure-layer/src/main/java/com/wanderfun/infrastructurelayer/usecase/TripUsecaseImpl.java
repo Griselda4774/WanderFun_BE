@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.usecase.trips;
+package com.wanderfun.infrastructurelayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.trips.TripDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
@@ -44,7 +44,7 @@ public class TripUsecaseImpl implements TripUsecase {
 
         trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
         trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
-        trip.setAuthorId(jwtUtil.getIdFromToken(accessToken));
+        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.create(trip);
         return true;
     }

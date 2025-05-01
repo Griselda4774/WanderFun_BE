@@ -2,7 +2,7 @@ package com.wanderfun.presentationlayer.controller;
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
-import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
+import com.wanderfun.applicationlayer.usecase.PlaceCategoryUsecase;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class PlaceCategoryController {
     }
 
     @GetMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable Long placeCategoryId) {
+    public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable Integer placeCategoryId) {
         PlaceCategory result = placeCategoryUsecase.findPlaceCategoryById(placeCategoryId);
         if (result == null) {
             throw new RequestFailedException("Find place category failed!");
@@ -70,7 +70,7 @@ public class PlaceCategoryController {
     }
 
     @PutMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Long placeCategoryId,
+    public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Integer placeCategoryId,
                                                                           @RequestBody PlaceCategoryDto placeCategoryDto) {
         boolean result = placeCategoryUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
 
@@ -85,7 +85,7 @@ public class PlaceCategoryController {
     }
 
     @DeleteMapping("/categories/{placeCategoryId}")
-    public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Long placeCategoryId) {
+    public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Integer placeCategoryId) {
         boolean result = placeCategoryUsecase.deletePlaceCategoryById(placeCategoryId);
 
         if (!result) {
