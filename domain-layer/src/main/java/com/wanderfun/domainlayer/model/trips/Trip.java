@@ -8,7 +8,7 @@ public class Trip {
     private String name;
     private Date startTime;
     private Date endTime;
-    private Long authorId;
+    private Long userId;
     private List<TripPlace> listTripPlaces;
 
     public Trip() {}
@@ -45,12 +45,12 @@ public class Trip {
         this.endTime = endTime;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public List<TripPlace> getListTripPlaces() {
