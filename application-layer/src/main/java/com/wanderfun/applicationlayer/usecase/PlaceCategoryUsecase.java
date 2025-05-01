@@ -11,11 +11,11 @@ public interface PlaceCategoryUsecase {
 
     List<PlaceCategory> findAllPlaceCategory();
 
-    PlaceCategory findPlaceCategoryById(Long id);
+    PlaceCategory findPlaceCategoryById(Integer id);
 
     boolean createPlaceCategory(PlaceCategoryDto placeCategoryDto);
 
-    boolean updatePlaceCategoryById(Long id, PlaceCategoryDto placeCategoryDto);
+    boolean updatePlaceCategoryById(Integer id, PlaceCategoryDto placeCategoryDto);
 
-    boolean deletePlaceCategoryById(Long id);
+    boolean deletePlaceCategoryById(Integer id);
 }

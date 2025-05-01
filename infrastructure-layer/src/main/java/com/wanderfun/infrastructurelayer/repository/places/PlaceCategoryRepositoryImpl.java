@@ -32,10 +32,4 @@ public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategor
         return jpaPlaceCategoryRepository.findByNameEn(nameEn)
                 .map(entity -> objectMapper.map(entity, PlaceCategory.class));
     }
-
-    @Override
-    public Optional<PlaceCategory> findById(Integer id) {
-        return jpaPlaceCategoryRepository.findById(id)
-                .map(entity -> objectMapper.map(entity, PlaceCategory.class));
-    }
 }
