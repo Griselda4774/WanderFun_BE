@@ -1,24 +1,24 @@
-package com.wanderfun.domainlayer.model.posts;
+package com.wanderfun.applicationlayer.dto.posts;
 
-import com.wanderfun.domainlayer.model.places.Place;
-import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
+import com.wanderfun.domainlayer.model.places.MiniPlaceDto;
 import com.wanderfun.domainlayer.model.trips.Trip;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-public class Post {
+public class PostDto {
     private Long id;
-    private User user;
+    private MiniUserDto user;
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    private Place place;
+    private MiniPlaceDto place;
     private boolean isTripShare;
     private Trip trip;
     private int likeCount;
+    private boolean isLiked;
 
-    public Post() {
+    public PostDto() {
     }
 
     public Long getId() {
@@ -29,11 +29,11 @@ public class Post {
         this.id = id;
     }
 
-    public User getUser() {
+    public MiniUserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(MiniUserDto user) {
         this.user = user;
     }
 
@@ -61,11 +61,11 @@ public class Post {
         this.updateAt = updateAt;
     }
 
-    public Place getPlace() {
+    public MiniPlaceDto getPlace() {
         return place;
     }
 
-    public void setPlace(Place place) {
+    public void setPlace(MiniPlaceDto place) {
         this.place = place;
     }
 
@@ -91,5 +91,13 @@ public class Post {
 
     public void setLike(int like) {
         this.likeCount = like;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 }

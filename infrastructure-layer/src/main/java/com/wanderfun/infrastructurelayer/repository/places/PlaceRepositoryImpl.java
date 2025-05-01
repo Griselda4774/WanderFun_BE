@@ -29,29 +29,31 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
     public Place save(Place place) {
         PlaceEntity placeEntity = objectMapper.map(place, PlaceEntity.class);
 
-        if (place.getAddress() != null) {
-            if (placeEntity.getAddress().getId() != null) {
-                AddressEntity addressEntity = new AddressEntity();
-                addressEntity.setId(place.getAddress().getId());
-                placeEntity.setAddress(addressEntity);
-            }
-        }
+        mapEntityRelation(place, placeEntity);
 
-        if (place.getCategory() != null) {
-            if (placeEntity.getCategory().getId() != null) {
-                PlaceCategoryEntity placeCategoryEntity = new PlaceCategoryEntity();
-                placeCategoryEntity.setId(place.getCategory().getId());
-                placeEntity.setCategory(placeCategoryEntity);
-            }
-        }
-
-        if (place.getCoverImage() != null) {
-            if (placeEntity.getCoverImage().getId() != null) {
-                ImageEntity imageEntity = new ImageEntity();
-                imageEntity.setId(place.getCoverImage().getId());
-                placeEntity.setCoverImage(imageEntity);
-            }
-        }
+//        if (place.getAddress() != null) {
+//            if (placeEntity.getAddress().getId() != null) {
+//                AddressEntity addressEntity = new AddressEntity();
+//                addressEntity.setId(place.getAddress().getId());
+//                placeEntity.setAddress(addressEntity);
+//            }
+//        }
+//
+//        if (place.getCategory() != null) {
+//            if (placeEntity.getCategory().getId() != null) {
+//                PlaceCategoryEntity placeCategoryEntity = new PlaceCategoryEntity();
+//                placeCategoryEntity.setId(place.getCategory().getId());
+//                placeEntity.setCategory(placeCategoryEntity);
+//            }
+//        }
+//
+//        if (place.getCoverImage() != null) {
+//            if (placeEntity.getCoverImage().getId() != null) {
+//                ImageEntity imageEntity = new ImageEntity();
+//                imageEntity.setId(place.getCoverImage().getId());
+//                placeEntity.setCoverImage(imageEntity);
+//            }
+//        }
 
         PlaceEntity savedPlaceEntity = jpaPlaceRepository.save(placeEntity);
         return objectMapper.map(savedPlaceEntity, Place.class);
@@ -62,29 +64,7 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
         List<PlaceEntity> placeEntities = places.stream()
                 .map((place) -> {
                     PlaceEntity placeEntity = objectMapper.map(place, PlaceEntity.class);
-                    if (place.getAddress() != null) {
-                        if (placeEntity.getAddress().getId() != null) {
-                            AddressEntity addressEntity = new AddressEntity();
-                            addressEntity.setId(place.getAddress().getId());
-                            placeEntity.setAddress(addressEntity);
-                        }
-                    }
-
-                    if (place.getCategory() != null) {
-                        if (placeEntity.getCategory().getId() != null) {
-                            PlaceCategoryEntity placeCategoryEntity = new PlaceCategoryEntity();
-                            placeCategoryEntity.setId(place.getCategory().getId());
-                            placeEntity.setCategory(placeCategoryEntity);
-                        }
-                    }
-
-                    if (place.getCoverImage() != null) {
-                        if (placeEntity.getCoverImage().getId() != null) {
-                            ImageEntity imageEntity = new ImageEntity();
-                            imageEntity.setId(place.getCoverImage().getId());
-                            placeEntity.setCoverImage(imageEntity);
-                        }
-                    }
+                    mapEntityRelation(place, placeEntity);
                     return placeEntity;
                 }).toList();
 
@@ -115,5 +95,25 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
     @Override
     public List<Place> findAllByProvinceName(String provinceName) {
         return objectMapper.mapList(jpaPlaceRepository.findByProvinceName(provinceName), Place.class);
+    }
+
+    private void mapEntityRelation(Place place, PlaceEntity placeEntity) {
+        if (place.getAddress() != null && place.getAddress().getId() != null) {
+            AddressEntity addressEntity = new AddressEntity();
+            addressEntity.setId(place.getAddress().getId());
+            placeEntity.setAddress(addressEntity);
+        }
+
+        if (place.getCategory() != null && place.getCategory().getId() != null) {
+            PlaceCategoryEntity placeCategoryEntity = new PlaceCategoryEntity();
+            placeCategoryEntity.setId(place.getCategory().getId());
+            placeEntity.setCategory(placeCategoryEntity);
+        }
+
+        if (place.getCoverImage() != null && place.getCoverImage().getId() != null) {
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.setId(place.getCoverImage().getId());
+            placeEntity.setCoverImage(imageEntity);
+        }
     }
 }

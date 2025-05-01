@@ -6,7 +6,7 @@
 //import com.wanderfun.applicationlayer.service.LeaderboardPlaceService;
 //import com.wanderfun.applicationlayer.service.LeaderboardUserService;
 //import com.wanderfun.applicationlayer.service.place.PlaceService;
-//import com.wanderfun.applicationlayer.service.UserService;
+//import com.wanderfun.applicationlayer.service.users.UserService;
 //import com.wanderfun.domainlayer.model.statistics.LeaderboardPlace;
 //import com.wanderfun.domainlayer.model.statistics.LeaderboardUser;
 //import com.wanderfun.domainlayer.model.places.Place;
