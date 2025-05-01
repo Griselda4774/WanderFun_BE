@@ -5,8 +5,8 @@ import com.wanderfun.domainlayer.repository.BaseRepository;
 
 import java.util.Optional;
 
-public interface PlaceCategoryRepository extends BaseRepository<PlaceCategory, Integer> {
+public interface PlaceCategoryRepository extends BaseRepository<PlaceCategory, Long> {
     Optional<PlaceCategory> findByName(String name);
     Optional<PlaceCategory> findByNameEn(String nameEn);
-    Optional<PlaceCategory> findById(Integer id);
+    Optional<PlaceCategory> findById(Long id);
 }
