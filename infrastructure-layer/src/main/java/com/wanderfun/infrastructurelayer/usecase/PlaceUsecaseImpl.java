@@ -8,6 +8,9 @@ import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.addresses.AddressService;
+import com.wanderfun.applicationlayer.service.addresses.DistrictService;
+import com.wanderfun.applicationlayer.service.addresses.ProvinceService;
+import com.wanderfun.applicationlayer.service.addresses.WardService;
 import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
 import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
@@ -34,13 +37,19 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     private final ObjectMapper objectMapper;
     private final AddressService addressService;
     private final PlaceDetailService placeDetailService;
+    private final ProvinceService provinceService;
+    private final DistrictService districtService;
+    private final WardService wardService;
 
     @Autowired
-    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService) {
+    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService, ProvinceService provinceService, DistrictService districtService, WardService wardService) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.addressService = addressService;
         this.placeDetailService = placeDetailService;
+        this.provinceService = provinceService;
+        this.districtService = districtService;
+        this.wardService = wardService;
     }
 
     @Override
@@ -199,17 +208,24 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         if (place.getAddress() == null) {
             place.setAddress(new Address());
         }
+
+        String provinceCode = provinceService.findByName(placeCreateDto.getAddress().getProvinceName()).getCode();
         place.getAddress().setProvince(new Province());
-        place.getAddress().getProvince().setCode(placeCreateDto.getAddress().getProvinceCode());
+        place.getAddress().getProvince().setCode(provinceCode);
 
+        String districtCode = districtService.findByNameAndProvinceCode(placeCreateDto.getAddress().getDistrictName(), provinceCode).getCode();
         place.getAddress().setDistrict(new District());
-        place.getAddress().getDistrict().setCode(placeCreateDto.getAddress().getDistrictCode());
+        place.getAddress().getDistrict().setCode(districtCode);
 
-        String wardCode = placeCreateDto.getAddress().getWardCode();
+        String wardCode;
+        try {
+            wardCode = wardService.findByNameAndDistrictCode(placeCreateDto.getAddress().getWardName(), districtCode).getCode();
+        } catch (ObjectNotFoundException e) {
+            wardCode = null;
+        }
+
         place.getAddress().setWard(new Ward());
-        place.getAddress().getWard().setCode(
-                StringUtils.hasText(wardCode) ? wardCode : null
-        );
+        place.getAddress().getWard().setCode(wardCode);
 
         String street = placeCreateDto.getAddress().getStreet();
         place.getAddress().setStreet(StringUtils.hasText(street) ? street : null);

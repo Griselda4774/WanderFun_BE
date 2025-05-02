@@ -2,10 +2,14 @@ package com.wanderfun.infrastructurelayer.persistence.entity.posts;
 
 import com.wanderfun.infrastructurelayer.persistence.entity.users.UserEntity;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "comments")
 public class CommentEntity {
     @Id
@@ -20,9 +24,11 @@ public class CommentEntity {
     private String content;
 
     @Column(name = "create_at", nullable = false, updatable = false)
+    @CreatedDate
     private LocalDateTime createAt;
 
     @Column(name = "update_at", nullable = false)
+    @LastModifiedDate
     private LocalDateTime updateAt;
 
     @ManyToOne(optional = false)

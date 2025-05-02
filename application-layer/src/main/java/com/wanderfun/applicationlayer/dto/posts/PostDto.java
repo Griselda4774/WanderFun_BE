@@ -1,5 +1,6 @@
 package com.wanderfun.applicationlayer.dto.posts;
 
+import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 import com.wanderfun.domainlayer.model.places.MiniPlaceDto;
 import com.wanderfun.domainlayer.model.trips.Trip;
@@ -15,6 +16,7 @@ public class PostDto {
     private MiniPlaceDto place;
     private boolean isTripShare;
     private Trip trip;
+    private ImageDto image;
     private int likeCount;
     private boolean isLiked;
 
@@ -83,6 +85,14 @@ public class PostDto {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public ImageDto getImage() {
+        return image;
+    }
+
+    public void setImage(ImageDto image) {
+        this.image = image;
     }
 
     public int getLike() {

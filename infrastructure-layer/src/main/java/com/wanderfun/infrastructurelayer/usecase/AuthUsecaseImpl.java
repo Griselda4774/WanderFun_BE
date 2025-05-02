@@ -10,10 +10,12 @@ import com.wanderfun.applicationlayer.exception.WrongEmailOrPasswordException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.auths.RefreshTokenService;
 import com.wanderfun.applicationlayer.service.auths.AccountService;
+import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.AuthUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
+import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.domainlayer.model.users.UserRole;
 import com.wanderfun.infrastructurelayer.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final RefreshTokenService refreshTokenService;
+    private final UserService userService;
 
     @Autowired
     public AuthUsecaseImpl(AccountService accountService,
@@ -39,46 +42,35 @@ public class AuthUsecaseImpl implements AuthUsecase {
                            AuthenticationManager authenticationManager,
                            JwtUtil jwtUtil,
                            PasswordEncoder passwordEncoder,
-                           RefreshTokenService refreshTokenService) {
+                           RefreshTokenService refreshTokenService,
+                           UserService userService) {
         this.accountService = accountService;
         this.objectMapper = objectMapper;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
         this.refreshTokenService = refreshTokenService;
+        this.userService = userService;
     }
 
     @Override
     public boolean register(RegisterDto registerDto) throws ObjectAlreadyExistException {
         Account account = objectMapper.map(registerDto, Account.class);
-        Account existingAccount = null;
-        try {
-            existingAccount = accountService.findByEmail(account.getEmail());
-        } catch (Exception e) {
-        }
-
-        if (existingAccount != null) {
-            throw new ObjectAlreadyExistException(String.format("Email already used!"));
-        }
+        checkExistingAccount(account);
 
         account.setRole(UserRole.USER);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountService.create(account);
+        User user = new User();
+        user.setAccountId(account.getId());
+        userService.create(user);
         return true;
     }
 
     @Override
     public boolean registerAdmin(RegisterDto registerDto) throws ObjectAlreadyExistException {
         Account account = objectMapper.map(registerDto, Account.class);
-        Account existingAccount = null;
-        try {
-            existingAccount = accountService.findByEmail(account.getEmail());
-        } catch (Exception e) {
-        }
-
-        if (existingAccount != null) {
-            throw new ObjectAlreadyExistException(String.format("Email already used!"));
-        }
+        checkExistingAccount(account);
 
         account.setRole(UserRole.ADMIN);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
@@ -153,5 +145,17 @@ public class AuthUsecaseImpl implements AuthUsecase {
         tokenResponseDto.setAccessToken(accessToken);
         tokenResponseDto.setRefreshToken(refreshTokenModel.getToken());
         return tokenResponseDto;
+    }
+
+    private void checkExistingAccount(Account account) throws ObjectAlreadyExistException {
+        Account existingAccount = null;
+        try {
+            existingAccount = accountService.findByEmail(account.getEmail());
+        } catch (Exception ignored) {
+        }
+
+        if (existingAccount != null) {
+            throw new ObjectAlreadyExistException("Email already used!");
+        }
     }
 }
