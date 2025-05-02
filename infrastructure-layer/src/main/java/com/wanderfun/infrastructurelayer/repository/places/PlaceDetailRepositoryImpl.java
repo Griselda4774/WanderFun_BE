@@ -35,9 +35,8 @@ public class PlaceDetailRepositoryImpl extends BaseRepositoryImpl<PlaceDetail, P
         PlaceDetailEntity placeDetailEntity = objectMapper.map(placeDetail, PlaceDetailEntity.class);
 
         if (placeDetail.getPlaceId() != null) {
-            PlaceEntity placeEntity = new PlaceEntity();
-            placeEntity.setId(placeDetail.getPlaceId());
-            placeDetailEntity.setPlace(placeEntity);
+            placeDetailEntity.setPlace(new PlaceEntity());
+            placeDetailEntity.getPlace().setId(placeDetail.getPlaceId());
         }
 
         if (placeDetail.getSectionList() != null && !placeDetail.getSectionList().isEmpty()) {

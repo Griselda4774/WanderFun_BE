@@ -29,7 +29,7 @@ public class PlaceEntity {
     @JoinColumn(name = "category_id", nullable = false)
     private PlaceCategoryEntity category;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cover_image_id")
     private ImageEntity coverImage;
 

@@ -21,6 +21,7 @@ public class Post {
     private int likeCount;
 
     public Post() {
+        this.isTripShare = false;
     }
 
     public Long getId() {
