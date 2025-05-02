@@ -15,10 +15,10 @@ public interface JpaPostRepository extends JpaBaseRepository<PostEntity, Long> {
             SELECT new com.wanderfun.infrastructurelayer.persistence.entity.posts.PostEntity(
                 p.id, p.user, p.content, p.createAt, p.updateAt, p.place, p.isTripShare, p.trip, p.image, COUNT(l.id))
             FROM PostEntity p
-            LEFT JOIN FETCH p.user
-            LEFT JOIN FETCH p.place
-            LEFT JOIN FETCH p.trip
-            LEFT JOIN FETCH p.image
+            LEFT JOIN p.user
+            LEFT JOIN p.place
+            LEFT JOIN p.trip
+            LEFT JOIN p.image
             LEFT JOIN LikeEntity l ON l.targetId = p.id AND l.targetType = 'POST'
             WHERE (:cursor IS NULL OR p.id < :cursor)
             GROUP BY p.id, p.user, p.content, p.createAt, p.updateAt, p.place, p.isTripShare, p.trip, p.image
