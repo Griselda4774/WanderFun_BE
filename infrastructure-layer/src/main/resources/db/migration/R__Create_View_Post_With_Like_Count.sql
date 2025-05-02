@@ -1,0 +1,15 @@
+CREATE VIEW post_with_like_count AS
+SELECT
+    p.id,
+    p.user_id,
+    p.content,
+    p.create_at,
+    p.update_at,
+    p.place_id,
+    p.is_trip_share,
+    p.trip_id,
+    p.image_id,
+    COUNT(l.id) AS like_count
+FROM post p
+LEFT JOIN likes l ON l.target_id = p.id AND l.target_type = 'POST'
+GROUP BY p.id, p.user_id, p.content, p.create_at, p.update_at, p.place_id, p.is_trip_share, p.trip_id, p.image_id;

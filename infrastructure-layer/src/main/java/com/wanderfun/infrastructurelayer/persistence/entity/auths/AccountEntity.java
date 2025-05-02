@@ -1,11 +1,13 @@
 package com.wanderfun.infrastructurelayer.persistence.entity.auths;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "accounts", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
@@ -34,7 +36,7 @@ public class AccountEntity {
     private boolean isDeleted = false;
 
     @Column(name = "create_at", updatable = false)
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createAt;
 
     public AccountEntity() {

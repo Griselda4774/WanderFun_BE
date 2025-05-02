@@ -4,37 +4,37 @@ import jakarta.validation.constraints.NotBlank;
 
 public class AddressCreateDto {
     @NotBlank
-    private String provinceCode;
+    private String provinceName;
     @NotBlank
-    private String districtCode;
-    private String wardCode;
+    private String districtName;
+    private String wardName;
     private String street;
 
     public AddressCreateDto() {
     }
 
-    public String getProvinceCode() {
-        return provinceCode;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
-    public String getDistrictCode() {
-        return districtCode;
+    public String getDistrictName() {
+        return districtName;
     }
 
-    public void setDistrictCode(String districtCode) {
-        this.districtCode = districtCode;
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
     }
 
-    public String getWardCode() {
-        return wardCode;
+    public String getWardName() {
+        return wardName;
     }
 
-    public void setWardCode(String wardCode) {
-        this.wardCode = wardCode;
+    public void setWardName(String wardName) {
+        this.wardName = wardName;
     }
 
     public String getStreet() {

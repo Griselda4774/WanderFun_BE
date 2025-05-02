@@ -7,10 +7,12 @@ CREATE TABLE posts (
     place_id BIGINT,
     is_trip_share BIT DEFAULT 0,
     trip_id BIGINT,
+    image_id BIGINT,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (place_id) REFERENCES places(id),
-    FOREIGN KEY (trip_id) REFERENCES trips(id)
+    FOREIGN KEY (trip_id) REFERENCES trips(id),
+    FOREIGN KEY (image_id) REFERENCES images(id)
 );
 
 CREATE TABLE comments (

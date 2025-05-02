@@ -7,7 +7,7 @@ CREATE TABLE accounts (
     is_verified BIT DEFAULT 0,
     is_active BIT DEFAULT 1,
     is_deleted BIT DEFAULT 0,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    create_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4

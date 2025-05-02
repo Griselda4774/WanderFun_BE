@@ -1,5 +1,6 @@
 package com.wanderfun.domainlayer.model.posts;
 
+import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.domainlayer.model.trips.Trip;
@@ -16,6 +17,7 @@ public class Post {
     private Place place;
     private boolean isTripShare;
     private Trip trip;
+    private Image image;
     private int likeCount;
 
     public Post() {
@@ -83,6 +85,14 @@ public class Post {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public int getLike() {
