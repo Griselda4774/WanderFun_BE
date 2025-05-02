@@ -7,7 +7,6 @@ import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripPlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.users.UserEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.trips.JpaTripRepository;
-import com.wanderfun.infrastructurelayer.persistence.jpaRepository.users.JpaUserRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,13 +17,11 @@ import java.util.Optional;
 @Repository
 public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Long> implements TripRepository {
     private final JpaTripRepository jpaTripRepository;
-    private final JpaUserRepository jpaUserRepository;
 
     @Autowired
-    public TripRepositoryImpl(JpaTripRepository jpaTripRepository, ObjectMapper objectMapper, JpaUserRepository jpaUserRepository) {
+    public TripRepositoryImpl(JpaTripRepository jpaTripRepository, ObjectMapper objectMapper) {
         super(jpaTripRepository, objectMapper, Trip.class, TripEntity.class);
         this.jpaTripRepository = jpaTripRepository;
-        this.jpaUserRepository = jpaUserRepository;
     }
 
     @Override
@@ -37,8 +34,8 @@ public class TripRepositoryImpl extends BaseRepositoryImpl<Trip, TripEntity, Lon
             tripEntity.setTripPlaces(tripPlaceEntities);
         }
 
-        UserEntity userEntity = jpaUserRepository.findById(trip.getUserId()).get();
-        tripEntity.setUser(userEntity);
+        tripEntity.setUser(new UserEntity());
+        tripEntity.getUser().setId(trip.getUserId());
 
         TripEntity savedTripEntity = jpaTripRepository.save(tripEntity);
 

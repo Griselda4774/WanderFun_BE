@@ -16,7 +16,7 @@ public class SectionEntity {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "image_id")
     private ImageEntity image;
 

@@ -2,6 +2,7 @@ package com.wanderfun.infrastructurelayer.repository.posts;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.posts.Post;
+import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.domainlayer.repository.posts.PostRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.PostEntity;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.posts.JpaPostRepository;
@@ -23,6 +24,22 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
         super(jpaPostRepository, objectMapper, Post.class, PostEntity.class);
         this.jpaPostRepository = jpaPostRepository;
         this.objectMapper = objectMapper;
+    }
+
+    @Override
+    public Post save(Post post) {
+        PostEntity postEntity = objectMapper.map(post, PostEntity.class);
+
+        if (post.isTripShare()) {
+            postEntity.setPlace(null);
+            postEntity.setImage(null);
+        } else {
+            postEntity.setTrip(null);
+        }
+
+        PostEntity savedPostEntity = jpaPostRepository.save(postEntity);
+
+        return objectMapper.map(savedPostEntity, Post.class);
     }
 
     @Override

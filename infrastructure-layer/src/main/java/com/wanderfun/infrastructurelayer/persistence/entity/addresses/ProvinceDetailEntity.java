@@ -42,7 +42,7 @@ public class ProvinceDetailEntity {
     @Column(name = "how_to_get_there", columnDefinition = "TEXT")
     private String howToGetThere;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cover_image_id")
     private ImageEntity coverImage;
 
