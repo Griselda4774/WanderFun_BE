@@ -9,7 +9,7 @@ public class Trip {
     private Date startTime;
     private Date endTime;
     private Long userId;
-    private List<TripPlace> listTripPlaces;
+    private List<TripPlace> tripPlaceList;
 
     public Trip() {}
 
@@ -53,11 +53,11 @@ public class Trip {
         this.userId = userId;
     }
 
-    public List<TripPlace> getListTripPlaces() {
-        return listTripPlaces;
+    public List<TripPlace> getTripPlaceList() {
+        return tripPlaceList;
     }
 
-    public void setListTripPlaces(List<TripPlace> listTripPlaces) {
-        this.listTripPlaces = listTripPlaces;
+    public void setTripPlaceList(List<TripPlace> tripPlaceList) {
+        this.tripPlaceList = tripPlaceList;
     }
 }

@@ -3,20 +3,13 @@ package com.wanderfun.applicationlayer.dto.trips;
 import java.util.Date;
 import java.util.List;
 
-public class TripDto {
-    private Long id;
+public class TripCreateDto {
     private String name;
     private Date startTime;
     private Date endTime;
-    private Long userId;
-    private List<TripPlaceDto> listTripPlaces;
+    private List<TripPlaceCreateDto> tripPlaceList;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TripCreateDto() {
     }
 
     public String getName() {
@@ -43,19 +36,11 @@ public class TripDto {
         this.endTime = endTime;
     }
 
-    public Long getUserId() {
-        return userId;
+    public List<TripPlaceCreateDto> getTripPlaceList() {
+        return tripPlaceList;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public List<TripPlaceDto> getListTripPlaces() {
-        return listTripPlaces;
-    }
-
-    public void setListTripPlaces(List<TripPlaceDto> listTripPlaces) {
-        this.listTripPlaces = listTripPlaces;
+    public void setTripPlaceList(List<TripPlaceCreateDto> tripPlaceList) {
+        this.tripPlaceList = tripPlaceList;
     }
 }

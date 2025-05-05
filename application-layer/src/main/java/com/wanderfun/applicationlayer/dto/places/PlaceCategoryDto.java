@@ -4,16 +4,16 @@ import com.wanderfun.domainlayer.model.images.Image;
 
 public class PlaceCategoryDto {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String nameEn;
     private Image iconImage;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

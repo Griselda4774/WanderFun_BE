@@ -1,5 +1,6 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
+import com.wanderfun.applicationlayer.dto.trips.TripCreateDto;
 import com.wanderfun.applicationlayer.dto.trips.TripDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
@@ -9,6 +10,9 @@ import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,8 +35,8 @@ public class TripUsecaseImpl implements TripUsecase {
         return objectMapper.map(tripService.findById(id), TripDto.class);
     }
 
-    public boolean createTrip(TripDto tripDto, String accessToken) throws ObjectAlreadyExistException {
-        Trip trip = objectMapper.map(tripDto, Trip.class);
+    public boolean createTrip(TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException {
+        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
         Trip existingTrip = null;
         try {
             existingTrip = tripService.findByName(trip.getName());
@@ -42,15 +46,23 @@ public class TripUsecaseImpl implements TripUsecase {
             throw new ObjectAlreadyExistException("This name is already used!");
         }
 
-        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
-        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
+        trip.getTripPlaceList().getFirst().setStartTime(
+            trip.getTripPlaceList().getFirst().getStartTime() == null ? Date.valueOf(LocalDate.now()) : trip.getTripPlaceList().getFirst().getStartTime()
+        );
+        trip.setStartTime(trip.getTripPlaceList().getFirst().getStartTime());
+
+        trip.getTripPlaceList().getLast().setEndTime(
+            trip.getTripPlaceList().getLast().getEndTime() == null ? Date.valueOf(LocalDate.now()) : trip.getTripPlaceList().getLast().getEndTime()
+        );
+        trip.setEndTime(trip.getTripPlaceList().getLast().getEndTime());
+
         trip.setUserId(jwtUtil.getIdFromToken(accessToken));
         tripService.create(trip);
         return true;
     }
 
-    public boolean updateTripById(Long id, TripDto tripDto) throws ObjectAlreadyExistException{
-        Trip trip = objectMapper.map(tripDto, Trip.class);
+    public boolean updateTripById(Long id, TripCreateDto tripCreateDto) throws ObjectAlreadyExistException{
+        Trip trip = objectMapper.map(tripCreateDto, Trip.class);
 
         Trip currentTrip = tripService.findById(id);
         if (!trip.getName().equals(currentTrip.getName())) {
@@ -65,8 +77,8 @@ public class TripUsecaseImpl implements TripUsecase {
             }
         }
 
-        trip.setStartTime(trip.getListTripPlaces().getFirst().getStartTime());
-        trip.setEndTime(trip.getListTripPlaces().getLast().getEndTime());
+        trip.setStartTime(trip.getTripPlaceList().getFirst().getStartTime());
+        trip.setEndTime(trip.getTripPlaceList().getLast().getEndTime());
         tripService.updateById(id, trip);
         return true;
     }
