@@ -117,7 +117,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
                         Place place = objectMapper.map(placeCreateDto, Place.class);
                         checkPlaceBeforeCreate(place, placeCreateDto);
                         return place;
-                    } catch (ObjectAlreadyExistException | ObjectNotFoundException e) {
+                    } catch (Exception e) {
                         return null;
                     }
                 })
