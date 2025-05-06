@@ -1,6 +1,7 @@
 package com.wanderfun.infrastructurelayer.filter;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
+import com.wanderfun.applicationlayer.service.auths.AccountService;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.infrastructurelayer.security.CustomUserDetails;
 import com.wanderfun.infrastructurelayer.security.UserDetailServiceImpl;
@@ -9,6 +10,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.internal.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -24,11 +26,14 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailServiceImpl userDetailService;
     private final ObjectMapper objectMapper;
+    private final AccountService accountService;
 
-    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService, ObjectMapper objectMapper) {
+    @Autowired
+    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService, ObjectMapper objectMapper, AccountService accountService) {
         this.jwtUtil = jwtUtil;
         this.userDetailService = userDetailService;
         this.objectMapper = objectMapper;
+        this.accountService = accountService;
     }
 
     @Override
@@ -46,12 +51,12 @@ public class JwtFilter extends OncePerRequestFilter {
             }
 
             final String token = header.substring(7);
-            if(jwtUtil.validateToken(token) != true) {
+            if(!jwtUtil.validateToken(token)) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                 return;
             }
 
-            String email = jwtUtil.getEmailFromToken(token);
+            String email = accountService.findById(jwtUtil.getIdFromToken(token)).getEmail();
             String role = jwtUtil.getRoleFromToken(token);
             if (email != null && role != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 CustomUserDetails userDetails = userDetailService.loadUserByUsername(email);

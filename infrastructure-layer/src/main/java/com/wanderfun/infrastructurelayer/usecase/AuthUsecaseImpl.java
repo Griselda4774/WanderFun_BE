@@ -60,9 +60,11 @@ public class AuthUsecaseImpl implements AuthUsecase {
 
         account.setRole(UserRole.USER);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        accountService.create(account);
+        Account currentAccount = accountService.create(account);
         User user = new User();
-        user.setAccountId(account.getId());
+        user.setAccountId(currentAccount.getId());
+        user.setFirstName(registerDto.getFirstName());
+        user.setLastName(registerDto.getLastName());
         userService.create(user);
         return true;
     }

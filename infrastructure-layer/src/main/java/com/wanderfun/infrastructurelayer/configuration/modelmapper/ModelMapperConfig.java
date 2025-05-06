@@ -1,7 +1,10 @@
 package com.wanderfun.infrastructurelayer.configuration.modelmapper;
 
+import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
 import com.wanderfun.domainlayer.model.images.Image;
+import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.Section;
+import com.wanderfun.domainlayer.model.trips.TripPlace;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import org.modelmapper.*;
@@ -33,6 +36,20 @@ public class ModelMapperConfig {
                 return source == null ? null : new ArrayList<>(source);
             }
         });
+
+        Converter<Long, Place> placeIdToPlaceConverter = ctx -> {
+            Long placeId = ctx.getSource();
+            if (placeId == null) {
+                return null;
+            }
+            Place place = new Place();
+            place.setId(placeId);
+            return place;
+        };
+
+        modelMapper.typeMap(TripPlaceCreateDto.class, TripPlace.class)
+                .addMappings(mapper -> mapper.using(placeIdToPlaceConverter)
+                .map(TripPlaceCreateDto::getPlaceId, TripPlace::setPlace));
 
         return modelMapper;
     }

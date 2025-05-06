@@ -5,14 +5,14 @@ import com.wanderfun.applicationlayer.dto.trips.TripDto;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.trips.TripService;
-import com.wanderfun.applicationlayer.usecase.trips.TripUsecase;
+import com.wanderfun.applicationlayer.service.users.UserService;
+import com.wanderfun.applicationlayer.usecase.TripUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.trips.Trip;
+import com.wanderfun.domainlayer.model.trips.TripPlace;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,11 +20,13 @@ public class TripUsecaseImpl implements TripUsecase {
     private final TripService tripService;
     private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    public TripUsecaseImpl(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
+    public TripUsecaseImpl(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil, UserService userService) {
         this.tripService = tripService;
         this.objectMapper = objectMapper;
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
 
     public List<TripDto> findAllTrips(String accessToken) {
@@ -46,17 +48,10 @@ public class TripUsecaseImpl implements TripUsecase {
             throw new ObjectAlreadyExistException("This name is already used!");
         }
 
-        trip.getTripPlaceList().getFirst().setStartTime(
-            trip.getTripPlaceList().getFirst().getStartTime() == null ? Date.valueOf(LocalDate.now()) : trip.getTripPlaceList().getFirst().getStartTime()
-        );
         trip.setStartTime(trip.getTripPlaceList().getFirst().getStartTime());
-
-        trip.getTripPlaceList().getLast().setEndTime(
-            trip.getTripPlaceList().getLast().getEndTime() == null ? Date.valueOf(LocalDate.now()) : trip.getTripPlaceList().getLast().getEndTime()
-        );
         trip.setEndTime(trip.getTripPlaceList().getLast().getEndTime());
 
-        trip.setUserId(jwtUtil.getIdFromToken(accessToken));
+        trip.setUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         tripService.create(trip);
         return true;
     }
