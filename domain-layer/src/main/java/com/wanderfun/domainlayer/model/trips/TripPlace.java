@@ -2,14 +2,14 @@ package com.wanderfun.domainlayer.model.trips;
 
 import com.wanderfun.domainlayer.model.places.Place;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TripPlace {
     private Long id;
     private Place place;
     private Long tripId;
-    private Date startTime;
-    private Date endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
     private String placeNote;
 
     public TripPlace() {}
@@ -38,19 +38,19 @@ public class TripPlace {
         this.tripId = tripId;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 

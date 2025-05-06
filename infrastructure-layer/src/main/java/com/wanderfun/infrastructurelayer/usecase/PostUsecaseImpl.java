@@ -5,6 +5,7 @@ import com.wanderfun.applicationlayer.dto.posts.PostDto;
 import com.wanderfun.applicationlayer.exception.NotHavePermissionException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.posts.PostService;
+import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.PostUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.places.Place;
@@ -22,16 +23,18 @@ public class PostUsecaseImpl implements PostUsecase {
     private final PostService postService;
     private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
     @Autowired
-    public PostUsecaseImpl(PostService postService, ObjectMapper objectMapper, JwtUtil jwtUtil) {
+    public PostUsecaseImpl(PostService postService, ObjectMapper objectMapper, JwtUtil jwtUtil, UserService userService) {
         this.postService = postService;
         this.objectMapper = objectMapper;
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
 
     @Override
-    public List<PostDto> findAllByCursor(Long cursor, int size) {
+    public List<PostDto> findAllPostByCursor(Long cursor, int size) {
         return objectMapper.mapList(postService.findAllByCursor(cursor, size), PostDto.class);
     }
 
@@ -52,7 +55,7 @@ public class PostUsecaseImpl implements PostUsecase {
             throw new NotHavePermissionException("You don't have permission to update this post");
         }
         post.setUser(new User());
-        post.getUser().setId(jwtUtil.getIdFromToken(accessToken));
+        post.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         postService.updateById(postId, post);
         return true;
     }

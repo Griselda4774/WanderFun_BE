@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategory, PlaceCategoryEntity, Integer> implements PlaceCategoryRepository {
+public class PlaceCategoryRepositoryImpl extends BaseRepositoryImpl<PlaceCategory, PlaceCategoryEntity, Long> implements PlaceCategoryRepository {
     private final JpaPlaceCategoryRepository jpaPlaceCategoryRepository;
 
     @Autowired

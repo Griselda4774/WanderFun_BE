@@ -1,4 +1,5 @@
 INSERT INTO place_categories (name, name_en, icon_image_id) VALUES
+('Khác', 'Other', NULL),
 ('Công viên', 'Park', NULL),
 ('Nhà hàng', 'Restaurant', NULL),
 ('Khách sạn', 'Hotel', NULL),
@@ -8,5 +9,4 @@ INSERT INTO place_categories (name, name_en, icon_image_id) VALUES
 ('Khu vui chơi', 'Amusement Park', NULL),
 ('Quán cà phê', 'Cafe', NULL),
 ('Di tích lịch sử', 'Historical Site', NULL),
-('Chợ địa phương', 'Local Market', NULL),
-('Khác', 'Other', NULL);
+('Chợ địa phương', 'Local Market', NULL);

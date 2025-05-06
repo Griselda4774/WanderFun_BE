@@ -1,25 +1,16 @@
-package com.wanderfun.domainlayer.model.trips;
+package com.wanderfun.applicationlayer.dto.trips;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-public class Trip {
-    private Long id;
+public class TripCreateDto {
     private String name;
     private LocalDate startTime;
     private LocalDate endTime;
-    private Long userId;
-    private List<TripPlace> tripPlaceList;
+    private List<TripPlaceCreateDto> tripPlaceList;
 
-    public Trip() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TripCreateDto() {
     }
 
     public String getName() {
@@ -46,19 +37,11 @@ public class Trip {
         this.endTime = endTime;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public List<TripPlace> getTripPlaceList() {
+    public List<TripPlaceCreateDto> getTripPlaceList() {
         return tripPlaceList;
     }
 
-    public void setTripPlaceList(List<TripPlace> tripPlaceList) {
+    public void setTripPlaceList(List<TripPlaceCreateDto> tripPlaceList) {
         this.tripPlaceList = tripPlaceList;
     }
 }

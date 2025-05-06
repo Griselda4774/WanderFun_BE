@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory, Integer> implements PlaceCategoryService {
+public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory, Long> implements PlaceCategoryService {
     private final PlaceCategoryRepository placeCategoryRepository;
 
     @Autowired
