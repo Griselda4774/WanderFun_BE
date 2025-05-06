@@ -30,6 +30,8 @@ public class TripPlaceEntity {
     @Column(name = "place_notes", columnDefinition = "TEXT")
     private String placeNotes;
 
+    public TripPlaceEntity() {}
+
     public Long getId() {
         return id;
     }

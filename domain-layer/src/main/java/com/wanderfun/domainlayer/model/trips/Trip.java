@@ -1,6 +1,7 @@
 package com.wanderfun.domainlayer.model.trips;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Trip {
     private LocalDate startTime;
     private LocalDate endTime;
     private Long userId;
-    private List<TripPlace> tripPlaceList;
+    private List<TripPlace> tripPlaceList = new ArrayList<>();
 
     public Trip() {}
 
