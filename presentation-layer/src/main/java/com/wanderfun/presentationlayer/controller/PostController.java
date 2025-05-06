@@ -23,8 +23,8 @@ public class PostController {
     }
 
     @GetMapping("/cursor")
-    public ResponseEntity<ResponseDto<List<PostDto>>> findAllByCursor(@RequestParam Long cursor, @RequestParam int size) {
-        List<PostDto> result = postUsecase.findAllByCursor(cursor, size);
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestParam Long cursor, @RequestParam int size) {
+        List<PostDto> result = postUsecase.findAllPostByCursor(cursor, size);
         if (result == null) {
             throw new RequestFailedException("Find all post by cursor failed!");
         }

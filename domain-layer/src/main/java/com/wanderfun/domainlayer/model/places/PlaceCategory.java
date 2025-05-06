@@ -3,18 +3,18 @@ package com.wanderfun.domainlayer.model.places;
 import com.wanderfun.domainlayer.model.images.Image;
 
 public class PlaceCategory {
-    private Long id;
+    private Integer id;
     private String name;
     private String nameEn;
     private Image iconImage;
 
     public PlaceCategory() {}
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

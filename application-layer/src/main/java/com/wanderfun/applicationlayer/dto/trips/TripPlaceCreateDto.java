@@ -1,14 +1,16 @@
 package com.wanderfun.applicationlayer.dto.trips;
 
-import com.wanderfun.domainlayer.model.places.Place;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TripPlaceCreateDto {
-
+    @NotBlank(message = "Place ID cannot be blank")
     private Long placeId;
-    private Date startTime;
-    private Date endTime;
+    @NotBlank(message = "Start time cannot be blank")
+    private LocalDate startTime;
+    @NotBlank(message = "End time cannot be blank")
+    private LocalDate endTime;
     private String placeNote;
 
     public TripPlaceCreateDto() {
@@ -22,19 +24,19 @@ public class TripPlaceCreateDto {
         this.placeId = placeId;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 

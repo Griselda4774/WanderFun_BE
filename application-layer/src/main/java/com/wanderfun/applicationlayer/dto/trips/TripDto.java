@@ -1,13 +1,14 @@
 package com.wanderfun.applicationlayer.dto.trips;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class TripDto {
     private Long id;
     private String name;
-    private Date startTime;
-    private Date endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
     private Long userId;
     private List<TripPlaceDto> listTripPlaces;
 
@@ -27,19 +28,19 @@ public class TripDto {
         this.name = name;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 

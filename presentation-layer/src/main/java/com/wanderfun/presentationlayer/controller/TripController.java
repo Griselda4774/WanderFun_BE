@@ -3,7 +3,7 @@ package com.wanderfun.presentationlayer.controller;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.trips.TripCreateDto;
 import com.wanderfun.applicationlayer.dto.trips.TripDto;
-import com.wanderfun.applicationlayer.usecase.trips.TripUsecase;
+import com.wanderfun.applicationlayer.usecase.TripUsecase;
 
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.usecase.trips;
+package com.wanderfun.applicationlayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.trips.TripCreateDto;
 import com.wanderfun.applicationlayer.dto.trips.TripDto;
