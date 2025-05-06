@@ -90,9 +90,13 @@ public class SecurityConfig {
                         .requestMatchers("/wanderfun/place/feedback/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/favourite/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/checkin/**").hasRole(UserRole.USER.name())
+                        .requestMatchers("/wanderfun/place/categories/**").hasRole(UserRole.ADMIN.name())
 
                         // Trip
                         .requestMatchers("/wanderfun/trip/**").hasRole(UserRole.USER.name())
+
+                        // Post
+                        .requestMatchers(HttpMethod.GET,"/wanderfun/post/**").hasRole(UserRole.USER.name())
 
                         // Album
                         .requestMatchers("/wanderfun/album/**").hasRole(UserRole.USER.name())
