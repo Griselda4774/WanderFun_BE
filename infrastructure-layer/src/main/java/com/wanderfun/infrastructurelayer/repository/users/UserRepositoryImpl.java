@@ -12,6 +12,8 @@ import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Long> implements UserRepository {
     private final JpaUserRepository jpaUserRepository;
@@ -28,6 +30,12 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
         mapEntityRelation(user, userEntity);
         UserEntity savedUserEntity = jpaUserRepository.save(userEntity);
         return objectMapper.map(savedUserEntity, User.class);
+    }
+
+    @Override
+    public Optional<User> findByAccountId(Long accountId) {
+        return jpaUserRepository.findByAccountId(accountId)
+                .map(userEntity -> objectMapper.map(userEntity, User.class));
     }
 
     private void mapEntityRelation(User user, UserEntity userEntity) {

@@ -2,7 +2,7 @@ package com.wanderfun.applicationlayer.dto.posts;
 
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
-import com.wanderfun.domainlayer.model.places.MiniPlaceDto;
+import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
 import com.wanderfun.domainlayer.model.trips.Trip;
 
 import java.time.LocalDateTime;

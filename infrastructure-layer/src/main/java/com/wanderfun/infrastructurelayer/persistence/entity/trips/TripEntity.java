@@ -29,7 +29,7 @@ public class TripEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TripPlaceEntity> tripPlaces = new ArrayList<>();
+    private List<TripPlaceEntity> tripPlaceList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -71,12 +71,12 @@ public class TripEntity {
         this.user = user;
     }
 
-    public List<TripPlaceEntity> getTripPlaces() {
-        return tripPlaces;
+    public List<TripPlaceEntity> getTripPlaceList() {
+        return tripPlaceList;
     }
 
-    public void setTripPlaces(List<TripPlaceEntity> tripPlaces) {
-        this.tripPlaces = tripPlaces;
+    public void setTripPlaceList(List<TripPlaceEntity> tripPlaceList) {
+        this.tripPlaceList = tripPlaceList;
     }
 }
 
