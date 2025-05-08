@@ -30,7 +30,7 @@ public class TripUsecaseImpl implements TripUsecase {
     }
 
     public List<TripDto> findAllTrips(String accessToken) {
-        return objectMapper.mapList(tripService.findAllByUserId(jwtUtil.getIdFromToken(accessToken)), TripDto.class);
+        return objectMapper.mapList(tripService.findAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId()), TripDto.class);
     }
 
     public TripDto findTripById(Long id) {
@@ -56,7 +56,7 @@ public class TripUsecaseImpl implements TripUsecase {
         return true;
     }
 
-    public boolean updateTripById(Long id, TripCreateDto tripCreateDto) throws ObjectAlreadyExistException{
+    public boolean updateTripById(Long id, TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException{
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
 
         Trip currentTrip = tripService.findById(id);
@@ -74,6 +74,8 @@ public class TripUsecaseImpl implements TripUsecase {
 
         trip.setStartTime(trip.getTripPlaceList().getFirst().getStartTime());
         trip.setEndTime(trip.getTripPlaceList().getLast().getEndTime());
+
+        trip.setUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         tripService.updateById(id, trip);
         return true;
     }
@@ -84,7 +86,7 @@ public class TripUsecaseImpl implements TripUsecase {
     }
 
     public boolean deleteAllTrips(String accessToken) {
-        tripService.deleteAllByUserId(jwtUtil.getIdFromToken(accessToken));
+        tripService.deleteAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         return true;
     }
 

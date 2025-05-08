@@ -73,9 +73,14 @@ public class TripController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto<TripDto>> updateTripById(@PathVariable long id,
-                                                         @RequestBody TripCreateDto tripCreateDto) {
-        boolean result = tripUsecase.updateTripById(id, tripCreateDto);
+    public ResponseEntity<ResponseDto<TripDto>> updateTripById(@RequestHeader("Authorization") String accessToken,
+                                                            @PathVariable long id,
+                                                            @RequestBody TripCreateDto tripCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = tripUsecase.updateTripById(id, tripCreateDto, accessToken);
         if (!result) {
             throw new RequestFailedException("Update trip failed!");
         }
@@ -101,6 +106,9 @@ public class TripController {
 
     @DeleteMapping("")
     public ResponseEntity<ResponseDto<TripDto>> deleteAllTrips(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
         boolean result = tripUsecase.deleteAllTrips(accessToken);
         if (!result) {
             throw new RequestFailedException("Delete all trips failed!");
