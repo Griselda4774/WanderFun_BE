@@ -2,6 +2,7 @@ package com.wanderfun.infrastructurelayer.usecase;
 
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
+import com.wanderfun.applicationlayer.exception.NotHavePermissionException;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.place.PlaceCategoryService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PlaceCategoryUsecaseImpl implements PlaceCategoryUsecase {
@@ -85,8 +87,11 @@ public class PlaceCategoryUsecaseImpl implements PlaceCategoryUsecase {
     }
 
     @Override
-    public boolean deletePlaceCategoryById(Long id) {
-        placeCategoryService.deleteById(id);
-        return true;
+    public boolean deletePlaceCategoryById(Long id) throws NotHavePermissionException {
+         if(Objects.equals(placeCategoryService.findById(id).getNameEn(), "Other")) {
+             throw new NotHavePermissionException("You don't have permission to delete this place category");
+         }
+         placeCategoryService.deleteById(id);
+         return true;
     }
 }

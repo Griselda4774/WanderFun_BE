@@ -33,5 +33,4 @@ public class PlaceCategoryServiceImpl extends BaseServiceImpl<PlaceCategory, Lon
         return placeCategoryRepository.findByNameEn(nameEn)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", PlaceCategory.class.getName())));
     }
-
 }
