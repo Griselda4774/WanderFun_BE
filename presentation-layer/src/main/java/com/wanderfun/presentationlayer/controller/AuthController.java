@@ -79,7 +79,7 @@ public class AuthController {
             throw new RequestFailedException("Logout failed!");
         }
 
-        ResponseDto<LoginResponseDto> response = new ResponseDto();
+        ResponseDto<LoginResponseDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Logout successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
