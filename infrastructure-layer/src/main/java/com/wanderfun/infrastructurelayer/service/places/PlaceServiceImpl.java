@@ -47,4 +47,10 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place, Long> implements Pl
     public List<Place> findAllByProvinceName(String provinceName) {
         return placeRepository.findAllByProvinceName(provinceName);
     }
+
+    @Override
+    @Transactional
+    public List<Place> findAllByCategoryId(Long categoryId) {
+        return placeRepository.findAllByCategoryId(categoryId);
+    }
 }
