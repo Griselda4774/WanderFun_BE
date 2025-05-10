@@ -97,6 +97,11 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
         return objectMapper.mapList(jpaPlaceRepository.findByProvinceName(provinceName), Place.class);
     }
 
+    @Override
+    public List<Place> findAllByCategoryId(Long categoryId) {
+        return objectMapper.mapList(jpaPlaceRepository.findAllByCategoryId(categoryId), Place.class);
+    }
+
     private void mapEntityRelation(Place place, PlaceEntity placeEntity) {
         if (place.getAddress() != null && place.getAddress().getId() != null) {
             AddressEntity addressEntity = new AddressEntity();

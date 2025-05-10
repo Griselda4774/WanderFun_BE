@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("wanderfun/place")
+@RequestMapping("wanderfun/category")
 public class PlaceCategoryController {
     private final PlaceCategoryUsecase placeCategoryUsecase;
 
@@ -22,7 +22,7 @@ public class PlaceCategoryController {
         this.placeCategoryUsecase = placeCategoryUsecase;
     }
 
-    @GetMapping("/categories")
+    @GetMapping("")
     public ResponseEntity<ResponseDto<List<PlaceCategory>>> findAllPlaceCategory(@RequestHeader("Authorization") String accessToken){
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
@@ -40,7 +40,7 @@ public class PlaceCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/categories/{placeCategoryId}")
+    @GetMapping("/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> findPlaceCategoryById(@PathVariable Long placeCategoryId) {
         PlaceCategory result = placeCategoryUsecase.findPlaceCategoryById(placeCategoryId);
         if (result == null) {
@@ -54,7 +54,7 @@ public class PlaceCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/categories")
+    @PostMapping("")
     public ResponseEntity<ResponseDto<PlaceCategory>> addPlaceCategory(@RequestHeader("Authorization") String accessToken,
                                                                        @RequestBody PlaceCategoryDto placeCategoryDto){
         boolean result = placeCategoryUsecase.createPlaceCategory(placeCategoryDto);
@@ -69,7 +69,7 @@ public class PlaceCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/categories/{placeCategoryId}")
+    @PutMapping("/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> updatePlaceCategory(@PathVariable Long placeCategoryId,
                                                                           @RequestBody PlaceCategoryDto placeCategoryDto) {
         boolean result = placeCategoryUsecase.updatePlaceCategoryById(placeCategoryId, placeCategoryDto);
@@ -84,7 +84,7 @@ public class PlaceCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/categories/{placeCategoryId}")
+    @DeleteMapping("/{placeCategoryId}")
     public ResponseEntity<ResponseDto<PlaceCategory>> deletePlaceCategory(@PathVariable Long placeCategoryId) {
         boolean result = placeCategoryUsecase.deletePlaceCategoryById(placeCategoryId);
 

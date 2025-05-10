@@ -12,7 +12,7 @@ public class TripPlaceDto {
     private Long tripId;
     private LocalDate startTime;
     private LocalDate endTime;
-    private String placeNote;
+    private String placeNotes;
 
     public TripPlaceDto() {
     }
@@ -57,11 +57,11 @@ public class TripPlaceDto {
         this.endTime = endTime;
     }
 
-    public String getPlaceNote() {
-        return placeNote;
+    public String getPlaceNotes() {
+        return placeNotes;
     }
 
-    public void setPlaceNote(String placeNote) {
-        this.placeNote = placeNote;
+    public void setPlaceNotes(String placeNotes) {
+        this.placeNotes = placeNotes;
     }
 }

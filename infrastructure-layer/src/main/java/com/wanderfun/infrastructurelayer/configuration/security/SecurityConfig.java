@@ -108,6 +108,9 @@ public class SecurityConfig {
                         .requestMatchers("/wanderfun/leaderboard/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/wanderfun/leaderboard/**").hasRole(UserRole.ADMIN.name())
 
+                        // Place Category
+                        .requestMatchers("/wanderfun/place/categories/**").hasRole(UserRole.ADMIN.name())
+
                         // Default
                         .anyRequest().authenticated()
                 )

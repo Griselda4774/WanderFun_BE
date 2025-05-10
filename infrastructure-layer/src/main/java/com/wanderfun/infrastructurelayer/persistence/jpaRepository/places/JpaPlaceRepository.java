@@ -21,4 +21,10 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
     @Query("SELECT p FROM PlaceEntity p WHERE p.name = :name")
     Optional<PlaceEntity> findByName(@Param("name")String name);
     Optional<PlaceEntity> findByLongitudeAndLatitude(double longitude, double latitude);
+
+    @Query("""
+        SELECT p FROM PlaceEntity p
+        WHERE p.category.id = :category_id
+    """)
+    List<PlaceEntity> findAllByCategoryId(@Param("category_id")Long categoryId);
 }

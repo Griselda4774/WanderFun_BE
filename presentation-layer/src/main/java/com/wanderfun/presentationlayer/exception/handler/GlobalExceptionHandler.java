@@ -151,4 +151,5 @@ public class GlobalExceptionHandler {
         response.setMessage(e.getMessage());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }

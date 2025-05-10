@@ -9,7 +9,7 @@ public interface TripUsecase {
     List<TripDto> findAllTrips(String accessToken);
     TripDto findTripById(Long id);
     boolean createTrip(TripCreateDto tripCreateDto, String accessToken);
-    boolean updateTripById(Long id, TripCreateDto tripCreateDto);
+    boolean updateTripById(Long id, TripCreateDto tripCreateDto, String accessToken);
     boolean deleteTripById(Long id);
     boolean deleteAllTrips(String accessToken);
 }

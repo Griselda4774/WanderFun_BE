@@ -28,8 +28,10 @@ public class TripEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripPlaceEntity> tripPlaceList = new ArrayList<>();
+
+    public TripEntity() {}
 
     public Long getId() {
         return id;
