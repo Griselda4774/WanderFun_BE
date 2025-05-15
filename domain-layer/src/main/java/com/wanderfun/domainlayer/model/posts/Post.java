@@ -18,7 +18,7 @@ public class Post {
     private boolean isTripShare;
     private Trip trip;
     private Image image;
-    private int likeCount;
+    private Long likeCount;
 
     public Post() {
         this.isTripShare = false;
@@ -96,11 +96,11 @@ public class Post {
         this.image = image;
     }
 
-    public int getLike() {
+    public Long getLike() {
         return likeCount;
     }
 
-    public void setLike(int like) {
+    public void setLike(Long like) {
         this.likeCount = like;
     }
 }

@@ -17,7 +17,7 @@ public class PostDto {
     private boolean isTripShare;
     private Trip trip;
     private ImageDto image;
-    private int likeCount;
+    private Long likeCount;
     private boolean isLiked;
 
     public PostDto() {
@@ -95,11 +95,11 @@ public class PostDto {
         this.image = image;
     }
 
-    public int getLike() {
+    public Long getLike() {
         return likeCount;
     }
 
-    public void setLike(int like) {
+    public void setLike(Long like) {
         this.likeCount = like;
     }
 

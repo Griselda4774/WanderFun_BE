@@ -52,11 +52,14 @@ public class PostEntity {
     @Transient
     private Long likeCount;
 
+    @Transient
+    private Long commentCount;
+
     public PostEntity() {}
 
     public PostEntity(Long id, UserEntity user, String content, LocalDateTime createAt,
                       LocalDateTime updateAt, PlaceEntity place, Boolean isTripShare,
-                      TripEntity trip, ImageEntity image, Long likeCount) {
+                      TripEntity trip, ImageEntity image, Long likeCount, Long commentCount) {
         this.id = id;
         this.user = user;
         this.content = content;
@@ -67,6 +70,7 @@ public class PostEntity {
         this.trip = trip;
         this.image = image;
         this.likeCount = likeCount != null ? likeCount : 0;
+        this.commentCount = commentCount != null ? commentCount : 0;
     }
 
     public Long getId() {
@@ -147,6 +151,14 @@ public class PostEntity {
 
     public void setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
+    }
+
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
     }
 }
 
