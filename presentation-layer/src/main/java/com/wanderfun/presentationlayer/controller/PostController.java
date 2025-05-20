@@ -37,6 +37,20 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<ResponseDto<PostDto>> findPostById(@PathVariable Long postId) {
+        PostDto result = postUsecase.findPostById(postId);
+        if (result == null) {
+            throw new RequestFailedException("Find post by id failed!");
+        }
+
+        ResponseDto<PostDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find post by id successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PostMapping("")
     public ResponseEntity<ResponseDto<PostDto>> createPost(@RequestHeader("Authorization") String accessToken,
                                                         @RequestBody PostCreateDto postCreateDto) {

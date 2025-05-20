@@ -5,6 +5,7 @@ import com.wanderfun.applicationlayer.service.posts.PostService;
 import com.wanderfun.domainlayer.model.posts.Post;
 import com.wanderfun.domainlayer.repository.posts.PostRepository;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class PostServiceImpl extends BaseServiceImpl<Post, Long> implements Post
     }
 
     @Override
+    @Transactional
     public List<Post> findAllByCursor(Long cursor, int size) {
         return postRepository.findAllByCursor(cursor, size);
     }

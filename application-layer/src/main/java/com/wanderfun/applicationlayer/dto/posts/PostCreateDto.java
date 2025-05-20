@@ -3,7 +3,6 @@ package com.wanderfun.applicationlayer.dto.posts;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 
 public class PostCreateDto {
-    private Long id;
     private String content;
     private Long placeId;
     private boolean isTripShare;
@@ -11,14 +10,6 @@ public class PostCreateDto {
     private ImageDto image;
 
     public PostCreateDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getContent() {

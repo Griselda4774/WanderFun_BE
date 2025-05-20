@@ -96,7 +96,10 @@ public class SecurityConfig {
                         .requestMatchers("/wanderfun/trip/**").hasRole(UserRole.USER.name())
 
                         // Post
-                        .requestMatchers(HttpMethod.GET,"/wanderfun/post/**").hasRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.GET,"/wanderfun/post/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/wanderfun/post/**").hasRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.PUT,"/wanderfun/post/**").hasRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.DELETE,"/wanderfun/post/**").hasRole(UserRole.USER.name())
 
                         // Album
                         .requestMatchers("/wanderfun/album/**").hasRole(UserRole.USER.name())

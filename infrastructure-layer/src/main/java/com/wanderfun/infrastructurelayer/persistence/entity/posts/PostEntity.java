@@ -45,33 +45,11 @@ public class PostEntity {
     @JoinColumn(name = "trip_id")
     private TripEntity trip;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "image_id")
     private ImageEntity image;
 
-    @Transient
-    private Long likeCount;
-
-    @Transient
-    private Long commentCount;
-
     public PostEntity() {}
-
-    public PostEntity(Long id, UserEntity user, String content, LocalDateTime createAt,
-                      LocalDateTime updateAt, PlaceEntity place, Boolean isTripShare,
-                      TripEntity trip, ImageEntity image, Long likeCount, Long commentCount) {
-        this.id = id;
-        this.user = user;
-        this.content = content;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-        this.place = place;
-        this.isTripShare = isTripShare;
-        this.trip = trip;
-        this.image = image;
-        this.likeCount = likeCount != null ? likeCount : 0;
-        this.commentCount = commentCount != null ? commentCount : 0;
-    }
 
     public Long getId() {
         return id;
@@ -143,22 +121,6 @@ public class PostEntity {
 
     public void setImage(ImageEntity image) {
         this.image = image;
-    }
-
-    public Long getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(Long likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public Long getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(Long commentCount) {
-        this.commentCount = commentCount;
     }
 }
 
