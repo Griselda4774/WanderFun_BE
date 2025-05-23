@@ -10,7 +10,7 @@ public class TripDto {
     private LocalDate startTime;
     private LocalDate endTime;
     private Long userId;
-    private List<TripPlaceDto> listTripPlaces;
+    private List<TripPlaceDto> tripPlaceList;
 
     public Long getId() {
         return id;
@@ -52,11 +52,8 @@ public class TripDto {
         this.userId = userId;
     }
 
-    public List<TripPlaceDto> getListTripPlaces() {
-        return listTripPlaces;
-    }
+    public List<TripPlaceDto> getTripPlaceList() { return tripPlaceList; }
 
-    public void setListTripPlaces(List<TripPlaceDto> listTripPlaces) {
-        this.listTripPlaces = listTripPlaces;
-    }
+    public void setTripPlaceList(List<TripPlaceDto> tripPlaceList) { this.tripPlaceList = tripPlaceList; }
+
 }
