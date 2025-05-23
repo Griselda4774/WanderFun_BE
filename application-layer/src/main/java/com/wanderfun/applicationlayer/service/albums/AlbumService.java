@@ -1,5 +1,6 @@
-package com.wanderfun.applicationlayer.service;
+package com.wanderfun.applicationlayer.service.albums;
 
+import com.wanderfun.applicationlayer.service.BaseService;
 import com.wanderfun.domainlayer.model.albums.Album;
 
 import java.util.List;
