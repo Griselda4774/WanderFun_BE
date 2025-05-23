@@ -63,7 +63,7 @@ public class PostUsecaseImpl implements PostUsecase {
     @Override
     public boolean deletePost(Long postId, String accessToken) {
         Post currentPost = postService.findById(postId);
-        if (Objects.equals(currentPost.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
+        if (Objects.equals(currentPost.getUser().getId(), userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId())) {
             postService.deleteById(postId);
         }
         return true;
