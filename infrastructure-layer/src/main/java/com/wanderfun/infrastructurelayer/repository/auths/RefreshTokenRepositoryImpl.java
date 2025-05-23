@@ -39,7 +39,7 @@ public class RefreshTokenRepositoryImpl extends BaseRepositoryImpl<RefreshToken,
 
     @Override
     public Optional<RefreshToken> findByAccountId(Long accountId) {
-        return jpaRefreshTokenRepository.findByAccount_Id(accountId)
+        return jpaRefreshTokenRepository.findByAccountId(accountId)
                 .map(entity -> objectMapper.map(entity, RefreshToken.class));
     }
 

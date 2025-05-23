@@ -141,7 +141,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
         String accessToken = jwtUtil.generateAccessToken(account.getId(), account.getEmail(), account.getRole().name());
         String newRefreshToken = jwtUtil.generateRefreshToken(account.getId());
         refreshTokenModel.setToken(newRefreshToken);
-        refreshTokenService.updateByAccountId(refreshTokenModel.getAccountId(), refreshTokenModel);
+        refreshTokenService.updateByAccountId(accountId, refreshTokenModel);
 
         TokenResponseDto tokenResponseDto = new TokenResponseDto();
         tokenResponseDto.setAccessToken(accessToken);

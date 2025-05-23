@@ -28,7 +28,6 @@
 		<module>application-layer</module>
 		<module>presentation-layer</module>
 		<module>infrastructure-layer</module>
-		<module>demo</module>
 	</modules>
 
 </project>

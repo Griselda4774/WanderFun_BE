@@ -93,6 +93,9 @@ public class JwtFilter extends OncePerRequestFilter {
                 // Place endpoints
                 Pair.of("GET", "/wanderfun/place"),
 
+                // Post endpoints
+                Pair.of("GET", "/wanderfun/post/cursor"),
+
                 // Leaderboard endpoints
                 Pair.of("GET", "/wanderfun/leaderboard/user"),
                 Pair.of("GET", "/wanderfun/leaderboard/place"),
