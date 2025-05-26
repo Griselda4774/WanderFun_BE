@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Long> implements PostRepository {
@@ -43,8 +44,24 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
     }
 
     @Override
+    public Optional<Post> findById(Long id) {
+        return jpaPostRepository.findById(id)
+                .map(postEntity -> {
+                    Post post = objectMapper.map(postEntity, Post.class);
+                    post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
+                    post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
+                    return post;
+                });
+    }
+
+    @Override
     public List<Post> findAllByCursor(Long cursor, int size) {
         Pageable pageable = PageRequest.of(0, size);
-        return objectMapper.mapList(jpaPostRepository.findAllPostByCursor(cursor, pageable), Post.class);
+        List<Post> postList = objectMapper.mapList(jpaPostRepository.findAllPostByCursor(cursor, pageable), Post.class);
+        postList.forEach(post -> {
+            post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
+            post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
+        });
+        return postList;
     }
 }

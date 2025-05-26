@@ -23,7 +23,8 @@ public class PostController {
     }
 
     @GetMapping("/cursor")
-    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestParam Long cursor, @RequestParam int size) {
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestParam(required = false) Long cursor,
+                                                                          @RequestParam(defaultValue = "10") int size) {
         List<PostDto> result = postUsecase.findAllPostByCursor(cursor, size);
         if (result == null) {
             throw new RequestFailedException("Find all post by cursor failed!");
@@ -32,6 +33,20 @@ public class PostController {
         ResponseDto<List<PostDto>> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Find all post by cursor successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<ResponseDto<PostDto>> findPostById(@PathVariable Long postId) {
+        PostDto result = postUsecase.findPostById(postId);
+        if (result == null) {
+            throw new RequestFailedException("Find post by id failed!");
+        }
+
+        ResponseDto<PostDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find post by id successful!");
         response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

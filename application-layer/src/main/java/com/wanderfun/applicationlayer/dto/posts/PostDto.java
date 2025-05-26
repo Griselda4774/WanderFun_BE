@@ -1,9 +1,9 @@
 package com.wanderfun.applicationlayer.dto.posts;
 
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
+import com.wanderfun.applicationlayer.dto.trips.MiniTripDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
-import com.wanderfun.domainlayer.model.trips.Trip;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +15,10 @@ public class PostDto {
     private LocalDateTime updateAt;
     private MiniPlaceDto place;
     private boolean isTripShare;
-    private Trip trip;
+    private MiniTripDto trip;
     private ImageDto image;
-    private int likeCount;
+    private Long likeCount;
+    private Long commentCount;
     private boolean isLiked;
 
     public PostDto() {
@@ -79,11 +80,11 @@ public class PostDto {
         isTripShare = tripShare;
     }
 
-    public Trip getTrip() {
+    public MiniTripDto getTrip() {
         return trip;
     }
 
-    public void setTrip(Trip trip) {
+    public void setTrip(MiniTripDto trip) {
         this.trip = trip;
     }
 
@@ -95,12 +96,20 @@ public class PostDto {
         this.image = image;
     }
 
-    public int getLike() {
+    public Long getLikeCount() {
         return likeCount;
     }
 
-    public void setLike(int like) {
-        this.likeCount = like;
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
     }
 
     public boolean isLiked() {

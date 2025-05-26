@@ -4,7 +4,7 @@ import com.wanderfun.domainlayer.model.users.UserRole;
 
 public class LoginResponseDto {
     private Long id;
-    private String email;
+    private Long userId;
     private UserRole role;
     private final String tokenType = "Bearer";
     private String accessToken;
@@ -13,24 +13,20 @@ public class LoginResponseDto {
     public LoginResponseDto() {
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
+    public Long getId() {
+        return id;
     }
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public UserRole getRole() {
@@ -41,19 +37,23 @@ public class LoginResponseDto {
         this.role = role;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTokenType() {
+        return tokenType;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public Long getId() {
-        return id;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

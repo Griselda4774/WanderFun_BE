@@ -39,6 +39,9 @@ public class CommentEntity {
     @JoinColumn(name = "parent_id")
     private CommentEntity parent;
 
+    @Transient
+    private Long likeCount;
+
     public CommentEntity() {}
 
     public Long getId() {
@@ -95,6 +98,14 @@ public class CommentEntity {
 
     public void setParent(CommentEntity parent) {
         this.parent = parent;
+    }
+
+    public Long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
     }
 }
 

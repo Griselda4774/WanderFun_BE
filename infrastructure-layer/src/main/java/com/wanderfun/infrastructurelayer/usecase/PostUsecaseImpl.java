@@ -39,10 +39,15 @@ public class PostUsecaseImpl implements PostUsecase {
     }
 
     @Override
+    public PostDto findPostById(Long postId) {
+        return objectMapper.map(postService.findById(postId), PostDto.class);
+    }
+
+    @Override
     public boolean createPost(PostCreateDto postCreateDto, String accessToken) {
         Post post = objectMapper.map(postCreateDto, Post.class);
         post.setUser(new User());
-        post.getUser().setId(jwtUtil.getIdFromToken(accessToken));
+        post.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         postService.create(post);
         return true;
     }

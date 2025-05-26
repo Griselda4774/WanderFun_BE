@@ -13,11 +13,6 @@ public class ResponseDto<T> {
     private T data;
 
     public ResponseDto() {
-        this.timestamp = new Date();
-        this.data = null;
-        this.error = false;
-        this.errorType = null;
-        this.errorData = null;
     }
 
     public String getStatusCode() {

@@ -1,10 +1,12 @@
 package com.wanderfun.infrastructurelayer.configuration.modelmapper;
 
 import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
+import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.Section;
 import com.wanderfun.domainlayer.model.trips.TripPlace;
+import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import org.modelmapper.*;
@@ -50,6 +52,9 @@ public class ModelMapperConfig {
         modelMapper.typeMap(TripPlaceCreateDto.class, TripPlace.class)
                 .addMappings(mapper -> mapper.using(placeIdToPlaceConverter)
                 .map(TripPlaceCreateDto::getPlaceId, TripPlace::setPlace));
+
+        modelMapper.typeMap(RefreshTokenEntity.class, RefreshToken.class)
+                .addMapping(src -> src.getAccount().getId(), RefreshToken::setAccountId);
 
         return modelMapper;
     }

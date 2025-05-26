@@ -1,21 +1,19 @@
-package com.wanderfun.domainlayer.model.posts;
+package com.wanderfun.applicationlayer.dto.posts;
 
-import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-public class Comment {
+public class FeedbackDto {
     private Long id;
-    private User user;
+    private MiniUserDto user;
+    private float rating;
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    private Long postId;
-    private Long parentId;
-    private int likeCount;
+    private Long placeDetailId;
 
-    public Comment() {
+    public FeedbackDto() {
     }
 
     public Long getId() {
@@ -26,12 +24,20 @@ public class Comment {
         this.id = id;
     }
 
-    public User getUser() {
+    public MiniUserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(MiniUserDto user) {
         this.user = user;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public String getContent() {
@@ -58,27 +64,11 @@ public class Comment {
         this.updateAt = updateAt;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Long getPlaceDetailId() {
+        return placeDetailId;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public int getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
+    public void setPlaceDetailId(Long placeDetailId) {
+        this.placeDetailId = placeDetailId;
     }
 }
