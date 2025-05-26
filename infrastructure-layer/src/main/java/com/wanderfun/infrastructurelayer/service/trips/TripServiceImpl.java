@@ -7,6 +7,7 @@ import com.wanderfun.applicationlayer.service.trips.TripService;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.infrastructurelayer.service.BaseServiceImpl;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class TripServiceImpl extends BaseServiceImpl<Trip, Long> implements TripService {
     private final TripRepository tripRepository;
 
+    @Autowired
     public TripServiceImpl(TripRepository tripRepository, ObjectMapper objectMapper) {
         super(tripRepository, objectMapper, Trip.class);
         this.tripRepository = tripRepository;

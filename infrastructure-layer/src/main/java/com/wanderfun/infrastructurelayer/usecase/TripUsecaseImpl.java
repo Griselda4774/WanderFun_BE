@@ -10,6 +10,7 @@ import com.wanderfun.applicationlayer.usecase.TripUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.domainlayer.model.trips.TripPlace;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class TripUsecaseImpl implements TripUsecase {
     private final JwtUtil jwtUtil;
     private final UserService userService;
 
+    @Autowired
     public TripUsecaseImpl(TripService tripService, ObjectMapper objectMapper, JwtUtil jwtUtil, UserService userService) {
         this.tripService = tripService;
         this.objectMapper = objectMapper;
@@ -29,14 +31,17 @@ public class TripUsecaseImpl implements TripUsecase {
         this.userService = userService;
     }
 
+    @Override
     public List<TripDto> findAllTrips(String accessToken) {
         return objectMapper.mapList(tripService.findAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId()), TripDto.class);
     }
 
+    @Override
     public TripDto findTripById(Long id) {
         return objectMapper.map(tripService.findById(id), TripDto.class);
     }
 
+    @Override
     public boolean createTrip(TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException {
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
         Trip existingTrip = null;
@@ -56,6 +61,7 @@ public class TripUsecaseImpl implements TripUsecase {
         return true;
     }
 
+    @Override
     public boolean updateTripById(Long id, TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException{
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
 
@@ -80,11 +86,13 @@ public class TripUsecaseImpl implements TripUsecase {
         return true;
     }
 
+    @Override
     public boolean deleteTripById(Long id) {
         tripService.deleteById(id);
         return true;
     }
 
+    @Override
     public boolean deleteAllTrips(String accessToken) {
         tripService.deleteAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         return true;
