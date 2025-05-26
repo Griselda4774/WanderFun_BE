@@ -1,19 +1,19 @@
-package com.wanderfun.domainlayer.model.places;
+package com.wanderfun.applicationlayer.dto.posts;
 
-import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 
 import java.time.LocalDateTime;
 
-public class Feedback {
+public class FeedbackDto {
     private Long id;
-    private User user;
+    private MiniUserDto user;
     private float rating;
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private Long placeDetailId;
 
-    public Feedback() {
+    public FeedbackDto() {
     }
 
     public Long getId() {
@@ -24,11 +24,11 @@ public class Feedback {
         this.id = id;
     }
 
-    public User getUser() {
+    public MiniUserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(MiniUserDto user) {
         this.user = user;
     }
 

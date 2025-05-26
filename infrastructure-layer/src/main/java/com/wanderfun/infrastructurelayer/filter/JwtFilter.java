@@ -6,11 +6,13 @@ import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.infrastructurelayer.security.CustomUserDetails;
 import com.wanderfun.infrastructurelayer.security.UserDetailServiceImpl;
 import com.wanderfun.presentationlayer.exception.UnauthorizedException;
+import io.micrometer.common.lang.NonNullApi;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.internal.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -25,19 +27,19 @@ import java.util.List;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailServiceImpl userDetailService;
-    private final ObjectMapper objectMapper;
     private final AccountService accountService;
 
     @Autowired
-    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService, ObjectMapper objectMapper, AccountService accountService) {
+    public JwtFilter(JwtUtil jwtUtil, UserDetailServiceImpl userDetailService, AccountService accountService) {
         this.jwtUtil = jwtUtil;
         this.userDetailService = userDetailService;
-        this.objectMapper = objectMapper;
         this.accountService = accountService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+                                    @NonNull HttpServletResponse response,
+                                    @NonNull FilterChain filterChain)
             throws UnauthorizedException, IOException{
         try {
             if (isPublicApi(request)) {
@@ -94,7 +96,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 Pair.of("GET", "/wanderfun/place"),
 
                 // Post endpoints
-                Pair.of("GET", "/wanderfun/post/cursor"),
+                Pair.of("GET", "/wanderfun/post"),
 
                 // Leaderboard endpoints
                 Pair.of("GET", "/wanderfun/leaderboard/user"),

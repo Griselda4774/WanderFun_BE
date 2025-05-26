@@ -47,7 +47,7 @@ public class PostUsecaseImpl implements PostUsecase {
     public boolean createPost(PostCreateDto postCreateDto, String accessToken) {
         Post post = objectMapper.map(postCreateDto, Post.class);
         post.setUser(new User());
-        post.getUser().setId(jwtUtil.getIdFromToken(accessToken));
+        post.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
         postService.create(post);
         return true;
     }

@@ -58,14 +58,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
         Account account = objectMapper.map(registerDto, Account.class);
         checkExistingAccount(account);
 
-        account.setRole(UserRole.USER);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        Account currentAccount = accountService.create(account);
-        User user = new User();
-        user.setAccountId(currentAccount.getId());
-        user.setFirstName(registerDto.getFirstName());
-        user.setLastName(registerDto.getLastName());
-        userService.create(user);
+        initUser(account, registerDto);
         return true;
     }
 
@@ -74,9 +67,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
         Account account = objectMapper.map(registerDto, Account.class);
         checkExistingAccount(account);
 
-        account.setRole(UserRole.ADMIN);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        accountService.create(account);
+        initUser(account, registerDto);
         return true;
     }
 
@@ -105,7 +96,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
 
             LoginResponseDto loginResponseDto = new LoginResponseDto();
             loginResponseDto.setId(account.getId());
-            loginResponseDto.setEmail(account.getEmail());
+            loginResponseDto.setUserId(userService.findByAccountId(account.getId()).getId());
             loginResponseDto.setRole(account.getRole());
             loginResponseDto.setAccessToken(accessToken);
             loginResponseDto.setRefreshToken(refreshToken);
@@ -159,5 +150,16 @@ public class AuthUsecaseImpl implements AuthUsecase {
         if (existingAccount != null) {
             throw new ObjectAlreadyExistException("Email already used!");
         }
+    }
+
+    private void initUser(Account account, RegisterDto registerDto) {
+        account.setRole(UserRole.USER);
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        Account currentAccount = accountService.create(account);
+        User user = new User();
+        user.setAccountId(currentAccount.getId());
+        user.setFirstName(registerDto.getFirstName());
+        user.setLastName(registerDto.getLastName());
+        userService.create(user);
     }
 }

@@ -1,28 +1,25 @@
-//package com.wanderfun.presentationlayer.controller;
-//
-//import com.wanderfun.applicationlayer.dto.ResponseDto;
-//import com.wanderfun.applicationlayer.dto.user.*;
-//import com.wanderfun.applicationlayer.usecase.UserUsecase;
-//import com.wanderfun.presentationlayer.exception.RequestFailedException;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.validation.annotation.Validated;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//@CrossOrigin
-//@RestController
-//@RequestMapping("wanderfun/user")
-//public class UserController {
-//    private final UserUsecase userUsecase;
-//
-//    @Autowired
-//    public UserController(UserUsecase userUsecase) {
-//        this.userUsecase = userUsecase;
-//    }
-//
+package com.wanderfun.presentationlayer.controller;
+
+import com.wanderfun.applicationlayer.dto.ResponseDto;
+import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
+import com.wanderfun.applicationlayer.usecase.UserUsecase;
+import com.wanderfun.presentationlayer.exception.RequestFailedException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin
+@RestController
+@RequestMapping("wanderfun/user")
+public class UserController {
+    private final UserUsecase userUsecase;
+
+    @Autowired
+    public UserController(UserUsecase userUsecase) {
+        this.userUsecase = userUsecase;
+    }
+
 //    @GetMapping("")
 //    public ResponseEntity<ResponseDto<List<UserResponseDto>>> findAllUsers() {
 //        List<UserResponseDto> result = userUsecase.findAllUsers();
@@ -134,6 +131,24 @@
 //        response.setData(result);
 //        return ResponseEntity.status(HttpStatus.OK).body(response);
 //    }
+
+    @GetMapping("/self/mini")
+    public ResponseEntity<ResponseDto<MiniUserDto>> getMiniSelfInfo(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        MiniUserDto result = userUsecase.getMiniSelfInfo(accessToken);
+        if (result == null) {
+            throw new RequestFailedException("Get mini self info failed!");
+        }
+
+        ResponseDto<MiniUserDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Get self info successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 //
 //    @PutMapping("/self")
 //    public ResponseEntity<ResponseDto<SelfInfoDto>> updateSelfInfo(@RequestHeader("Authorization") String accessToken,
@@ -165,4 +180,4 @@
 //        response.setMessage("Delete self successful!");
 //        return ResponseEntity.status(HttpStatus.OK).body(response);
 //    }
-//}
+}
