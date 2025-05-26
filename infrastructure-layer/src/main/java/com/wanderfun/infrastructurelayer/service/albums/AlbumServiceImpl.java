@@ -32,12 +32,12 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album, Long> implements Al
     @Override
     @Transactional
     public List<Album> findAllByUserId(Long userId) {
-        return albumRepository.findAllByUser_Id(userId);
+        return albumRepository.findAllByUserId(userId);
     }
 
     @Override
     @Transactional
     public void deleteAllByUserId(Long userId) {
-        albumRepository.deleteAllByUser_Id(userId);
+        albumRepository.deleteAllByUserId(userId);
     }
 }

@@ -3,7 +3,6 @@ package com.wanderfun.infrastructurelayer.repository.albums;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.repository.albums.AlbumRepository;
 import com.wanderfun.domainlayer.model.albums.Album;
-import com.wanderfun.infrastructurelayer.persistence.entity.*;
 import com.wanderfun.infrastructurelayer.persistence.entity.albums.AlbumEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.albums.AlbumImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.users.UserEntity;
@@ -32,10 +31,10 @@ public class AlbumRepositoryImpl extends BaseRepositoryImpl<Album, AlbumEntity, 
     public Album save(Album album) {
         AlbumEntity albumEntity = objectMapper.map(album, AlbumEntity.class);
 
-        if (album.getAlbumImages() != null || !album.getAlbumImages().isEmpty()) {
-            List<AlbumImageEntity> albumImageEntities = objectMapper.mapList(album.getAlbumImages(), AlbumImageEntity.class);
+        if (album.getAlbumImageList() != null || !album.getAlbumImageList().isEmpty()) {
+            List<AlbumImageEntity> albumImageEntities = objectMapper.mapList(album.getAlbumImageList(), AlbumImageEntity.class);
             albumImageEntities.forEach(albumImageEntity -> albumImageEntity.setAlbum(albumEntity));
-            albumEntity.setAlbumImages(albumImageEntities);
+            albumEntity.setAlbumImageList(albumImageEntities);
         }
 
         UserEntity userEntity = jpaUserRepository.findById(album.getUserId()).get();
@@ -54,13 +53,13 @@ public class AlbumRepositoryImpl extends BaseRepositoryImpl<Album, AlbumEntity, 
     }
 
     @Override
-    public List<Album> findAllByUser_Id(Long userId) {
-        List<Album> albums = objectMapper.mapList(jpaAlbumRepository.findAllByUser_Id(userId), Album.class);
+    public List<Album> findAllByUserId(Long userId) {
+        List<Album> albums = objectMapper.mapList(jpaAlbumRepository.findAllByUserId(userId), Album.class);
         return albums;
     }
 
     @Override
-    public void deleteAllByUser_Id(Long userId) {
-        jpaAlbumRepository.deleteAllByUser_Id(userId);
+    public void deleteAllByUserId(Long userId) {
+        jpaAlbumRepository.deleteAllByUserId(userId);
     }
 }

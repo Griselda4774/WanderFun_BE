@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface AlbumRepository extends BaseRepository<Album, Long> {
     Optional<Album> findByName(String name);
-    List<Album> findAllByUser_Id(Long userId);
-    void deleteAllByUser_Id(Long userId);
+    List<Album> findAllByUserId(Long userId);
+    void deleteAllByUserId(Long userId);
 }

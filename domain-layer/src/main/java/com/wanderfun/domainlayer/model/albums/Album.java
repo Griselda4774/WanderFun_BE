@@ -11,7 +11,7 @@ public class Album {
     private String name;
     private String description;
     private Image coverImage;
-    private List<AlbumImage> albumImages;
+    private List<AlbumImage> albumImageList;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Place place;
@@ -51,12 +51,12 @@ public class Album {
         return createdAt;
     }
 
-    public List<AlbumImage> getAlbumImages() {
-        return albumImages;
+    public List<AlbumImage> getAlbumImageList() {
+        return albumImageList;
     }
 
-    public void setAlbumImages(List<AlbumImage> albumImages) {
-        this.albumImages = albumImages;
+    public void setAlbumImageList(List<AlbumImage> albumImageList) {
+        this.albumImageList = albumImageList;
     }
 
     public Image getCoverImage() {

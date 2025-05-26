@@ -11,7 +11,7 @@ public class AlbumDto {
     private String name;
     private String description;
     private ImageDto coverImage;
-    private List<AlbumImageDto> albumImages;
+    private List<AlbumImageDto> albumImageList;
     private LocalTime createdAt;
     private LocalTime updatedAt;
     private MiniPlaceDto place;
@@ -51,12 +51,12 @@ public class AlbumDto {
         this.coverImage = coverImage;
     }
 
-    public List<AlbumImageDto> getAlbumImages() {
-        return albumImages;
+    public List<AlbumImageDto> getAlbumImageList() {
+        return albumImageList;
     }
 
-    public void setAlbumImages(List<AlbumImageDto> albumImages) {
-        this.albumImages = albumImages;
+    public void setAlbumImageList(List<AlbumImageDto> albumImageList) {
+        this.albumImageList = albumImageList;
     }
 
     public LocalTime getCreatedAt() {

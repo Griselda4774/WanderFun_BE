@@ -26,7 +26,7 @@ public class AlbumEntity {
     private ImageEntity coverImage;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AlbumImageEntity> albumImages = new ArrayList<>();
+    private List<AlbumImageEntity> albumImageList = new ArrayList<>();
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -77,12 +77,12 @@ public class AlbumEntity {
         this.coverImage = coverImage;
     }
 
-    public List<AlbumImageEntity> getAlbumImages() {
-        return albumImages;
+    public List<AlbumImageEntity> getAlbumImageList() {
+        return albumImageList;
     }
 
-    public void setAlbumImages(List<AlbumImageEntity> albumImages) {
-        this.albumImages = albumImages;
+    public void setAlbumImageList(List<AlbumImageEntity> albumImageList) {
+        this.albumImageList = albumImageList;
     }
 
     public LocalDateTime getCreatedAt() {
