@@ -39,7 +39,8 @@ CREATE TABLE likes (
     target_id BIGINT NOT NULL,
     target_type VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT uq_user_target UNIQUE (user_id, target_id, target_type)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
