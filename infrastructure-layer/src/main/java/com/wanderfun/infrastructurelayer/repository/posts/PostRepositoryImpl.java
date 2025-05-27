@@ -30,10 +30,8 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
     @Override
     public Post save(Post post) {
         PostEntity postEntity = objectMapper.map(post, PostEntity.class);
-
         if (post.isTripShare()) {
             postEntity.setPlace(null);
-            postEntity.setImage(null);
         } else {
             postEntity.setTrip(null);
         }
