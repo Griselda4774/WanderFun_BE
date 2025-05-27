@@ -45,6 +45,7 @@ public class PostUsecaseImpl implements PostUsecase {
 
     @Override
     public boolean createPost(PostCreateDto postCreateDto, String accessToken) {
+        postCreateDto.setTripShare(postCreateDto.getTripId() != null);
         Post post = objectMapper.map(postCreateDto, Post.class);
         post.setUser(new User());
         post.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
@@ -54,6 +55,7 @@ public class PostUsecaseImpl implements PostUsecase {
 
     @Override
     public boolean updatePost(Long postId, PostCreateDto postCreateDto, String accessToken) {
+        postCreateDto.setTripShare(postCreateDto.getTripId() != null);
         Post currentPost = postService.findById(postId);
         Post post = objectMapper.map(postCreateDto, Post.class);
         if (!Objects.equals(currentPost.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
