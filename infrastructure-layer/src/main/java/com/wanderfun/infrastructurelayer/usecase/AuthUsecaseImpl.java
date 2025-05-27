@@ -57,7 +57,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
     public boolean register(RegisterDto registerDto) throws ObjectAlreadyExistException {
         Account account = objectMapper.map(registerDto, Account.class);
         checkExistingAccount(account);
-
+        account.setRole(UserRole.USER);
         initUser(account, registerDto);
         return true;
     }
@@ -66,7 +66,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
     public boolean registerAdmin(RegisterDto registerDto) throws ObjectAlreadyExistException {
         Account account = objectMapper.map(registerDto, Account.class);
         checkExistingAccount(account);
-
+        account.setRole(UserRole.ADMIN);
         initUser(account, registerDto);
         return true;
     }
@@ -153,7 +153,6 @@ public class AuthUsecaseImpl implements AuthUsecase {
     }
 
     private void initUser(Account account, RegisterDto registerDto) {
-        account.setRole(UserRole.USER);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         Account currentAccount = accountService.create(account);
         User user = new User();
