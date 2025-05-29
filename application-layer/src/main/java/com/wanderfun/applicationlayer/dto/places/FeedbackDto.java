@@ -1,4 +1,4 @@
-package com.wanderfun.applicationlayer.dto.posts;
+package com.wanderfun.applicationlayer.dto.places;
 
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 

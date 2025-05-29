@@ -1,21 +1,21 @@
-package com.wanderfun.domainlayer.model.posts;
+package com.wanderfun.applicationlayer.dto.posts;
 
-import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-public class Comment {
+public class CommentDto {
     private Long id;
-    private User user;
+    private MiniUserDto user;
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private Long postId;
     private Long parentId;
     private Long likeCount;
+    private boolean isLiked;
 
-    public Comment() {
+    public CommentDto() {
     }
 
     public Long getId() {
@@ -26,11 +26,11 @@ public class Comment {
         this.id = id;
     }
 
-    public User getUser() {
+    public MiniUserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(MiniUserDto user) {
         this.user = user;
     }
 
@@ -80,5 +80,13 @@ public class Comment {
 
     public void setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 }

@@ -14,13 +14,11 @@ import java.util.List;
 @Service
 public class PostServiceImpl extends BaseServiceImpl<Post, Long> implements PostService {
     private final PostRepository postRepository;
-    private final ObjectMapper objectMapper;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, ObjectMapper objectMapper) {
         super(postRepository, objectMapper, Post.class);
         this.postRepository = postRepository;
-        this.objectMapper = objectMapper;
     }
 
     @Override
