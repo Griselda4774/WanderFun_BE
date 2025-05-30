@@ -11,12 +11,12 @@ import java.util.List;
 
 @Repository
 public interface JpaPostRepository extends JpaBaseRepository<PostEntity, Long> {
-    @Query("SELECT p FROM PostEntity p WHERE (:cursor IS NULL OR p.id < :cursor) ORDER BY p.createAt DESC")
+    @Query("SELECT p FROM PostEntity p WHERE (:cursor IS NULL OR p.id < :cursor) ORDER BY p.id DESC")
     List<PostEntity> findAllPostByCursor(@Param("cursor") Long cursor, Pageable pageable);
 
-    @Query("SELECT CAST(COUNT(c) AS long) FROM CommentEntity c WHERE c.post.id = :postId")
-    Long countCommentById(@Param("postId")Long postId);
+    @Query("SELECT CAST(COUNT(c) AS long) FROM CommentEntity c WHERE c.post.id = :post_id")
+    Long countCommentById(@Param("post_id")Long postId);
 
-    @Query("SELECT CAST(COUNT(l) AS long) FROM LikeEntity l WHERE l.targetId = :postId AND l.targetType = 'POST'")
-    Long countLikeById(@Param("postId")Long postId);
+    @Query("SELECT CAST(COUNT(l) AS long) FROM LikeEntity l WHERE l.targetId = :post_id AND l.targetType = 'POST'")
+    Long countLikeById(@Param("post_id")Long postId);
 }

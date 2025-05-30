@@ -6,12 +6,14 @@ import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.Section;
+import com.wanderfun.domainlayer.model.posts.Comment;
 import com.wanderfun.domainlayer.model.posts.Post;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.domainlayer.model.trips.TripPlace;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -76,6 +78,9 @@ public class ModelMapperConfig {
         modelMapper.typeMap(PostCreateDto.class, Post.class)
                 .addMappings(mapper -> mapper.using(tripIdToTripConverter)
                         .map(PostCreateDto::getTripId, Post::setTrip));
+
+        modelMapper.typeMap(CommentEntity.class, Comment.class)
+                .addMapping(src -> src.getPost().getId(), Comment::setPostId);
 
         return modelMapper;
     }
