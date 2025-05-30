@@ -167,19 +167,19 @@ public class PlaceController {
         response.setMessage("Delete place successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-//
-//    @DeleteMapping("")
-//    public ResponseEntity<ResponseDto<PlaceDto>> deleteAllPlaces() {
-//        boolean result = placeUsecase.deleteAllPlaces();
-//        if (!result) {
-//            throw new RequestFailedException("Delete all places failed!");
-//        }
-//
-//        ResponseDto<PlaceDto> response = new ResponseDto<>();
-//        response.setStatusCode(HttpStatus.OK.toString());
-//        response.setMessage("Delete all places successful!");
-//        return ResponseEntity.status(HttpStatus.OK).body(response);
-//    }
+
+    @DeleteMapping("")
+    public ResponseEntity<ResponseDto<PlaceDto>> deleteAllPlaces() {
+        boolean result = placeUsecase.deleteAll();
+        if (!result) {
+            throw new RequestFailedException("Delete all places failed!");
+        }
+
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Delete all places successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 //
 //    @PostMapping("/feedback/{placeId}")
 //    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestHeader("Authorization") String accessToken,

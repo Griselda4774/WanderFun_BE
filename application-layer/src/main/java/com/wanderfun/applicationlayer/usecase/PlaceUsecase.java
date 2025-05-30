@@ -17,4 +17,5 @@ public interface PlaceUsecase {
     boolean createAll(List<PlaceCreateDto> placeCreateDtoList);
     boolean updateById(Long id, PlaceCreateDto placeCreateDto);
     boolean deleteById(Long id);
+    boolean deleteAll();
 }

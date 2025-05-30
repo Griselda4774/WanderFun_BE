@@ -86,7 +86,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/wanderfun/place/**").hasRole(UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.DELETE,"/wanderfun/place").hasRole(UserRole.ADMIN.name())
                         .requestMatchers("/wanderfun/place/feedback/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/favourite/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/checkin/**").hasRole(UserRole.USER.name())
