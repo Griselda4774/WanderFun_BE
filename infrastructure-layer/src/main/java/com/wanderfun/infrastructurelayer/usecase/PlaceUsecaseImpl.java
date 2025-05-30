@@ -204,6 +204,12 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         return true;
     }
 
+    @Override
+    public boolean deleteAll() {
+        placeService.deleteAll();
+        return true;
+    }
+
     private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {
         if (place.getAddress() == null) {
             place.setAddress(new Address());

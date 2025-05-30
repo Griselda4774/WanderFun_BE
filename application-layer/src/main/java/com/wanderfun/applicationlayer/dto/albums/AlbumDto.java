@@ -3,7 +3,7 @@ package com.wanderfun.applicationlayer.dto.albums;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class AlbumDto {
@@ -12,8 +12,8 @@ public class AlbumDto {
     private String description;
     private ImageDto coverImage;
     private List<AlbumImageDto> albumImageList;
-    private LocalTime createdAt;
-    private LocalTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private MiniPlaceDto place;
     private Long userId;
 
@@ -59,19 +59,19 @@ public class AlbumDto {
         this.albumImageList = albumImageList;
     }
 
-    public LocalTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
