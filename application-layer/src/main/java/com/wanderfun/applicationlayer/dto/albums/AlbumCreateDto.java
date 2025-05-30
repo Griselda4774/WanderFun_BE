@@ -1,17 +1,17 @@
 package com.wanderfun.applicationlayer.dto.albums;
 
+import com.wanderfun.applicationlayer.dto.images.ImageDto;
+
+import java.util.List;
+
 public class AlbumCreateDto {
     private String name;
     private String description;
+    private ImageDto coverImage;
+    private List<AlbumImageDto> albumImageList;
     private Long placeId;
 
     public AlbumCreateDto() {
-    }
-
-    public AlbumCreateDto(String name, String description, Long placeId) {
-        this.name = name;
-        this.description = description;
-        this.placeId = placeId;
     }
 
     public String getName() {
@@ -28,6 +28,22 @@ public class AlbumCreateDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ImageDto getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(ImageDto coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public List<AlbumImageDto> getAlbumImageList() {
+        return albumImageList;
+    }
+
+    public void setAlbumImageList(List<AlbumImageDto> albumImageList) {
+        this.albumImageList = albumImageList;
     }
 
     public Long getPlaceId() {

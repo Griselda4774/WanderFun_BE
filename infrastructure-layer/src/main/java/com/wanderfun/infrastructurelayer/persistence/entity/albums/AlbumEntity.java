@@ -25,7 +25,7 @@ public class AlbumEntity {
     @JoinColumn(name = "cover_image_id")
     private ImageEntity coverImage;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AlbumImageEntity> albumImageList = new ArrayList<>();
 
     @Column(name = "created_at", nullable = false)
