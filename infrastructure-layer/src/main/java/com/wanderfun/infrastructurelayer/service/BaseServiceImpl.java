@@ -30,6 +30,7 @@ public class BaseServiceImpl<Model, ID> implements BaseService<Model, ID> {
     }
 
     @Override
+    @Transactional
     public Model create(Model model) {
         return baseRepository.save(model);
     }

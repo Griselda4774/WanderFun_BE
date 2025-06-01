@@ -13,7 +13,7 @@ public interface PostUsecase {
     boolean updatePost(Long postId, PostCreateDto postDto, String accessToken);
     boolean deletePost(Long postId, String accessToken);
     List<CommentDto> findAllCommentByPostId(String accessToken, Long postId);
-    boolean createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto);
-    boolean updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto);
+    CommentDto createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto);
+    CommentDto updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto);
     boolean deleteComment(String accessToken, Long commentId);
 }
