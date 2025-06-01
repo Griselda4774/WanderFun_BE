@@ -1,14 +1,18 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
+import com.wanderfun.applicationlayer.dto.posts.CommentCreateDto;
+import com.wanderfun.applicationlayer.dto.posts.CommentDto;
 import com.wanderfun.applicationlayer.dto.posts.PostCreateDto;
 import com.wanderfun.applicationlayer.dto.posts.PostDto;
 import com.wanderfun.applicationlayer.exception.NotHavePermissionException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
+import com.wanderfun.applicationlayer.service.posts.CommentService;
 import com.wanderfun.applicationlayer.service.posts.PostService;
 import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.PostUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.places.Place;
+import com.wanderfun.domainlayer.model.posts.Comment;
 import com.wanderfun.domainlayer.model.posts.Post;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.domainlayer.model.users.User;
@@ -24,13 +28,15 @@ public class PostUsecaseImpl implements PostUsecase {
     private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
     private final UserService userService;
+    private final CommentService commentService;
 
     @Autowired
-    public PostUsecaseImpl(PostService postService, ObjectMapper objectMapper, JwtUtil jwtUtil, UserService userService) {
+    public PostUsecaseImpl(PostService postService, ObjectMapper objectMapper, JwtUtil jwtUtil, UserService userService, CommentService commentService) {
         this.postService = postService;
         this.objectMapper = objectMapper;
         this.jwtUtil = jwtUtil;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -76,18 +82,40 @@ public class PostUsecaseImpl implements PostUsecase {
         return true;
     }
 
-    private void checkPost(Post post, PostCreateDto postCreateDto) {
-        if (post.isTripShare()) {
-            post.setTrip(new Trip());
-            post.getTrip().setId(postCreateDto.getTripId());
-            post.setPlace(null);
-            post.setImage(null);
-        } else {
-            post.setTrip(null);
-            if (post.getPlace() != null) {
-                post.setPlace(new Place());
-                post.getPlace().setId(postCreateDto.getPlaceId());
-            }
+    @Override
+    public List<CommentDto> findAllCommentByPostId(String accessToken, Long postId) {
+        return objectMapper.mapList(commentService.findAllByPostId(postId), CommentDto.class);
+    }
+
+    @Override
+    public boolean createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto) {
+        Comment comment = objectMapper.map(commentCreateDto, Comment.class);
+        comment.setPostId(postId);
+        comment.setUser(new User());
+        comment.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
+        commentService.create(comment);
+        return true;
+    }
+
+    @Override
+    public boolean updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto) {
+        Comment currentComment = commentService.findById(commentId);
+        Comment comment = objectMapper.map(commentCreateDto, Comment.class);
+        if (!Objects.equals(currentComment.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
+            throw new NotHavePermissionException("You don't have permission to update this comment");
         }
+        comment.setUser(new User());
+        comment.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
+        commentService.updateById(commentId, comment);
+        return true;
+    }
+
+    @Override
+    public boolean deleteComment(String accessToken, Long commentId) {
+        Comment currentComment = commentService.findById(commentId);
+        if (Objects.equals(currentComment.getUser().getId(), userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId())) {
+            commentService.deleteById(commentId);
+        }
+        return true;
     }
 }

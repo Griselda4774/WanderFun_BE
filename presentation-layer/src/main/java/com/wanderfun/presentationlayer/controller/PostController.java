@@ -1,6 +1,8 @@
 package com.wanderfun.presentationlayer.controller;
 
 import com.wanderfun.applicationlayer.dto.ResponseDto;
+import com.wanderfun.applicationlayer.dto.posts.CommentCreateDto;
+import com.wanderfun.applicationlayer.dto.posts.CommentDto;
 import com.wanderfun.applicationlayer.dto.posts.PostCreateDto;
 import com.wanderfun.applicationlayer.dto.posts.PostDto;
 import com.wanderfun.applicationlayer.usecase.PostUsecase;
@@ -23,7 +25,8 @@ public class PostController {
     }
 
     @GetMapping("/cursor")
-    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestParam(required = false) Long cursor,
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                                          @RequestParam(required = false) Long cursor,
                                                                           @RequestParam(defaultValue = "10") int size) {
         List<PostDto> result = postUsecase.findAllPostByCursor(cursor, size);
         if (result == null) {
@@ -38,7 +41,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<ResponseDto<PostDto>> findPostById(@PathVariable Long postId) {
+    public ResponseEntity<ResponseDto<PostDto>> findPostById(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                             @PathVariable Long postId) {
         PostDto result = postUsecase.findPostById(postId);
         if (result == null) {
             throw new RequestFailedException("Find post by id failed!");
@@ -103,6 +107,83 @@ public class PostController {
         ResponseDto<PostDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete post successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // Comment-related endpoints can be added here as needed
+    @GetMapping("/comment")
+    public ResponseEntity<ResponseDto<List<CommentDto>>> findAllCommentsByPostId(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                                                 @RequestParam() Long postId) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        List<CommentDto> result = postUsecase.findAllCommentByPostId(accessToken, postId);
+        if (result == null) {
+            throw new RequestFailedException("Find all comment by post id failed!");
+        }
+
+        ResponseDto<List<CommentDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all comment by post id successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
+    @PostMapping("/comment")
+    public ResponseEntity<ResponseDto<CommentDto>> createComment(@RequestHeader("Authorization") String accessToken,
+                                                                 @RequestParam() Long postId,
+                                                                 @RequestBody CommentCreateDto commentCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = postUsecase.createComment(accessToken, postId, commentCreateDto);
+        if (!result) {
+            throw new RequestFailedException("Create comment failed!");
+        }
+
+        ResponseDto<CommentDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.CREATED.toString());
+        response.setMessage("Create comment successful!");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/comment/{commentId}")
+    public ResponseEntity<ResponseDto<CommentDto>> updateComment(@PathVariable Long commentId,
+                                                                 @RequestHeader("Authorization") String accessToken,
+                                                                 @RequestBody CommentCreateDto commentCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = postUsecase.updateComment(accessToken, commentId, commentCreateDto);
+        if (!result) {
+            throw new RequestFailedException("Update comment failed!");
+        }
+
+        ResponseDto<CommentDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Update comment successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/comment/{commentId}")
+    public ResponseEntity<ResponseDto<CommentDto>> deleteComment(@PathVariable Long commentId,
+                                                              @RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = postUsecase.deleteComment(accessToken, commentId);
+        if (!result) {
+            throw new RequestFailedException("Delete comment failed!");
+        }
+
+        ResponseDto<CommentDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Delete comment successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
