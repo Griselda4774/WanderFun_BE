@@ -83,7 +83,7 @@ public class PostUsecaseImpl implements PostUsecase {
     }
 
     @Override
-    public List<CommentDto> findAllCommentByPostId(Long postId) {
+    public List<CommentDto> findAllCommentByPostId(String accessToken, Long postId) {
         return objectMapper.mapList(commentService.findAllByPostId(postId), CommentDto.class);
     }
 

@@ -25,7 +25,8 @@ public class PostController {
     }
 
     @GetMapping("/cursor")
-    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestParam(required = false) Long cursor,
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                                          @RequestParam(required = false) Long cursor,
                                                                           @RequestParam(defaultValue = "10") int size) {
         List<PostDto> result = postUsecase.findAllPostByCursor(cursor, size);
         if (result == null) {
@@ -40,7 +41,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<ResponseDto<PostDto>> findPostById(@PathVariable Long postId) {
+    public ResponseEntity<ResponseDto<PostDto>> findPostById(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                             @PathVariable Long postId) {
         PostDto result = postUsecase.findPostById(postId);
         if (result == null) {
             throw new RequestFailedException("Find post by id failed!");
@@ -110,8 +112,13 @@ public class PostController {
 
     // Comment-related endpoints can be added here as needed
     @GetMapping("/comment")
-    public ResponseEntity<ResponseDto<List<CommentDto>>> findAllCommentsByPostId(@RequestParam() Long postId) {
-        List<CommentDto> result = postUsecase.findAllCommentByPostId(postId);
+    public ResponseEntity<ResponseDto<List<CommentDto>>> findAllCommentsByPostId(@RequestHeader(value = "Authorization", required = false) String accessToken,
+                                                                                 @RequestParam() Long postId) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        List<CommentDto> result = postUsecase.findAllCommentByPostId(accessToken, postId);
         if (result == null) {
             throw new RequestFailedException("Find all comment by post id failed!");
         }

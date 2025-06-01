@@ -1,6 +1,9 @@
 package com.wanderfun.applicationlayer.dto.posts;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CommentCreateDto {
+    @NotBlank
     private String content;
     private Long parentId;
 
