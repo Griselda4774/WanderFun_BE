@@ -113,6 +113,9 @@ public class SecurityConfig {
                         // Place Category
                         .requestMatchers("/wanderfun/place/categories/**").hasRole(UserRole.ADMIN.name())
 
+                        // Account
+                        .requestMatchers("/wanderfun/account/**").hasRole(UserRole.ADMIN.name())
+
                         // Default
                         .anyRequest().authenticated()
                 )
