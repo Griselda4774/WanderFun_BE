@@ -14,6 +14,7 @@ import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEn
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -81,6 +82,9 @@ public class ModelMapperConfig {
 
         modelMapper.typeMap(CommentEntity.class, Comment.class)
                 .addMapping(src -> src.getPost().getId(), Comment::setPostId);
+
+        modelMapper.typeMap(TripEntity.class, Trip.class)
+                .addMapping(src -> src.getUser().getId(), Trip::setUserId);
 
         return modelMapper;
     }
