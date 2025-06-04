@@ -26,4 +26,10 @@ public class PostServiceImpl extends BaseServiceImpl<Post, Long> implements Post
     public List<Post> findAllByCursor(Long cursor, int size) {
         return postRepository.findAllByCursor(cursor, size);
     }
+
+    @Override
+    @Transactional
+    public List<Post> findAllByUserId(Long userId) {
+        return postRepository.findAllByUserId(userId);
+    }
 }

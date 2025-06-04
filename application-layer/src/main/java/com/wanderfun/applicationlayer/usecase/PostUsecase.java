@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PostUsecase {
     List<PostDto> findAllPostByCursor(Long cursor, int size);
+    List<PostDto> findAllPostByUserId(String accessToken);
     PostDto findPostById(Long postId);
     boolean createPost(PostCreateDto postCreateDto, String accessToken);
     boolean updatePost(Long postId, PostCreateDto postDto, String accessToken);

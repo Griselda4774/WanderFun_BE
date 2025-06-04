@@ -40,6 +40,24 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByUser(@RequestHeader(value = "Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        List<PostDto> result = postUsecase.findAllPostByUserId(accessToken);
+        if (result == null) {
+            throw new RequestFailedException("Find all post by user id failed!");
+        }
+
+        ResponseDto<List<PostDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all post by user id successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @GetMapping("/{postId}")
     public ResponseEntity<ResponseDto<PostDto>> findPostById(@RequestHeader(value = "Authorization", required = false) String accessToken,
                                                              @PathVariable Long postId) {

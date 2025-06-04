@@ -45,6 +45,11 @@ public class PostUsecaseImpl implements PostUsecase {
     }
 
     @Override
+    public List<PostDto> findAllPostByUserId(String accessToken) {
+        return objectMapper.mapList(postService.findAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId()), PostDto.class);
+    }
+
+    @Override
     public PostDto findPostById(Long postId) {
         return objectMapper.map(postService.findById(postId), PostDto.class);
     }

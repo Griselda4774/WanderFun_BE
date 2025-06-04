@@ -78,7 +78,7 @@ public class SecurityConfig {
 
                         // User
                         .requestMatchers(HttpMethod.GET,"/wanderfun/user/self/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
-                        .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.ADMIN.name())
+                        .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.USER.name())
 
                         // Place
                         .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()

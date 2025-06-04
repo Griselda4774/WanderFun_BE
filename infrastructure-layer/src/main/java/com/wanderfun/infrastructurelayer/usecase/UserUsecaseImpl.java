@@ -1,16 +1,16 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
+import com.wanderfun.applicationlayer.dto.users.UserCreateDto;
+import com.wanderfun.applicationlayer.dto.users.UserDto;
 import com.wanderfun.applicationlayer.exception.ObjectInvalidException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.UserUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
+import com.wanderfun.domainlayer.model.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserUsecaseImpl implements UserUsecase {
@@ -104,5 +104,24 @@ public class UserUsecaseImpl implements UserUsecase {
             throw new ObjectInvalidException("Invalid access token");
         }
         return objectMapper.map(userService.findByAccountId(jwtUtil.getIdFromToken(assessToken)), MiniUserDto.class);
+    }
+
+    @Override
+    public UserDto getSelfInfo(String assessToken) {
+        if (!jwtUtil.validateToken(assessToken)) {
+            throw new ObjectInvalidException("Invalid access token");
+        }
+        return objectMapper.map(userService.findByAccountId(jwtUtil.getIdFromToken(assessToken)), UserDto.class);
+    }
+
+    @Override
+    public UserDto updateSelfInfo(String assessToken, UserCreateDto userCreateDto) {
+        if (!jwtUtil.validateToken(assessToken)) {
+            throw new ObjectInvalidException("Invalid access token");
+        }
+        Long userId = userService.findByAccountId(jwtUtil.getIdFromToken(assessToken)).getId();
+        User user = objectMapper.map(userCreateDto, User.class);
+        user.setAccountId(jwtUtil.getIdFromToken(assessToken));
+        return objectMapper.map(userService.updateById(userId, user), UserDto.class);
     }
 }
