@@ -45,6 +45,11 @@ public class PostUsecaseImpl implements PostUsecase {
     }
 
     @Override
+    public List<PostDto> findAllPostByUserId(String accessToken) {
+        return objectMapper.mapList(postService.findAllByUserId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId()), PostDto.class);
+    }
+
+    @Override
     public PostDto findPostById(Long postId) {
         return objectMapper.map(postService.findById(postId), PostDto.class);
     }
@@ -88,17 +93,20 @@ public class PostUsecaseImpl implements PostUsecase {
     }
 
     @Override
-    public boolean createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto) {
+    public CommentDto createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto) {
         Comment comment = objectMapper.map(commentCreateDto, Comment.class);
         comment.setPostId(postId);
         comment.setUser(new User());
         comment.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
-        commentService.create(comment);
-        return true;
+
+        Comment savedComment = commentService.create(comment);
+        Comment retrievedComment = commentService.findById(savedComment.getId());
+
+        return objectMapper.map(retrievedComment, CommentDto.class);
     }
 
     @Override
-    public boolean updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto) {
+    public CommentDto updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto) {
         Comment currentComment = commentService.findById(commentId);
         Comment comment = objectMapper.map(commentCreateDto, Comment.class);
         if (!Objects.equals(currentComment.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
@@ -106,8 +114,11 @@ public class PostUsecaseImpl implements PostUsecase {
         }
         comment.setUser(new User());
         comment.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
-        commentService.updateById(commentId, comment);
-        return true;
+
+        Comment savedComment = commentService.updateById(commentId, comment);
+        Comment retrievedComment = commentService.findById(savedComment.getId());
+
+        return objectMapper.map(retrievedComment, CommentDto.class);
     }
 
     @Override

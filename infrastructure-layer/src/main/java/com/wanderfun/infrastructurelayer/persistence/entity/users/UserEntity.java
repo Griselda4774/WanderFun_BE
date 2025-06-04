@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(name = "is_created_profile")
     private Boolean isCreatedProfile = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "avatar_image_id")
     private ImageEntity avatarImage;
 

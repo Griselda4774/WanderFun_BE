@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PostRepository extends BaseRepository<Post, Long> {
     List<Post> findAllByCursor(Long cursor, int size);
+    List<Post> findAllByUserId(Long userId);
 }

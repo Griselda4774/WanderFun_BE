@@ -40,6 +40,24 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByUser(@RequestHeader(value = "Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        List<PostDto> result = postUsecase.findAllPostByUserId(accessToken);
+        if (result == null) {
+            throw new RequestFailedException("Find all post by user id failed!");
+        }
+
+        ResponseDto<List<PostDto>> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find all post by user id successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @GetMapping("/{postId}")
     public ResponseEntity<ResponseDto<PostDto>> findPostById(@RequestHeader(value = "Authorization", required = false) String accessToken,
                                                              @PathVariable Long postId) {
@@ -139,14 +157,15 @@ public class PostController {
             accessToken = accessToken.substring(7);
         }
 
-        boolean result = postUsecase.createComment(accessToken, postId, commentCreateDto);
-        if (!result) {
+        CommentDto result = postUsecase.createComment(accessToken, postId, commentCreateDto);
+        if (result == null) {
             throw new RequestFailedException("Create comment failed!");
         }
 
         ResponseDto<CommentDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.CREATED.toString());
         response.setMessage("Create comment successful!");
+        response.setData(result);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -158,14 +177,15 @@ public class PostController {
             accessToken = accessToken.substring(7);
         }
 
-        boolean result = postUsecase.updateComment(accessToken, commentId, commentCreateDto);
-        if (!result) {
+        CommentDto result = postUsecase.updateComment(accessToken, commentId, commentCreateDto);
+        if (result == null) {
             throw new RequestFailedException("Update comment failed!");
         }
 
         ResponseDto<CommentDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Update comment successful!");
+        response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

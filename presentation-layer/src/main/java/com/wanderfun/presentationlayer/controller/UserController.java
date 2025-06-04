@@ -2,11 +2,14 @@ package com.wanderfun.presentationlayer.controller;
 
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
+import com.wanderfun.applicationlayer.dto.users.UserCreateDto;
+import com.wanderfun.applicationlayer.dto.users.UserDto;
 import com.wanderfun.applicationlayer.usecase.UserUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -145,28 +148,46 @@ public class UserController {
 
         ResponseDto<MiniUserDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Get mini self info successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/self")
+    public ResponseEntity<ResponseDto<UserDto>> getSelfInfo(@RequestHeader("Authorization") String accessToken) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        UserDto result = userUsecase.getSelfInfo(accessToken);
+        if (result == null) {
+            throw new RequestFailedException("Get self info failed!");
+        }
+
+        ResponseDto<UserDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Get self info successful!");
         response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-//
-//    @PutMapping("/self")
-//    public ResponseEntity<ResponseDto<SelfInfoDto>> updateSelfInfo(@RequestHeader("Authorization") String accessToken,
-//                                                         @RequestBody @Validated ChangeInfoDto changeInfoDto) {
-//        if (accessToken.startsWith("Bearer ")) {
-//            accessToken = accessToken.substring(7);
-//        }
-//
-//        boolean result = userUsecase.updateSelfInfo(accessToken, changeInfoDto);
-//        if (!result) {
-//            throw new RequestFailedException("Update self info failed!");
-//        }
-//
-//        ResponseDto<SelfInfoDto> response = new ResponseDto<>();
-//        response.setStatusCode(HttpStatus.OK.toString());
-//        response.setMessage("Update self info successful!");
-//        return ResponseEntity.status(HttpStatus.OK).body(response);
-//    }
+
+    @PutMapping("/self")
+    public ResponseEntity<ResponseDto<UserDto>> updateSelfInfo(@RequestHeader("Authorization") String accessToken,
+                                                               @RequestBody UserCreateDto userCreateDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        UserDto result = userUsecase.updateSelfInfo(accessToken, userCreateDto);
+        if (result == null) {
+            throw new RequestFailedException("Update self info failed!");
+        }
+
+        ResponseDto<UserDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Update self info successful!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 //
 //    @DeleteMapping("self")
 //    public ResponseEntity<ResponseDto<SelfInfoDto>> deleteSelf(@RequestHeader("Authorization") String accessToken) {

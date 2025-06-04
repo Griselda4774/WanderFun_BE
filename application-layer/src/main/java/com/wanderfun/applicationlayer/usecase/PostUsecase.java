@@ -8,12 +8,13 @@ import java.util.List;
 
 public interface PostUsecase {
     List<PostDto> findAllPostByCursor(Long cursor, int size);
+    List<PostDto> findAllPostByUserId(String accessToken);
     PostDto findPostById(Long postId);
     boolean createPost(PostCreateDto postCreateDto, String accessToken);
     boolean updatePost(Long postId, PostCreateDto postDto, String accessToken);
     boolean deletePost(Long postId, String accessToken);
     List<CommentDto> findAllCommentByPostId(String accessToken, Long postId);
-    boolean createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto);
-    boolean updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto);
+    CommentDto createComment(String accessToken, Long postId, CommentCreateDto commentCreateDto);
+    CommentDto updateComment(String accessToken, Long commentId, CommentCreateDto commentCreateDto);
     boolean deleteComment(String accessToken, Long commentId);
 }

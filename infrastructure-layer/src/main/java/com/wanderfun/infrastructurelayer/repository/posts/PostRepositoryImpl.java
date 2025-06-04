@@ -62,4 +62,15 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
         });
         return postList;
     }
+
+    @Override
+    public List<Post> findAllByUserId(Long userId) {
+        List<PostEntity> postEntities = jpaPostRepository.findAllByUserId(userId);
+        List<Post> posts = objectMapper.mapList(postEntities, Post.class);
+        posts.forEach(post -> {
+            post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
+            post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
+        });
+        return posts;
+    }
 }
