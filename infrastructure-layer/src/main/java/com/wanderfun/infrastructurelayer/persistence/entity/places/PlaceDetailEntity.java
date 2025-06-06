@@ -36,6 +36,9 @@ public class PlaceDetailEntity {
     @Column(name = "is_closed")
     private Boolean isClosed = false;
 
+    @Column(name = "is_open_all_day")
+    private Boolean isOpenAllDay = false;
+
     @Column(name = "best_time_to_visit")
     private String bestTimeToVisit;
 
@@ -124,6 +127,14 @@ public class PlaceDetailEntity {
 
     public void setClosed(Boolean closed) {
         isClosed = closed;
+    }
+
+    public Boolean getOpenAllDay() {
+        return isOpenAllDay;
+    }
+
+    public void setOpenAllDay(Boolean openAllDay) {
+        isOpenAllDay = openAllDay;
     }
 
     public String getBestTimeToVisit() {

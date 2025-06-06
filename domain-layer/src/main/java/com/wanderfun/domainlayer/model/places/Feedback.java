@@ -1,5 +1,6 @@
 package com.wanderfun.domainlayer.model.places;
 
+import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.users.User;
 
 import java.time.LocalDateTime;
@@ -9,9 +10,10 @@ public class Feedback {
     private User user;
     private float rating;
     private String content;
+    private Image image;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    private Long placeDetailId;
+    private Long placeId;
 
     public Feedback() {
     }
@@ -48,6 +50,14 @@ public class Feedback {
         this.content = content;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public LocalDateTime getCreateAt() {
         return createAt;
     }
@@ -65,10 +75,10 @@ public class Feedback {
     }
 
     public Long getPlaceDetailId() {
-        return placeDetailId;
+        return placeId;
     }
 
-    public void setPlaceDetailId(Long placeDetailId) {
-        this.placeDetailId = placeDetailId;
+    public void setPlaceDetailId(Long placeId) {
+        this.placeId = placeId;
     }
 }

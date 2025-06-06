@@ -1,5 +1,6 @@
 package com.wanderfun.applicationlayer.dto.places;
 
+import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
 
 import java.time.LocalDateTime;
@@ -9,9 +10,10 @@ public class FeedbackDto {
     private MiniUserDto user;
     private float rating;
     private String content;
+    private ImageDto image;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    private Long placeDetailId;
+    private Long placeId;
 
     public FeedbackDto() {
     }
@@ -48,6 +50,14 @@ public class FeedbackDto {
         this.content = content;
     }
 
+    public ImageDto getImage() {
+        return image;
+    }
+
+    public void setImage(ImageDto image) {
+        this.image = image;
+    }
+
     public LocalDateTime getCreateAt() {
         return createAt;
     }
@@ -64,11 +74,11 @@ public class FeedbackDto {
         this.updateAt = updateAt;
     }
 
-    public Long getPlaceDetailId() {
-        return placeDetailId;
+    public Long getPlaceId() {
+        return placeId;
     }
 
-    public void setPlaceDetailId(Long placeDetailId) {
-        this.placeDetailId = placeDetailId;
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 }

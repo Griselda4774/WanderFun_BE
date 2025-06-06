@@ -1,5 +1,6 @@
-package com.wanderfun.applicationlayer.service;
+package com.wanderfun.applicationlayer.service.place;
 
+import com.wanderfun.applicationlayer.service.BaseService;
 import com.wanderfun.domainlayer.model.places.Feedback;
 
 import java.util.List;

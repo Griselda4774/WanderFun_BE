@@ -18,6 +18,7 @@ import com.wanderfun.domainlayer.model.addresses.Address;
 import com.wanderfun.domainlayer.model.addresses.District;
 import com.wanderfun.domainlayer.model.addresses.Province;
 import com.wanderfun.domainlayer.model.addresses.Ward;
+import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.domainlayer.model.places.PlaceDetail;
@@ -208,6 +209,11 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     public boolean deleteAll() {
         placeService.deleteAll();
         return true;
+    }
+
+    @Override
+    public List<Feedback> findAllFeedbacksByPlaceId(Long placeId) {
+        return List.of();
     }
 
     private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {

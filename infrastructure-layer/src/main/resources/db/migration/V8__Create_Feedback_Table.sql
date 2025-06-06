@@ -1,0 +1,15 @@
+CREATE TABLE feedbacks (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    place_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    image_id BIGINT,
+    rating FLOAT NOT NULL,
+    content VARCHAR(1024),
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (place_id) REFERENCES places(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (image_id) REFERENCES images(id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;

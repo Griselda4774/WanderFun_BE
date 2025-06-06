@@ -1,12 +1,13 @@
 package com.wanderfun.applicationlayer.dto.places;
 
+import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.domainlayer.model.images.Image;
 
 public class SectionDto {
     private Long id;
     private String title;
     private String content;
-    private Image image;
+    private ImageDto image;
     private Long placeDetailId;
 
     public SectionDto() {
@@ -36,11 +37,11 @@ public class SectionDto {
         this.content = content;
     }
 
-    public Image getImage() {
+    public ImageDto getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageDto image) {
         this.image = image;
     }
 

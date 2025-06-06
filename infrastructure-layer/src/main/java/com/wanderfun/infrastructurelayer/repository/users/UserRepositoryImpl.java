@@ -25,36 +25,8 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
     }
 
     @Override
-    public User save(User user) {
-        UserEntity userEntity = objectMapper.map(user, UserEntity.class);
-        mapEntityRelation(user, userEntity);
-        UserEntity savedUserEntity = jpaUserRepository.save(userEntity);
-        return objectMapper.map(savedUserEntity, User.class);
-    }
-
-    @Override
     public Optional<User> findByAccountId(Long accountId) {
         return jpaUserRepository.findByAccountId(accountId)
                 .map(userEntity -> objectMapper.map(userEntity, User.class));
-    }
-
-    private void mapEntityRelation(User user, UserEntity userEntity) {
-        if (user.getAccountId() != null) {
-            AccountEntity accountEntity = new AccountEntity();
-            accountEntity.setId(user.getAccountId());
-            userEntity.setAccount(accountEntity);
-        }
-
-        if (user.getAvatarImage() != null && user.getAvatarImage().getId() != null) {
-            ImageEntity imageEntity = new ImageEntity();
-            imageEntity.setId(user.getAvatarImage().getId());
-            userEntity.setAvatarImage(imageEntity);
-        }
-
-        if (user.getAddress() != null && user.getAddress().getId() != null) {
-            AddressEntity addressEntity = new AddressEntity();
-            addressEntity.setId(user.getAddress().getId());
-            userEntity.setAddress(addressEntity);
-        }
     }
 }
