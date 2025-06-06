@@ -2,6 +2,7 @@ package com.wanderfun.infrastructurelayer.configuration.modelmapper;
 
 import com.wanderfun.applicationlayer.dto.posts.PostCreateDto;
 import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
+import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Place;
@@ -10,11 +11,14 @@ import com.wanderfun.domainlayer.model.posts.Comment;
 import com.wanderfun.domainlayer.model.posts.Post;
 import com.wanderfun.domainlayer.model.trips.Trip;
 import com.wanderfun.domainlayer.model.trips.TripPlace;
+import com.wanderfun.domainlayer.model.users.User;
+import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.users.UserEntity;
 import org.modelmapper.*;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -65,26 +69,45 @@ public class ModelMapperConfig {
             return trip;
         };
 
+        Converter<Long, AccountEntity> accountIdToAccountEntityConverter = ctx -> {
+            Long accountId = ctx.getSource();
+            if (accountId == null) {
+                return null;
+            }
+            AccountEntity accountEntity = new AccountEntity();
+            accountEntity.setId(accountId);
+            return accountEntity;
+        };
+
+        // Trip
         modelMapper.typeMap(TripPlaceCreateDto.class, TripPlace.class)
                 .addMappings(mapper -> mapper.using(placeIdToPlaceConverter)
                 .map(TripPlaceCreateDto::getPlaceId, TripPlace::setPlace));
 
+        modelMapper.typeMap(TripEntity.class, Trip.class)
+                .addMapping(src -> src.getUser().getId(), Trip::setUserId);
+
+        // RefreshToken
         modelMapper.typeMap(RefreshTokenEntity.class, RefreshToken.class)
                 .addMapping(src -> src.getAccount().getId(), RefreshToken::setAccountId);
 
+        // Post
         modelMapper.typeMap(PostCreateDto.class, Post.class)
-                .addMappings(mapper -> mapper.using(placeIdToPlaceConverter)
-                        .map(PostCreateDto::getPlaceId, Post::setPlace));
+                .addMappings(mapper -> {
+                    mapper.using(placeIdToPlaceConverter)
+                            .map(PostCreateDto::getPlaceId, Post::setPlace);
+                    mapper.using(tripIdToTripConverter)
+                            .map(PostCreateDto::getTripId, Post::setTrip);
+                });
 
-        modelMapper.typeMap(PostCreateDto.class, Post.class)
-                .addMappings(mapper -> mapper.using(tripIdToTripConverter)
-                        .map(PostCreateDto::getTripId, Post::setTrip));
-
+        // Comment
         modelMapper.typeMap(CommentEntity.class, Comment.class)
                 .addMapping(src -> src.getPost().getId(), Comment::setPostId);
 
-        modelMapper.typeMap(TripEntity.class, Trip.class)
-                .addMapping(src -> src.getUser().getId(), Trip::setUserId);
+        // User
+        modelMapper.typeMap(User.class, UserEntity.class)
+                .addMappings(mapper ->
+                    mapper.using(accountIdToAccountEntityConverter).map(User::getAccountId, UserEntity::setAccount));
 
         return modelMapper;
     }

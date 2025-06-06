@@ -33,6 +33,7 @@ CREATE TABLE place_details (
     time_open TIME,
     time_close TIME,
     is_closed BIT DEFAULT 0,
+    is_open_all_day BIT DEFAULT 0,
     best_time_to_visit VARCHAR(255),
     price_range_top INT,
     price_range_bottom INT,

@@ -3,7 +3,6 @@ package com.wanderfun.applicationlayer.dto.places;
 import com.wanderfun.domainlayer.model.images.Image;
 
 public class PlaceCategoryDto {
-
     private Long id;
     private String name;
     private String nameEn;

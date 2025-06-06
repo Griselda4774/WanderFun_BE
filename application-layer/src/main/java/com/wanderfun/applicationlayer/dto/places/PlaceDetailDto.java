@@ -11,6 +11,7 @@ public class PlaceDetailDto {
     private LocalTime timeOpen;
     private LocalTime timeClose;
     private boolean isClosed;
+    private boolean isOpenAllDay;
     private String bestTimeToVisit;
     private int priceRangeTop;
     private int priceRangeBottom;
@@ -77,6 +78,14 @@ public class PlaceDetailDto {
 
     public void setClosed(boolean closed) {
         isClosed = closed;
+    }
+
+    public boolean isOpenAllDay() {
+        return isOpenAllDay;
+    }
+
+    public void setOpenAllDay(boolean openAllDay) {
+        isOpenAllDay = openAllDay;
     }
 
     public String getBestTimeToVisit() {
