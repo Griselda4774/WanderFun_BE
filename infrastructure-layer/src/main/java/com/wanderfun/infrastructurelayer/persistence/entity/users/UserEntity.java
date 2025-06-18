@@ -45,6 +45,8 @@ public class UserEntity {
     @JoinColumn(name = "account_id", nullable = false)
     private AccountEntity account;
 
+    private Long point;
+
     public UserEntity() {
     }
 
@@ -127,5 +129,13 @@ public class UserEntity {
     public void setAccount(AccountEntity account) {
         this.account = account;
     }
+
+    public Long getPoint() {
+        return point;
+    }
+
+    public void setPoint(Long point) {
+        this.point = point;
+        }
 }
 

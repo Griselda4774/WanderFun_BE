@@ -39,7 +39,7 @@ public class CommentEntity {
     @JoinColumn(name = "parent_id")
     private CommentEntity parent;
 
-    @Transient
+    @Column(name = "like_count", nullable = false)
     private Long likeCount;
 
     public CommentEntity() {}
