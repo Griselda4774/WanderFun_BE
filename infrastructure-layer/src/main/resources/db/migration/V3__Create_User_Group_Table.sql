@@ -9,7 +9,9 @@ CREATE TABLE users (
     phone_number VARCHAR(20),
     address_id BIGINT,
     account_id BIGINT NOT NULL,
-    point BIGINT DEFAULT 0,
+    point INT DEFAULT 0,
+    check_in_count INT DEFAULT 0,
+    place_check_in_count INT DEFAULT 0,
     CONSTRAINT fk_users_account FOREIGN KEY (account_id) REFERENCES accounts(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4

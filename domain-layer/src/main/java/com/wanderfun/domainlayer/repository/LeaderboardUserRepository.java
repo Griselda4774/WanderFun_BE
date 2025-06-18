@@ -1,6 +1,6 @@
 package com.wanderfun.domainlayer.repository;
 
-import com.wanderfun.domainlayer.model.statistics.LeaderboardUser;
+import com.wanderfun.domainlayer.model.rankings.UserRanking;
 
-public interface LeaderboardUserRepository extends BaseRepository<LeaderboardUser, Long> {
+public interface LeaderboardUserRepository extends BaseRepository<UserRanking, Long> {
 }

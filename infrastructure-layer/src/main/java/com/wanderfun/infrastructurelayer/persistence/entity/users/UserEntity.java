@@ -45,7 +45,14 @@ public class UserEntity {
     @JoinColumn(name = "account_id", nullable = false)
     private AccountEntity account;
 
-    private Long point;
+    @Column(name = "point", nullable = false)
+    private int point;
+
+    @Column(name = "check_in_count", nullable = false)
+    private int checkInCount;
+
+    @Column(name = "place_check_in_count", nullable = false)
+    private int placeCheckInCount;
 
     public UserEntity() {
     }
@@ -130,12 +137,28 @@ public class UserEntity {
         this.account = account;
     }
 
-    public Long getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Long point) {
+    public void setPoint(int point) {
         this.point = point;
-        }
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
+    }
+
+    public int getPlaceCheckInCount() {
+        return placeCheckInCount;
+    }
+
+    public void setPlaceCheckInCount(int placeCheckInCount) {
+        this.placeCheckInCount = placeCheckInCount;
+    }
 }
 

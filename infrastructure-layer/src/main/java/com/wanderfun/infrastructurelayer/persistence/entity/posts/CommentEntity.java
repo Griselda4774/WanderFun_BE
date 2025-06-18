@@ -40,7 +40,7 @@ public class CommentEntity {
     private CommentEntity parent;
 
     @Column(name = "like_count", nullable = false)
-    private Long likeCount;
+    private int likeCount;
 
     public CommentEntity() {}
 
@@ -100,11 +100,11 @@ public class CommentEntity {
         this.parent = parent;
     }
 
-    public Long getLikeCount() {
+    public int getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
+    public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
 }

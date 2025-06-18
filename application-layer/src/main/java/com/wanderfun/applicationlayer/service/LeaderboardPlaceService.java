@@ -1,6 +1,6 @@
 package com.wanderfun.applicationlayer.service;
 
-import com.wanderfun.domainlayer.model.statistics.LeaderboardPlace;
+import com.wanderfun.domainlayer.model.rankings.PlaceRanking;
 
-public interface LeaderboardPlaceService extends BaseService<LeaderboardPlace, Long> {
+public interface LeaderboardPlaceService extends BaseService<PlaceRanking, Long> {
 }

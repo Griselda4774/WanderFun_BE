@@ -55,10 +55,10 @@ public class PostEntity {
     private List<CommentEntity> commentList = new ArrayList<>();
 
     @Column(name = "like_count", nullable = false)
-    private Long likeCount;
+    private int likeCount;
 
     @Column(name = "comment_count", nullable = false)
-    private Long commentCount;
+    private int commentCount;
 
     public PostEntity() {}
 
@@ -134,19 +134,19 @@ public class PostEntity {
         this.image = image;
     }
 
-    public Long getLikeCount() {
+    public int getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
+    public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
 
-    public Long getCommentCount() {
+    public int getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(Long commentCount) {
+    public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
     }
 }

@@ -13,7 +13,7 @@ public class Comment {
     private LocalDateTime updateAt;
     private Long postId;
     private Long parentId;
-    private Long likeCount;
+    private int likeCount;
 
     public Comment() {
     }
@@ -74,11 +74,11 @@ public class Comment {
         this.parentId = parentId;
     }
 
-    public Long getLikeCount() {
+    public int getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
+    public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
 }

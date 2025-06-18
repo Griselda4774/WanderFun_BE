@@ -12,7 +12,7 @@ public class Place {
     private PlaceCategory category;
     private Image coverImage;
     private float rating;
-    private Long feedbackCount;
+    private int feedbackCount;
 
     public Place() {
     }
@@ -81,11 +81,11 @@ public class Place {
         this.rating = rating;
     }
 
-    public Long getFeedbackCount() {
+    public int getFeedbackCount() {
         return feedbackCount;
     }
 
-    public void setFeedbackCount(Long feedbackCount) {
+    public void setFeedbackCount(int feedbackCount) {
         this.feedbackCount = feedbackCount;
     }
 }

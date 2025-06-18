@@ -15,6 +15,8 @@ public class UserDto {
     private String gender;
     private String phoneNumber;
     private int point;
+    private int checkInCount;
+    private int placeCheckInCount;
     private AddressDto address;
     private Long accountId;
 
@@ -90,6 +92,22 @@ public class UserDto {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
+    }
+
+    public int getPlaceCheckInCount() {
+        return placeCheckInCount;
+    }
+
+    public void setPlaceCheckInCount(int placeCheckInCount) {
+        this.placeCheckInCount = placeCheckInCount;
     }
 
     public AddressDto getAddress() {

@@ -17,8 +17,8 @@ public class PostDto {
     private boolean isTripShare;
     private MiniTripDto trip;
     private ImageDto image;
-    private Long likeCount;
-    private Long commentCount;
+    private int likeCount;
+    private int commentCount;
     private boolean isLiked;
 
     public PostDto() {
@@ -96,19 +96,19 @@ public class PostDto {
         this.image = image;
     }
 
-    public Long getLikeCount() {
+    public int getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
+    public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
 
-    public Long getCommentCount() {
+    public int getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(Long commentCount) {
+    public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
     }
 
