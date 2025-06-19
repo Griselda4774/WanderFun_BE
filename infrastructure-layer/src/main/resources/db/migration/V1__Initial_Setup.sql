@@ -1,11 +1,3 @@
--- Auths Group --
-
--- ----------------------------------
-
--- Users Group --
-
--- ----------------------------------
-
 -- Images Group --
 CREATE TABLE images (
     id BIGINT NOT NULL AUTO_INCREMENT,
