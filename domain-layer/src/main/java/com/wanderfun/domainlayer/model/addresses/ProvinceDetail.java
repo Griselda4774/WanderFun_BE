@@ -7,7 +7,7 @@ public class ProvinceDetail {
     private String provinceCode;
     private double longitude;
     private double latitude;
-    private double area_km2;
+    private double area;
     private String description;
     private String bestTimeToVisit;
     private String festivals;
@@ -51,12 +51,12 @@ public class ProvinceDetail {
         this.latitude = latitude;
     }
 
-    public double getArea_km2() {
-        return area_km2;
+    public double getArea() {
+        return area;
     }
 
-    public void setArea_km2(double area_km2) {
-        this.area_km2 = area_km2;
+    public void setArea(double area) {
+        this.area = area;
     }
 
     public String getDescription() {
