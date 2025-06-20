@@ -39,6 +39,9 @@ public class PlaceEntity {
     @Column(name = "feedback_count", nullable = false)
     private int feedbackCount;
 
+    @Column(name = "check_in_count", nullable = false)
+    private int checkInCount;
+
     public PlaceEntity() {};
 
     public Long getId() {
@@ -111,6 +114,14 @@ public class PlaceEntity {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 }
 
