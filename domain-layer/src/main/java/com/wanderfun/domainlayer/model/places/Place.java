@@ -13,6 +13,7 @@ public class Place {
     private Image coverImage;
     private float rating;
     private int feedbackCount;
+    private int checkInCount;
 
     public Place() {
     }
@@ -87,5 +88,13 @@ public class Place {
 
     public void setFeedbackCount(int feedbackCount) {
         this.feedbackCount = feedbackCount;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 }
