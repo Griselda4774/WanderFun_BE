@@ -54,6 +54,12 @@ public class PostEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> commentList = new ArrayList<>();
 
+    @Column(name = "like_count", nullable = false)
+    private int likeCount;
+
+    @Column(name = "comment_count", nullable = false)
+    private int commentCount;
+
     public PostEntity() {}
 
     public Long getId() {
@@ -126,6 +132,22 @@ public class PostEntity {
 
     public void setImage(ImageEntity image) {
         this.image = image;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 }
 

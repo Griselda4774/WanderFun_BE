@@ -33,6 +33,12 @@ public class PlaceEntity {
     @JoinColumn(name = "cover_image_id")
     private ImageEntity coverImage;
 
+    @Column(name = "rating", nullable = false)
+    private float rating;
+
+    @Column(name = "feedback_count", nullable = false)
+    private int feedbackCount;
+
     public PlaceEntity() {};
 
     public Long getId() {
@@ -89,6 +95,22 @@ public class PlaceEntity {
 
     public void setCoverImage(ImageEntity coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public int getFeedbackCount() {
+        return feedbackCount;
+    }
+
+    public void setFeedbackCount(int feedbackCount) {
+        this.feedbackCount = feedbackCount;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
 

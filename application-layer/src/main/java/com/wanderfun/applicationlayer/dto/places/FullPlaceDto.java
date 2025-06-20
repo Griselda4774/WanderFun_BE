@@ -12,8 +12,7 @@ public class FullPlaceDto {
     private PlaceCategoryDto category;
     private ImageDto coverImage;
     private float rating;
-    private int totalRating;
-    private int totalFeedback;
+    private int feedbackCount;
     private PlaceDetailDto placeDetail;
 
     public FullPlaceDto() {}
@@ -82,20 +81,12 @@ public class FullPlaceDto {
         this.rating = rating;
     }
 
-    public int getTotalRating() {
-        return totalRating;
+    public int getFeedbackCount() {
+        return feedbackCount;
     }
 
-    public void setTotalRating(int totalRating) {
-        this.totalRating = totalRating;
-    }
-
-    public int getTotalFeedback() {
-        return totalFeedback;
-    }
-
-    public void setTotalFeedback(int totalFeedback) {
-        this.totalFeedback = totalFeedback;
+    public void setFeedbackCount(int feedbackCount) {
+        this.feedbackCount = feedbackCount;
     }
 
     public PlaceDetailDto getPlaceDetail() {

@@ -50,20 +50,12 @@ public class CommentRepositoryImpl extends BaseRepositoryImpl<Comment, CommentEn
     @Override
     public Optional<Comment> findById(Long id) {
         return jpaCommentRepository.findById(id)
-                .map(commentEntity -> {
-                    Comment comment = objectMapper.map(commentEntity, Comment.class);
-                    comment.setLikeCount(jpaCommentRepository.countLikeById(comment.getId()));
-                    return comment;
-                });
+                .map(commentEntity -> objectMapper.map(commentEntity, Comment.class));
     }
 
     @Override
     public List<Comment> findAllByPostId(Long postId) {
-        List<Comment> commentList = objectMapper.mapList(jpaCommentRepository
+        return objectMapper.mapList(jpaCommentRepository
                 .findAllByPostId(postId), Comment.class);
-        commentList.forEach(comment -> {
-            comment.setLikeCount(jpaCommentRepository.countLikeById(comment.getId()));
-        });
-        return commentList;
     }
 }

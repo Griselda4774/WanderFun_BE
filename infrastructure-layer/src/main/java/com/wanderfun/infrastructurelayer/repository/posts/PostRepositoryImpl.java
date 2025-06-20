@@ -45,32 +45,19 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
     public Optional<Post> findById(Long id) {
         return jpaPostRepository.findById(id)
                 .map(postEntity -> {
-                    Post post = objectMapper.map(postEntity, Post.class);
-                    post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
-                    post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
-                    return post;
+                    return objectMapper.map(postEntity, Post.class);
                 });
     }
 
     @Override
     public List<Post> findAllByCursor(Long cursor, int size) {
         Pageable pageable = PageRequest.of(0, size);
-        List<Post> postList = objectMapper.mapList(jpaPostRepository.findAllPostByCursor(cursor, pageable), Post.class);
-        postList.forEach(post -> {
-            post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
-            post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
-        });
-        return postList;
+        return objectMapper.mapList(jpaPostRepository.findAllPostByCursor(cursor, pageable), Post.class);
     }
 
     @Override
     public List<Post> findAllByUserId(Long userId) {
         List<PostEntity> postEntities = jpaPostRepository.findAllByUserId(userId);
-        List<Post> posts = objectMapper.mapList(postEntities, Post.class);
-        posts.forEach(post -> {
-            post.setCommentCount(jpaPostRepository.countCommentById(post.getId()));
-            post.setLikeCount(jpaPostRepository.countLikeById(post.getId()));
-        });
-        return posts;
+        return objectMapper.mapList(postEntities, Post.class);
     }
 }
