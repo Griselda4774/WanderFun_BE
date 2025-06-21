@@ -17,7 +17,7 @@ public interface PlaceUsecase {
     boolean deleteById(Long id);
     boolean deleteAll();
     List<FeedbackDto> findAllFeedbacksByPlaceId(Long placeId);
-//    boolean createFeedback(FeedbackCreateDto feedbackCreateDto);
-//    boolean updateFeedbackById(Long id, FeedbackCreateDto feedbackCreateDto);
-//    boolean deleteFeedbackById(Long feedbackId);
+    FeedbackDto createFeedback(String accessToken, Long placeId, FeedbackCreateDto feedbackCreateDto);
+    FeedbackDto updateFeedbackById(String accessToken, Long id, FeedbackCreateDto feedbackCreateDto);
+    boolean deleteFeedbackById(String accessToken, Long id);
 }

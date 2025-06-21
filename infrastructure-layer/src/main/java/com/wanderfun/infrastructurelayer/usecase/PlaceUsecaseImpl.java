@@ -1,6 +1,7 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
 import com.wanderfun.applicationlayer.dto.places.*;
+import com.wanderfun.applicationlayer.exception.NotHavePermissionException;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
@@ -11,7 +12,9 @@ import com.wanderfun.applicationlayer.service.addresses.WardService;
 import com.wanderfun.applicationlayer.service.place.FeedbackService;
 import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
+import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.addresses.Address;
 import com.wanderfun.domainlayer.model.addresses.District;
 import com.wanderfun.domainlayer.model.addresses.Province;
@@ -20,6 +23,7 @@ import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.domainlayer.model.places.PlaceDetail;
+import com.wanderfun.domainlayer.model.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -40,9 +44,15 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     private final DistrictService districtService;
     private final WardService wardService;
     private final FeedbackService feedbackService;
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService, ProvinceService provinceService, DistrictService districtService, WardService wardService, FeedbackService feedbackService) {
+    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper,
+                            AddressService addressService, PlaceDetailService placeDetailService,
+                            ProvinceService provinceService, DistrictService districtService,
+                            WardService wardService, FeedbackService feedbackService,
+                            UserService userService, JwtUtil jwtUtil) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.addressService = addressService;
@@ -51,6 +61,8 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         this.districtService = districtService;
         this.wardService = wardService;
         this.feedbackService = feedbackService;
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -214,6 +226,44 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     @Override
     public List<FeedbackDto> findAllFeedbacksByPlaceId(Long placeId) {
         return objectMapper.mapList(feedbackService.findAllByPlaceId(placeId), FeedbackDto.class);
+    }
+
+    @Override
+    public FeedbackDto createFeedback(String accessToken, Long placeId, FeedbackCreateDto feedbackCreateDto) {
+        Feedback feedback = objectMapper.map(feedbackCreateDto, Feedback.class);
+        feedback.setPlaceId(placeId);
+        feedback.setUser(new User());
+        feedback.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
+
+        Feedback savedFeedback = feedbackService.create(feedback);
+        Feedback retrievedFeedback = feedbackService.findById(savedFeedback.getId());
+
+        return objectMapper.map(retrievedFeedback, FeedbackDto.class);
+    }
+
+    @Override
+    public FeedbackDto updateFeedbackById(String accessToken, Long id, FeedbackCreateDto feedbackCreateDto) {
+        Feedback currentFeedback = feedbackService.findById(id);
+        Feedback feedback = objectMapper.map(feedbackCreateDto, Feedback.class);
+        if (!Objects.equals(currentFeedback.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
+            throw new NotHavePermissionException("You don't have permission to update this feedback");
+        }
+        feedback.setUser(new User());
+        feedback.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
+
+        Feedback savedFeedback = feedbackService.updateById(id, feedback);
+        Feedback retrievedFeedback = feedbackService.findById(savedFeedback.getId());
+
+        return objectMapper.map(retrievedFeedback, FeedbackDto.class);
+    }
+
+    @Override
+    public boolean deleteFeedbackById(String accessToken, Long id) {
+        Feedback currentFeedback = feedbackService.findById(id);
+        if (Objects.equals(currentFeedback.getUser().getId(), userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId())) {
+            feedbackService.deleteById(id);
+        }
+        return true;
     }
 
     private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {

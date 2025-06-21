@@ -74,11 +74,11 @@ public class Feedback {
         this.updateAt = updateAt;
     }
 
-    public Long getPlaceDetailId() {
+    public Long getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceDetailId(Long placeId) {
+    public void setPlaceId(Long placeId) {
         this.placeId = placeId;
     }
 }

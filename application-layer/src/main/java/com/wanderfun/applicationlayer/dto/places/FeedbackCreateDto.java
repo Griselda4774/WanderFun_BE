@@ -6,7 +6,6 @@ public class FeedbackCreateDto {
     private float rating;
     private String content;
     private ImageDto image;
-    private Long placeId;
 
     public FeedbackCreateDto() {
     }
@@ -33,13 +32,5 @@ public class FeedbackCreateDto {
 
     public void setImage(ImageDto image) {
         this.image = image;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 }
