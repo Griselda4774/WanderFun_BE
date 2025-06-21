@@ -185,7 +185,7 @@ public class PlaceController {
 
     // Feedback-related endpoints
     @GetMapping("/feedback")
-    public ResponseEntity<ResponseDto<List<FeedbackDto>>> findAllFeedbacksByPostId(@RequestParam() Long placeId) {
+    public ResponseEntity<ResponseDto<List<FeedbackDto>>> findAllFeedbacksByPlaceId(@RequestParam() Long placeId) {
         List<FeedbackDto> result = placeUsecase.findAllFeedbacksByPlaceId(placeId);
         if (result == null) {
             throw new RequestFailedException("Find all feedbacks by place id failed!");
