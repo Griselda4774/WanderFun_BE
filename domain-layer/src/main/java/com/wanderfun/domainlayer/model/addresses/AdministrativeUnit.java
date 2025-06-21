@@ -2,12 +2,12 @@ package com.wanderfun.domainlayer.model.addresses;
 
 public class AdministrativeUnit {
     public Integer id;
-    public String full_name;
-    public String full_name_en;
-    public String short_name;
-    public String short_name_en;
-    public String code_name;
-    public String code_name_en;
+    public String fullName;
+    public String fullNameEn;
+    public String shortName;
+    public String shortNameEn;
+    public String codeName;
+    public String codeNameEn;
 
     public AdministrativeUnit() {}
 
@@ -19,51 +19,51 @@ public class AdministrativeUnit {
         this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getFull_name_en() {
-        return full_name_en;
+    public String getFullNameEn() {
+        return fullNameEn;
     }
 
-    public void setFull_name_en(String full_name_en) {
-        this.full_name_en = full_name_en;
+    public void setFullNameEn(String fullNameEn) {
+        this.fullNameEn = fullNameEn;
     }
 
-    public String getShort_name() {
-        return short_name;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setShort_name(String short_name) {
-        this.short_name = short_name;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getShort_name_en() {
-        return short_name_en;
+    public String getShortNameEn() {
+        return shortNameEn;
     }
 
-    public void setShort_name_en(String short_name_en) {
-        this.short_name_en = short_name_en;
+    public void setShortNameEn(String shortNameEn) {
+        this.shortNameEn = shortNameEn;
     }
 
-    public String getCode_name() {
-        return code_name;
+    public String getCodeName() {
+        return codeName;
     }
 
-    public void setCode_name(String code_name) {
-        this.code_name = code_name;
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
     }
 
-    public String getCode_name_en() {
-        return code_name_en;
+    public String getCodeNameEn() {
+        return codeNameEn;
     }
 
-    public void setCode_name_en(String code_name_en) {
-        this.code_name_en = code_name_en;
+    public void setCodeNameEn(String codeNameEn) {
+        this.codeNameEn = codeNameEn;
     }
 }

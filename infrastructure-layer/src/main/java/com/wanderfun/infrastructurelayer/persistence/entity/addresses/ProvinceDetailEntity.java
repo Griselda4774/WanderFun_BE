@@ -21,8 +21,8 @@ public class ProvinceDetailEntity {
     @Column(nullable = false)
     private Double latitude;
 
-    @Column(name = "area_km2")
-    private Double areaKm2;
+    @Column(name = "area")
+    private Double area;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -80,12 +80,12 @@ public class ProvinceDetailEntity {
         this.latitude = latitude;
     }
 
-    public Double getAreaKm2() {
-        return areaKm2;
+    public Double getArea() {
+        return area;
     }
 
-    public void setAreaKm2(Double areaKm2) {
-        this.areaKm2 = areaKm2;
+    public void setArea(Double area) {
+        this.area = area;
     }
 
     public String getDescription() {

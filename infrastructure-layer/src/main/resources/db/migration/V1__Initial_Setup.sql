@@ -52,7 +52,7 @@ CREATE TABLE province_details (
     province_code VARCHAR(20) NOT NULL UNIQUE,
     longitude DOUBLE NOT NULL,
     latitude DOUBLE NOT NULL,
-    area_km2 DOUBLE,
+    area DOUBLE,
     description TEXT,
     best_time_to_visit VARCHAR(255),
     festivals TEXT,

@@ -13,6 +13,7 @@ public class PlaceDto {
     private ImageDto coverImage;
     private float rating;
     private int feedbackCount;
+    private int checkInCount;
 
     public PlaceDto() {
     }
@@ -87,5 +88,13 @@ public class PlaceDto {
 
     public void setFeedbackCount(int feedbackCount) {
         this.feedbackCount = feedbackCount;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 }
