@@ -1,9 +1,6 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceDetailDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceDto;
+import com.wanderfun.applicationlayer.dto.places.*;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
@@ -11,6 +8,7 @@ import com.wanderfun.applicationlayer.service.addresses.AddressService;
 import com.wanderfun.applicationlayer.service.addresses.DistrictService;
 import com.wanderfun.applicationlayer.service.addresses.ProvinceService;
 import com.wanderfun.applicationlayer.service.addresses.WardService;
+import com.wanderfun.applicationlayer.service.place.FeedbackService;
 import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
 import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
@@ -41,9 +39,10 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     private final ProvinceService provinceService;
     private final DistrictService districtService;
     private final WardService wardService;
+    private final FeedbackService feedbackService;
 
     @Autowired
-    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService, ProvinceService provinceService, DistrictService districtService, WardService wardService) {
+    public PlaceUsecaseImpl(PlaceService placeService, ObjectMapper objectMapper, AddressService addressService, PlaceDetailService placeDetailService, ProvinceService provinceService, DistrictService districtService, WardService wardService, FeedbackService feedbackService) {
         this.placeService = placeService;
         this.objectMapper = objectMapper;
         this.addressService = addressService;
@@ -51,6 +50,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
         this.provinceService = provinceService;
         this.districtService = districtService;
         this.wardService = wardService;
+        this.feedbackService = feedbackService;
     }
 
     @Override
@@ -212,8 +212,8 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     @Override
-    public List<Feedback> findAllFeedbacksByPlaceId(Long placeId) {
-        return List.of();
+    public List<FeedbackDto> findAllFeedbacksByPlaceId(Long placeId) {
+        return objectMapper.mapList(feedbackService.findAllByPlaceId(placeId), FeedbackDto.class);
     }
 
     private void setUpPlaceInputData(Place place, PlaceCreateDto placeCreateDto) {
