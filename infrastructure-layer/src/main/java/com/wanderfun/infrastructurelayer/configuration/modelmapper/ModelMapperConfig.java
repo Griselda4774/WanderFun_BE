@@ -5,6 +5,7 @@ import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.images.Image;
+import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
 import com.wanderfun.domainlayer.model.places.Section;
 import com.wanderfun.domainlayer.model.posts.Comment;
@@ -15,6 +16,8 @@ import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.FeedbackEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.trips.TripEntity;
@@ -49,6 +52,8 @@ public class ModelMapperConfig {
             }
         });
 
+        // Custom converters
+        // Place
         Converter<Long, Place> placeIdToPlaceConverter = ctx -> {
             Long placeId = ctx.getSource();
             if (placeId == null) {
@@ -57,6 +62,16 @@ public class ModelMapperConfig {
             Place place = new Place();
             place.setId(placeId);
             return place;
+        };
+
+        Converter<Long, PlaceEntity> placeIdToPlaceEntityConverter = ctx -> {
+            Long placeId = ctx.getSource();
+            if (placeId == null) {
+                return null;
+            }
+            PlaceEntity placeEntity = new PlaceEntity();
+            placeEntity.setId(placeId);
+            return placeEntity;
         };
 
         Converter<Long, Trip> tripIdToTripConverter = ctx -> {
@@ -79,6 +94,8 @@ public class ModelMapperConfig {
             return accountEntity;
         };
 
+
+        // Custom type mappings
         // Trip
         modelMapper.typeMap(TripPlaceCreateDto.class, TripPlace.class)
                 .addMappings(mapper -> mapper.using(placeIdToPlaceConverter)
@@ -108,6 +125,13 @@ public class ModelMapperConfig {
         modelMapper.typeMap(User.class, UserEntity.class)
                 .addMappings(mapper ->
                     mapper.using(accountIdToAccountEntityConverter).map(User::getAccountId, UserEntity::setAccount));
+
+        // Feedback
+        modelMapper.typeMap(Feedback.class, FeedbackEntity.class)
+                .addMappings(mapper -> {
+                    mapper.using(placeIdToPlaceEntityConverter)
+                            .map(Feedback::getPlaceId, FeedbackEntity::setPlace);
+                });
 
         return modelMapper;
     }

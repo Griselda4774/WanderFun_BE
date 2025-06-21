@@ -24,6 +24,7 @@ public class PostController {
         this.postUsecase = postUsecase;
     }
 
+    // Post-related endpoints
     @GetMapping("/cursor")
     public ResponseEntity<ResponseDto<List<PostDto>>> findAllPostByCursor(@RequestHeader(value = "Authorization", required = false) String accessToken,
                                                                           @RequestParam(required = false) Long cursor,
@@ -128,15 +129,10 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    // Comment-related endpoints can be added here as needed
+    // Comment-related endpoints
     @GetMapping("/comment")
-    public ResponseEntity<ResponseDto<List<CommentDto>>> findAllCommentsByPostId(@RequestHeader(value = "Authorization", required = false) String accessToken,
-                                                                                 @RequestParam() Long postId) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        List<CommentDto> result = postUsecase.findAllCommentByPostId(accessToken, postId);
+    public ResponseEntity<ResponseDto<List<CommentDto>>> findAllCommentsByPostId(@RequestParam() Long postId) {
+        List<CommentDto> result = postUsecase.findAllCommentByPostId(postId);
         if (result == null) {
             throw new RequestFailedException("Find all comment by post id failed!");
         }
