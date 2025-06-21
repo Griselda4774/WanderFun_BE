@@ -6,6 +6,7 @@ public class MiniPlaceDto {
     private Long id;
     private String name;
     private Image coverImage;
+    private int checkInCount;
 
     public MiniPlaceDto() {
     }
@@ -32,5 +33,13 @@ public class MiniPlaceDto {
 
     public void setCoverImage(Image coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 }

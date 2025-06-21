@@ -1,9 +1,6 @@
 package com.wanderfun.applicationlayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.places.FullPlaceDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceCreateDto;
-import com.wanderfun.applicationlayer.dto.places.PlaceDto;
-import com.wanderfun.domainlayer.model.places.Feedback;
+import com.wanderfun.applicationlayer.dto.places.*;
 
 import java.util.List;
 
@@ -19,5 +16,8 @@ public interface PlaceUsecase {
     boolean updateById(Long id, PlaceCreateDto placeCreateDto);
     boolean deleteById(Long id);
     boolean deleteAll();
-    List<Feedback> findAllFeedbacksByPlaceId(Long placeId);
+    List<FeedbackDto> findAllFeedbacksByPlaceId(Long placeId);
+//    boolean createFeedback(FeedbackCreateDto feedbackCreateDto);
+//    boolean updateFeedbackById(Long id, FeedbackCreateDto feedbackCreateDto);
+//    boolean deleteFeedbackById(Long feedbackId);
 }
