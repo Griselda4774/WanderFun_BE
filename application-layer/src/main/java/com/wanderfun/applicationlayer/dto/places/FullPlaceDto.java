@@ -13,6 +13,7 @@ public class FullPlaceDto {
     private ImageDto coverImage;
     private float rating;
     private int feedbackCount;
+    private int checkInCount;
     private PlaceDetailDto placeDetail;
 
     public FullPlaceDto() {}
@@ -87,6 +88,14 @@ public class FullPlaceDto {
 
     public void setFeedbackCount(int feedbackCount) {
         this.feedbackCount = feedbackCount;
+    }
+
+    public int getCheckInCount() {
+        return checkInCount;
+    }
+
+    public void setCheckInCount(int checkInCount) {
+        this.checkInCount = checkInCount;
     }
 
     public PlaceDetailDto getPlaceDetail() {
