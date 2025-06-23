@@ -18,6 +18,7 @@ CREATE TABLE places (
     category_id INTEGER NOT NULL,
     cover_image_id BIGINT,
     rating FLOAT DEFAULT 0,
+    total_rating INT DEFAULT 0,
     feedback_count INT DEFAULT 0,
     check_in_count INT DEFAULT 0,
     FOREIGN KEY (category_id) REFERENCES place_categories(id),

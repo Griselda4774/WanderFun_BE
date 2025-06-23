@@ -22,7 +22,7 @@ public class FeedbackEntity {
     private UserEntity user;
 
     @Column(nullable = false)
-    private float rating;
+    private int rating;
 
     @Column(length = 1024)
     private String content;
@@ -63,11 +63,11 @@ public class FeedbackEntity {
         this.user = user;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

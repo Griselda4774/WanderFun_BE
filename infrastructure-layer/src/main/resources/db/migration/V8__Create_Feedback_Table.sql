@@ -3,7 +3,7 @@ CREATE TABLE feedbacks (
     place_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     image_id BIGINT,
-    rating FLOAT NOT NULL,
+    rating INT NOT NULL,
     content VARCHAR(1024),
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
