@@ -44,9 +44,7 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<Post, PostEntity, Lon
     @Override
     public Optional<Post> findById(Long id) {
         return jpaPostRepository.findById(id)
-                .map(postEntity -> {
-                    return objectMapper.map(postEntity, Post.class);
-                });
+                .map(postEntity -> objectMapper.map(postEntity, Post.class));
     }
 
     @Override

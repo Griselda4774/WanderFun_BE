@@ -1,8 +1,8 @@
-package com.wanderfun.presentationlayer.controller;
+package com.wanderfun.presentationlayer.controller.places;
 
 import com.wanderfun.applicationlayer.dto.places.PlaceCategoryDto;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
-import com.wanderfun.applicationlayer.usecase.PlaceCategoryUsecase;
+import com.wanderfun.applicationlayer.usecase.places.PlaceCategoryUsecase;
 import com.wanderfun.domainlayer.model.places.PlaceCategory;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -133,6 +133,9 @@ public class ModelMapperConfig {
                             .map(Feedback::getPlaceId, FeedbackEntity::setPlace);
                 });
 
+        modelMapper.typeMap(FeedbackEntity.class, Feedback.class)
+                .addMapping(src -> src.getPlace().getId(), Feedback::setPlaceId);
+
         return modelMapper;
     }
 }

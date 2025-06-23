@@ -1,4 +1,4 @@
-package com.wanderfun.presentationlayer.controller;
+package com.wanderfun.presentationlayer.controller.places;
 //
 //import com.wanderfun.applicationlayer.dto.checkin.CheckInDto;
 //import com.wanderfun.applicationlayer.dto.favouriteplace.FavouritePlaceDto;
@@ -10,9 +10,7 @@ package com.wanderfun.presentationlayer.controller;
 //import com.wanderfun.applicationlayer.dto.place.PlaceMiniDto;
 import com.wanderfun.applicationlayer.dto.places.*;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
-import com.wanderfun.applicationlayer.dto.posts.CommentCreateDto;
-import com.wanderfun.applicationlayer.dto.posts.CommentDto;
-import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -180,80 +178,6 @@ public class PlaceController {
         ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete all places successful!");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-    // Feedback-related endpoints
-    @GetMapping("/feedback")
-    public ResponseEntity<ResponseDto<List<FeedbackDto>>> findAllFeedbacksByPlaceId(@RequestParam() Long placeId) {
-        List<FeedbackDto> result = placeUsecase.findAllFeedbacksByPlaceId(placeId);
-        if (result == null) {
-            throw new RequestFailedException("Find all feedbacks by place id failed!");
-        }
-
-        ResponseDto<List<FeedbackDto>> response = new ResponseDto<>();
-        response.setStatusCode(HttpStatus.OK.toString());
-        response.setMessage("Find all feedback by place id successful!");
-        response.setData(result);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-
-    @PostMapping("/feedback")
-    public ResponseEntity<ResponseDto<FeedbackDto>> createFeedback(@RequestHeader("Authorization") String accessToken,
-                                                                 @RequestParam() Long placeId,
-                                                                 @RequestBody FeedbackCreateDto feedbackCreateDto) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        FeedbackDto result = placeUsecase.createFeedback(accessToken, placeId, feedbackCreateDto);
-        if (result == null) {
-            throw new RequestFailedException("Create feedback failed!");
-        }
-
-        ResponseDto<FeedbackDto> response = new ResponseDto<>();
-        response.setStatusCode(HttpStatus.CREATED.toString());
-        response.setMessage("Create feedback successful!");
-        response.setData(result);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
-    @PutMapping("/feedback/{feedbackId}")
-    public ResponseEntity<ResponseDto<FeedbackDto>> updateFeedback(@PathVariable Long feedbackId,
-                                                                 @RequestHeader("Authorization") String accessToken,
-                                                                 @RequestBody FeedbackCreateDto feedbackCreateDto) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        FeedbackDto result = placeUsecase.updateFeedbackById(accessToken, feedbackId, feedbackCreateDto);
-        if (result == null) {
-            throw new RequestFailedException("Update feedback failed!");
-        }
-
-        ResponseDto<FeedbackDto> response = new ResponseDto<>();
-        response.setStatusCode(HttpStatus.OK.toString());
-        response.setMessage("Update feedback successful!");
-        response.setData(result);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-    @DeleteMapping("/feedback/{feedbackId}")
-    public ResponseEntity<ResponseDto<FeedbackDto>> deleteFeedback(@PathVariable Long feedbackId,
-                                                                 @RequestHeader("Authorization") String accessToken) {
-        if (accessToken.startsWith("Bearer ")) {
-            accessToken = accessToken.substring(7);
-        }
-
-        boolean result = placeUsecase.deleteFeedbackById(accessToken, feedbackId);
-        if (!result) {
-            throw new RequestFailedException("Delete feedback failed!");
-        }
-
-        ResponseDto<FeedbackDto> response = new ResponseDto<>();
-        response.setStatusCode(HttpStatus.OK.toString());
-        response.setMessage("Delete feedback successful!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

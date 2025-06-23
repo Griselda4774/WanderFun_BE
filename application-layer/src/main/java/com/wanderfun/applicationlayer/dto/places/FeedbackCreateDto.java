@@ -3,18 +3,18 @@ package com.wanderfun.applicationlayer.dto.places;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 
 public class FeedbackCreateDto {
-    private float rating;
+    private int rating;
     private String content;
     private ImageDto image;
 
     public FeedbackCreateDto() {
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

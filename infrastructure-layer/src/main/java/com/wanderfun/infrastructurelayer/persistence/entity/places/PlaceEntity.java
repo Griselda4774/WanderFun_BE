@@ -36,6 +36,9 @@ public class PlaceEntity {
     @Column(name = "rating", nullable = false)
     private float rating;
 
+    @Column(name = "total_rating", nullable = false)
+    private int totalRating;
+
     @Column(name = "feedback_count", nullable = false)
     private int feedbackCount;
 
@@ -114,6 +117,14 @@ public class PlaceEntity {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
     }
 
     public int getCheckInCount() {
