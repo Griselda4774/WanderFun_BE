@@ -1,4 +1,4 @@
-package com.wanderfun.infrastructurelayer.usecase;
+package com.wanderfun.infrastructurelayer.usecase.places;
 
 import com.wanderfun.applicationlayer.dto.places.*;
 import com.wanderfun.applicationlayer.exception.NotHavePermissionException;
@@ -13,7 +13,7 @@ import com.wanderfun.applicationlayer.service.place.FeedbackService;
 import com.wanderfun.applicationlayer.service.place.PlaceDetailService;
 import com.wanderfun.applicationlayer.service.place.PlaceService;
 import com.wanderfun.applicationlayer.service.users.UserService;
-import com.wanderfun.applicationlayer.usecase.PlaceUsecase;
+import com.wanderfun.applicationlayer.usecase.places.PlaceUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
 import com.wanderfun.domainlayer.model.addresses.Address;
 import com.wanderfun.domainlayer.model.addresses.District;
@@ -220,49 +220,6 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     @Override
     public boolean deleteAll() {
         placeService.deleteAll();
-        return true;
-    }
-
-    @Override
-    public List<FeedbackDto> findAllFeedbacksByPlaceId(Long placeId) {
-        return objectMapper.mapList(feedbackService.findAllByPlaceId(placeId), FeedbackDto.class);
-    }
-
-    @Override
-    public FeedbackDto createFeedback(String accessToken, Long placeId, FeedbackCreateDto feedbackCreateDto) {
-        Feedback feedback = objectMapper.map(feedbackCreateDto, Feedback.class);
-        feedback.setPlaceId(placeId);
-        feedback.setUser(new User());
-        feedback.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
-
-        Feedback savedFeedback = feedbackService.create(feedback);
-        Feedback retrievedFeedback = feedbackService.findById(savedFeedback.getId());
-
-        return objectMapper.map(retrievedFeedback, FeedbackDto.class);
-    }
-
-    @Override
-    public FeedbackDto updateFeedbackById(String accessToken, Long id, FeedbackCreateDto feedbackCreateDto) {
-        Feedback currentFeedback = feedbackService.findById(id);
-        Feedback feedback = objectMapper.map(feedbackCreateDto, Feedback.class);
-        if (!Objects.equals(currentFeedback.getUser().getId(), jwtUtil.getIdFromToken(accessToken))) {
-            throw new NotHavePermissionException("You don't have permission to update this feedback");
-        }
-        feedback.setUser(new User());
-        feedback.getUser().setId(userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId());
-
-        Feedback savedFeedback = feedbackService.updateById(id, feedback);
-        Feedback retrievedFeedback = feedbackService.findById(savedFeedback.getId());
-
-        return objectMapper.map(retrievedFeedback, FeedbackDto.class);
-    }
-
-    @Override
-    public boolean deleteFeedbackById(String accessToken, Long id) {
-        Feedback currentFeedback = feedbackService.findById(id);
-        if (Objects.equals(currentFeedback.getUser().getId(), userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId())) {
-            feedbackService.deleteById(id);
-        }
         return true;
     }
 

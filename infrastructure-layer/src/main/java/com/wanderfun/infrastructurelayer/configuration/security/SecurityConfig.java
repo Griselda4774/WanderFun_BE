@@ -81,12 +81,19 @@ public class SecurityConfig {
                         .requestMatchers("/wanderfun/user/**").hasAnyRole(UserRole.USER.name())
 
                         // Place
-                        .requestMatchers(HttpMethod.GET,"/wanderfun/place/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/wanderfun/place").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST,"/wanderfun/place/**").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.PUT,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.DELETE,"/wanderfun/place/").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers("/wanderfun/place/feedback/**").hasRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.GET, "/wanderfun/place/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/wanderfun/place").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/wanderfun/place/**").hasAnyRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT, "/wanderfun/place/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE, "/wanderfun/place/**").hasRole(UserRole.ADMIN.name())
+
+                        // Feedback
+                        .requestMatchers(HttpMethod.GET, "/wanderfun/feedback/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/wanderfun/feedback/**").hasAnyRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.PUT, "/wanderfun/feedback/**").hasAnyRole(UserRole.USER.name())
+                        .requestMatchers(HttpMethod.DELETE, "/wanderfun/feedback/**").hasAnyRole(UserRole.USER.name())
+
+                        // Other place
                         .requestMatchers("/wanderfun/place/favourite/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/checkin/**").hasRole(UserRole.USER.name())
                         .requestMatchers("/wanderfun/place/categories/**").hasRole(UserRole.ADMIN.name())
