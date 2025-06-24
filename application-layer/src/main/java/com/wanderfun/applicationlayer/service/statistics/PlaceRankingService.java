@@ -1,6 +1,6 @@
-package com.wanderfun.applicationlayer.service.rankings;
+package com.wanderfun.applicationlayer.service.statistics;
 
-import com.wanderfun.domainlayer.model.rankings.PlaceRanking;
+import com.wanderfun.domainlayer.model.statistics.PlaceRanking;
 
 import java.util.List;
 
