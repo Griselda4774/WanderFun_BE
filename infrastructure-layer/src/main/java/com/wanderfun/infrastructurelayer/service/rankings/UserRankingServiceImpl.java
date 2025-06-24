@@ -1,7 +1,7 @@
 package com.wanderfun.infrastructurelayer.service.rankings;
 
-import com.wanderfun.applicationlayer.service.rankings.UserRankingService;
-import com.wanderfun.domainlayer.model.rankings.UserRanking;
+import com.wanderfun.applicationlayer.service.statistics.UserRankingService;
+import com.wanderfun.domainlayer.model.statistics.UserRanking;
 import com.wanderfun.domainlayer.repository.rankings.UserRankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

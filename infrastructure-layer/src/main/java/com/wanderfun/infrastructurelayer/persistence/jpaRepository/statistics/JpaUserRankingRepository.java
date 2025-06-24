@@ -1,6 +1,6 @@
-package com.wanderfun.infrastructurelayer.persistence.jpaRepository.rankings;
+package com.wanderfun.infrastructurelayer.persistence.jpaRepository.statistics;
 
-import com.wanderfun.infrastructurelayer.persistence.entity.rankings.UserRankingEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.statistics.UserRankingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

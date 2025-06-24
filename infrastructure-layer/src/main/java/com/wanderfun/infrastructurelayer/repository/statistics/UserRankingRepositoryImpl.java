@@ -1,9 +1,9 @@
-package com.wanderfun.infrastructurelayer.repository.rankings;
+package com.wanderfun.infrastructurelayer.repository.statistics;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
-import com.wanderfun.domainlayer.model.rankings.UserRanking;
+import com.wanderfun.domainlayer.model.statistics.UserRanking;
 import com.wanderfun.domainlayer.repository.rankings.UserRankingRepository;
-import com.wanderfun.infrastructurelayer.persistence.jpaRepository.rankings.JpaUserRankingRepository;
+import com.wanderfun.infrastructurelayer.persistence.jpaRepository.statistics.JpaUserRankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

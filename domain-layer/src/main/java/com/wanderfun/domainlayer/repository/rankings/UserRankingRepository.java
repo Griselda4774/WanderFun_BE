@@ -1,6 +1,6 @@
 package com.wanderfun.domainlayer.repository.rankings;
 
-import com.wanderfun.domainlayer.model.rankings.UserRanking;
+import com.wanderfun.domainlayer.model.statistics.UserRanking;
 
 import java.util.List;
 import java.util.Optional;
