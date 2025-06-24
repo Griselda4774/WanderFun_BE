@@ -1,13 +1,39 @@
-package com.wanderfun.domainlayer.model.rankings;
+package com.wanderfun.infrastructurelayer.persistence.entity.statistics;
 
-public class PlaceRanking {
-    private String name;
-    private String coverImageUrl;
-    private int checkInCount;
-    private int ranking;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.Immutable;
+
+@Entity
+@Immutable
+@Table(name = "place_ranking_view")
+public class PlaceRankingEntity {
+
+    @Id
+    @Column(name = "place_id")
     private Long placeId;
 
-    public PlaceRanking() {
+    private String name;
+
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
+    @Column(name = "check_in_count")
+    private int checkInCount;
+
+    private int ranking;
+
+    public PlaceRankingEntity() {
+    }
+
+    public Long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 
     public String getName() {
@@ -40,13 +66,5 @@ public class PlaceRanking {
 
     public void setRanking(int ranking) {
         this.ranking = ranking;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 }

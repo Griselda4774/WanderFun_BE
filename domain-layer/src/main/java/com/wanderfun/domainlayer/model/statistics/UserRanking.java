@@ -1,48 +1,16 @@
-package com.wanderfun.infrastructurelayer.persistence.entity.rankings;
+package com.wanderfun.domainlayer.model.statistics;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.hibernate.annotations.Immutable;
-
-@Entity
-@Immutable
-@Table(name = "user_ranking_view")
-public class UserRankingEntity {
-
-    @Id
-    @Column(name = "user_id")
+public class UserRanking {
+    private String firstName;
+    private String lastName;
+    private String avatarUrl;
+    private int point;
+    private int ranking;
+    private int checkInCount;
+    private int placeCheckInCount;
     private Long userId;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "avatar_url")
-    private String avatarUrl;
-
-    private int point;
-
-    private int ranking;
-
-    @Column(name = "check_in_count")
-    private int checkInCount;
-
-    @Column(name = "place_check_in_count")
-    private int placeCheckInCount;
-
-    public UserRankingEntity() {
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public UserRanking() {
     }
 
     public String getFirstName() {
@@ -77,11 +45,11 @@ public class UserRankingEntity {
         this.point = point;
     }
 
-    public int getRank() {
+    public int getRanking() {
         return ranking;
     }
 
-    public void setRank(int ranking) {
+    public void setRanking(int ranking) {
         this.ranking = ranking;
     }
 
@@ -99,5 +67,13 @@ public class UserRankingEntity {
 
     public void setPlaceCheckInCount(int placeCheckInCount) {
         this.placeCheckInCount = placeCheckInCount;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

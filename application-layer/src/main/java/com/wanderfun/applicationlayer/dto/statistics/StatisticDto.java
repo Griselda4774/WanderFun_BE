@@ -7,13 +7,7 @@ public class StatisticDto {
     private Long totalComments;
     private Long totalLikes;
 
-    public StatisticDto(Long totalUsers, Long totalAccounts, Long totalPosts, Long totalComments, Long totalLikes) {
-        this.totalUsers = totalUsers;
-        this.totalAccounts = totalAccounts;
-        this.totalPosts = totalPosts;
-        this.totalComments = totalComments;
-        this.totalLikes = totalLikes;
-    }
+    public StatisticDto() {}
 
     public Long getTotalUsers() {
         return totalUsers;

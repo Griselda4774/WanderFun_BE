@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface JpaFeedbackRepository extends JpaBaseRepository<FeedbackEntity, Long> {
-    @Query("SELECT f FROM FeedbackEntity f WHERE f.place.id = :place_id")
+    @Query("SELECT f FROM FeedbackEntity f WHERE f.place.id = :place_id ORDER BY f.createAt DESC")
     List<FeedbackEntity> findByPlaceId(@Param("place_id")Long placeId);
 }
