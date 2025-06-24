@@ -97,3 +97,42 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_checkin_insert_place
+AFTER INSERT ON check_ins
+FOR EACH ROW
+BEGIN
+    UPDATE places
+    SET check_in_count = check_in_count + 1
+    WHERE id = NEW.place_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_checkin_delete_place
+AFTER DELETE ON check_ins
+FOR EACH ROW
+BEGIN
+    UPDATE places
+    SET check_in_count = GREATEST(check_in_count - 1, 0)
+    WHERE id = OLD.place_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_checkin_update_place
+AFTER UPDATE ON check_ins
+FOR EACH ROW
+BEGIN
+    IF OLD.place_id != NEW.place_id THEN
+        UPDATE places
+        SET check_in_count = GREATEST(check_in_count - 1, 0)
+        WHERE id = OLD.place_id;
+
+        UPDATE places
+        SET check_in_count = check_in_count + 1
+        WHERE id = NEW.place_id;
+    END IF;
+END$$
+DELIMITER ;

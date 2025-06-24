@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface JpaUserRankingRepository extends JpaRepository<UserRankingEntity, Long> {
-    @Query("SELECT u FROM UserRankingEntity u ORDER BY u.ranking DESC LIMIT 100")
+    @Query("SELECT u FROM UserRankingEntity u ORDER BY u.ranking ASC LIMIT 100")
     List<UserRankingEntity> findTop100();
 
     @Query("SELECT u FROM UserRankingEntity u WHERE u.userId = :user_id")

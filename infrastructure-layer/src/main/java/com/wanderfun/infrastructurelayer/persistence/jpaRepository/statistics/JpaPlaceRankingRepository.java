@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface JpaPlaceRankingRepository extends JpaRepository<PlaceRankingEntity, Long> {
-    @Query("SELECT p FROM PlaceRankingEntity p ORDER BY p.ranking DESC LIMIT 100")
+    @Query("SELECT p FROM PlaceRankingEntity p ORDER BY p.ranking ASC LIMIT 100")
     List<PlaceRankingEntity> findTop100();
 
     @Query("SELECT p FROM PlaceRankingEntity p WHERE p.placeId = :place_id")
