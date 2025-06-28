@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface CheckInRepository extends BaseRepository<CheckIn, Long> {
     List<CheckIn> findAllByUserId(Long userId);
     Optional<CheckIn> findLastCheckInByUserId(Long userId);
+    Long countTotalCheckInsToday();
 }

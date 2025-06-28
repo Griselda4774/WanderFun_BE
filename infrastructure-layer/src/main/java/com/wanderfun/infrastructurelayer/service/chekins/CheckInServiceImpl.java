@@ -33,4 +33,9 @@ public class CheckInServiceImpl extends BaseServiceImpl<CheckIn, Long> implement
         return checkInRepository.findLastCheckInByUserId(userId)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("Last %s not found for user with ID: " + userId, CheckIn.class.getSimpleName())));
     }
+
+    @Override
+    public Long countTotalCheckInsToday() {
+        return checkInRepository.countTotalCheckInsToday();
+    }
 }

@@ -20,6 +20,11 @@ public class BaseServiceImpl<Model, ID> implements BaseService<Model, ID> {
     }
 
     @Override
+    public Long count() {
+        return baseRepository.count();
+    }
+
+    @Override
     public Model findById(ID id) {
         return baseRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(String.format("%s not found", modelClass.getSimpleName())));
     }

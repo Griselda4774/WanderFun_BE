@@ -3,6 +3,7 @@ package com.wanderfun.presentationlayer.controller;
 import com.wanderfun.applicationlayer.dto.ResponseDto;
 import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.applicationlayer.dto.statistics.PlaceRankingDto;
+import com.wanderfun.applicationlayer.dto.statistics.StatisticDto;
 import com.wanderfun.applicationlayer.dto.statistics.UserRankingDto;
 import com.wanderfun.applicationlayer.usecase.StatisticUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
@@ -51,6 +52,20 @@ public class StatisticController {
         ResponseDto<List<UserRankingDto>> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Find user ranking successful!");
+        response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<ResponseDto<StatisticDto>> getStatistics() {
+        StatisticDto result = statisticUsecase.getStatistics();
+        if(result == null) {
+            throw new RequestFailedException("Find statistics failed!");
+        }
+
+        ResponseDto<StatisticDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Find statistics successful!");
         response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

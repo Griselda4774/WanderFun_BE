@@ -3,6 +3,7 @@ package com.wanderfun.applicationlayer.service;
 import java.util.List;
 
 public interface BaseService<Model, ID> {
+ Long count();
  Model findById(ID id);
  List<Model> findAll();
  Model create(Model model);
