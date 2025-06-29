@@ -22,6 +22,11 @@ public class BaseRepositoryImpl<Model, Entity, ID> implements BaseRepository<Mod
     }
 
     @Override
+    public Long count() {
+        return jpaBaseRepository.count();
+    }
+
+    @Override
     public Model save(Model model) {
         Entity entity = objectMapper.map(model, entityClass);
         Entity savedEntity = jpaBaseRepository.save(entity);

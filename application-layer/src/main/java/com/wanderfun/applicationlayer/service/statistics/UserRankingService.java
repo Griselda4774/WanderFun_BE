@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface UserRankingService {
     List<UserRanking> findTop100();
+    List<UserRanking> findTopWithLimit(Long limit);
     UserRanking findByUserId(Long userId);
 }

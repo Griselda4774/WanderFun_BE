@@ -2,9 +2,11 @@ package com.wanderfun.infrastructurelayer.repository.statistics;
 
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
 import com.wanderfun.domainlayer.model.statistics.PlaceRanking;
-import com.wanderfun.domainlayer.repository.rankings.PlaceRankingRepository;
+import com.wanderfun.domainlayer.model.statistics.UserRanking;
+import com.wanderfun.domainlayer.repository.statistics.PlaceRankingRepository;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.statistics.JpaPlaceRankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class PlaceRankingRepositoryImpl implements PlaceRankingRepository {
     @Override
     public List<PlaceRanking> findTop100() {
         return objectMapper.mapList(jpaPlaceRankingRepository.findTop100(), PlaceRanking.class);
+    }
+
+    @Override
+    public List<PlaceRanking> findTopWithLimit(Long limit) {
+        return objectMapper.mapList(jpaPlaceRankingRepository.findTopWithLimit(PageRequest.of(0, limit.intValue())), PlaceRanking.class);
     }
 
     @Override

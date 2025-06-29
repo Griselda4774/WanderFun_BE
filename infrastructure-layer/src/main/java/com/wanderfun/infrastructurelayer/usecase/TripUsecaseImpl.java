@@ -45,11 +45,12 @@ public class TripUsecaseImpl implements TripUsecase {
     public boolean createTrip(TripCreateDto tripCreateDto, String accessToken) throws ObjectAlreadyExistException {
         Trip trip = objectMapper.map(tripCreateDto, Trip.class);
         Trip existingTrip = null;
+        Long createTripUserId = jwtUtil.getIdFromToken(accessToken);
         try {
             existingTrip = tripService.findByName(trip.getName());
         } catch (Exception e) {}
 
-        if(existingTrip != null) {
+        if(existingTrip != null && existingTrip.getUserId().equals(createTripUserId)) {
             throw new ObjectAlreadyExistException("This name is already used!");
         }
 

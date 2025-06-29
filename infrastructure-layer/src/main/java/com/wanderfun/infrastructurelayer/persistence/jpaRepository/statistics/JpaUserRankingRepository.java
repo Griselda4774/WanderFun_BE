@@ -1,6 +1,7 @@
 package com.wanderfun.infrastructurelayer.persistence.jpaRepository.statistics;
 
 import com.wanderfun.infrastructurelayer.persistence.entity.statistics.UserRankingEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +14,9 @@ import java.util.Optional;
 public interface JpaUserRankingRepository extends JpaRepository<UserRankingEntity, Long> {
     @Query("SELECT u FROM UserRankingEntity u ORDER BY u.ranking ASC LIMIT 100")
     List<UserRankingEntity> findTop100();
+
+    @Query("SELECT u FROM UserRankingEntity u ORDER BY u.ranking ASC")
+    List<UserRankingEntity> findTopWithLimit(Pageable pageable);
 
     @Query("SELECT u FROM UserRankingEntity u WHERE u.userId = :user_id")
     Optional<UserRankingEntity> findByUserId(@Param("user_id")Long userId);

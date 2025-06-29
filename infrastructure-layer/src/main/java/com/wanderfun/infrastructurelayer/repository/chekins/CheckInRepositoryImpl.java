@@ -34,4 +34,9 @@ public class CheckInRepositoryImpl extends BaseRepositoryImpl<CheckIn, CheckInEn
         return jpaCheckInRepository.findLastCheckInByUserId(userId)
                 .map(checkInEntity -> objectMapper.map(checkInEntity, CheckIn.class));
     }
+
+    @Override
+    public Long countTotalCheckInsToday() {
+        return jpaCheckInRepository.countTotalCheckInsToday();
+    }
 }

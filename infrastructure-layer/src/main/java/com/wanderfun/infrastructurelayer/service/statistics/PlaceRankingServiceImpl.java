@@ -1,8 +1,8 @@
-package com.wanderfun.infrastructurelayer.service.rankings;
+package com.wanderfun.infrastructurelayer.service.statistics;
 
 import com.wanderfun.applicationlayer.service.statistics.PlaceRankingService;
 import com.wanderfun.domainlayer.model.statistics.PlaceRanking;
-import com.wanderfun.domainlayer.repository.rankings.PlaceRankingRepository;
+import com.wanderfun.domainlayer.repository.statistics.PlaceRankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,11 @@ public class PlaceRankingServiceImpl implements PlaceRankingService {
     @Override
     public List<PlaceRanking> findTop100() {
         return placeRankingRepository.findTop100();
+    }
+
+    @Override
+    public List<PlaceRanking> findTopWithLimit(Long limit) {
+        return placeRankingRepository.findTopWithLimit(limit);
     }
 
     @Override

@@ -29,4 +29,9 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
         return jpaUserRepository.findByAccountId(accountId)
                 .map(userEntity -> objectMapper.map(userEntity, User.class));
     }
+
+    @Override
+    public Long count() {
+        return (long) jpaUserRepository.findAll().size();
+    }
 }

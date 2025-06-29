@@ -1,11 +1,14 @@
 package com.wanderfun.applicationlayer.dto.statistics;
 
+import java.util.List;
+
 public class StatisticDto {
     private Long totalUsers;
-    private Long totalAccounts;
-    private Long totalPosts;
-    private Long totalComments;
-    private Long totalLikes;
+    private Long totalPlaces;
+    private Long TotalCheckInsAllTime;
+    private Long totalCheckInsToday;
+    private List<PlaceRankingDto> TopCheckInsPlaces;
+    private List<UserRankingDto> TopCheckInsUsers;
 
     public StatisticDto() {}
 
@@ -17,35 +20,43 @@ public class StatisticDto {
         this.totalUsers = totalUsers;
     }
 
-    public Long getTotalAccounts() {
-        return totalAccounts;
+    public Long getTotalPlaces() {
+        return totalPlaces;
     }
 
-    public void setTotalAccounts(Long totalAccounts) {
-        this.totalAccounts = totalAccounts;
+    public void setTotalPlaces(Long totalPlaces) {
+        this.totalPlaces = totalPlaces;
     }
 
-    public Long getTotalPosts() {
-        return totalPosts;
+    public Long getTotalCheckInsAllTime() {
+        return TotalCheckInsAllTime;
     }
 
-    public void setTotalPosts(Long totalPosts) {
-        this.totalPosts = totalPosts;
+    public void setTotalCheckInsAllTime(Long totalCheckInsAllTime) {
+        TotalCheckInsAllTime = totalCheckInsAllTime;
     }
 
-    public Long getTotalComments() {
-        return totalComments;
+    public Long getTotalCheckInsToday() {
+        return totalCheckInsToday;
     }
 
-    public void setTotalComments(Long totalComments) {
-        this.totalComments = totalComments;
+    public void setTotalCheckInsToday(Long totalCheckInsToday) {
+        this.totalCheckInsToday = totalCheckInsToday;
     }
 
-    public Long getTotalLikes() {
-        return totalLikes;
+    public List<PlaceRankingDto> getTopCheckInsPlaces() {
+        return TopCheckInsPlaces;
     }
 
-    public void setTotalLikes(Long totalLikes) {
-        this.totalLikes = totalLikes;
+    public void setTopCheckInsPlaces(List<PlaceRankingDto> topCheckInsPlaces) {
+        TopCheckInsPlaces = topCheckInsPlaces;
+    }
+
+    public List<UserRankingDto> getTopCheckInsUsers() {
+        return TopCheckInsUsers;
+    }
+
+    public void setTopCheckInsUsers(List<UserRankingDto> topCheckInsUsers) {
+        TopCheckInsUsers = topCheckInsUsers;
     }
 }

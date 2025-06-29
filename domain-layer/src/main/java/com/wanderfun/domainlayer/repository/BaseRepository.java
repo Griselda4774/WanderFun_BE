@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BaseRepository<Model, ID> {
+    Long count();
     Model save (Model model);
     List<Model> saveAll(List<Model> models);
     List<Model> findAll();
