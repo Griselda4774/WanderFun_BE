@@ -53,4 +53,10 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place, Long> implements Pl
     public List<Place> findAllByCategoryId(Long categoryId) {
         return placeRepository.findAllByCategoryId(categoryId);
     }
+
+    @Override
+    @Transactional
+    public List<Place> findAllInBoundingBox(double minLongitude, double maxLongitude, double minLatitude, double maxLatitude) {
+        return placeRepository.findAllInBoundingBox(minLongitude, maxLongitude, minLatitude, maxLatitude);
+    }
 }
