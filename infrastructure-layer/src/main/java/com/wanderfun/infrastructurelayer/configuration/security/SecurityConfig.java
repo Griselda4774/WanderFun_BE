@@ -123,6 +123,9 @@ public class SecurityConfig {
                         // Account
                         .requestMatchers("/wanderfun/account/**").hasRole(UserRole.ADMIN.name())
 
+                        // Checkin
+                        .requestMatchers("/wanderfun/checkin/**").hasRole(UserRole.USER.name())
+
                         // Default
                         .anyRequest().authenticated()
                 )

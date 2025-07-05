@@ -3,10 +3,14 @@ package com.wanderfun.infrastructurelayer.persistence.entity.places;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.users.UserEntity;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "feedbacks")
 public class FeedbackEntity {
     @Id
@@ -32,9 +36,11 @@ public class FeedbackEntity {
     private ImageEntity image;
 
     @Column(name = "create_at", updatable = false)
+    @CreatedDate
     private LocalDateTime createAt;
 
     @Column(name = "update_at")
+    @LastModifiedDate
     private LocalDateTime updateAt;
 
     public FeedbackEntity() {}

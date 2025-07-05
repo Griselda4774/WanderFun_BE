@@ -12,4 +12,5 @@ public interface PlaceRepository extends BaseRepository<Place, Long> {
     Optional<Place> findByLongitudeAndLatitude(double longitude, double latitude);
     List<Place> findAllByProvinceName(String provinceName);
     List<Place> findAllByCategoryId(Long categoryId);
+    List<Place> findAllInBoundingBox(double minLongitude, double minLatitude, double maxLongitude, double maxLatitude);
 }

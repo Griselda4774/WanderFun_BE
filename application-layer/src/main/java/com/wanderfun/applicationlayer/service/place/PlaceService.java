@@ -11,4 +11,5 @@ public interface PlaceService extends BaseService<Place, Long> {
     Place findByLongitudeAndLatitude(double longitude, double latitude);
     List<Place> findAllByProvinceName(String provinceName);
     List<Place> findAllByCategoryId(Long categoryId);
+    List<Place> findAllInBoundingBox(double minLongitude, double minLatitude, double maxLongitude, double maxLatitude);
 }

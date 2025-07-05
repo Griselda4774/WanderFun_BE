@@ -27,4 +27,15 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
         WHERE p.category.id = :category_id
     """)
     List<PlaceEntity> findAllByCategoryId(@Param("category_id")Long categoryId);
+
+    @Query("""
+        SELECT p FROM PlaceEntity p
+        WHERE p.longitude BETWEEN :minLong AND :maxLong
+        AND p.latitude BETWEEN :minLat AND :maxLat
+    """)
+    List<PlaceEntity> findAllInBoundingBox(@Param("minLong") double minLongitude,
+                                           @Param("maxLong") double maxLongitude,
+                                           @Param("minLat") double minLatitude,
+                                           @Param("maxLat") double maxLatitude
+    );
 }
