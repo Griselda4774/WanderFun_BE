@@ -54,10 +54,10 @@ public class StatisticUsecaseImpl implements StatisticUsecase {
         StatisticDto statisticDto = new StatisticDto();
         statisticDto.setTotalPlaces(placeService.count());
         statisticDto.setTotalUsers(userService.count());
-        statisticDto.setTotalCheckInsAllTime(checkInService.count());
-        statisticDto.setTotalCheckInsToday(checkInService.countTotalCheckInsToday());
-        statisticDto.setTopCheckInsPlaces(objectMapper.mapList(placeRankingService.findTopWithLimit(5L), PlaceRankingDto.class));
-        statisticDto.setTopCheckInsUsers(objectMapper.mapList(userRankingService.findTopWithLimit(5L), UserRankingDto.class));
+        statisticDto.setTotalCheckInAllTime(checkInService.count());
+        statisticDto.setTotalCheckInToday(checkInService.countTotalCheckInsToday());
+        statisticDto.setTopCheckInPlaces(objectMapper.mapList(placeRankingService.findTopWithLimit(5L), PlaceRankingDto.class));
+        statisticDto.setTopCheckInUsers(objectMapper.mapList(userRankingService.findTopWithLimit(5L), UserRankingDto.class));
 
         return statisticDto;
     }
