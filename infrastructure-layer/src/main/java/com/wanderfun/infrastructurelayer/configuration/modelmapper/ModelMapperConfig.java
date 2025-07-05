@@ -4,6 +4,7 @@ import com.wanderfun.applicationlayer.dto.posts.PostCreateDto;
 import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
+import com.wanderfun.domainlayer.model.checkins.CheckIn;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
@@ -15,6 +16,7 @@ import com.wanderfun.domainlayer.model.trips.TripPlace;
 import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.checkins.CheckInEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.FeedbackEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
@@ -74,6 +76,7 @@ public class ModelMapperConfig {
             return placeEntity;
         };
 
+        // Trip
         Converter<Long, Trip> tripIdToTripConverter = ctx -> {
             Long tripId = ctx.getSource();
             if (tripId == null) {
@@ -84,6 +87,7 @@ public class ModelMapperConfig {
             return trip;
         };
 
+        // Account
         Converter<Long, AccountEntity> accountIdToAccountEntityConverter = ctx -> {
             Long accountId = ctx.getSource();
             if (accountId == null) {
@@ -92,6 +96,17 @@ public class ModelMapperConfig {
             AccountEntity accountEntity = new AccountEntity();
             accountEntity.setId(accountId);
             return accountEntity;
+        };
+
+        // User
+        Converter<Long, UserEntity> userIdToUserEntityConverter = ctx -> {
+            Long userId = ctx.getSource();
+            if (userId == null) {
+                return null;
+            }
+            UserEntity userEntity = new UserEntity();
+            userEntity.setId(userId);
+            return userEntity;
         };
 
 
@@ -135,6 +150,14 @@ public class ModelMapperConfig {
 
         modelMapper.typeMap(FeedbackEntity.class, Feedback.class)
                 .addMapping(src -> src.getPlace().getId(), Feedback::setPlaceId);
+
+        // CheckIn
+        modelMapper.typeMap(CheckInEntity.class, CheckIn.class)
+                .addMapping(src -> src.getUser().getId(), CheckIn::setUserId);
+
+        modelMapper.typeMap(CheckIn.class, CheckInEntity.class)
+                .addMappings(mapper -> mapper.using(userIdToUserEntityConverter)
+                        .map(CheckIn::getUserId, CheckInEntity::setUser));
 
         return modelMapper;
     }

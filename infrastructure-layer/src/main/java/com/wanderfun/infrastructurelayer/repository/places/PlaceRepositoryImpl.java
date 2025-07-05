@@ -102,6 +102,12 @@ public class PlaceRepositoryImpl extends BaseRepositoryImpl<Place, PlaceEntity, 
         return objectMapper.mapList(jpaPlaceRepository.findAllByCategoryId(categoryId), Place.class);
     }
 
+    @Override
+    public List<Place> findAllInBoundingBox(double minLongitude, double maxLongitude, double minLatitude, double maxLatitude) {
+        List<PlaceEntity> placeEntities = jpaPlaceRepository.findAllInBoundingBox(minLongitude, maxLongitude, minLatitude, maxLatitude);
+        return objectMapper.mapList(placeEntities, Place.class);
+    }
+
     private void mapEntityRelation(Place place, PlaceEntity placeEntity) {
         if (place.getAddress() != null && place.getAddress().getId() != null) {
             AddressEntity addressEntity = new AddressEntity();
