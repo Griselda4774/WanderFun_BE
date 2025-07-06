@@ -3,7 +3,7 @@ package com.wanderfun.applicationlayer.dto.posts;
 import com.wanderfun.applicationlayer.dto.images.ImageDto;
 import com.wanderfun.applicationlayer.dto.trips.MiniTripDto;
 import com.wanderfun.applicationlayer.dto.users.MiniUserDto;
-import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +13,7 @@ public class PostDto {
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    private MiniPlaceDto place;
+    private PlaceDto place;
     private boolean isTripShare;
     private MiniTripDto trip;
     private ImageDto image;
@@ -64,11 +64,11 @@ public class PostDto {
         this.updateAt = updateAt;
     }
 
-    public MiniPlaceDto getPlace() {
+    public PlaceDto getPlace() {
         return place;
     }
 
-    public void setPlace(MiniPlaceDto place) {
+    public void setPlace(PlaceDto place) {
         this.place = place;
     }
 
