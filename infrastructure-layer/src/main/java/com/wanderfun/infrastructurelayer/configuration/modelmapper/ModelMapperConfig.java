@@ -5,6 +5,7 @@ import com.wanderfun.applicationlayer.dto.trips.TripPlaceCreateDto;
 import com.wanderfun.domainlayer.model.auths.Account;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.checkins.CheckIn;
+import com.wanderfun.domainlayer.model.favoriteplaces.FavoritePlace;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
@@ -17,6 +18,7 @@ import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.AccountEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.checkins.CheckInEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.favoriteplace.FavoritePlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.FeedbackEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
@@ -158,6 +160,14 @@ public class ModelMapperConfig {
         modelMapper.typeMap(CheckIn.class, CheckInEntity.class)
                 .addMappings(mapper -> mapper.using(userIdToUserEntityConverter)
                         .map(CheckIn::getUserId, CheckInEntity::setUser));
+
+        // FavoritePlace
+        modelMapper.typeMap(FavoritePlaceEntity.class, FavoritePlace.class)
+                .addMapping(src -> src.getUser().getId(), FavoritePlace::setUserId);
+
+        modelMapper.typeMap(FavoritePlace.class, FavoritePlaceEntity.class)
+                .addMappings(mapper -> mapper.using(userIdToUserEntityConverter)
+                        .map(FavoritePlace::getUserId, FavoritePlaceEntity::setUser));
 
         return modelMapper;
     }

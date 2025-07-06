@@ -1,11 +1,13 @@
 package com.wanderfun.domainlayer.model.favoriteplaces;
 
-public class FavouritePlace {
+import com.wanderfun.domainlayer.model.places.Place;
+
+public class FavoritePlace {
     private Long id;
-    private Long placeId;
+    private Place place;
     private Long userId;
 
-    public FavouritePlace() {
+    public FavoritePlace() {
     }
 
     public Long getId() {
@@ -16,12 +18,12 @@ public class FavouritePlace {
         this.id = id;
     }
 
-    public Long getPlaceId() {
-        return placeId;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Long getUserId() {
