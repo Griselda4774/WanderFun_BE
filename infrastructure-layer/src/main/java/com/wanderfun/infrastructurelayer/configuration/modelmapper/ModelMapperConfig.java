@@ -8,6 +8,7 @@ import com.wanderfun.domainlayer.model.checkins.CheckIn;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
+import com.wanderfun.domainlayer.model.places.PlaceDetail;
 import com.wanderfun.domainlayer.model.places.Section;
 import com.wanderfun.domainlayer.model.posts.Comment;
 import com.wanderfun.domainlayer.model.posts.Post;
@@ -19,6 +20,7 @@ import com.wanderfun.infrastructurelayer.persistence.entity.auths.RefreshTokenEn
 import com.wanderfun.infrastructurelayer.persistence.entity.checkins.CheckInEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.FeedbackEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceDetailEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
@@ -74,6 +76,17 @@ public class ModelMapperConfig {
             PlaceEntity placeEntity = new PlaceEntity();
             placeEntity.setId(placeId);
             return placeEntity;
+        };
+
+        // PlaceDetail
+        Converter<Long, PlaceDetailEntity> placeDetailIdToPlaceDetailEntityConverter = ctx -> {
+            Long placeDetailId = ctx.getSource();
+            if (placeDetailId == null) {
+                return null;
+            }
+            PlaceDetailEntity placeDetailEntity = new PlaceDetailEntity();
+            placeDetailEntity.setId(placeDetailId);
+            return placeDetailEntity;
         };
 
         // Trip
@@ -158,6 +171,10 @@ public class ModelMapperConfig {
         modelMapper.typeMap(CheckIn.class, CheckInEntity.class)
                 .addMappings(mapper -> mapper.using(userIdToUserEntityConverter)
                         .map(CheckIn::getUserId, CheckInEntity::setUser));
+
+        // Section
+        modelMapper.typeMap(SectionEntity.class, Section.class)
+                .addMapping(src -> src.getPlaceDetail().getId(), Section::setPlaceDetailId);
 
         return modelMapper;
     }

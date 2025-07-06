@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface JpaPlaceDetailRepository extends JpaBaseRepository<PlaceDetailEntity, Long> {
     @Query("SELECT pd FROM PlaceDetailEntity pd WHERE pd.place.id = :id")
-    Optional<PlaceDetailEntity> findByPlace_Id(@Param("id")Long id);
+    Optional<PlaceDetailEntity> findByPlaceId(@Param("id")Long id);
 }
