@@ -9,6 +9,7 @@ import com.wanderfun.domainlayer.model.favoriteplaces.FavoritePlace;
 import com.wanderfun.domainlayer.model.images.Image;
 import com.wanderfun.domainlayer.model.places.Feedback;
 import com.wanderfun.domainlayer.model.places.Place;
+import com.wanderfun.domainlayer.model.places.PlaceDetail;
 import com.wanderfun.domainlayer.model.places.Section;
 import com.wanderfun.domainlayer.model.posts.Comment;
 import com.wanderfun.domainlayer.model.posts.Post;
@@ -21,6 +22,7 @@ import com.wanderfun.infrastructurelayer.persistence.entity.checkins.CheckInEnti
 import com.wanderfun.infrastructurelayer.persistence.entity.favoriteplace.FavoritePlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.images.ImageEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.FeedbackEntity;
+import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceDetailEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.posts.CommentEntity;
@@ -76,6 +78,17 @@ public class ModelMapperConfig {
             PlaceEntity placeEntity = new PlaceEntity();
             placeEntity.setId(placeId);
             return placeEntity;
+        };
+
+        // PlaceDetail
+        Converter<Long, PlaceDetailEntity> placeDetailIdToPlaceDetailEntityConverter = ctx -> {
+            Long placeDetailId = ctx.getSource();
+            if (placeDetailId == null) {
+                return null;
+            }
+            PlaceDetailEntity placeDetailEntity = new PlaceDetailEntity();
+            placeDetailEntity.setId(placeDetailId);
+            return placeDetailEntity;
         };
 
         // Trip
@@ -168,6 +181,10 @@ public class ModelMapperConfig {
         modelMapper.typeMap(FavoritePlace.class, FavoritePlaceEntity.class)
                 .addMappings(mapper -> mapper.using(userIdToUserEntityConverter)
                         .map(FavoritePlace::getUserId, FavoritePlaceEntity::setUser));
+
+        // Section
+        modelMapper.typeMap(SectionEntity.class, Section.class)
+                .addMapping(src -> src.getPlaceDetail().getId(), Section::setPlaceDetailId);
 
         return modelMapper;
     }

@@ -1,13 +1,13 @@
 package com.wanderfun.applicationlayer.dto.checkins;
 
-import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 
 import java.time.LocalDateTime;
 
 public class CheckInDto {
     private Long id;
     private Long userId;
-    private MiniPlaceDto place;
+    private PlaceDto place;
     private LocalDateTime createdAt;
 
     public CheckInDto() {
@@ -29,11 +29,11 @@ public class CheckInDto {
         this.userId = userId;
     }
 
-    public MiniPlaceDto getPlace() {
+    public PlaceDto getPlace() {
         return place;
     }
 
-    public void setPlace(MiniPlaceDto place) {
+    public void setPlace(PlaceDto place) {
         this.place = place;
     }
 

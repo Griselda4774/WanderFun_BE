@@ -5,10 +5,10 @@ import java.util.List;
 public class StatisticDto {
     private Long totalUsers;
     private Long totalPlaces;
-    private Long TotalCheckInsAllTime;
-    private Long totalCheckInsToday;
-    private List<PlaceRankingDto> TopCheckInsPlaces;
-    private List<UserRankingDto> TopCheckInsUsers;
+    private Long TotalCheckInAllTime;
+    private Long totalCheckInToday;
+    private List<PlaceRankingDto> TopCheckInPlaces;
+    private List<UserRankingDto> TopCheckInUsers;
 
     public StatisticDto() {}
 
@@ -28,35 +28,35 @@ public class StatisticDto {
         this.totalPlaces = totalPlaces;
     }
 
-    public Long getTotalCheckInsAllTime() {
-        return TotalCheckInsAllTime;
+    public Long getTotalCheckInAllTime() {
+        return TotalCheckInAllTime;
     }
 
-    public void setTotalCheckInsAllTime(Long totalCheckInsAllTime) {
-        TotalCheckInsAllTime = totalCheckInsAllTime;
+    public void setTotalCheckInAllTime(Long totalCheckInAllTime) {
+        TotalCheckInAllTime = totalCheckInAllTime;
     }
 
-    public Long getTotalCheckInsToday() {
-        return totalCheckInsToday;
+    public Long getTotalCheckInToday() {
+        return totalCheckInToday;
     }
 
-    public void setTotalCheckInsToday(Long totalCheckInsToday) {
-        this.totalCheckInsToday = totalCheckInsToday;
+    public void setTotalCheckInToday(Long totalCheckInToday) {
+        this.totalCheckInToday = totalCheckInToday;
     }
 
-    public List<PlaceRankingDto> getTopCheckInsPlaces() {
-        return TopCheckInsPlaces;
+    public List<PlaceRankingDto> getTopCheckInPlaces() {
+        return TopCheckInPlaces;
     }
 
-    public void setTopCheckInsPlaces(List<PlaceRankingDto> topCheckInsPlaces) {
-        TopCheckInsPlaces = topCheckInsPlaces;
+    public void setTopCheckInPlaces(List<PlaceRankingDto> topCheckInPlaces) {
+        TopCheckInPlaces = topCheckInPlaces;
     }
 
-    public List<UserRankingDto> getTopCheckInsUsers() {
-        return TopCheckInsUsers;
+    public List<UserRankingDto> getTopCheckInUsers() {
+        return TopCheckInUsers;
     }
 
-    public void setTopCheckInsUsers(List<UserRankingDto> topCheckInsUsers) {
-        TopCheckInsUsers = topCheckInsUsers;
+    public void setTopCheckInUsers(List<UserRankingDto> topCheckInUsers) {
+        TopCheckInUsers = topCheckInUsers;
     }
 }
