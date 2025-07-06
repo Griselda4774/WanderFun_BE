@@ -93,11 +93,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/wanderfun/feedback/**").hasAnyRole(UserRole.USER.name())
                         .requestMatchers(HttpMethod.DELETE, "/wanderfun/feedback/**").hasAnyRole(UserRole.USER.name())
 
-                        // Other place
-                        .requestMatchers("/wanderfun/place/favourite/**").hasRole(UserRole.USER.name())
-                        .requestMatchers("/wanderfun/place/checkin/**").hasRole(UserRole.USER.name())
-                        .requestMatchers("/wanderfun/place/categories/**").hasRole(UserRole.ADMIN.name())
-
                         // Trip
                         .requestMatchers("/wanderfun/trip/**").hasRole(UserRole.USER.name())
 
@@ -125,6 +120,9 @@ public class SecurityConfig {
 
                         // Checkin
                         .requestMatchers("/wanderfun/checkin/**").hasRole(UserRole.USER.name())
+
+                        // Favorite Place
+                        .requestMatchers("/wanderfun/favorite-place/**").hasRole(UserRole.USER.name())
 
                         // Default
                         .anyRequest().authenticated()
