@@ -14,8 +14,9 @@ public interface JpaCheckInRepository extends JpaBaseRepository<CheckInEntity, L
     @Query("SELECT c FROM CheckInEntity c WHERE c.user.id = :user_id")
     List<CheckInEntity> findAllByUserId(@Param("user_id") Long userId);
 
-    @Query("SELECT c FROM CheckInEntity c WHERE c.user.id = :user_id ORDER BY c.createdAt DESC LIMIT 1")
-    Optional<CheckInEntity> findLastCheckInByUserId(@Param("user_id") Long userId);
+    @Query("SELECT c FROM CheckInEntity c WHERE c.user.id = :user_id AND c.place.id = :place_id ORDER BY c.createdAt DESC LIMIT 1")
+    Optional<CheckInEntity> findLastCheckInByUserIdAndPlaceId(@Param("user_id") Long userId,
+                                                              @Param("place_id") Long placeId);
 
     @Query("SELECT COUNT(c) FROM CheckInEntity c WHERE DATE(c.createdAt) = CURRENT_DATE")
     Long countTotalCheckInsToday();

@@ -44,18 +44,18 @@ public class FavoritePlaceController {
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<FavoritePlaceDto>> createFavoritePlace(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity<ResponseDto<PlaceDto>> createFavoritePlace(@RequestHeader("Authorization") String accessToken,
                                                                              @RequestParam Long placeId) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
         }
 
-        FavoritePlaceDto result = favoritePlaceUsecase.create(accessToken, placeId);
+        PlaceDto result = favoritePlaceUsecase.create(accessToken, placeId);
         if (result == null) {
             throw new RequestFailedException("Create check-in failed!");
         }
 
-        ResponseDto<FavoritePlaceDto> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.CREATED.toString());
         response.setMessage("Create check-in successful!");
         response.setData(result);
@@ -64,20 +64,21 @@ public class FavoritePlaceController {
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResponseDto<FavoritePlaceDto>> deleteByUserAndPlaceId(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity<ResponseDto<PlaceDto>> deleteByUserAndPlaceId(@RequestHeader("Authorization") String accessToken,
                                                                                 @RequestParam Long placeId) {
         if (accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
         }
 
-        boolean result = favoritePlaceUsecase.deleteById(accessToken, placeId);
-        if (!result) {
+        PlaceDto result = favoritePlaceUsecase.deleteById(accessToken, placeId);
+        if (result == null) {
             throw new RequestFailedException("Delete favorite place failed!");
         }
 
-        ResponseDto<FavoritePlaceDto> response = new ResponseDto<>();
+        ResponseDto<PlaceDto> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Delete favorite place successful!");
+        response.setData(result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

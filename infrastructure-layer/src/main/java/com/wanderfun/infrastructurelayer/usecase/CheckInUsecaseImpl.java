@@ -47,11 +47,11 @@ public class CheckInUsecaseImpl implements CheckInUsecase {
         Long userId = userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId();
 
         try {
-            CheckIn lastCheckIn = checkInService.findLastCheckInByUserId(userId);
+            CheckIn lastCheckIn = checkInService.findLastCheckInByUserIdAndPlaceId(userId, placeId);
             LocalDateTime lastTime = lastCheckIn.getCreatedAt();
             LocalDateTime now = LocalDateTime.now();
             if (Duration.between(lastTime, now).compareTo(Duration.ofHours(24)) < 0) {
-                throw new ObjectAlreadyExistException("You can only check in once every 24 hours.");
+                throw new ObjectAlreadyExistException("You can only check in at one place once every 24 hours.");
             }
         } catch (ObjectNotFoundException ignored) {
         }
