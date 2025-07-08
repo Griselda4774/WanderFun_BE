@@ -101,26 +101,26 @@ public class AuthController {
     }
 
     @GetMapping("/otp")
-    public ResponseEntity<ResponseDto<MailOtpDto>> sendOtp(@RequestParam String email) {
+    public ResponseEntity<ResponseDto<Void>> sendOtp(@RequestParam String email) {
         boolean result = authUsecase.sendOtp(email);
         if (!result) {
             throw new RequestFailedException("Failed to send OTP!");
         }
 
-        ResponseDto<MailOtpDto> response = new ResponseDto<>();
+        ResponseDto<Void> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Send OTP successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/otp/verify")
-    public ResponseEntity<ResponseDto<MailOtpDto>> verifyOtp(@RequestBody @Validated MailOtpDto mailOtpDto) {
+    public ResponseEntity<ResponseDto<Void>> verifyOtp(@RequestBody @Validated MailOtpDto mailOtpDto) {
         boolean result = authUsecase.verifyOtp(mailOtpDto);
         if (!result) {
             throw new RequestFailedException("Verify OTP failed!");
         }
 
-        ResponseDto<MailOtpDto> response = new ResponseDto<>();
+        ResponseDto<Void> response = new ResponseDto<>();
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Verify OTP successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(response);

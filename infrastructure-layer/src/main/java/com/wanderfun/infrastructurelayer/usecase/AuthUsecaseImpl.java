@@ -83,6 +83,8 @@ public class AuthUsecaseImpl implements AuthUsecase {
     @Override
     public LoginResponseDto login(LoginDto loginDto) throws WrongEmailOrPasswordException {
         try {
+            LoginResponseDto loginResponseDto = new LoginResponseDto();
+
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginDto.getEmail(),
@@ -94,6 +96,13 @@ public class AuthUsecaseImpl implements AuthUsecase {
 
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             Account account = userDetails.getAccount();
+            if (!account.isVerified()) {
+                loginResponseDto.setVerified(false);
+                return loginResponseDto;
+            } else {
+                loginResponseDto.setVerified(true);
+            }
+
             String accessToken = jwtUtil.generateAccessToken(account.getId(), account.getEmail(), account.getRole().name());
             String refreshToken = jwtUtil.generateRefreshToken(account.getId());
 
@@ -103,7 +112,6 @@ public class AuthUsecaseImpl implements AuthUsecase {
             refreshTokenService.deleteByAccountId(account.getId());
             refreshTokenService.create(refreshTokenModel);
 
-            LoginResponseDto loginResponseDto = new LoginResponseDto();
             loginResponseDto.setId(account.getId());
             loginResponseDto.setUserId(userService.findByAccountId(account.getId()).getId());
             loginResponseDto.setRole(account.getRole());
@@ -168,6 +176,12 @@ public class AuthUsecaseImpl implements AuthUsecase {
         if (mailOtp != null && mailOtp.getExpirationTime().isAfter(LocalDateTime.now()) && !mailOtp.isUsed()) {
             mailOtp.setUsed(true);
             mailOtpService.updateById(mailOtp.getId(), mailOtp);
+            try {
+                Account account = accountService.findByEmail(mailOtp.getEmail());
+                account.setVerified(true);
+                accountService.updateById(account.getId(), account);
+            } catch (ObjectNotFoundException ignored) {
+            }
             return true;
         } else {
             throw new ObjectInvalidException("OTP is invalid or expired!");

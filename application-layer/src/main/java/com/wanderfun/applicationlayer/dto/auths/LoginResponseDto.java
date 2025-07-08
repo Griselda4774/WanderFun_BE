@@ -9,6 +9,7 @@ public class LoginResponseDto {
     private final String tokenType = "Bearer";
     private String accessToken;
     private String refreshToken;
+    private boolean verified;
 
     public LoginResponseDto() {
     }
@@ -55,5 +56,13 @@ public class LoginResponseDto {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }
