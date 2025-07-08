@@ -1,6 +1,7 @@
 package com.wanderfun.applicationlayer.dto.trips;
 
 import com.wanderfun.applicationlayer.dto.places.MiniPlaceDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import com.wanderfun.domainlayer.model.places.Place;
 
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.util.Date;
 
 public class TripPlaceDto {
     private Long id;
-    private MiniPlaceDto place;
+    private PlaceDto place;
     private Long tripId;
     private LocalDate startTime;
     private LocalDate endTime;
@@ -25,11 +26,11 @@ public class TripPlaceDto {
         this.id = id;
     }
 
-    public MiniPlaceDto getPlace() {
+    public PlaceDto getPlace() {
         return place;
     }
 
-    public void setPlace(MiniPlaceDto place) {
+    public void setPlace(PlaceDto place) {
         this.place = place;
     }
 
