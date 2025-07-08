@@ -1,9 +1,6 @@
 package com.wanderfun.applicationlayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.auths.LoginDto;
-import com.wanderfun.applicationlayer.dto.auths.LoginResponseDto;
-import com.wanderfun.applicationlayer.dto.auths.RegisterDto;
-import com.wanderfun.applicationlayer.dto.auths.TokenResponseDto;
+import com.wanderfun.applicationlayer.dto.auths.*;
 
 public interface AuthUsecase {
     boolean register(RegisterDto registerDto);
@@ -11,4 +8,6 @@ public interface AuthUsecase {
     LoginResponseDto login(LoginDto loginDto);
     boolean logout(String accessToken);
     TokenResponseDto refresh (String refreshToken);
+    boolean sendOtp(String email);
+    boolean verifyOtp(MailOtpDto mailOtpDto);
 }

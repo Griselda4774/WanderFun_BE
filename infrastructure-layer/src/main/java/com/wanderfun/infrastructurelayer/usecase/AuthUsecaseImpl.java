@@ -1,19 +1,20 @@
 package com.wanderfun.infrastructurelayer.usecase;
 
-import com.wanderfun.applicationlayer.dto.auths.LoginDto;
-import com.wanderfun.applicationlayer.dto.auths.LoginResponseDto;
-import com.wanderfun.applicationlayer.dto.auths.RegisterDto;
-import com.wanderfun.applicationlayer.dto.auths.TokenResponseDto;
+import com.wanderfun.applicationlayer.dto.auths.*;
 import com.wanderfun.applicationlayer.exception.ObjectAlreadyExistException;
 import com.wanderfun.applicationlayer.exception.ObjectInvalidException;
+import com.wanderfun.applicationlayer.exception.ObjectNotFoundException;
 import com.wanderfun.applicationlayer.exception.WrongEmailOrPasswordException;
 import com.wanderfun.applicationlayer.mapper.ObjectMapper;
+import com.wanderfun.applicationlayer.service.auths.MailOtpService;
 import com.wanderfun.applicationlayer.service.auths.RefreshTokenService;
 import com.wanderfun.applicationlayer.service.auths.AccountService;
 import com.wanderfun.applicationlayer.service.users.UserService;
 import com.wanderfun.applicationlayer.usecase.AuthUsecase;
 import com.wanderfun.applicationlayer.util.JwtUtil;
+import com.wanderfun.applicationlayer.util.MailUtil;
 import com.wanderfun.domainlayer.model.auths.Account;
+import com.wanderfun.domainlayer.model.auths.MailOtp;
 import com.wanderfun.domainlayer.model.auths.RefreshToken;
 import com.wanderfun.domainlayer.model.users.User;
 import com.wanderfun.domainlayer.model.users.UserRole;
@@ -26,6 +27,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Random;
+
 @Service
 public class AuthUsecaseImpl implements AuthUsecase {
     private final AccountService accountService;
@@ -35,6 +39,8 @@ public class AuthUsecaseImpl implements AuthUsecase {
     private final PasswordEncoder passwordEncoder;
     private final RefreshTokenService refreshTokenService;
     private final UserService userService;
+    private final MailOtpService mailOtpService;
+    private final MailUtil mailUtil;
 
     @Autowired
     public AuthUsecaseImpl(AccountService accountService,
@@ -43,7 +49,8 @@ public class AuthUsecaseImpl implements AuthUsecase {
                            JwtUtil jwtUtil,
                            PasswordEncoder passwordEncoder,
                            RefreshTokenService refreshTokenService,
-                           UserService userService) {
+                           UserService userService,
+                           MailOtpService mailOtpService, MailUtil mailUtil) {
         this.accountService = accountService;
         this.objectMapper = objectMapper;
         this.authenticationManager = authenticationManager;
@@ -51,6 +58,8 @@ public class AuthUsecaseImpl implements AuthUsecase {
         this.passwordEncoder = passwordEncoder;
         this.refreshTokenService = refreshTokenService;
         this.userService = userService;
+        this.mailOtpService = mailOtpService;
+        this.mailUtil = mailUtil;
     }
 
     @Override
@@ -138,6 +147,31 @@ public class AuthUsecaseImpl implements AuthUsecase {
         tokenResponseDto.setAccessToken(accessToken);
         tokenResponseDto.setRefreshToken(refreshTokenModel.getToken());
         return tokenResponseDto;
+    }
+
+    @Override
+    public boolean sendOtp(String email) {
+        String otp = String.format("%06d", new Random().nextInt(999999));
+        LocalDateTime expiration = LocalDateTime.now().plusMinutes(1);
+        MailOtp mailOtp = new MailOtp();
+        mailOtp.setEmail(email);
+        mailOtp.setOtp(otp);
+        mailOtp.setExpirationTime(expiration);
+        mailOtpService.create(mailOtp);
+        mailUtil.sendOtp(email, otp);
+        return true;
+    }
+
+    @Override
+    public boolean verifyOtp(MailOtpDto mailOtpDto) {
+        MailOtp mailOtp = mailOtpService.findByEmailAndOtp(mailOtpDto.getEmail(), mailOtpDto.getOtp());
+        if (mailOtp != null && mailOtp.getExpirationTime().isAfter(LocalDateTime.now()) && !mailOtp.isUsed()) {
+            mailOtp.setUsed(true);
+            mailOtpService.updateById(mailOtp.getId(), mailOtp);
+            return true;
+        } else {
+            throw new ObjectInvalidException("OTP is invalid or expired!");
+        }
     }
 
     private void checkExistingAccount(Account account) throws ObjectAlreadyExistException {

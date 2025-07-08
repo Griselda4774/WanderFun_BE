@@ -85,6 +85,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 Pair.of("POST", "/wanderfun/auth/register"),
                 Pair.of("POST", "/wanderfun/auth/login"),
                 Pair.of("POST", "/wanderfun/auth/admin/register"),
+                Pair.of("GET", "/wanderfun/auth/otp"),
+                Pair.of("POST", "/wanderfun/auth/otp/verify"),
 
                 // Address endpoints
                 Pair.of("GET", "/wanderfun/address/province"),

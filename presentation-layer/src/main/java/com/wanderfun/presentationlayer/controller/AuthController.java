@@ -1,10 +1,7 @@
 package com.wanderfun.presentationlayer.controller;
 
 import com.wanderfun.applicationlayer.dto.ResponseDto;
-import com.wanderfun.applicationlayer.dto.auths.LoginDto;
-import com.wanderfun.applicationlayer.dto.auths.LoginResponseDto;
-import com.wanderfun.applicationlayer.dto.auths.RegisterDto;
-import com.wanderfun.applicationlayer.dto.auths.TokenResponseDto;
+import com.wanderfun.applicationlayer.dto.auths.*;
 import com.wanderfun.applicationlayer.usecase.AuthUsecase;
 import com.wanderfun.presentationlayer.exception.RequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +97,32 @@ public class AuthController {
         response.setStatusCode(HttpStatus.OK.toString());
         response.setMessage("Refresh token successfully!");
         response.setData(result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/otp")
+    public ResponseEntity<ResponseDto<MailOtpDto>> sendOtp(@RequestParam String email) {
+        boolean result = authUsecase.sendOtp(email);
+        if (!result) {
+            throw new RequestFailedException("Failed to send OTP!");
+        }
+
+        ResponseDto<MailOtpDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Send OTP successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/otp/verify")
+    public ResponseEntity<ResponseDto<MailOtpDto>> verifyOtp(@RequestBody @Validated MailOtpDto mailOtpDto) {
+        boolean result = authUsecase.verifyOtp(mailOtpDto);
+        if (!result) {
+            throw new RequestFailedException("Verify OTP failed!");
+        }
+
+        ResponseDto<MailOtpDto> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Verify OTP successfully!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

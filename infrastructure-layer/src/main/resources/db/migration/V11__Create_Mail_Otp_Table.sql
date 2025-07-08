@@ -1,0 +1,9 @@
+CREATE TABLE mail_otps (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    otp VARCHAR(6) NOT NULL,
+    expiration_time DATETIME NOT NULL,
+    used BOOLEAN NOT NULL DEFAULT FALSE
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;

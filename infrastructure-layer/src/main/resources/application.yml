@@ -1,7 +1,23 @@
-# Spring Boot Application Configuration
+# Spring Boot Configuration
 spring:
+  # General Application Configuration
   application:
     name: wanderfun
+
+  # Mail Configuration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
 
   # Database Configuration
   datasource:
