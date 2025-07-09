@@ -29,8 +29,8 @@ public class CheckInServiceImpl extends BaseServiceImpl<CheckIn, Long> implement
     }
 
     @Override
-    public CheckIn findLastCheckInByUserId(Long userId) {
-        return checkInRepository.findLastCheckInByUserId(userId)
+    public CheckIn findLastCheckInByUserIdAndPlaceId(Long userId, Long placeId) {
+        return checkInRepository.findLastCheckInByUserIdAndPlaceId(userId, placeId)
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("Last %s not found for user with ID: " + userId, CheckIn.class.getSimpleName())));
     }
 

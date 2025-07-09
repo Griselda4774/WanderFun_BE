@@ -68,11 +68,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
-//            if(role == null && !isRefreshApi(request)) {
-//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-//                return;
-//            }
-
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
@@ -85,6 +80,9 @@ public class JwtFilter extends OncePerRequestFilter {
                 Pair.of("POST", "/wanderfun/auth/register"),
                 Pair.of("POST", "/wanderfun/auth/login"),
                 Pair.of("POST", "/wanderfun/auth/admin/register"),
+                Pair.of("GET", "/wanderfun/auth/otp"),
+                Pair.of("POST", "/wanderfun/auth/otp/verify"),
+                Pair.of("POST", "/wanderfun/auth/password/forgot"),
 
                 // Address endpoints
                 Pair.of("GET", "/wanderfun/address/province"),

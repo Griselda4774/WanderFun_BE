@@ -40,12 +40,12 @@ public class FavoritePlaceUsecaseImpl implements FavoritePlaceUsecase {
     }
 
     @Override
-    public FavoritePlaceDto create(String accessToken, Long placeId) {
+    public PlaceDto create(String accessToken, Long placeId) {
         Long userId = userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId();
 
         try {
             FavoritePlace currentFavoritePlace = favoritePlaceService.findFavoritePlaceByUserIdAndPlaceId(userId, placeId);
-            return objectMapper.map(currentFavoritePlace, FavoritePlaceDto.class);
+            return objectMapper.map(currentFavoritePlace, PlaceDto.class);
         } catch (ObjectNotFoundException ignored) {
         }
 
@@ -54,18 +54,18 @@ public class FavoritePlaceUsecaseImpl implements FavoritePlaceUsecase {
         newFavoritePlace.setUserId(userId);
         newFavoritePlace.setPlace(place);
 
-        FavoritePlace savedFavoritePlace = favoritePlaceService.create(newFavoritePlace);
-        return objectMapper.map(savedFavoritePlace, FavoritePlaceDto.class);
+        favoritePlaceService.create(newFavoritePlace);
+        return objectMapper.map(place, PlaceDto.class);
     }
 
     @Override
-    public boolean deleteById(String accessToken, Long placeId) {
+    public PlaceDto deleteById(String accessToken, Long placeId) {
         Long userId = userService.findByAccountId(jwtUtil.getIdFromToken(accessToken)).getId();
         try {
             FavoritePlace currentFavoritePlace = favoritePlaceService.findFavoritePlaceByUserIdAndPlaceId(userId, placeId);
             favoritePlaceService.deleteById(currentFavoritePlace.getId());
         } catch (ObjectNotFoundException ignored) {
         }
-        return true;
+        return objectMapper.map(placeService.findById(placeId), PlaceDto.class);
     }
 }

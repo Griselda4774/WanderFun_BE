@@ -6,7 +6,7 @@ import com.wanderfun.applicationlayer.dto.places.PlaceDto;
 import java.util.List;
 
 public interface FavoritePlaceUsecase {
-    FavoritePlaceDto create(String accessToken, Long placeId);
     List<PlaceDto> findAllByUser(String accessToken);
-    boolean deleteById(String accessToken, Long favoritePlaceId);
+    PlaceDto create(String accessToken, Long placeId);
+    PlaceDto deleteById(String accessToken, Long favoritePlaceId);
 }

@@ -7,17 +7,29 @@ public class ChangePasswordDto {
     @NotBlank(message = "Password is required")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
             message = "Password must be at least 8 characters and include at least one lowercase letter, one uppercase letter, and one number")
-    private String password;
+    private String newPassword;
+    @NotBlank(message = "Password is required")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
+            message = "Password must be at least 8 characters and include at least one lowercase letter, one uppercase letter, and one number")
+    private String oldPassword;
 
     public ChangePasswordDto() {
     }
 
-    public String getPassword() {
-        return password;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }
 

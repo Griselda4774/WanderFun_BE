@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface JpaFavoritePlaceRepository extends JpaBaseRepository<FavoritePlaceEntity, Long> {
-    @Query("SELECT f.place FROM FavoritePlaceEntity f WHERE f.user.id = :user_id")
+    @Query("SELECT f.place FROM FavoritePlaceEntity f WHERE f.user.id = :user_id ORDER BY f.place.name ASC")
     List<PlaceEntity> findAllByUserId(@Param("user_id") Long userId);
 
     @Query("SELECT f FROM FavoritePlaceEntity f WHERE f.user.id = :user_id AND f.place.id = :place_id")

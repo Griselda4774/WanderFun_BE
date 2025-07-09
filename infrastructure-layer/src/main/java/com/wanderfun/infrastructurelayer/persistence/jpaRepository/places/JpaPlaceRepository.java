@@ -13,7 +13,10 @@ import java.util.Optional;
 public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long> {
     @Query("""
         SELECT p FROM PlaceEntity p
-        WHERE p.address.province.nameEn = :province_name
+        WHERE LOWER(p.address.province.nameEn) = LOWER(:province_name)
+        OR LOWER(p.address.province.fullNameEn) = LOWER(:province_name)
+        OR LOWER(p.address.province.name) = LOWER(:province_name)
+        OR LOWER(p.address.province.fullName) = LOWER(:province_name)
     """)
     List<PlaceEntity> findByProvinceName(@Param("province_name") String provinceName);
 

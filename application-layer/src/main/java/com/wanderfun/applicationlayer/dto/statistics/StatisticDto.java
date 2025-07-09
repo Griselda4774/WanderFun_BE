@@ -1,5 +1,8 @@
 package com.wanderfun.applicationlayer.dto.statistics;
 
+import com.wanderfun.applicationlayer.dto.auths.AccountDto;
+import com.wanderfun.applicationlayer.dto.places.PlaceDto;
+
 import java.util.List;
 
 public class StatisticDto {
@@ -7,6 +10,7 @@ public class StatisticDto {
     private Long totalPlaces;
     private Long TotalCheckInAllTime;
     private Long totalCheckInToday;
+    private List<AccountDto> AccountsList ;
     private List<PlaceRankingDto> TopCheckInPlaces;
     private List<UserRankingDto> TopCheckInUsers;
 

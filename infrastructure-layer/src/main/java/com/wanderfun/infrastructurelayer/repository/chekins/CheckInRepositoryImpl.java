@@ -30,8 +30,8 @@ public class CheckInRepositoryImpl extends BaseRepositoryImpl<CheckIn, CheckInEn
     }
 
     @Override
-    public Optional<CheckIn> findLastCheckInByUserId(Long userId) {
-        return jpaCheckInRepository.findLastCheckInByUserId(userId)
+    public Optional<CheckIn> findLastCheckInByUserIdAndPlaceId(Long userId, Long placeId) {
+        return jpaCheckInRepository.findLastCheckInByUserIdAndPlaceId(userId, placeId)
                 .map(checkInEntity -> objectMapper.map(checkInEntity, CheckIn.class));
     }
 
