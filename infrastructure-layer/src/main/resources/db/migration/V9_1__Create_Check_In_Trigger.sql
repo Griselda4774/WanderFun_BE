@@ -6,10 +6,10 @@ FOR EACH ROW
 BEGIN
     -- Single atomic UPDATE to prevent race conditions
     UPDATE users u
-    INNER JOIN place_details pd ON pd.place_id = NEW.place_id
+    INNER JOIN places p ON p.id = NEW.place_id
     SET
         u.check_in_count = u.check_in_count + 1,
-        u.point = u.point + pd.check_in_point,
+        u.point = u.point + p.check_in_point,
         u.place_check_in_count = CASE
             WHEN NOT EXISTS (
                 SELECT 1 FROM check_ins ci
@@ -32,10 +32,10 @@ FOR EACH ROW
 BEGIN
     -- Single atomic UPDATE with safety guards
     UPDATE users u
-    INNER JOIN place_details pd ON pd.place_id = OLD.place_id
+    INNER JOIN places p ON p.id = OLD.place_id
     SET
         u.check_in_count = GREATEST(u.check_in_count - 1, 0),
-        u.point = GREATEST(u.point - pd.check_in_point, 0),
+        u.point = GREATEST(u.point - p.check_in_point, 0),
         u.place_check_in_count = CASE
             WHEN NOT EXISTS (
                 SELECT 1 FROM check_ins ci
@@ -60,10 +60,10 @@ BEGIN
 
         -- Handle old place/user (subtract)
         UPDATE users u
-        INNER JOIN place_details pd ON pd.place_id = OLD.place_id
+        INNER JOIN places p ON p.id = OLD.place_id
         SET
             u.check_in_count = GREATEST(u.check_in_count - 1, 0),
-            u.point = GREATEST(u.point - pd.check_in_point, 0),
+            u.point = GREATEST(u.point - p.check_in_point, 0),
             u.place_check_in_count = CASE
                 WHEN NOT EXISTS (
                     SELECT 1 FROM check_ins ci
@@ -78,10 +78,10 @@ BEGIN
 
         -- Handle new place/user (add)
         UPDATE users u
-        INNER JOIN place_details pd ON pd.place_id = NEW.place_id
+        INNER JOIN places p ON p.id = NEW.place_id
         SET
             u.check_in_count = u.check_in_count + 1,
-            u.point = u.point + pd.check_in_point,
+            u.point = u.point + p.check_in_point,
             u.place_check_in_count = CASE
                 WHEN NOT EXISTS (
                     SELECT 1 FROM check_ins ci

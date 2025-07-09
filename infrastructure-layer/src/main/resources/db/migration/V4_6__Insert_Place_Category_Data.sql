@@ -1,3 +1,4 @@
+INSERT INTO place_categories (id, name, name_en, icon_image_id) VALUES
 (1, 'Khác', 'Other', NULL),
 (2, 'Công viên', 'Park', NULL),
 (3, 'Nhà hàng', 'Restaurant', NULL),
@@ -23,7 +24,7 @@
 (23, 'Thác', 'Waterfall', NULL),
 (24, 'Hải đăng', 'Lighthouse', NULL),
 (25, 'Núi', 'Mountain', NULL),
-(26, 'Nhà thờ', 'Church', NULL);
+(26, 'Nhà thờ', 'Church', NULL),
 (27, 'Phố cổ', 'Old Quarter', NULL),
 (28, 'Rừng', 'Forest', NULL),
 (29, 'Suối', 'Stream/Spring', NULL);
