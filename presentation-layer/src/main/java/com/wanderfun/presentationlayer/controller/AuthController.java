@@ -126,4 +126,35 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PostMapping("/password/forgot")
+    public ResponseEntity<ResponseDto<Void>> forgotPassword(@RequestBody @Validated ForgotPasswordDto forgotPasswordDto) {
+        boolean result = authUsecase.forgotPassword(forgotPasswordDto);
+        if (!result) {
+            throw new RequestFailedException("Forgot password failed!");
+        }
+
+        ResponseDto<Void> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Forgot password successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/password/change")
+    public ResponseEntity<ResponseDto<Void>> changePassword(
+            @RequestHeader("Authorization") String accessToken,
+            @RequestBody @Validated ChangePasswordDto changePasswordDto) {
+        if (accessToken.startsWith("Bearer ")) {
+            accessToken = accessToken.substring(7);
+        }
+
+        boolean result = authUsecase.changePassword(accessToken, changePasswordDto);
+        if (!result) {
+            throw new RequestFailedException("Change password failed!");
+        }
+
+        ResponseDto<Void> response = new ResponseDto<>();
+        response.setStatusCode(HttpStatus.OK.toString());
+        response.setMessage("Change password successfully!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

@@ -188,6 +188,45 @@ public class AuthUsecaseImpl implements AuthUsecase {
         }
     }
 
+    @Override
+    public boolean forgotPassword(ForgotPasswordDto forgotPasswordDto) {
+        Account account = accountService.findByEmail(forgotPasswordDto.getEmail());
+
+        MailOtp mailOtp = mailOtpService.findByEmailAndOtp(forgotPasswordDto.getEmail(), forgotPasswordDto.getOtp());
+        if (mailOtp == null || !mailOtp.isUsed()) {
+            throw new ObjectInvalidException("OTP is invalid!");
+        }
+
+        account.setPassword(passwordEncoder.encode(forgotPasswordDto.getNewPassword()));
+        accountService.updateById(account.getId(), account);
+        return true;
+    }
+
+    @Override
+    public boolean changePassword(String accessToken, ChangePasswordDto changePasswordDto) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            jwtUtil.getEmailFromToken(accessToken),
+                            changePasswordDto.getOldPassword()
+                    )
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            Account account = userDetails.getAccount();
+
+            account.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+            accountService.updateById(account.getId(), account);
+
+            return true;
+
+        } catch (Exception e) {
+            throw new WrongEmailOrPasswordException("Email or password is not correct!");
+        }
+    }
+
     private void checkExistingAccount(Account account) throws ObjectAlreadyExistException {
         Account existingAccount = null;
         try {

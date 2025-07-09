@@ -10,4 +10,6 @@ public interface AuthUsecase {
     TokenResponseDto refresh (String refreshToken);
     boolean sendOtp(String email);
     boolean verifyOtp(MailOtpDto mailOtpDto);
+    boolean forgotPassword(ForgotPasswordDto forgotPasswordDto);
+    boolean changePassword(String accessToken, ChangePasswordDto changePasswordDto);
 }
