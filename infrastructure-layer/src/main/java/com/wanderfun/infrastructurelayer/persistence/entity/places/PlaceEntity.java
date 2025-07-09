@@ -33,6 +33,18 @@ public class PlaceEntity {
     @JoinColumn(name = "cover_image_id")
     private ImageEntity coverImage;
 
+    @Column(name = "check_in_point")
+    private Integer checkInPoint;
+
+    @Column(name = "check_in_range_meter")
+    private Float checkInRangeMeter;
+
+    @Column(name = "verified")
+    private Boolean verified;
+
+    @Column(name = "pending")
+    private Boolean pending;
+
     @Column(name = "rating", nullable = false)
     private float rating;
 
@@ -101,6 +113,38 @@ public class PlaceEntity {
 
     public void setCoverImage(ImageEntity coverImage) {
         this.coverImage = coverImage;
+    }
+
+    public Integer getCheckInPoint() {
+        return checkInPoint;
+    }
+
+    public void setCheckInPoint(Integer checkInPoint) {
+        this.checkInPoint = checkInPoint;
+    }
+
+    public Float getCheckInRangeMeter() {
+        return checkInRangeMeter;
+    }
+
+    public void setCheckInRangeMeter(Float checkInRangeMeter) {
+        this.checkInRangeMeter = checkInRangeMeter;
+    }
+
+    public Boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public Boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(Boolean pending) {
+        this.pending = pending;
     }
 
     public int getFeedbackCount() {

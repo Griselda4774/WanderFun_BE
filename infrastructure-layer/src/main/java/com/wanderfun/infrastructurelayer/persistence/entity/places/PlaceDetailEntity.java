@@ -21,12 +21,6 @@ public class PlaceDetailEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "check_in_point")
-    private Integer checkInPoint = 0;
-
-    @Column(name = "check_in_range_meter")
-    private Float checkInRangeMeter = 100f;
-
     @Column(name = "time_open")
     private LocalTime timeOpen;
 
@@ -47,9 +41,6 @@ public class PlaceDetailEntity {
 
     @Column(name = "price_range_bottom")
     private Integer priceRangeBottom;
-
-    @Column(name = "is_verified")
-    private Boolean isVerified = false;
 
     @Column(name = "alternative_name")
     private String alternativeName;
@@ -87,22 +78,6 @@ public class PlaceDetailEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getCheckInPoint() {
-        return checkInPoint;
-    }
-
-    public void setCheckInPoint(Integer checkInPoint) {
-        this.checkInPoint = checkInPoint;
-    }
-
-    public Float getCheckInRangeMeter() {
-        return checkInRangeMeter;
-    }
-
-    public void setCheckInRangeMeter(Float checkInRangeMeter) {
-        this.checkInRangeMeter = checkInRangeMeter;
     }
 
     public LocalTime getTimeOpen() {
@@ -159,14 +134,6 @@ public class PlaceDetailEntity {
 
     public void setPriceRangeBottom(Integer priceRangeBottom) {
         this.priceRangeBottom = priceRangeBottom;
-    }
-
-    public Boolean getVerified() {
-        return isVerified;
-    }
-
-    public void setVerified(Boolean verified) {
-        isVerified = verified;
     }
 
     public String getAlternativeName() {
