@@ -288,7 +288,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     private void handlePlaceDetail(Place savedPlace, PlaceCreateDto placeCreateDto) {
-        PlaceDetail placeDetail = objectMapper.map(placeCreateDto.getPlaceDetailDto(), PlaceDetail.class);
+        PlaceDetail placeDetail = objectMapper.map(placeCreateDto.getPlaceDetail(), PlaceDetail.class);
         placeDetail.setPlaceId(savedPlace.getId());
         try {
             PlaceDetail existingPlaceDetail = placeDetailService.findByPlaceId(savedPlace.getId());

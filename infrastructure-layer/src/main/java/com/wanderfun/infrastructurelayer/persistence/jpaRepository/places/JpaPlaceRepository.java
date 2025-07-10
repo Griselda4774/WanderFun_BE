@@ -26,7 +26,13 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
        WHERE p.name LIKE CONCAT('%', :name, '%')
        OR c.name LIKE CONCAT('%', :name, '%')
        OR c.nameEn LIKE CONCAT('%', :name, '%')
-       ORDER BY p.name ASC
+       ORDER BY
+       CASE
+       WHEN p.name LIKE CONCAT('%', :name, '%') THEN 0
+       WHEN c.name LIKE CONCAT('%', :name, '%') THEN 1
+       ELSE 2
+       END,
+       p.name ASC
     """)
     List<PlaceEntity> findAllByNameContaining(String name);
 

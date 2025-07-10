@@ -16,6 +16,8 @@ public class PlaceCreateDto {
     @NotBlank
     private Integer categoryId;
     private ImageDto coverImage;
+    private int checkInPoint;
+    private float checkInRangeMeter;
     private PlaceDetailDto placeDetail;
 
     public PlaceCreateDto() {
@@ -69,10 +71,25 @@ public class PlaceCreateDto {
         this.coverImage = coverImage;
     }
 
-    public PlaceDetailDto getPlaceDetailDto() {
-        return placeDetail;
+    public int getCheckInPoint() {
+        return checkInPoint;
     }
 
+    public void setCheckInPoint(int checkInPoint) {
+        this.checkInPoint = checkInPoint;
+    }
+
+    public float getCheckInRangeMeter() {
+        return checkInRangeMeter;
+    }
+
+    public void setCheckInRangeMeter(float checkInRangeMeter) {
+        this.checkInRangeMeter = checkInRangeMeter;
+    }
+
+    public PlaceDetailDto getPlaceDetail() {
+        return placeDetail;
+    }
     public void setPlaceDetail(PlaceDetailDto placeDetail) {
         this.placeDetail = placeDetail;
     }
