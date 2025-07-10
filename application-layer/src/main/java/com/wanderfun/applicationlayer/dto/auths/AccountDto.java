@@ -1,7 +1,5 @@
 package com.wanderfun.applicationlayer.dto.auths;
 
-import com.wanderfun.domainlayer.model.users.UserRole;
-
 import java.time.LocalDateTime;
 
 public class AccountDto {
@@ -9,7 +7,7 @@ public class AccountDto {
     private String email;
     private boolean isVerified;
     private boolean isActive;
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
     public AccountDto() {}
 
@@ -45,11 +43,11 @@ public class AccountDto {
         isActive = active;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
     }
 }

@@ -10,4 +10,5 @@ public interface AccountRepository extends BaseRepository<Account, Long> {
     Optional<Account> findByEmail(String email);
     List<Account> findAllUserAccount();
     boolean updateAccountState(Long id);
+    Long countAccountsCreatedToday();
 }

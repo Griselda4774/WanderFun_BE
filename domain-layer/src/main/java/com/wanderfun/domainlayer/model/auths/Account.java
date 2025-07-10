@@ -14,7 +14,7 @@ public class Account {
     private boolean isVerified;
     private boolean isActive;
     private boolean isDeleted;
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
     public Account() {};
 
@@ -74,11 +74,11 @@ public class Account {
         isDeleted = deleted;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
     }
 }
