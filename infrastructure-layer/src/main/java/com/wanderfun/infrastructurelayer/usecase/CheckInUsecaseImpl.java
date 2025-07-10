@@ -68,7 +68,7 @@ public class CheckInUsecaseImpl implements CheckInUsecase {
 
     @Override
     public List<MiniPlaceDto> findAllEligiblePlaces(double userLng, double userLat) {
-        double boundingRadius = 200; // 200 meters
+        double boundingRadius = 500; // 500 meters
 
         // Calculate bounding box
         double latOffset = boundingRadius / 111111.0;
@@ -82,7 +82,7 @@ public class CheckInUsecaseImpl implements CheckInUsecase {
         List<Place> eligiblePlaces = places.stream()
                 .filter(place -> {
                     double distance = haversine(userLat, userLng, place.getLatitude(), place.getLongitude());
-                    return distance <= 200;
+                    return distance <= place.getCheckInRangeMeter();
                 })
                 .toList();
 

@@ -8,12 +8,10 @@ public class ResponseDto<T> {
     private boolean error;
     private String errorType;
     private Map<String, String> errorData;
-    private LocalDateTime timestamp;
     private String message;
     private T data;
 
     public ResponseDto() {
-        this.timestamp = LocalDateTime.now();
     }
 
     public String getStatusCode() {
@@ -46,14 +44,6 @@ public class ResponseDto<T> {
 
     public void setErrorData(Map<String, String> errorData) {
         this.errorData = errorData;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getMessage() {

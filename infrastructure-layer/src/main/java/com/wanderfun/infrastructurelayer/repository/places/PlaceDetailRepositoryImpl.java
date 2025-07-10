@@ -6,7 +6,6 @@ import com.wanderfun.domainlayer.repository.place.PlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceDetailEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.PlaceEntity;
 import com.wanderfun.infrastructurelayer.persistence.entity.places.SectionEntity;
-import com.wanderfun.infrastructurelayer.persistence.entity.places.mapper.PlaceDetailEntityMapper;
 import com.wanderfun.infrastructurelayer.persistence.jpaRepository.places.JpaPlaceDetailRepository;
 import com.wanderfun.infrastructurelayer.repository.BaseRepositoryImpl;
 

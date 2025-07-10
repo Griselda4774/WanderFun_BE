@@ -76,6 +76,7 @@ public class AuthUsecaseImpl implements AuthUsecase {
         Account account = objectMapper.map(registerDto, Account.class);
         checkExistingAccount(account);
         account.setRole(UserRole.ADMIN);
+        account.setVerified(true);
         initUser(account, registerDto);
         return true;
     }
