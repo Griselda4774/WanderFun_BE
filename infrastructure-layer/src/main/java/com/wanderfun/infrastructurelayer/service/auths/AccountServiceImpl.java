@@ -41,4 +41,10 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
     public boolean updateAccountState(Long id) {
         return accountRepository.updateAccountState(id);
     }
+
+    @Override
+    @Transactional
+    public Long countAccountsCreatedToday() {
+        return accountRepository.countAccountsCreatedToday();
+    }
 }

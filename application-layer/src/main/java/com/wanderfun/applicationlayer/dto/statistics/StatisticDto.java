@@ -8,6 +8,7 @@ import java.util.List;
 public class StatisticDto {
     private Long totalUsers;
     private Long totalPlaces;
+    private Long totalCreatedAccountsToday;
     private Long TotalCheckInAllTime;
     private Long totalCheckInToday;
     private List<AccountDto> AccountsList ;
@@ -30,6 +31,22 @@ public class StatisticDto {
 
     public void setTotalPlaces(Long totalPlaces) {
         this.totalPlaces = totalPlaces;
+    }
+
+    public Long getTotalCreatedAccountsToday() {
+        return totalCreatedAccountsToday;
+    }
+
+    public void setTotalCreatedAccountsToday(Long totalCreatedAccountsToday) {
+        this.totalCreatedAccountsToday = totalCreatedAccountsToday;
+    }
+
+    public List<AccountDto> getAccountsList() {
+        return AccountsList;
+    }
+
+    public void setAccountsList(List<AccountDto> accountsList) {
+        AccountsList = accountsList;
     }
 
     public Long getTotalCheckInAllTime() {
