@@ -212,6 +212,12 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
 
     @Override
     public boolean deleteById(Long id) {
+        try {
+            PlaceDetail placeDetail = placeDetailService.findByPlaceId(id);
+            if (placeDetail != null) {
+                placeDetailService.deleteById(placeDetail.getId());
+            }
+        } catch (ObjectNotFoundException ignored) {}
         placeService.deleteById(id);
         return true;
     }
