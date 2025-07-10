@@ -17,7 +17,7 @@ CREATE TABLE posts (
     FOREIGN KEY (image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE comments (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -34,7 +34,7 @@ CREATE TABLE comments (
     FOREIGN KEY (parent_id) REFERENCES comments(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE likes (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -46,4 +46,4 @@ CREATE TABLE likes (
     CONSTRAINT uq_user_target UNIQUE (user_id, target_id, target_type)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;

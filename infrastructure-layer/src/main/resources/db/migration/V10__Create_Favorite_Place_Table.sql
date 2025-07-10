@@ -8,4 +8,4 @@ CREATE TABLE favorite_places (
     FOREIGN KEY (place_id) REFERENCES places(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;

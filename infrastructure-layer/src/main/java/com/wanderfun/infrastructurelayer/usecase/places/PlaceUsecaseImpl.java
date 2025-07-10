@@ -103,8 +103,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     @Override
     public List<PlaceDto> findAllByProvinceName(String provinceName) {
         List<Place> places = placeService.findAllByProvinceName(provinceName);
-        List<PlaceDto> placeDtoList = objectMapper.mapList(places, PlaceDto.class);
-        return placeDtoList;
+        return objectMapper.mapList(places, PlaceDto.class);
     }
 
     @Override
@@ -289,7 +288,7 @@ public class PlaceUsecaseImpl implements PlaceUsecase {
     }
 
     private void handlePlaceDetail(Place savedPlace, PlaceCreateDto placeCreateDto) {
-        PlaceDetail placeDetail = objectMapper.map(placeCreateDto.getPlaceDetailDto(), PlaceDetail.class);
+        PlaceDetail placeDetail = objectMapper.map(placeCreateDto.getPlaceDetail(), PlaceDetail.class);
         placeDetail.setPlaceId(savedPlace.getId());
         try {
             PlaceDetail existingPlaceDetail = placeDetailService.findByPlaceId(savedPlace.getId());

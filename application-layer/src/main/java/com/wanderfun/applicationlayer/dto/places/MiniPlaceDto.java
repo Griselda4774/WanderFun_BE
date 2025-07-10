@@ -5,6 +5,8 @@ import com.wanderfun.domainlayer.model.images.Image;
 public class MiniPlaceDto {
     private Long id;
     private String name;
+    private double longitude;
+    private double latitude;
     private Image coverImage;
     private int checkInCount;
 
@@ -25,6 +27,22 @@ public class MiniPlaceDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public Image getCoverImage() {

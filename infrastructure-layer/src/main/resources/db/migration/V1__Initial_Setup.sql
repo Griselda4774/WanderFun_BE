@@ -6,7 +6,7 @@ CREATE TABLE images (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 -- ----------------------------------
 
 -- Addresses Group --
@@ -18,7 +18,7 @@ CREATE TABLE administrative_regions (
     code_name_en VARCHAR(255)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE administrative_units (
     id INTEGER NOT NULL PRIMARY KEY,
@@ -30,7 +30,7 @@ CREATE TABLE administrative_units (
     code_name_en VARCHAR(255)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE provinces (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -45,7 +45,7 @@ CREATE TABLE provinces (
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE province_details (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -64,7 +64,7 @@ CREATE TABLE province_details (
     FOREIGN KEY (cover_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE districts (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -79,7 +79,7 @@ CREATE TABLE districts (
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE wards (
     code VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -94,7 +94,7 @@ CREATE TABLE wards (
     FOREIGN KEY (administrative_unit_id) REFERENCES administrative_units(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE addresses (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -107,4 +107,4 @@ CREATE TABLE addresses (
     CONSTRAINT fk_addresses_ward FOREIGN KEY (ward_code) REFERENCES wards(code)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;

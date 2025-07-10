@@ -11,7 +11,20 @@ import java.util.Optional;
 
 @Repository
 public interface JpaProvinceRepository extends JpaBaseRepository<ProvinceEntity, String> {
-    @Query("SELECT p FROM ProvinceEntity p WHERE p.name LIKE %:name%")
+    @Query("""
+        SELECT DISTINCT p FROM ProvinceEntity p
+        WHERE p.name LIKE CONCAT('%', :name, '%')
+        OR p.fullName LIKE CONCAT('%', :name, '%')
+        OR p.nameEn LIKE CONCAT('%', :name, '%')
+        OR p.fullNameEn LIKE CONCAT('%', :name, '%')
+        ORDER BY
+        CASE
+        WHEN p.name LIKE CONCAT('%', :name, '%') THEN 0
+        WHEN p.nameEn LIKE CONCAT('%', :name, '%') THEN 1
+        ELSE 2
+        END,
+        p.name ASC
+    """)
     List<ProvinceEntity> findAllByNameContaining(@Param("name") String name);
 
     @Query(" SELECT p FROM ProvinceEntity p WHERE p.name = :name")
