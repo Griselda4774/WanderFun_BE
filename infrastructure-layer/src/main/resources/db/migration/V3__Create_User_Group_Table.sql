@@ -15,4 +15,4 @@ CREATE TABLE users (
     CONSTRAINT fk_users_account FOREIGN KEY (account_id) REFERENCES accounts(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;

@@ -127,6 +127,9 @@ public class SecurityConfig {
                         // Favorite Place
                         .requestMatchers("/wanderfun/favorite-place/**").hasRole(UserRole.USER.name())
 
+                        // Auto complete
+                        .requestMatchers("/wanderfun/autocomplete/**").permitAll()
+
                         // Default
                         .anyRequest().authenticated()
                 )

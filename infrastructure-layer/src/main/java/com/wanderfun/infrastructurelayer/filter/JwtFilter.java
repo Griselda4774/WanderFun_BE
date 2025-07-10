@@ -105,7 +105,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 // Swagger endpoints
                 Pair.of("GET", "/swagger-ui"),
-                Pair.of("GET", "/v3/api-docs")
+                Pair.of("GET", "/v3/api-docs"),
+
+                // Auto complete search endpoints
+                Pair.of("GET", "/wanderfun/autocomplete/place"),
+                Pair.of("GET", "/wanderfun/autocomplete/province")
         );
 
         String requestPath = request.getServletPath();

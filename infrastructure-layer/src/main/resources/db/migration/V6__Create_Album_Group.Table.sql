@@ -12,7 +12,7 @@ CREATE TABLE albums (
     CONSTRAINT fk_album_place FOREIGN KEY (place_id) REFERENCES places(id)
 )  ENGINE=InnoDB
    DEFAULT CHARSET=utf8mb4
-   COLLATE=utf8mb4_unicode_ci;
+   COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE album_images (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

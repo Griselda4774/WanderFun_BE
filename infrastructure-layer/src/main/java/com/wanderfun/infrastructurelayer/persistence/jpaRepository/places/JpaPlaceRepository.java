@@ -20,7 +20,16 @@ public interface JpaPlaceRepository extends JpaBaseRepository<PlaceEntity, Long>
     """)
     List<PlaceEntity> findByProvinceName(@Param("province_name") String provinceName);
 
+    @Query("""
+       SELECT DISTINCT p FROM PlaceEntity p
+       JOIN FETCH p.category c
+       WHERE p.name LIKE CONCAT('%', :name, '%')
+       OR c.name LIKE CONCAT('%', :name, '%')
+       OR c.nameEn LIKE CONCAT('%', :name, '%')
+       ORDER BY p.name ASC
+    """)
     List<PlaceEntity> findAllByNameContaining(String name);
+
     @Query("SELECT p FROM PlaceEntity p WHERE p.name = :name")
     Optional<PlaceEntity> findByName(@Param("name")String name);
     Optional<PlaceEntity> findByLongitudeAndLatitude(double longitude, double latitude);

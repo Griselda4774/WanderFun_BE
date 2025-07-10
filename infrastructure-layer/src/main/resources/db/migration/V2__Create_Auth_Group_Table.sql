@@ -10,7 +10,7 @@ CREATE TABLE accounts (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE refresh_tokens (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -20,4 +20,4 @@ CREATE TABLE refresh_tokens (
     FOREIGN KEY (account_id) REFERENCES accounts(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;

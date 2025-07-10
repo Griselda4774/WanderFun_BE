@@ -7,7 +7,7 @@ CREATE TABLE place_categories (
     FOREIGN KEY (icon_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE places (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -30,7 +30,7 @@ CREATE TABLE places (
     FOREIGN KEY (cover_image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE place_details (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -49,7 +49,7 @@ CREATE TABLE place_details (
     FOREIGN KEY (place_id) REFERENCES places(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE sections (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -62,4 +62,4 @@ CREATE TABLE sections (
     FOREIGN KEY (image_id) REFERENCES images(id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+  COLLATE=utf8mb4_general_ci;
