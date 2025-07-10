@@ -17,4 +17,10 @@ public interface JpaAccountRepository extends JpaBaseRepository<AccountEntity, L
         WHERE a.role = 'USER'
     """)
     List<AccountEntity> findAllUserAccount();
+
+    @Query("""
+    SELECT COUNT(a) FROM AccountEntity a
+    WHERE DATE(a.createAt) = CURRENT_DATE
+    """)
+    Long countAccountsCreatedToday();
 }

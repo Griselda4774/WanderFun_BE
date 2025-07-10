@@ -49,4 +49,9 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, AccountEn
             throw new ObjectNotFoundException(String.format("%s with id %d not found", Account.class.getSimpleName(), id));
         }
     }
+
+    @Override
+    public Long countAccountsCreatedToday() {
+        return jpaAccountRepository.countAccountsCreatedToday();
+    }
 }

@@ -9,4 +9,5 @@ public interface AccountService extends BaseService<Account, Long> {
     Account findByEmail(String email);
     List<Account> findAllUserAccount();
     boolean updateAccountState(Long id);
+    Long countAccountsCreatedToday();
 }
